@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T2 · Trilha 00 · Direito Tributário — SEFAZ-DF</title>
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;
+  --accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;
+  --warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;
+  --accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;
+  --warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:16px;padding:12px 0 6px;flex-wrap:wrap}
+.badge{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px;letter-spacing:.5px}
+.top h1{font-size:18px;margin:0;font-weight:650}
+.top .sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px}
+nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--surface2);color:var(--text)}
+nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{padding:24px 0 80px}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.call.warn{border-color:var(--warn);background:var(--warn-soft)}
+.call.bad{border-color:var(--bad);background:var(--bad-soft)}
+.call.ok{border-color:var(--ok);background:var(--ok-soft)}
+.call b:first-child{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.tbl table th:first-child,.tbl table td:first-child{padding-left:14px}
+.k{font-weight:650;color:var(--accent)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+/* roteiro */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
+
+/* mapa mental */
+.mm{padding:22px 16px}
+.mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
+.mm-root b{display:block;font-size:17px;letter-spacing:.5px}
+.mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
+.mm-branches{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-br{display:flex;flex-direction:column;align-items:stretch}
+.mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
+.mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
+.mm-h b{display:block;font-size:14.5px;color:var(--c)}
+.mm-br ul{list-style:none;margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--c)}
+.mm-br li{font-size:13px;line-height:1.4;background:var(--surface2);border-radius:8px;padding:6px 9px;margin:6px 0;position:relative}
+.mm-br li::before{content:"";position:absolute;left:-12px;top:50%;width:10px;border-top:2px solid var(--c)}
+@media(max-width:860px){.mm-branches{grid-template-columns:1fr 1fr;border-top:0}}
+@media(max-width:520px){.mm-branches{grid-template-columns:1fr}}
+
+
+/* abreviações com dica */
+abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+#tip{position:fixed;z-index:100;max-width:300px;background:#1d2330;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+@media (prefers-color-scheme:dark){#tip{background:#e6e9ef;color:#12151b}}
+
+/* mapa clicável */
+.mm [data-k]{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mm [data-k]:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.mm [data-k].sel{outline:3px solid var(--c,var(--accent));outline-offset:2px}
+.mm-root[data-k].sel{outline-color:var(--text)}
+.mm-hint{text-align:center;color:var(--muted);font-size:13px;margin:-4px 0 12px}
+#mmPanel{border-left:6px solid var(--c,var(--accent));scroll-margin-top:140px}
+#mmPanel h4{margin:0 0 4px;font-size:18px;color:var(--c,var(--accent))}
+#mmPanel .mm-sec{margin:12px 0 0}
+#mmPanel .lbl{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+#mmPanel .ex{background:var(--ok-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .pg{background:var(--bad-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+
+/* questões */
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 16px}
+.qnav button{width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:12.5px;cursor:pointer}
+.qnav button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.qnav button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.qnav button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.progress{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:width .3s}
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
+.enun{white-space:pre-line;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ce{display:flex;gap:10px}.ce .opt{justify-content:center;font-weight:650}
+.opt{user-select:none;-webkit-user-select:none;position:relative}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.sel .l::before{content:"● ";color:var(--accent)}
+.opt.desc{opacity:.55;padding-right:92px}
+.opt.desc span{text-decoration:line-through;text-decoration-thickness:2px}
+.ce .opt.desc{text-decoration:line-through;text-decoration-thickness:2px}
+.opt.desc::after{content:"descartada";position:absolute;right:10px;top:8px;font-size:11px;color:var(--muted);text-decoration:none}
+.qact{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.qmsg{font-size:14.5px;padding:8px 12px;border-radius:8px;display:none}
+.qmsg.on{display:block}
+.qmsg.warn{background:var(--warn-soft);color:var(--warn)}
+.qmsg.bad{background:var(--bad-soft);color:var(--bad)}
+.qhint{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.coment{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.coment p{margin:6px 0}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+
+/* flashcards */
+.fc{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-inner{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fc-face.back{transform:rotateY(180deg);background:var(--accent-soft);text-align:left;align-items:flex-start;font-size:15px}
+.fc-face .q{font-size:19px;font-weight:600}
+.fc-meta{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;color:var(--muted);font-size:13px}
+.boxes{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.boxes span{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line)}
+
+/* rendimento */
+.big{font-size:44px;font-weight:750;line-height:1}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.bar .t{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar .t>div{height:100%;background:var(--ok)}
+.bar .t>div.mid{background:var(--warn)}.bar .t>div.low{background:var(--bad)}
+@media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
+.btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span class="badge">T2</span>
+      <div>
+        <h1>Trilha 00 · Tarefa 2 · Direito Tributário</h1>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00 (Fábio Dutra): Conceito e espécies de tributos + Reforma Tributária</div>
+      </div>
+    </div>
+    <nav id="nav">
+      <button data-t="inicio" class="on">Roteiro</button>
+      <button data-t="resumo">Resumo</button>
+      <button data-t="mapa">Mapa mental</button>
+      <button data-t="esquemas">Esquemas</button>
+      <button data-t="reforma">Reforma Tributária</button>
+      <button data-t="questoes">Questões <span class="pill" id="navQ">0/0</span></button>
+      <button data-t="flash">Flashcards</button>
+      <button data-t="rend">Rendimento</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ROTEIRO -->
+<section class="tab on" id="inicio">
+  <h2>Roteiro da sessão T2</h2>
+  <p class="lead">Tarefa da trilha: <i>"Estudo da Aula 00.1 – Reforma Tributária"</i>. A trilha estima cerca de 1h30 por tarefa.</p>
+
+  <div class="call warn"><b>Sobre o material</b>
+    A pasta <code>estrategia/direito tributário</code> só tem a <b>Aula 00 (versão simplificada)</b>. A Aula 00.1 não está lá. Esta página foi montada com a Aula 00, que trata de conceito, espécies e classificação dos tributos e já traz os pontos da EC 132/2023 (IBS, CBS, IS e COSIP). A aba <b>Reforma Tributária</b> resume o essencial para cobrir a T2. Quando baixar a Aula 00.1, gere uma nova página para ela.
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><b>Pré-teste (5 min).</b> Antes de ler, abra os <b>Flashcards</b> e tente responder 5 cartões. Errar antes de estudar faz você fixar melhor depois.</li>
+      <li><b>Resumo (25 min).</b> Leia a aba <b>Resumo</b>. Em cada bloco <i>Pergunte-se</i>, responda mentalmente antes de abrir.</li>
+      <li><b>Mapa mental + Esquemas (10 min).</b> Visualize a estrutura e depois tente redesenhar o mapa de memória, num papel.</li>
+      <li><b>Reforma Tributária (10 min).</b> É o foco declarado da T2. Atenção ao cronograma de transição.</li>
+      <li><b>Questões (35 min).</b> São 53 questões CEBRASPE comentadas da aula, de 2020 a 2026. Responda e leia o comentário de cada uma. O progresso fica salvo, então você pode parar e continuar depois.</li>
+      <li><b>Rendimento + revisão (5 min).</b> Veja seus pontos fracos por tema e use <b>Refazer erradas</b> na próxima revisão.</li>
+    </ol>
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Banca</b><br><span class="muted">CEBRASPE: itens de Certo/Errado em que um erro anula um acerto. Na dúvida real, deixe em branco.</span></div>
+    <div class="card"><b>Peso na prova</b><br><span class="muted">Direito Tributário está na P2 (peso 3): 15 itens, equivalentes a 45 pontos ponderados.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas e flashcards ficam no navegador (localStorage). Use <i>Exportar</i> na aba Rendimento para fazer backup.</span></div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="tab" id="resumo">
+  <h2>Resumo: Conceito e Espécies de Tributos</h2>
+  <p class="lead">O texto segue a ordem da aula. Os <span class="k">termos em destaque</span> são os que mais caem e os blocos vermelhos marcam as pegadinhas da banca.</p>
+
+  <h3>1. Direito Tributário e receitas públicas</h3>
+  <div class="card">
+    <p>O Direito Tributário é ramo do <span class="k">Direito Público</span> e é <b>autônomo</b>, porque tem princípios próprios, como o não confisco. Ele se apoia em dois pilares: a <b>supremacia</b> do interesse público (as prerrogativas do Estado) e a <b>indisponibilidade</b> do interesse público (as sujeições). Por isso o agente público não pode perdoar uma dívida de IPVA: <b>remissão, anistia, isenção, subsídio, redução de base e crédito presumido só se concedem por lei específica</b> (CF, artigo 150, parágrafo 6º).</p>
+    <p>O destino da arrecadação é tema do Direito Financeiro e não interessa ao Tributário (CTN, artigo 4º). A exceção são as espécies finalísticas, vistas adiante.</p>
+    <div class="tbl"><table>
+      <tr><th></th><th>Receita ORIGINÁRIA</th><th>Receita DERIVADA</th></tr>
+      <tr><td>Origem</td><td>Patrimônio do próprio Estado</td><td>Patrimônio do particular, obtido por coação</td></tr>
+      <tr><td>Regime</td><td>Predominantemente privado</td><td>Direito público</td></tr>
+      <tr><td>Poder de império</td><td>Não há</td><td>Há</td></tr>
+      <tr><td>Fonte</td><td>Contrato</td><td>Lei</td></tr>
+      <tr><td>Exemplos</td><td>Aluguéis, preços públicos/tarifas, multas <b>contratuais</b></td><td><b>Tributos</b>, multas pecuniárias, reparações de guerra</td></tr>
+    </table></div>
+  </div>
+
+  <h3>2. Conceito de tributo (CTN, artigo 3º)</h3>
+  <div class="card">
+    <div class="call"><b>Artigo 3º, para decorar</b>
+      "Tributo é toda prestação <b>pecuniária</b> <b>compulsória</b>, em moeda ou cujo valor nela se possa exprimir, que <b>não constitua sanção de ato ilícito</b>, <b>instituída em lei</b> e cobrada mediante <b>atividade administrativa plenamente vinculada</b>."
+    </div>
+    <p>O CTN foi recepcionado com <b>status de lei complementar</b> (CF, artigo 146, III, "a", que pede LC para definir tributo e espécies), então só uma LC pode alterá-lo.</p>
+    <div class="grid2">
+      <div><b>① Pecuniária</b><br>Paga-se em dinheiro, e não se admite tributo <i>in natura</i> (em bens) ou <i>in labore</i> (em serviços). A <b>dação em pagamento de bens IMÓVEIS</b> (artigo 156, XI) é permitida, na forma da lei de cada ente (na União, Lei 13.259/2016).<br>
+        <span class="muted">Bens <b>móveis</b>: na ADI 1.917 o STF derrubou uma lei distrital por ofensa à licitação. Na ADI 2.405, porém, decidiu que o ente pode criar hipóteses de extinção dos próprios créditos. Leia a questão inteira.</span></div>
+      <div><b>② Compulsória</b><br>Pagar não é opcional. A compulsoriedade é <b>requisito de EXISTÊNCIA</b> do tributo (Paulsen).</div>
+      <div><b>③ Instituída em lei</b><br>Pode ser lei ordinária, lei complementar ou <b>medida provisória</b> (o STF admite). Ato infralegal não serve. A legalidade é <b>requisito de VALIDADE</b>: tributo criado por decreto continua sendo tributo, mas é inválido.<br><span class="muted">Algumas alíquotas podem ser alteradas por ato infralegal quando a CF permite.</span></div>
+      <div><b>④ Não é sanção de ato ilícito</b><br>Por isso multa não é tributo. Mesmo assim, aplica-se o <span class="k">pecunia non olet</span> (artigo 118 CTN; STF, HC 77.530): <b>a renda do tráfico é tributável</b>. O que não pode é o ilícito ser a própria hipótese de incidência.</div>
+      <div><b>⑤ Atividade plenamente vinculada</b><br>O fiscal não tem discricionariedade e <b>deve</b> cobrar. Todo tributo tem cobrança vinculada.</div>
+    </div>
+    <div class="call bad"><b>Pegadinhas CEBRASPE</b>
+      • "Multa pecuniária, instituída em lei e cobrada por atividade vinculada é tributo": <b>ERRADO</b>, porque é sanção de ato ilícito.<br>
+      • "Multas não compõem a carga tributária": <b>CERTO</b>.<br>
+      • "O contribuinte pode pagar o tributo com bens móveis porque o CTN admite": <b>ERRADO</b>, o CTN só prevê a dação de imóveis.
+    </div>
+    <details><summary>Pergunte-se: qual elemento é requisito de existência e qual é de validade?</summary><div>A compulsoriedade é requisito de <b>existência</b>: sem ela, não há tributo. A legalidade é requisito de <b>validade</b>: um "tributo" criado por decreto existe, mas é inválido.</div></details>
+  </div>
+
+  <h3>3. Natureza jurídica e teorias das espécies</h3>
+  <div class="card">
+    <div class="call"><b>CTN, artigo 4º</b>A natureza jurídica específica do tributo é determinada pelo <b>FATO GERADOR</b>. São <b>irrelevantes</b>: I) a denominação e as características formais; II) a destinação legal do produto da arrecadação.</div>
+    <ul>
+      <li>O <b>CTN (artigo 5º)</b> adota a teoria <b>tripartida</b>: impostos, taxas e contribuições de melhoria. O artigo 145 da CF lista só as espécies de competência comum.</li>
+      <li>O <b>STF</b> adota a teoria <b>pentapartida</b> (RE 146.733), somando <b>empréstimos compulsórios</b> (artigo 148) e <b>contribuições especiais</b> (artigo 149).</li>
+      <li>Nessas duas espécies <b>a destinação importa</b>, porque são tributos finalísticos. Por isso o artigo 4º do CTN foi <b>parcialmente não recepcionado</b>.</li>
+      <li>Cotejar <b>fato gerador e base de cálculo</b> revela a natureza do tributo (CF, artigo 145, parágrafo 2º: taxa não pode ter base de cálculo própria de imposto).</li>
+    </ul>
+    <div class="call warn"><b>Não confunda os três sentidos de "vinculado"</b>
+      <b>Tributo vinculado:</b> o <u>fato gerador</u> é uma atividade estatal (taxas, contribuição de melhoria).<br>
+      <b>Arrecadação vinculada:</b> o <u>dinheiro</u> tem destino certo (empréstimo compulsório, contribuições).<br>
+      <b>Cobrança vinculada:</b> a <u>atividade do fiscal</u> é vinculada, e isso vale para <b>todos</b> os tributos.
+    </div>
+  </div>
+
+  <h3>4. Impostos</h3>
+  <div class="card">
+    <p><b>CTN, artigo 16:</b> imposto é o tributo cujo fato gerador é uma <b>situação independente de qualquer atividade estatal específica</b> relativa ao contribuinte. É o tributo <b>não vinculado por excelência</b> e também não contraprestacional, porque custeia serviços gerais (<i>uti universi</i>). Em regra, a receita de impostos não pode ser vinculada a destino específico (CF, artigo 167, IV).</p>
+    <ul>
+      <li>A CF <b>não cria</b> tributos, só distribui competência. O IGF está previsto, mas nunca foi instituído.</li>
+      <li>Cabe à LC definir <b>fato gerador, base de cálculo e contribuintes</b> dos impostos discriminados na CF (artigo 146, III, "a"). <b>Alíquotas não entram nessa lista.</b> A exigência vale só para impostos.</li>
+      <li><b>Competência residual</b> (artigo 154, I), só da União: exige LC, não cumulatividade e fato gerador ou base de cálculo diferentes dos impostos já discriminados.</li>
+      <li><b>IEG</b> (artigo 154, II): a União pode tributar inclusive fatos de competência de outros entes.</li>
+      <li><b>DF</b>: tem <b>competência cumulativa</b>, ou seja, institui impostos estaduais <b>e</b> municipais.</li>
+      <li><b>Capacidade contributiva</b> (artigo 145, parágrafo 1º): "sempre que possível", os impostos terão caráter pessoal. O STF admite aplicá-la também às taxas.</li>
+    </ul>
+    <div class="tbl"><table>
+      <tr><th>Ente</th><th>Impostos</th></tr>
+      <tr><td><b>União</b></td><td><abbr data-tip="Imposto de Importação">II</abbr>, IE, IR, IPI, IOF, ITR, IGF, <b>IS</b> (Seletivo, EC 132), IEG, residuais</td></tr>
+      <tr><td><b>Estados + DF</b></td><td>ITCMD, ICMS, IPVA</td></tr>
+      <tr><td><b>Municípios + DF</b></td><td>ISS, IPTU, ITBI</td></tr>
+      <tr><td><b>Compartilhado</b> (Estados, DF e Municípios)</td><td><b>IBS</b>, Imposto sobre Bens e Serviços (artigo 156-A, EC 132/2023)</td></tr>
+    </table></div>
+    <div class="call bad"><b>Pegadinha</b>"O sistema não prevê imposto de competência compartilhada": <b>ERRADO</b>, existe o IBS.</div>
+  </div>
+
+  <h3>5. Taxas</h3>
+  <div class="card">
+    <p><b>CTN, artigo 77 / CF, artigo 145, II:</b> o fato gerador é <b>(a)</b> o <b>exercício regular do poder de polícia</b> ou <b>(b)</b> a utilização, <b>efetiva ou potencial</b>, de <b>serviço público específico e divisível</b>, prestado ao contribuinte ou posto à sua disposição. O fato gerador é um <b>fato do Estado</b>, o que torna a taxa um tributo retributivo e contraprestacional. A competência é <b>comum</b>, cada ente atuando no âmbito das próprias atribuições (artigo 80).</p>
+    <div class="grid2">
+      <div><b>Taxa de serviço (artigo 79)</b>
+        <ul>
+          <li><b>Utilização efetiva:</b> o serviço é usufruído a qualquer título.</li>
+          <li><b>Utilização potencial:</b> o serviço é de utilização compulsória e está à disposição por meio de atividade administrativa <b>em efetivo funcionamento</b>. O que pode ser potencial é a <u>utilização</u>, não a disponibilização. Exemplo: o contribuinte que está viajando continua pagando a taxa de lixo.</li>
+          <li><b>Específico:</b> pode ser destacado em unidades autônomas.</li>
+          <li><b>Divisível:</b> pode ser utilizado separadamente por cada usuário.</li>
+        </ul></div>
+      <div><b>Taxa de polícia (artigo 78)</b>
+        <ul>
+          <li>O poder de polícia limita direitos em nome do interesse público.</li>
+          <li>Precisa ser <b>regular</b>: órgão competente, limites da lei, devido processo e, na atividade discricionária, sem abuso ou desvio de poder.</li>
+          <li><b>Não exige fiscalização "porta a porta"</b>: basta existir órgão e estrutura competentes (RE 588.322).</li>
+          <li>Taxa de polícia que excede de forma flagrante o custo da fiscalização é inconstitucional (ADI 7.400, mineração).</li>
+        </ul></div>
+    </div>
+    <h4>Base de cálculo</h4>
+    <ul>
+      <li>Taxa <b>não pode ter base de cálculo própria de imposto</b> (CF, 145, parágrafo 2º) <b>nem ser calculada em função do capital</b> das empresas (CTN, 77, parágrafo único).</li>
+      <li><b>Súmula Vinculante 29</b>: pode usar <b>um ou mais elementos</b> da base de um imposto, desde que não haja <b>identidade integral</b>. Exemplo: área construída na taxa de lixo.</li>
+      <li><b>Súmula 595</b>: é inconstitucional a taxa municipal de conservação de estradas com base idêntica à do ITR.</li>
+      <li><b>Súmula 665</b>: a taxa da CVM é constitucional, porque o capital funciona como faixa de referência para um valor fixo, e não como base de cálculo.</li>
+      <li><b>Súmula 667</b>: a taxa judiciária sem limite sobre o valor da causa viola o acesso à jurisdição.</li>
+      <li>É inconstitucional a TLLF calculada pelo <b>número de empregados</b>. Vale o princípio da <b>razoável equivalência</b> entre valor e custo.</li>
+    </ul>
+    <div class="call warn"><b>Taxa de incêndio: houve virada de jurisprudência</b>
+      Em 2020, a <b>ADI 2.908</b> declarou inconstitucional uma taxa de incêndio de Sergipe, por ser serviço <i>uti universi</i>.<br>
+      Em 2025, no <b>RE 1.417.155 (Tema 1.282)</b>, o STF considerou <b>constitucionais</b> as taxas estaduais de prevenção e combate a incêndio, busca, salvamento e resgate, por serem serviços específicos e divisíveis. A banca tende a cobrar as teses de repercussão geral.
+    </div>
+  </div>
+
+  <h3>6. Taxa × Preço público (tarifa)</h3>
+  <div class="card">
+    <p>A diferença-mãe é o <b>regime jurídico</b>: a taxa segue o direito público e a tarifa, o direito privado. Todas as outras diferenças decorrem daí.</p>
+    <p><b>Súmula 545 STF</b>: "Preços de serviços públicos e taxas não se confundem, porque estas, diferentemente daqueles, são compulsórias e têm sua cobrança condicionada a prévia autorização orçamentária [...]". A parte da autorização orçamentária remete ao princípio da anualidade, que não existe mais, mas <b>a banca já considerou a literalidade correta</b>.</p>
+    <p>Água e esgoto prestados por concessionária são <b>tarifa</b>. Pela Súmula 412 do STJ, a repetição do indébito segue o prazo do Código Civil; pela Súmula 407 do STJ, a tarifa pode variar por categoria de usuário e faixa de consumo.</p>
+  </div>
+
+  <h3>7. Contribuição de melhoria</h3>
+  <div class="card">
+    <p>CF, artigo 145, III e CTN, artigos 81 e 82, complementados pelo DL 195/67. A competência é <b>comum</b> e o tributo é <b>vinculado</b>. O <b>fato gerador é a VALORIZAÇÃO imobiliária</b> decorrente de obra pública, <b>não a obra em si</b>.</p>
+    <div class="grid2">
+      <div class="call"><b>Limites (só no CTN, a CF é omissa)</b><b>Total:</b> a despesa realizada com a obra.<br><b>Individual:</b> o acréscimo de valor de cada imóvel.</div>
+      <div class="call"><b>Requisitos da lei (artigo 82)</b>Publicação prévia de: memorial <b>descritivo</b>; orçamento do custo; <b>determinação</b> da parcela financiada; delimitação da zona beneficiada; fator de absorção. Prazo <b>de no mínimo 30 dias</b> para impugnação e regulamentação do processo administrativo.</div>
+    </div>
+    <ul>
+      <li>Só se cobra <b>depois</b> da obra, total ou em parte suficiente para beneficiar os imóveis (DL 195/67, artigo 9º).</li>
+      <li>O contribuinte deve ser notificado do montante, da forma e dos prazos de pagamento e dos elementos do cálculo (artigo 82, parágrafo 2º).</li>
+      <li>Exige <b>lei específica para cada obra</b> (CEBRASPE: CERTO).</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>Trocar "memorial <b>descritivo</b>" por "executivo" ou "<b>determinação</b>" por "estimativa"; "convênio com o ente onde a obra ocorre" não é requisito.</div>
+  </div>
+
+  <h3>8. Empréstimos compulsórios (CF, artigo 148)</h3>
+  <div class="card">
+    <ul>
+      <li>São <b>tributos</b>: a Súmula 418 do STF, que os tratava como contrato, está superada. A restituição não descaracteriza o tributo.</li>
+      <li>Competência <b>exclusiva da União</b>, mediante <b>lei complementar</b>. <b>Nunca</b> por lei ordinária ou MP (artigo 62, parágrafo 1º, III).</li>
+      <li>Hipóteses: <b>I</b> despesas extraordinárias decorrentes de calamidade pública ou guerra externa (ou sua iminência); <b>II</b> investimento público urgente e de relevante interesse nacional, que <b>observa a anterioridade anual</b> (artigo 150, III, "b").</li>
+      <li>A "absorção temporária de poder aquisitivo" (CTN, artigo 15, III) <b>não foi recepcionada</b>.</li>
+      <li>A <b>arrecadação é vinculada</b> à despesa que motivou a instituição, mas isso <b>não</b> faz dele um tributo vinculado.</li>
+      <li>A lei fixa prazo e condições de resgate. A devolução é <b>em moeda</b> (RE 175.385).</li>
+    </ul>
+  </div>
+
+  <h3>9. Contribuições especiais (CF, artigo 149)</h3>
+  <div class="card">
+    <p>São tributos <b>finalísticos</b>: a destinação define a espécie. Não se confundem com a contribuição de <i>melhoria</i>.</p>
+    <div class="tbl"><table>
+      <tr><th>Contribuição</th><th>Quem institui</th></tr>
+      <tr><td>Sociais (seguridade, gerais, residuais)</td><td>União. <b>Exceção:</b> todos os entes instituem a contribuição do <b>RPPS</b> dos próprios servidores (149, parágrafo 1º)</td></tr>
+      <tr><td>CIDE</td><td>Somente a União</td></tr>
+      <tr><td>Corporativas (interesse de categorias)</td><td>Somente a União</td></tr>
+      <tr><td>COSIP (iluminação pública + monitoramento de logradouros)</td><td>Somente <b>Municípios e DF</b> (149-A)</td></tr>
+    </table></div>
+    <div class="call"><b>Contribuições sociais e CIDE (149, parágrafo 2º)</b>Não incidem sobre receitas de <b>exportação</b>; incidem sobre a <b>importação</b>; alíquota <b>ad valorem</b> ou <b>específica</b>. A importação pode equiparar pessoa física a jurídica (parágrafo 3º) e a incidência pode ser monofásica (parágrafo 4º).</div>
+    <details open><summary>Contribuições sociais</summary><div>
+      <ul>
+        <li><b>Seguridade</b> = saúde + previdência + assistência (artigo 194). As fontes estão no artigo 195: folha, receita ou faturamento (COFINS), lucro (CSLL), trabalhador, concursos de prognósticos, importador (PIS/COFINS-Importação) e bens e serviços (<b>CBS</b>, EC 132). O PIS (artigo 239) é um <i>bis in idem</i> autorizado pela própria CF.</li>
+        <li><b>Base prevista na CF</b>: pode ser instituída por <b>lei ordinária</b>. COFINS e PIS, embora criados por LC, são materialmente ordinários. <b>Fonte nova (residual, 195, parágrafo 4º)</b>: exige LC, não cumulatividade e fato gerador ou base diferentes das <u>contribuições</u> existentes (podem coincidir com os de impostos).</li>
+        <li>Todas se sujeitam ao CTN como norma geral, mas <b>não</b> precisam de LC que defina fato gerador, base e contribuintes (RE 148.754).</li>
+        <li><b>Gerais</b>: salário-educação e Sistema S (SESC, SENAI e outros), que são parafiscais.</li>
+        <li><b>RPPS</b>: incide sobre ativos, aposentados e pensionistas, com alíquotas que podem ser progressivas. Para aposentados, em regra, sobre o que exceder o teto do RGPS. <b>Com déficit atuarial, sobre o que exceder o salário-mínimo.</b> A contribuição extraordinária só existe <b>no âmbito da União</b>. Estados, DF e Municípios não podem ter alíquota menor que a da União, salvo se não houver déficit.</li>
+      </ul></div></details>
+    <details><summary>CIDE</summary><div>
+      <ul>
+        <li>É um tributo <b>extrafiscal</b> com arrecadação vinculada, e a CF não fixa seus fatos geradores.</li>
+        <li>A <b>CIDE-Combustíveis</b> (artigo 177, parágrafo 4º) é a única com fato gerador e destino previstos na CF. A alíquota pode ser diferenciada por produto ou uso e pode ser <b>reduzida e restabelecida por ato do Executivo</b>, sem anterioridade anual. Recursos: subsídios a combustíveis; projetos ambientais do setor de petróleo e gás; infraestrutura de transportes; e subsídio a tarifas de transporte público coletivo (EC 132).</li>
+        <li>Outros exemplos: AFRMM, SEBRAE, INCRA, CIDE-Royalties.</li>
+        <li>Estados e Municípios <b>não</b> instituem CIDE.</li>
+      </ul></div></details>
+    <details><summary>COSIP, corporativas e sindicais</summary><div>
+      <ul>
+        <li><b>COSIP</b> (EC 39/2002, ampliada pela EC 132): financia o <b>custeio, a expansão e a melhoria</b> da iluminação pública <b>e</b> dos sistemas de monitoramento de logradouros. Pode ser cobrada na <b>fatura de energia</b> e observa a legalidade, a irretroatividade e as anterioridades (150, I e III). A LC 227/2026 incluiu o artigo 82-A no CTN.</li>
+        <li><b>Conselhos profissionais</b> (CREA, CRC, CRM): as anuidades são <b>tributo</b> (contribuição corporativa da União). A anuidade da <b>OAB não é tributo</b> (RE 1.182.189, Tema 1.054).</li>
+        <li><b>Contribuição confederativa</b>: Súmula Vinculante 40, só é exigível dos filiados, logo não é tributo.</li>
+        <li><b>Contribuição sindical</b>: deixou de ser compulsória com a Lei 13.467/2017 e por isso não é mais tributo (o STF validou a mudança).</li>
+      </ul></div></details>
+  </div>
+
+  <h3>10. Classificações doutrinárias</h3>
+  <div class="card">
+    <div class="tbl"><table>
+      <tr><th>Critério</th><th>Classes</th><th>Exemplos e observações</th></tr>
+      <tr><td>Hipótese de incidência</td><td><b>Vinculados</b> × <b>não vinculados</b></td><td>Taxas e contribuição de melhoria × impostos. Empréstimo compulsório e contribuições: depende do caso. Os vinculados também se chamam retributivos, bilaterais, contraprestacionais ou sinalagmáticos.</td></tr>
+      <tr><td>Destino da arrecadação</td><td>Arrecadação vinculada × não vinculada</td><td>Vinculada: contribuições, empréstimo compulsório, CIDE-Combustíveis, taxas judiciárias (artigo 98, parágrafo 2º). Não vinculada: impostos (regra, artigo 167, IV). A receita de taxa não pode ir para pessoa jurídica de direito privado.</td></tr>
+      <tr><td>Finalidade</td><td><b>Fiscal</b> / <b>extrafiscal</b> / <b>parafiscal</b></td><td>Fiscal arrecada. Extrafiscal intervém, por exemplo o Imposto de Importação para frear importações. Parafiscal tem sujeito ativo e destinatário diferentes do ente instituidor (CRC, CRM, Sistema S). COFINS e CSLL não são parafiscais. Fiscalidade e extrafiscalidade convivem no mesmo tributo.</td></tr>
+      <tr><td>Transferência do encargo</td><td><b>Diretos</b> × <b>indiretos</b></td><td>Indireto: o contribuinte de direito repassa o ônus ao contribuinte de fato (ICMS). Direto: não há repasse (IPVA). Pelo STJ, classifica-se pela <b>lei</b>, não por critério econômico.</td></tr>
+      <tr><td>Variação de alíquotas</td><td>Proporcional / progressivo / regressivo / fixo</td><td>Progressivo: alíquota sobe com a base (IRPF), o que <b>melhora a distribuição de renda</b>. Regressivo: o mais pobre paga proporcionalmente mais. Tributos sobre <b>consumo</b> são proporcionais, mas têm <b>efeito regressivo</b> sobre a renda.</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="tab" id="mapa">
+  <h2>Mapa mental: espécies tributárias</h2>
+  <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
+  <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
+  <div class="card mm" id="mmBox"></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa (TRIBUTO) para começar.</p></div>
+
+  <h3>Panorama da disciplina (estrutura do curso)</h3>
+  <div class="card">
+    <div class="grid3" style="font-size:14px">
+      <div><b class="k">Base</b><br>00 Conceito de tributos ← <i>você está aqui</i><br>01 Princípios<br>02 Imunidades<br>03 Competência</div>
+      <div><b class="k">Normas e obrigação</b><br>04 Legislação tributária<br>05 Obrigação tributária<br>06 Responsabilidade</div>
+      <div><b class="k">Crédito tributário</b><br>07 Constituição e lançamento<br>08 Suspensão<br>09 Extinção<br>10 Exclusão<br>11 Garantias e privilégios</div>
+      <div><b class="k">Administração</b><br>12 Fiscalização, dívida ativa, certidões</div>
+      <div><b class="k">Tributos em espécie</b><br>13 União · 14 Estados · 15 Municípios<br>16 IBS · 17 CBS</div>
+      <div><b class="k">Fechamento</b><br>18 Repartição de receitas<br>19 Simples Nacional</div>
+    </div>
+  </div>
+</section>
+
+<!-- ESQUEMAS -->
+<section class="tab" id="esquemas">
+  <h2>Esquemas comparativos</h2>
+  <p class="lead">Tabelas para revisão rápida, as que você deve conseguir reproduzir na véspera.</p>
+
+  <h3>As 5 espécies lado a lado</h3>
+  <div class="tbl"><table>
+    <tr><th>Espécie</th><th>Fato gerador</th><th>Competência</th><th>Veículo</th><th>fato gerador vinculado?</th><th>Arrecadação vinculada?</th></tr>
+    <tr><td><b>Imposto</b></td><td>Situação do contribuinte, independente de atividade estatal</td><td>Privativa (cada ente a sua) · residual e IEG da União · IBS compartilhado</td><td>lei ordinária (LC para residual, IGF)</td><td>Não</td><td>Não (regra, 167, IV)</td></tr>
+    <tr><td><b>Taxa</b></td><td>Poder de polícia ou serviço específico e divisível</td><td>Comum</td><td>lei ordinária</td><td>Sim</td><td>Não há regra geral (exceção: custas e emolumentos)</td></tr>
+    <tr><td><b>Contribuição melhoria</b></td><td>Valorização imobiliária por obra pública</td><td>Comum</td><td>lei ordinária (uma por obra)</td><td>Sim</td><td>Não faz sentido (cobrada depois da obra)</td></tr>
+    <tr><td><b>Empréstimo compulsório</b></td><td>Livre (escolha do legislador)</td><td>Exclusiva da União</td><td><b>LC</b></td><td>Depende</td><td><b>Sim</b></td></tr>
+    <tr><td><b>Contribuição especiais</b></td><td>Livre, pela finalidade</td><td>União (RPPS: todos; COSIP: Municípios e DF)</td><td>lei ordinária (residual: LC)</td><td>Depende</td><td><b>Sim</b></td></tr>
+  </table></div>
+
+  <h3>Taxas: constitucionais × inconstitucionais</h3>
+  <div class="grid2">
+    <div class="card" style="border-top:4px solid var(--ok)"><b style="color:var(--ok)">✔ Constitucionais</b>
+      <ul>
+        <li>Coleta, remoção e tratamento de lixo domiciliar (Súmula Vinculante 19)</li>
+        <li>Custas judiciais, taxa judiciária, emolumentos de cartório</li>
+        <li>Perícias e diligências a pedido do contribuinte no PAF</li>
+        <li>Prevenção e combate a incêndio, salvamento e resgate estaduais (Tema 1.282, 2025)</li>
+        <li>Fiscalização da CVM (Súmula 665)</li>
+        <li>TFA e TFLF com exercício efetivo do poder de polícia</li>
+        <li>Renovação de alvará, se há órgão estruturado</li>
+        <li>Taxa estadual de fiscalização de mineração (ADI 7.400), proporcional ao custo</li>
+        <li>Área construída como elemento de cálculo (Súmula Vinculante 29)</li>
+      </ul></div>
+    <div class="card" style="border-top:4px solid var(--bad)"><b style="color:var(--bad)">✘ Inconstitucionais</b>
+      <ul>
+        <li>Iluminação pública (Súmula Vinculante 41), custeada pela COSIP</li>
+        <li>Segurança pública (ADI 1.942)</li>
+        <li>Limpeza de logradouros: varrição, capina, lavagem (RE 576.321)</li>
+        <li>Emissão ou remessa de carnê ou guia de tributos</li>
+        <li>Conservação de estradas com base do ITR (Súmula 595)</li>
+        <li>Taxa judiciária sem limite sobre o valor da causa (Súmula 667)</li>
+        <li>TLLF calculada pelo número de empregados</li>
+        <li>Taxa calculada sobre o capital social (CTN 77, parágrafo único)</li>
+        <li>Taxa de polícia desproporcional ao custo</li>
+      </ul></div>
+  </div>
+
+  <h3>Taxa × Preço público</h3>
+  <div class="tbl"><table>
+    <tr><th>Taxa</th><th>Preço público (tarifa)</th></tr>
+    <tr><td>Natureza tributária</td><td>Não é tributo</td></tr>
+    <tr><td>Decorre de <b>lei</b></td><td>Decorre de <b>contrato</b> administrativo</td></tr>
+    <tr><td>Compulsória, sem manifestação de vontade</td><td><b>Facultativa</b>, com manifestação de vontade</td></tr>
+    <tr><td>Regime de direito público</td><td>Regime de direito privado</td></tr>
+    <tr><td>Só pessoa jurídica de direito público cobra</td><td>Pessoa jurídica de direito público ou privado</td></tr>
+    <tr><td>Receita <b>derivada</b></td><td>Receita <b>originária</b></td></tr>
+    <tr><td>Não admite rescisão</td><td>Admite rescisão</td></tr>
+    <tr><td>Exemplos: lixo domiciliar, passaporte, custas</td><td>Exemplos: energia elétrica, água e esgoto por concessionária, pedágio</td></tr>
+  </table></div>
+
+  <h3>Linha do tempo das "contribuições" que já não são tributo</h3>
+  <div class="tbl"><table>
+    <tr><th>Exação</th><th>É tributo?</th><th>Fundamento</th></tr>
+    <tr><td>Anuidade de conselho profissional (CRC, CREA…)</td><td><span class="pill ok">Sim</span></td><td>Contribuição corporativa (149)</td></tr>
+    <tr><td>Anuidade da OAB</td><td><span class="pill bad">Não</span></td><td>Tema 1.054 (2023)</td></tr>
+    <tr><td>Contribuição confederativa</td><td><span class="pill bad">Não</span></td><td>Súmula Vinculante 40, só filiados</td></tr>
+    <tr><td>Contribuição sindical</td><td><span class="pill bad">Não</span> (desde 2017)</td><td>Lei 13.467/2017, tornou-se facultativa</td></tr>
+    <tr><td>Multa</td><td><span class="pill bad">Não</span></td><td>Sanção de ato ilícito (artigo 3º)</td></tr>
+    <tr><td>Empréstimo compulsório</td><td><span class="pill ok">Sim</span></td><td>Súmula 418 superada</td></tr>
+  </table></div>
+</section>
+
+<!-- REFORMA -->
+<section class="tab" id="reforma">
+  <h2>Reforma Tributária: o essencial para a T2</h2>
+  <p class="lead">A EC 132/2023 é regulamentada pela LC 214/2025. Esta aba complementa a Aula 00.1, que você ainda precisa baixar.</p>
+
+  <div class="grid3">
+    <div class="card" style="border-top:4px solid var(--accent)"><b>CBS</b> · Contribuição sobre Bens e Serviços<br><span class="muted">União · artigo 195, V · substitui <b>PIS e COFINS</b></span></div>
+    <div class="card" style="border-top:4px solid var(--ok)"><b>IBS</b> · Imposto sobre Bens e Serviços<br><span class="muted">Competência <b>compartilhada</b> entre Estados, DF e Municípios · artigo 156-A · substitui <b>ICMS e ISS</b> · gerido pelo Comitê Gestor (156-B)</span></div>
+    <div class="card" style="border-top:4px solid var(--warn)"><b>IS</b> · Imposto Seletivo<br><span class="muted">União · artigo 153, VIII · bens e serviços <b>prejudiciais à saúde ou ao meio ambiente</b> · extrafiscal</span></div>
+  </div>
+
+  <h3>IVA dual: características do IBS e da CBS</h3>
+  <div class="card">
+    <ul>
+      <li><b>IVA dual</b>: dois tributos (CBS federal e IBS subnacional) com <b>regras uniformes</b>, mesmo fato gerador e mesma base.</li>
+      <li><b>Não cumulatividade plena</b>: incide em cada etapa só sobre o valor agregado, com crédito amplo das etapas anteriores. É um tributo <b>indireto, sobre consumo</b>, e não sobre lucro (questão 3 da lista).</li>
+      <li><b>Princípio do destino</b>: a receita vai para o ente onde está o consumidor, o que reduz a guerra fiscal.</li>
+      <li><b>Base ampla</b> (bens materiais, imateriais e serviços), cobrança "por fora" e <b>desoneração das exportações</b>.</li>
+      <li>Há <b>regimes diferenciados</b>, como reduções de alíquota e alíquota zero para a cesta básica nacional, e <b>cashback</b> (devolução a famílias de baixa renda).</li>
+      <li><b>DF:</b> como acumula as competências estadual e municipal, recebe as parcelas de IBS de Estado <b>e</b> de Município.</li>
+    </ul>
+  </div>
+
+  <h3>Cronograma de transição</h3>
+  <div class="tbl"><table>
+    <tr><th>Ano</th><th>O que acontece</th></tr>
+    <tr><td><b>2026</b></td><td>Ano-teste: CBS a 0,9% e IBS a 0,1%, compensáveis com PIS e COFINS</td></tr>
+    <tr><td><b>2027</b></td><td>CBS em vigor plena; <b>PIS e COFINS extintos</b>; IPI zerado (salvo produtos com industrialização incentivada na ZFM); <b>IS começa</b></td></tr>
+    <tr><td><b>2029 a 2032</b></td><td>ICMS e ISS reduzidos gradualmente, enquanto o IBS sobe na mesma proporção</td></tr>
+    <tr><td><b>2033</b></td><td><b>ICMS e ISS extintos</b>, com IBS e CBS integrais</td></tr>
+  </table></div>
+
+  <h3>Pontos da Reforma que já aparecem na Aula 00</h3>
+  <div class="card">
+    <ul>
+      <li>IBS é o exemplo de imposto de <b>competência compartilhada</b> (artigo 156-A).</li>
+      <li>A CBS entra no artigo 195 (V) como nova fonte de custeio da seguridade.</li>
+      <li>O IS foi incluído no artigo 153, VIII.</li>
+      <li>A <b>COSIP</b> foi ampliada para custear também os <b>sistemas de monitoramento</b> de logradouros, e agora observa o artigo 150, I e III (questão 9 da lista).</li>
+      <li>A CIDE-Combustíveis ganhou uma nova destinação: subsídio a tarifas de transporte público coletivo.</li>
+      <li>O <b>ADCT, artigo 136</b>, prevê contribuições estaduais <b>transitórias</b> sobre produtos primários e semielaborados, para Estados que já tinham fundos desse tipo atrelados ao ICMS.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- QUESTÕES -->
+<section class="tab" id="questoes">
+  <h2>Questões comentadas (CEBRASPE)</h2>
+  <p class="lead">São as 53 questões complementares da Aula 00. Responda e o comentário do professor aparece logo abaixo. O rendimento completo é gerado quando todas forem respondidas.</p>
+  <div class="row" style="margin-bottom:10px">
+    <label class="muted" for="fTema">Tema:</label>
+    <select id="fTema"></select>
+    <label class="muted" for="fStatus">Mostrar:</label>
+    <select id="fStatus"><option value="all">Todas</option><option value="pend">Não respondidas</option><option value="bad">Erradas</option><option value="ok">Certas</option></select>
+  </div>
+  <div class="progress"><div id="qProg"></div></div>
+  <div class="qnav" id="qNav"></div>
+  <div class="card" id="qCard"></div>
+  <div class="row" style="justify-content:space-between">
+    <button class="btn" id="qPrev">← Anterior</button>
+    <span class="muted" style="font-size:13px">Atalhos: <kbd>A</kbd>–<kbd>E</kbd> ou <kbd>C</kbd>/<kbd>E</kbd> escolhe · <kbd>Shift</kbd>+letra descarta · <kbd>Enter</kbd> responde · <kbd>←</kbd> <kbd>→</kbd> navega</span>
+    <button class="btn pri" id="qNext">Próxima →</button>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="tab" id="flash">
+  <h2>Flashcards com repetição espaçada</h2>
+  <p class="lead">Leia a pergunta, responda <b>em voz alta</b> e só então vire o cartão (clique ou <kbd>Espaço</kbd>). Marque com sinceridade: os cartões errados voltam primeiro (sistema Leitner, caixas 1 a 5).</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px">
+    <select id="fcDeck">
+      <option value="all">Todos os baralhos</option>
+      <option value="a00">Aula 00 · Conceito e espécies</option>
+      <option value="ref">Reforma Tributária</option>
+      <option value="pan">Panorama da disciplina (prévia CTN)</option>
+    </select>
+    <button class="btn" id="fcShuffle">Embaralhar</button>
+    <button class="btn" id="fcReset">Zerar caixas</button>
+  </div>
+  <div class="fc-meta"><span id="fcPos"></span><span id="fcBox"></span></div>
+  <div class="fc" id="fc"><div class="fc-inner"><div class="fc-face front"><div class="q" id="fcQ"></div><div class="muted" style="margin-top:14px;font-size:13px">clique para virar</div></div><div class="fc-face back"><div id="fcA"></div></div></div></div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn bad" id="fcBad">✘ Errei (<kbd>1</kbd>)</button>
+    <button class="btn" id="fcMid">~ Hesitei (<kbd>2</kbd>)</button>
+    <button class="btn ok" id="fcOk">✔ Acertei (<kbd>3</kbd>)</button>
+  </div>
+  <div class="boxes" id="fcBoxes"></div>
+</section>
+
+<!-- RENDIMENTO -->
+<section class="tab" id="rend">
+  <h2>Rendimento</h2>
+  <div id="rendBody"></div>
+  <h3>Gerenciar dados</h3>
+  <div class="row">
+    <button class="btn" id="expBtn">Exportar respostas (.json)</button>
+    <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
+    <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
+  </div>
+</section>
+
+</main>
+
+<div id="tip" role="tooltip"></div>
+<script>
+const QUESTOES = [{"n": 1, "fonte": "CEBRASPE/INFRA S.A./Contador/2026", "enun": "No âmbito de um processo administrativo tributário instaurado pela secretaria de fazenda de certo estado, um auditor fiscal analisa o planejamento tributário e a conformidade contábil-fiscal de um grupo econômico que atua nos ramos de construção civil e incorporação imobiliária. O contribuinte questiona a glosa de créditos, a aplicação de sanções e o regime de apuração de tributos federais e estaduais. A partir da situação hipotética apresentada e considerando as disposições legais aplicáveis ao imposto de renda de pessoa jurídica (IRPJ) e à contribuição social sobre o lucro líquido (CSLL), julgue o item a seguir. O conceito de tributo, conforme o Código Tributário Nacional, abrange as sanções por atos ilícitos (multas), desde que estas tenham natureza pecuniária, sejam instituídas por lei e cobradas mediante atividade administrativa plenamente vinculada.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O art. 3° do CTN é expresso ao dispor que tributo é prestação pecuniária compulsória \"que não constitua sanção de ato ilícito\". A ausência de sanção por ato ilícito é requisito essencial do conceito de tributo. Portanto, ainda que uma multa seja pecuniária, prevista em lei e cobrada por atividade vinculada, ela nunca será tributo, pois decorre justamente de ato ilícito. As características mencionadas na questão são de fato elementos do tributo, mas nenhuma delas tem o condão de incluir multas nesse conceito quando a própria lei as exclui expressamente."], "tema": "Conceito e natureza jurídica"}, {"n": 2, "fonte": "CEBRASPE/SEFAZ PR/Economista/2026", "enun": "A tributação é um elemento central da governança que viabiliza a execução orçamentária e a estabilidade institucional, refletindo a capacidade do Estado de organizar a sociedade e gerir o patrimônio comum de maneira estratégica. Assinale a opção em que é corretamente apresentado um exemplo de imposto que incide sobre o patrimônio do contribuinte.", "alts": [["a", "imposto sobre renda e proventos de qualquer natureza de pessoa física (IRPF)"], ["b", "imposto sobre serviços de qualquer natureza (ISSQN)"], ["c", "imposto sobre operações de crédito, câmbio e seguro, ou relativas a títulos ou valores mobiliários (IOF)"], ["d", "imposto sobre propriedade de veículos automotores (IPVA)"], ["e", "imposto sobre circulação de mercadorias e sobre prestações de serviços de transporte (ICMS)"]], "tipo": "mc", "resp": "d", "com": ["A questão classifica os impostos quanto à sua base de incidência. Vejamos:", "Letra A: Errada. O IRPF incide sobre a renda e proventos de qualquer natureza auferidos pela pessoa física, e não sobre o patrimônio.", "Letra B: Errada. O ISSQN incide sobre a prestação de serviços de qualquer natureza, sendo imposto sobre consumo/serviço, e não sobre patrimônio.", "Letra C: Errada. O IOF incide sobre operações de crédito, câmbio e seguro, ou relativas a títulos ou valores mobiliários, sendo imposto sobre operações financeiras — não sobre patrimônio.", "Letra D: Correta. O IPVA é o Imposto sobre a Propriedade de Veículos Automotores (art. 155, III, da CF/88). O fato gerador é justamente a propriedade do veículo, que configura patrimônio do contribuinte — trata-se, portanto, de imposto sobre o patrimônio.", "Letra E: Errada. O ICMS incide sobre operações relativas à circulação de mercadorias e prestações de serviços de transporte, sendo classificado como imposto sobre o consumo, e não sobre o patrimônio."], "tema": "Impostos"}, {"n": 3, "fonte": "CEBRASPE/SEFAZ PR/Economista/2026", "enun": "A Reforma Tributária brasileira aprovou o imposto sobre valor agregado (IVA). Esse imposto, no Brasil,\nI é um imposto direto que incide sobre o lucro das empresas.\nII incide de forma incremental em cada fase de produção e distribuição.\nIII tem função regulatória de controle de preços de serviços públicos, como água e energia. Assinale a opção correta.", "alts": [["a", "Apenas o item I está certo."], ["b", "Apenas o item II está certo."], ["c", "Apenas os itens I e III estão certos."], ["d", "Apenas os itens II e III estão certos."], ["e", "Todos os itens estão certos."]], "tipo": "mc", "resp": "b", "com": ["A questão aborda as características do Imposto sobre Valor Agregado no contexto da Reforma Tributária (EC 132/2023 e LC 214/2025), que é representado pelo Imposto sobre Bens e Serviços (IBS), previsto no art. 156-A, da CF! Entenda IVA nesta questão como sendo o IBS, portanto, ok?!", "Item I: Incorreto. O IVA não é um imposto direto que incide sobre o lucro das empresas. O imposto direto sobre lucro é o IRPJ/CSLL. O IVA é um imposto indireto, que incide sobre o consumo de bens e serviços.", "Item II: Correto. O IVA é caracterizado pela incidência incremental em cada fase de produção e distribuição: em cada etapa, tributa-se apenas o valor adicionado naquela fase, permitindo o aproveitamento de créditos das etapas anteriores. Isso é justamente o que a LC 214/2025 implementou com o IBS e a CBS, na lógica não cumulativa do IVA dual brasileiro.", "Item III: Incorreto. O IVA não tem função regulatória de controle de preços de serviços públicos como água e energia. O IVA é tributo fiscal/arrecadatório sobre o consumo."], "tema": "Reforma Tributária"}, {"n": 4, "fonte": "CEBRASPE/SEFAZ-RN-Auditor Fiscal/2026", "enun": "Assinale a opção correta no que diz respeito aos impostos e aos respectivos fatos geradores.", "alts": [["a", "Os impostos têm como fato gerador a utilização efetiva de serviço público."], ["b", "O fato gerador do imposto pode ter como causa o princípio do não enriquecimento injusto."], ["c", "Os impostos são uma remuneração paga ao estado pela exploração de seus bens."], ["d", "Um imposto pode ter como fato gerador a valorização imobiliária."], ["e", "Os impostos são cobrados independentemente da atividade estatal que beneficia o contribuinte."]], "tipo": "mc", "resp": "e", "com": ["A questão trata do conceito e da natureza jurídica dos impostos, disciplinados no art. 16 do CTN, que os classifica como tributos não vinculados a uma atividade estatal específica.", "Letra A: Errada. A utilização efetiva ou potencial de serviço público específico e divisível é fato gerador de taxa (CTN, art. 77), não de imposto. O imposto tem fato gerador desvinculado de qualquer atividade estatal.", "Letra B: Errada. O princípio do não enriquecimento injusto é instituto de Direito Civil, sem correlação com o fato gerador dos impostos. Nos termos do art. 16 do CTN, o fato gerador do imposto é uma situação independente de qualquer atividade estatal relativa ao c ontribuinte — podendo ser, por exemplo, a aquisição de renda, a propriedade de bem imóvel, ou a realização de operação de circulação de mercadoria.", "Letra C: Errada. A remuneração pela exploração de bens públicos é característica de preço público (tarifa), não de imposto. O imposto é cobrado em razão de uma manifestação de capacidade contributiva do sujeito passivo, sem contrapartida estatal direta.", "Letra D: Errada. A valorização imobiliária é fato gerador da contribuição de melhoria (CTN, art. 81), não de imposto.", "Letra E: Correta. O art. 16 do CTN define imposto como \"o tributo cuja obrigação tem por fato gerador uma situação independente de qualquer atividade estatal específica, relativa ao contribuinte.\" Trata-se do tributo não vinculado por excelência: o Estado não precisa prestar nenhuma contraprestação ao contribuinte para cobrar o imposto — basta que este pratique o fato gerador previsto em lei."], "tema": "Impostos"}, {"n": 5, "fonte": "CEBRASPE/SEFAZ-RN-Auditor Fiscal/2026", "enun": "Em relação às espécies tributárias, assinale a opção correta.", "alts": [["a", "Os impostos são tributos vinculados a uma atuação estatal específica em favor do contribuinte."], ["b", "A contribuição de melhoria tem como fato gerador o aumento da capacidade contributiva do proprietário do imóvel."], ["c", "As taxas decorrem do exercício do poder de polícia ou da utilização, efetiva ou potencial, de serviço público específico e divisível."], ["d", "As taxas têm como fato gerador uma situação independente de qualquer atividade estatal específica."], ["e", "A contribuição de melhoria pode ser cobrada independentemente da valorização imobiliária."]], "tipo": "mc", "resp": "c", "com": ["A questão testa a diferenciação entre as espécies tributárias — impostos, taxas e contribuição de melhoria —, com foco nos respectivos fatos geradores (CTN, arts. 16, 77 e 81).", "Letra A: Errada. Os impostos são tributos não vinculados: seu fato gerador é uma situação independente de qualquer atividade estatal específica (CTN, art. 16). Os tributos vinculados a atuação estatal específica são as taxas e a contribuição de melhoria.", "Letra B: Errada. O fato gerador da contribuição de melhoria não é o aumento da capacidade contributiva do proprietário, mas sim a valorização imobiliária decorrente de obra pública (CTN, art. 81).", "Letra C: Correta. O art. 77 do CTN, em harmonia com o art. 145, II, da CF/88, define que as taxas têm como fato gerador o exercício regular do poder de polícia ou a utilização, efetiva ou potencial, de serviço público específico e divisível, prestado ao contribuinte ou posto à sua disposição.", "Letra D: Errada. Essa é a definição de fato gerador de imposto (CTN, art. 16), não de taxa. As taxas têm fato gerador vinculado a uma atividade estatal — exercício do poder de polícia ou prestação de serviço público específico e divisível.", "Letra E: Errada. A contribuição de melhoria pressupõe a valorização imobiliária decorrente de obra pública como condição sine qua non para sua cobrança (CTN, arts. 81-82). Sem valorização, não há fato gerador da contribuição de melhoria. A obra pública, por si só, não é suficiente."], "tema": "Espécies tributárias (visão geral)"}, {"n": 6, "fonte": "CEBRASPE/SEFAZ-RN-Auditor Fiscal/2026", "enun": "A taxa é uma espécie de tributo que deve ser suportada pelo contribuinte, em virtude de um serviço prestado pelo poder público ou em razão do exercício regular do poder de polícia. Acerca das taxas, assinale a opção correta, à luz do CTN e do entendimento do STF.", "alts": [["a", "São inconstitucionais normas municipais que disciplinem a cobrança de taxas relativas à prevenção e extinção de incêndio."], ["b", "As taxas decorrem do exercício do poder de polícia, atividade da administração pública que, limitando ou disciplinando direito, interesse ou liberdade, regula a prática de ato ou abstenção de fato, em razão de interesse público, concernente exclusivamente a segurança, higiene, ordem, costumes e tranquilidade pública."], ["c", "O STF entende ser constitucional utilizarem-se elementos da base de cálculo de um imposto no cálculo da taxa, mesmo que a identidade seja integral entre as bases do imposto e da taxa."], ["d", "São constitucionais a instituição e a cobrança de taxa por emissão ou remessa de carnês e(ou) guias de recolhimento de tributos."], ["e", "A taxa é uma espécie tributária de competência comum, e será instituída de acordo com a competência de cada ente, podendo o município de Natal – RN, na sua base territorial, instituir taxa pela emissão de passaporte, mesmo que essa seja uma atividade de competência federal."]], "tipo": "mc", "resp": "a", "com": ["Letra A: Correta. A taxa de prevenção e extinção de incêndio está vinculada ao serviço do Corpo de Bombeiros Militar, que, nos termos do art. 144, §5º, da CF/88, é uma instituição estadual — não municipal. A competência para a fiscalização e prestação do serviço d e bombeiros é dos Estados-membros. O STF confirmou, no RE 1.417.155 (Tema 1282, 2025), a constitucionalidade das taxas de prevenção e combate a incêndios, busca, salvamento e resgate instituídas por estados-membros.", "Letra B: Errada. A alternativa reproduz parcialmente o conceito de poder de polícia do art. 78 do CTN, mas insere a palavra \"exclusivamente\", tornando-a incorreta. O art. 78 do CTN dispõe que o poder de polícia concerne à segurança, higiene, ordem, costumes, à disciplina da produção e do mercado, ao exercício de atividades econômicas dependentes de concessão ou autorização do Poder Público, à tranquilidade pública ou ao respeito à propriedade e aos direitos individuais ou coletivos. A lista é consideravelmente mais ampla do que a apresentada na alternativa.", "Letra C: Errada. A alternativa contraria diretamente a Súmula Vinculante 29 do STF, que admite a adoção de um ou mais elementos da base de cálculo de imposto no cálculo da taxa, desde que não haja integral identidade entre uma base e outra. A identidade integral torna a taxa inconstitucional, nos termos do art. 145, §2º, da CF/88 e do art. 77, parágrafo único, do CTN.", "Letra D: Errada. O STF consolidou entendimento diametralmente oposto: é inconstitucional a instituição e a cobrança de taxas por emissão ou remessa de carnês e/ou guias de recolhimento de tributos. O fundamento é que a emissão de guia de recolhimento é de interesse exclusivo da Administração, sendo mero instrumento de arrecadação, não envolvendo a prestação de um serviço público ao contribuinte (STF, Tema 721).", "Letra E: Errada. A taxa é de competência comum apenas no que se refere às atividades que o ente federativo tem competência para fiscalizar ou prestar. A emissão de passaporte é atividade exclusiva da União, exercida pela Polícia Federal, nos termos do art. 21, II e X, da CF/88. Assim, um município jamais poderia instituir taxa pela emissão de passaporte dentro de sua base territorial, pois lhe falta competência para exercer tal atividade."], "tema": "Taxas e preços públicos"}, {"n": 7, "fonte": "CEBRASPE/SEFAZ-PR-Agente/2026", "enun": "Um dos principais deveres de cidadania é o de contribuir para o financiamento das atividades de interesse da coletividade. Esse dever se relaciona ao pagamento de tributos, que asseguram recursos necessários à aplicação das leis, à manutenção das instituições e à promoção do desenvolvimento social. O Estado não pode funcionar sem receitas, isto é, sem recursos financeiros para o cumprimento de suas funções. É o pagamento de tributos que viabiliza todos os bens e serviços prestados pelo setor público à sociedade. Cada serviço, em áreas como saúde, educação, segurança, infraestrutura, proteção social, proteção ambiental, cultura, e muitas outras, só pode existir graças às receitas tributárias. Onde há investimento público, portanto, os tributos estão presentes: de unidades de pronto atendimento a hospitais de alta complexidade, da educação básica à universidade pública, das viaturas aos equipamentos das polícias civil e militar, das obras viárias aos investimentos em saneamento básico, infraestrutura urbana e habitação, sem falar nos salários e aposentadorias dos servidores públicos responsáveis pela prestação desses serviços. Internet: <www.sefaz.ba.gov.br> (com adaptações). A partir do texto, assinale a opção correta acerca dos critérios de classificação das espécies de tributos à luz da legislação tributária nacional e da doutrina de referência.", "alts": [["a", "Ao tratar de impostos, taxas, contribuições de melhoria, contribuições especiais e empréstimos compulsórios, a Constituição Federal de 1988 (CF) utiliza a natureza do fato gerador como critério, ao passo que a legislação infraconstitucional prestigia a denominação que o legislador atribuir ao tributo."], ["b", "A natureza jurídica específica do tributo é determinada pelo fato gerador, sendo irrelevantes a denominação e a destinação do produto arrecadado; os tributos são classificados em impostos, taxas e contribuições de melhoria, e a Constituição Federal de 1988 (CF) ampliou o rol de espécies tributárias ao incluir, entre elas, contribuições especiais e empréstimos compulsórios."], ["c", "O critério adotado na legislação tributária para distinguir tributos é exclusivamente político: tributos instituídos pela União são impostos, pelos estados são taxas, e pelos municípios são contribuições de melhoria."], ["d", "A legislação tributária infraconstitucional adota como critério a destinação do produto da arrecadação: se o tributo financia atividade geral do Estado, é imposto; se financia serviço específico, é taxa; se financia obra que beneficia determinado grupo, é contribuição de melhoria."], ["e", "A doutrina reconhece que a classificação em cinco espécies tributárias (impostos, taxas, contribuições de melhoria, contribuições especiais e empréstimos compulsórios) decorre do disposto na legislação infraconstitucional."]], "tipo": "mc", "resp": "b", "com": ["Esta questão aborda os critérios utilizados para classificar as espécies tributárias no ordenamento jurídico brasileiro. Vamos analisar!", "Letra A: Errada. A afirmação inverte a lógica do sistema tributário brasileiro. O art. 4º do CTN expressamente estabelece que \"a natureza jurídica específica do tributo é determinada pelo fato gerador da respectiva obrigação, sendo irrelevantes para qualificá-la: I – a denominação e demais características formais adotadas pela lei\". Portanto, é a legislação infraconstitucional (CTN) que adota o critério do fato gerador, rejeitando o critério da denominação.", "Letra B: Correta. Esta alternativa está em perfeita consonância com o art. 4º do CTN, que estabelece que a natureza jurídica do tributo é determinada pelo fato gerador, sendo irrelevantes a denominação e a destinação do produto arrecadado. Ademais, o art. 5º do CTN classifica os tributos em impostos, taxas e contribuições de melhoria (teoria tripartida). A Constituição Federal de 1988 efetivamente ampliou o rol de espécies tributárias ao prever expressamente contribuições especiais (art. 149) e empréstimos compulsórios (art. 148), sendo atualmente majoritária a teoria pentapartida adotada pelo STF.", "Letra C: Errada. O critério de classificação dos tributos não é político nem está relacionado ao ente federativo instituidor. A natureza jurídica do tributo é determinada pelo seu fato gerador, conforme art. 4º do CTN. Todos os entes podem instituir impostos e taxas dentro de suas competências constitucionais. A classificação baseia-se em critérios jurídicos, não políticos.", "Letra D: Errada. Embora a destinação do produto da arrecadação seja característica relevante de algumas espécies tributárias (especialmente das contribuições especiais), o art. 4º, II, do CTN expressamente estabelece que a destinação é irrelevante para determinar a natureza jurídica do tributo. O critério determinante é o fato gerador, não a destinação.", "Letra E: Errada. A classificação em cinco espécies tributárias decorre da Constituição Federal, não da legislação infraconstitucional. O CTN, editado antes da CF/88, adota a teoria tripartida (impostos, taxas e contribuições de melhoria). Foi a Constituição de 1988 que pre viu expressamente os empréstimos compulsórios (art. 148) e as contribuições especiais (art. 149), ensejando a teoria pentapartida reconhecida pelo STF."], "tema": "Conceito e natureza jurídica"}, {"n": 8, "fonte": "CEBRASPE/SEFAZ-SE-Auditor Fiscal/2025", "enun": "Assinale a opção correta no que concerne a taxas.", "alts": [["a", "As taxas cobradas pela União, pelos estados, Distrito Federal e municípios não podem ter alíquotas próprias de impostos."], ["b", "Do ponto de vista do fato gerador, a diferença entre a taxa de serviço e a do exercício do poder de polícia é que enquanto aquela está estritamente vinculada a uma atuação estatal específica relativa ao contribuinte, esta não está."], ["c", "É possível a adoção, no cálculo do valor de taxas, de um ou mais elementos da base de cálculo própria de determinado imposto, desde que não haja integral identidade."], ["d", "As taxas cobradas pelos estados, no âmbito de suas respectivas atribuições, têm como fato gerador a prestação de serviço público ou a utilização, efetiva ou potencial, do poder de polícia, específico e divisível, prestado ao contribuinte ou posto à sua disposição."], ["e", "Para a cobrança de taxas, considera-se serviço público a atividade da administração pública que, limitando ou disciplinando direito, interesse ou liberdade, regula a prática de ato ou abstenção de fato, em razão de interesse público."]], "tipo": "mc", "resp": "c", "com": ["Letra A: Errada. O art. 77, parágrafo único, do CTN estabelece que \"a taxa não pode ter base de cálculo ou fato gerador idênticos aos que correspondam a imposto\". A vedação diz respeito à base de cálculo e ao fato gerador, não a \"alíquotas próprias de impostos\". A redação está imprecisa e não reflete corretamente a norma do CTN. Redação similar existe no art. 145, § 2º, da CF.", "Letra B: Errada. Ambas as modalidades de taxa (serviço público e poder de polícia) estão vinculadas a uma atuação estatal específica relativa ao contribuinte. O art. 77 do CTN estabelece que as taxas têm como fato gerador \"o exercício regular do poder de polícia, ou a utilização, efetiva ou potencial, de serviço público específico e divisível, prestado ao contribuinte ou posto à sua disposição\". A diferença entre elas está na natureza da atuação estatal.", "Letra C: Correta. A jurisprudência do STF consolidou o entendimento de que é possível a adoção, no cálculo do valor de taxas, de um ou mais elementos da base de cálculo própria de determinado imposto, desde que não haja integral identidade. A Súmula Vinculante 29 do STF estabelece que \"é constitucional a adoção, no cálculo do valor de taxa, de um ou mais elementos da base de cálculo própria de determinado imposto, desde que não haja integral identidade entre uma base e outra\". Exemplo: taxa de lixo pode usar área construída (elemento do IPTU) como critério, desde que não seja idêntica à base do IPTU.", "Letra D: Errada. O art. 77 do CTN estabelece que as taxas têm como fato gerador \"o exercício regular do poder de polícia, ou a utilização, efetiva ou potencial, de serviço público específico e divisível\". A alternativa inverteu os conceitos ao dizer \"prestação de serviço público ou a utilização, efetiva ou potencial, do poder de polícia\". Não existe \"utilização do poder de polícia\" - o fato gerador é o exercício do poder de polícia.", "Letra E: Errada. Esta é a definição de poder de polícia (art. 78 do CTN), não de serviço público. O art. 78 estabelece que \"considera-se poder de polícia atividade da administração pública que, limitando ou disciplinando direito, interesse ou liberdade, regula a prática de ato ou abstenção de fato, em razão de interesse público\". Já o art. 79 trata das características dos serviços públicos (específicos e divisíveis)."], "tema": "Taxas e preços públicos"}, {"n": 9, "fonte": "CEBRASPE/SEFAZ-SE-Auditor Fiscal/2025", "enun": "De acordo com as disposições introduzidas pela EC n.º 132/2023, a contribuição de iluminação pública (CIP) pode\nI ser utilizada para custear somente o serviço de iluminação pública.\nII ser utilizada para o custeio, a expansão e a melhoria do serviço de iluminação pública.\nIII custear sistemas de monitoramento para segurança e preservação de logradouros públicos. Assinale a opção correta.", "alts": [["a", "Apenas o item I está certo."], ["b", "Apenas o item II está certo."], ["c", "Apenas os itens I e III estão certos."], ["d", "Apenas os itens II e III estão certos."], ["e", "Todos os itens estão certos."]], "tipo": "mc", "resp": "d", "com": ["A questão trata da Contribuição para Custeio do Serviço de Iluminação Pública, regulada no art. 149-A da CF/88, com alterações trazidas pela EC 132/2023 (Reforma Tributária). Vamos lá!", "Item I: Errado. A EC 132/2023 ampliou o objeto da contribuição. O art. 149-A da CF/88 (com redação da EC 132/2023) estabelece que \"Os Municípios e o Distrito Federal poderão instituir contribuição, na forma das respectivas leis, para o custeio, a expansão e a melhoria do serviço de iluminação pública e de sistemas de monitoramento para segurança e preservação de logradouros públicos\". Portanto, não é somente para iluminação pública.", "Item II: Correto. De fato, o art. 149-A prevê que a contribuição pode ser utilizada \"para o custeio, a expansão e a melhoria do serviço de iluminação pública\", abrangendo essas três finalidades.", "Item III: Correto. Como visto, a EC 132/2023 expressamente incluiu no art. 149-A a possibilidade de custear \"sistemas de monitoramento para segurança e preservação de logradouros públicos\". Esta foi uma importante ampliação do objeto da contribuição."], "tema": "Contribuições especiais"}, {"n": 10, "fonte": "CEBRASPE/CAU MG-Contador/2025", "enun": "Julgue o item seguinte, no que se refere a conceito e espécie de tributos, repartição das receitas tributárias e normas tributárias. O tributo é uma obrigação pecuniária imposta por lei, sem natureza de sanção, enquanto o imposto é uma espécie tributária não vinculada, cuja cobrança independe de qualquer contraprestação direta ao contribuinte.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De acordo com o art. 3º do CTN, o tributo é definido como \"toda prestação pecuniária compulsória, em moeda ou cujo valor nela se possa exprimir, que não constitua sanção de ato ilícito, instituída em lei e cobrada mediante atividade administrativa plenamente vinculada\". O imposto, por sua vez, está previsto no art. 16 do CTN como tributo não vinculado a qualquer atividade estatal específica relativa ao contribuinte."], "tema": "Espécies tributárias (visão geral)"}, {"n": 11, "fonte": "CEBRASPE/ANM-Contabilidade/2025", "enun": "Considerando as disposições da Constituição Federal de 1988 acerca de competência tributária, limitações ao poder de tributar e tributos dos diferentes entes federativos, julgue o item a seguir. Em caso de déficit atuarial nos sistemas de custeio de regime próprio de previdência social, a contribuição ordinária dos aposentados e pensionistas poderá incidir sobre o valor dos proventos de aposentadoria e de pensões que supere o salário mínimo.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O art. 149, §1º da CF/88 autoriza expressamente a instituição de contribuições para custeio de regime próprio de previdência social, inclusive com possibilidade de alíquotas progressivas e cobrança sobre aposentados e pensionistas. Ademais, o § 1º-A, prevê que, quando houver deficit atuarial, a contribuição ordinária dos aposentados e pensionistas poderá incidir sobre o valor dos proventos de aposentadoria e de pensões que supere o salário- mínimo."], "tema": "Contribuições especiais"}, {"n": 12, "fonte": "CEBRASPE/PF-Contador/2025", "enun": "Julgue o item que se seguem, relativos às normas tributárias gerais e ao tratamento contábil aplicável aos impostos e contribuições. Embora não esteja previsto expressamente no Código Tributário Nacional como imposto, taxa ou contribuição de melhoria, a CSLL é um tipo de tributo constitucionalmente previsto e atende ao princípio da legalidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A CSLL é uma contribuição social instituída pela Lei 7.689/88, com base no art. 195, I, \"c\" da CF/88. Embora não esteja classificada no CTN como uma das três espécies tradicionais (impostos, taxas e contribuições de melhoria), é constitucional, definida como uma contribuição de seguridade social e atende ao princípio da legalidade por ter sido criada por lei."], "tema": "Contribuições especiais"}, {"n": 13, "fonte": "CEBRASPE/CAU MG-Contador/2025", "enun": "Julgue o item seguinte, no que se refere a conceito e espécie de tributos, repartição das receitas tributárias e normas tributárias. As taxas e as contribuições de melhoria possuem a mesma natureza jurídica, uma vez que ambas são tributos vinculados, exigidos como contraprestação direta por serviços públicos específicos e divisíveis.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Embora ambas sejam tributos vinculados, possuem fatos geradores distintos. As taxas são devidas em razão do exercício do poder de polícia ou pela utilização de serviços públicos específicos e divisíveis (art. 145, II, CF/88). Já as contribuições de melhoria decorrem de obras públicas que valorizem o imóvel do contribuinte (art. 145, III, CF/88 e art. 81 do CTN). Portanto, não têm a mesma natureza jurídica específica."], "tema": "Espécies tributárias (visão geral)"}, {"n": 14, "fonte": "CEBRASPE/EMBRAPA-Advogado/2025", "enun": "Julgue o item a seguir, relativo ao Sistema Tributário Nacional, com base no disposto na Constituição Federal de 1988 (CF) e na jurisprudência do Supremo Tribunal Federal (STF). O STF reconheceu a legitimidade da contribuição ao INCRA, assentada a natureza de contribuição de intervenção sobre o domínio econômico, exceto no que diz respeito à cobrança em face das empresas urbanas, uma vez que a referida espécie tributária exige relação direta entre o contribuinte e a atuação estatal patrocinada pelo tributo.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Esta questão cobra o Tema de Repercussão Geral do STF nº 495: É constitucional a contribuição de intervenção no domínio econômico destinada ao INCRA devida pelas empresas urbanas e rurais, inclusive após o advento da EC nº 33/2001. Veja que a questão tent a excepcionar as empresas urbanas, o que contraria a jurisprudência em questão."], "tema": "Contribuições especiais"}, {"n": 15, "fonte": "CEBRASPE/CAU-MG-Advogado/2025", "enun": "Em relação a aspectos concernentes à obrigação tributária e à cobrança do crédito tributário, julgue o item seguinte, à luz da jurisprudência dos tribunais superiores. As anuidades cobradas pelos conselhos de fiscalização têm natureza jurídica de tributo, estando situadas no âmbito da competência exclusiva da União para edição de contribuições corporativas.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A assertiva está correta. O STF consolidou jurisprudência no sentido de que as anuidades cobradas pelos conselhos de fiscalização profissional têm natureza tributária (exceto a OAB), mais especificamente de contribuições de interesse de categorias profissionais. Conforme o art. 149 da CF/88, compete exclusivamente à União instituir \"contribuições sociais, de intervenção no domínio econômico e de interesse das categorias profissionais ou econômicas\". Os conselhos profissionais, como autarquias federais, exercem essa competência por delegação da União."], "tema": "Contribuições especiais"}, {"n": 16, "fonte": "CEBRASPE/CAU-MG-Advogado/2025", "enun": "Em relação a aspectos concernentes à obrigação tributária e à cobrança do crédito tributário, julgue o item seguinte, à luz da jurisprudência dos tribunais superiores. Segundo a jurisprudência do STF, é legítimo aos conselhos de fiscalização suspender o registro profissional quando verificada a inadimplência reiterada das anuidades.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Esta questão cobra o Tema de Repercussão Geral do STF nº 732: É inconstitucional a suspensão realizada por conselho de fiscalização profissional do exercício laboral de seus inscritos por inadimplência de anuidades, pois a medida consiste em sanção política em matéria tributária."], "tema": "Contribuições especiais"}, {"n": 17, "fonte": "CEBRASPE/PC-PE-Delegado/2025", "enun": "O sistema tributário nacional (STN) compreende o conjunto de normas constitucionais e infraconstitucionais que disciplinam a tributação. A complexidade de tal sistema advém tanto da disciplina constitucional quanto do modelo federativo adotado, caracterizado pela autonomia recíproca entre União e estados-membros e municípios, constituindo-se, assim, a pluralidade de pessoas dotadas de competência legislativa para instituir tributos. A respeito dos tributos, julgue os itens que se seguem.\nI De acordo com o Código Tributário Nacional (CTN), tributo é toda prestação pecuniária compulsória, em moeda ou cujo valor nela se possa exprimir, instituída em lei e cobrada mediante atividade administrativa plenamente vinculada, ainda que constitua sanção de ato ilícito, como é o caso da taxa para retirada de veículo apreendido por infração de trânsito, que inclui custos de guincho e estadia no pátio.\nII De acordo com disposição literal do CTN, são tributos os impostos, as taxas e as contribuições de melhoria.\nIII A Constituição Federal de 1988 prevê cinco espécies tributárias: impostos, taxas, contribuição de melhoria, empréstimos compulsórios e contribuições especiais. Assinale a opção correta.", "alts": [["a", "Apenas o item I está certo."], ["b", "Apenas o item II está certo."], ["c", "Apenas os itens I e III estão certos."], ["d", "Apenas os itens II e III estão certos."], ["e", "Todos os itens estão certos."]], "tipo": "mc", "resp": "d", "com": ["A questão trata do conceito de tributo e das espécies tributárias previstas no CTN e na CF/88.", "Item I: Errado. O art. 3º do CTN estabelece que \"tributo é toda prestação pecuniária compulsória, em moeda ou cujo valor nela se possa exprimir, que não constitua sanção de ato ilícito, instituída em lei e cobrada mediante atividade administrativa plenamente vinculada\". O tributo não pode constituir sanção de ato ilícito. A assertiva está incorreta ao afirmar \"ainda que constitua sanção de ato ilícito\".", "Item II: Correto. O art. 5º do CTN estabelece literalmente que \"os tributos são impostos, taxas e contribuições de melhoria\". Esta é a classificação tripartite adotada expressamente pelo CTN.", "Item III: Correto. A CF/88 adota a teoria pentapartite das espécies tributárias, prevendo: impostos (arts. 153, 155 e 156), taxas (art. 145, II), contribuição de melhoria (art. 145, III), empréstimos compulsórios (art. 148) e contribuições especiais (arts. 149 e 149-A), que se subdividem em contribuições sociais, de intervenção no domínio econômico, de interesse de categorias profissionais ou econômicas e COSIP. Esta classificação é reconhecida pela doutrina majoritária e pela jurisprudência do STF."], "tema": "Espécies tributárias (visão geral)"}, {"n": 18, "fonte": "CEBRASPE/STM-Analista Judiciário/2025", "enun": "Em relação a impostos, taxas e contribuições, julgue o item a seguir, considerando as disposições da Constituição Federal de 1988 (CF) e a jurisprudência dos tribunais superiores. É competência comum à União, aos estados e ao Distrito Federal a instituição de contribuições sociais e de interesse das categorias profissionais ou econômicas.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A questão versa sobre a competência constitucional para instituição de contribuições sociais e de interesse das categorias profissionais ou econômicas. O art. 149 da CF/88 estabelece que \"Compete exclusivamente à União instituir contribuições sociais, de intervenção no domínio econômico e de interesse das categorias profissionais ou econômicas\", não sendo competência comum aos demais entes federativos."], "tema": "Contribuições especiais"}, {"n": 19, "fonte": "CEBRASPE/APEX-Analista/2024", "enun": "Segundo o Código Tributário Nacional (CTN), o elemento que determina a natureza jurídica específica de um tributo, indicando tratar-se de imposto, taxa ou contribuição de melhoria, é", "alts": [["a", "o fato gerador da obrigação."], ["b", "o conjunto de características formais do tributo, conforme prescrito na lei."], ["c", "a denominação atribuída ao tributo."], ["d", "a destinação legal do produto de sua arrecadação."]], "tipo": "mc", "resp": "a", "com": ["A questão trata do critério utilizado pelo CTN para definir a natureza jurídica específica dos tributos, conforme estabelecido no art. 4º do CTN. Bem simples de se resolver (e acertar!).", "Letra A: Correta. O art. 4º do CTN estabelece que \"a natureza jurídica específica do tributo é determinada pelo fato gerador da respectiva obrigação principal, sendo irrelevantes para qualificá-la a denominação e demais características formais adotadas pela lei, ou a destinação legal do produto da sua arrecadação\".", "Letra B: Errada. O próprio art. 4º do CTN expressamente afirma que as características formais são irrelevantes para determinar a natureza jurídica específica do tributo.", "Letra C: Errada. A denominação atribuída ao tributo é expressamente considerada irrelevante pelo art. 4º do CTN para fins de determinação da natureza jurídica específica.", "Letra D: Errada. A destinação legal do produto da arrecadação também é considerada irrelevante pelo art. 4º do CTN para qualificar a natureza jurídica específica do tributo."], "tema": "Conceito e natureza jurídica"}, {"n": 20, "fonte": "CEBRASPE/CAGEPA-Contador/2024", "enun": "Julgue os seguintes itens, relativos a tributos.\nI Tributo é toda prestação pecuniária compulsória, em moeda ou cujo valor nela se possa exprimir, que não constitua sanção de ato ilícito, instituída em lei e cobrada mediante atividade administrativa plenamente vinculada.\nII Imposto é uma espécie de tributo que tem como fato gerador uma atuação estatal específica, diretamente referida ao contribuinte.\nIII Taxa é uma espécie de tributo que tem como fato gerador o exercício regular do poder de polícia ou a utilização, efetiva ou potencial, de serviço público específico e divisível, prestado ao contribuinte ou posto a sua disposição. Assinale a opção correta.", "alts": [["a", "Apenas o item I está certo."], ["b", "Apenas o item II está certo."], ["c", "Apenas o item III está certo."], ["d", "Apenas os itens I e II estão certos."], ["e", "Apenas os itens I e III estão certos."]], "tipo": "mc", "resp": "e", "com": ["Item I: Correto. A definição reproduz fielmente o art. 3º do CTN, que define tributo como \"toda prestação pecuniária compulsória, em moeda ou cujo valor nela se possa exprimir, que não constitua sanção de ato ilícito, instituída em lei e cobrada mediante atividade administrativa plenamente vinculada\".", "Item II: Errado. O conceito apresentado pode se referir às taxas (tributos vinculados), não aos impostos. Conforme o art. 16 do CTN, \"imposto é o tributo cuja obrigação tem por fato gerador uma situação independente de qualquer atividade estatal específica, relativa ao contribuinte\". Os impostos são tributos não vinculados a uma atuação estatal específica.", "Item III: Correto. A definição reproduz exatamente o art. 77 do CTN, que estabelece que \"as taxas cobradas pela União, pelos Estados, pelo Distrito Federal ou pelos Municípios, no âmbito de suas respectivas atribuições, têm como fato gerador o exercício regular do poder de polícia, ou a utilização, efetiva ou potencial, de serviço público específico e divisível, prestado ao contribuinte ou posto a sua disposição\"."], "tema": "Espécies tributárias (visão geral)"}, {"n": 21, "fonte": "CEBRASPE/CAGEPA-Contador/2024", "enun": "Ainda com relação a tributos, julgue os itens que se seguem.\nI A contribuição de melhoria é uma espécie de tributo cujo fato gerador é a valorização imobiliária decorrente de obra pública.\nII Empréstimos compulsórios são tributos cuja cobrança pode ocorrer em situações excepcionais, como calamidade pública, guerra externa ou sua iminência, conforme previsto na CF.\nIII As contribuições especiais são destinadas ao financiamento da seguridade social e, por isso, são consideradas como impostos. Assinale a opção correta.", "alts": [["a", "Apenas o item III está certo."], ["b", "Apenas os itens I e II estão certos."], ["c", "Apenas os itens I e III estão certos."], ["d", "Apenas os itens II e III estão certos."], ["e", "Todos os itens estão certos."]], "tipo": "mc", "resp": "b", "com": ["Item I: Correto. O art. 81 do CTN estabelece que \"a contribuição de melhoria cobrada pela União, pelos Estados, pelo Distrito Federal ou pelos Municípios, no âmbito de suas respectivas atribuições, é instituída para fazer face ao custo de obras públicas de que decorra valorização imobiliária, tendo como limite total a despesa realizada e como limite individual o acréscimo de valor que da obra resultar para cada imóvel beneficiado\".", "Item II: Correto. O art. 148 da CF/88 prevê que a União pode instituir empréstimos compulsórios para atender a despesas extraordinárias decorrentes de calamidade pública, guerra externa ou sua iminência, além de investimento público de caráter urgente e relevante interesse nacional.", "Item III: Errado. As contribuições especiais não são consideradas impostos, mas sim uma espécie tributária autônoma prevista no art. 149 da CF/88. Embora algumas contribuições sejam destinadas ao financiamento da seguridade social, existem outras finalidades, como intervenção no domínio econômico e interesse de categorias profissionais ou econômicas."], "tema": "Espécies tributárias (visão geral)"}, {"n": 22, "fonte": "CEBRASPE/INPI-Analista-/Gestão e Suporte/Direito/2024", "enun": "Considerando o conceito e a classificação dos tributos, julgue o item a seguir, de acordo com o Código Tributário Nacional: \"As taxas têm como fato gerador o exercício regular do poder de polícia, ou a utilização, efetiva ou potencial, de serviço público específico e divisível, prestado ao contribuinte ou posto à sua disposição.\"", "alts": [], "tipo": "ce", "resp": "C", "com": ["Conforme o art. 77 do CTN, o fato gerador das taxas é corretamente descrito como o exercício do poder de polícia ou a utilização, seja efetiva ou potencial, de serviços públicos específicos e divisíveis disponibilizados ao contribuinte. Esta definição abrange tanto os serviços utilizados diretamente quanto aqueles disponíveis para uso, mesmo que o contribuinte não os utilize de fato."], "tema": "Taxas e preços públicos"}, {"n": 23, "fonte": "CEBRASPE/Auditor do Estado (CGE RJ) /2024", "enun": "A respeito dos princípios constitucionais tributários e das espécies tributárias, julgue o item a seguir, considerando o Código Tributário Nacional (CTN), a Constituição Federal de 1988 e a jurisprudência do STF: \"A cobrança de taxa como contraprestação pelo serviço público de iluminação pública não encontra amparo constitucional, ante a indivisibilidade do serviço.\"", "alts": [], "tipo": "ce", "resp": "C", "com": ["De acordo com a Súmula Vinculante nº 41 e a jurisprudência do STF, a taxa para o serviço de iluminação pública é inconstitucional devido à sua natureza inespecífica e indivisível. A cobrança deve ocorrer via COSIP, conforme art. 149-A da CF após a EC 39/2002."], "tema": "Taxas e preços públicos"}, {"n": 24, "fonte": "CEBRASPE/Auditor do Estado (CGE RJ)/2024", "enun": "A respeito dos princípios constitucionais tributários e das espécies tributárias, julgue o item a seguir, considerando o Código Tributário Nacional (CTN), a Constituição Federal de 1988 e a jurisprudência do STF: \"É legítima a instituição, pelos estados, de contribuição de intervenção no domínio econômico que esteja atrelada à exploração de petróleo realizada no respectivo território.\"", "alts": [], "tipo": "ce", "resp": "E", "com": ["De acordo com o art. 149 da CF, somente a União pode instituir contribuições de intervenção no domínio econômico. Logo, a tentativa de um estado de criar tal contribuição para a exploração de petróleo é inconstitucional."], "tema": "Contribuições especiais"}, {"n": 25, "fonte": "CEBRASPE/APO -SEPLAN-RR/2023", "enun": "Constitui elemento essencial do conceito de tributo o fato de este ser uma obrigação pecuniária compulsória.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De fato, uma das características intrínsecas aos tributos é a sua compulsoriedade. É o que prevê o art. 3º, do CTN, e diversos doutrinadores chancelam esta assertiva."], "tema": "Conceito e natureza jurídica"}, {"n": 26, "fonte": "CEBRASPE/Pref Fortaleza-Auditor/2023", "enun": "Considerando os diferentes tipos de tributos, julgue o item subsequente. O tributo não se confunde com punição por ato ilícito.", "alts": [], "tipo": "ce", "resp": "C", "com": ["No conceito de tributo, aprende-se que este constitui prestação desprovida de caráter punitivo. Portanto, os tributos não se confundem com as multas. É o que estabelece o art. 3º, do CTN."], "tema": "Conceito e natureza jurídica"}, {"n": 27, "fonte": "CEBRASPE/Proc -PGE ES/2023", "enun": "De acordo com o Código Tributário Nacional, a natureza jurídica específica dos tributos deve ser determinada", "alts": [["a", "pelo fato gerador da obrigação."], ["b", "pela denominação do tributo."], ["c", "pela ocorrência de contraprestação."], ["d", "pelas características formais do tributo."], ["e", "pela destinação legal do produto da arrecadação."]], "tipo": "mc", "resp": "a", "com": ["Embora seja uma questão de múltipla escolha, a sua resposta é bastante direta: o art. 4º, do CTN, prescreve que o elemento essencial na definição da natureza jurídica específica dos tributos é o seu fato gerador. Ademais, o referido dispositivo também assevera que são irrelevantes nessa definição: a denominação do tributo e a destinação legal do produto da arrecadação."], "tema": "Conceito e natureza jurídica"}, {"n": 28, "fonte": "CEBRASPE/PGFN-PROCURADOR/2023", "enun": "No que se refere ao sistema tributário nacional e às normas gerais de direito tributário, julgue os itens a seguir.\nI Tributo é toda prestação pecuniária compulsória, em moeda ou cujo valor nela se possa exprimir, ainda que constitua sanção de ato ilícito, instituída em lei e cobrada mediante atividade administrativa plenamente vinculada.\nII Considerado o conceito legal de tributo, deve-se reconhecer a natureza tributária da taxa de ocupação dos terrenos de marinha.\nIII Apesar do caráter compulsório do tributo, a legislação por vezes permite ao contribuinte a opção por regimes tributários alternativos, como o Simples Nacional, o que não descaracteriza a natureza tributária da obrigação.\nIV A destinação legal do produto da arrecadação é irrelevante para aferir a natureza jurídica específica do tributo. Assinale a opção correta.", "alts": [["a", "Apenas os itens I e II estão certos."], ["b", "Apenas os itens I e IV estão certos."], ["c", "Apenas os itens II e III estão certos."], ["d", "Apenas os itens III e IV estão certos."], ["e", "Todos os itens estão certos."]], "tipo": "mc", "resp": "d", "com": ["Item I: O art. 3º, do CTN, veda que os tributos tenham natureza punitiva. Item errado.", "Item II: Os terrenos de marinha são considerados bens da União. A sua ocupação enseja o pagamento de taxa de ocupação. Porém, a jurisprudência entende que tal taxa não possui natureza tributária. Item errado.", "Item III: De fato, a opção pelos diversos regimes tributários a sua disposição, configura planejamento tributário lícito, por parte do contribuinte. E isso não retira seu o caráter tributário. Item correto.", "Item IV: O art. 4º, do CTN, prescreve que o elemento essencial na definição da natureza jurídica específica dos tributos é o seu fato gerador. Dessa forma, são irrelevantes nessa definição: a denominação do tributo e a destinação legal do produto da arrecadação. Item correto."], "tema": "Conceito e natureza jurídica"}, {"n": 29, "fonte": "CEBRASPE/APO -SEPLAN-RR/2023", "enun": "No que se refere a espécies e classificações de tributos, julgue o item subsequente. Ainda que auferidos por particulares, os emolumentos pagos aos cartórios extrajudiciais constituem tributo da espécie taxa, conforme decisão do STF.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A jurisprudência do Supremo Tribunal Federal é exatamente neste sentido: os emolumentos pagos aos cartórios extrajudiciais constituem tributo da espécie taxa."], "tema": "Taxas e preços públicos"}, {"n": 30, "fonte": "CEBRASPE/PPNT (PETROBRAS)/PETROBRAS/Suprimento de Bens e Serviços/Administração/2023", "enun": "No que se refere à administração tributária, julgue o item a seguir. Para facilitar a gestão tributária, um imposto e uma taxa podem ter a mesma base de cálculo.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O art. 145, § 2º, da CF/88, estabelece que as taxas não podem ter bases de cálculo próprias dos impostos. Assim, a assertiva está incorreta."], "tema": "Taxas e preços públicos"}, {"n": 31, "fonte": "CEBRASPE/PPNT (PETROBRAS)/PETROBRAS/Suprimento de Bens e Serviços/Administração/2023", "enun": "No que se refere à administração tributária, julgue o item a seguir. Um tributo recolhido com a finalidade de custear a prestação de um serviço público é uma taxa.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Esta assertiva foi considerada como correta pela banca CEBRASPE, mas é polêmica. Explico o porquê: apenas serviços públicos que sejam específicos e divisíveis podem ser remunerados por meio de taxas. Vale lembrar também que a contribuição de iluminação pública (CF, art. 149 -A) também pode custear a prestação de um serviço público. Conforme a redação atualizada do dispositivo (EC 132/2023), a COSIP abrange o custeio, a expansão e a melhoria do serviço d e iluminação pública e de sistemas de monitoramento para segurança e preservação de logradouros públicos. A questão estaria blindada contra recursos se tivesse afirmado: Um tributo recolhido com a finalidade de custear a prestação de um serviço público pode (em vez de é) uma taxa."], "tema": "Taxas e preços públicos"}, {"n": 32, "fonte": "CEBRASPE/Pref Fortaleza-Auditor/2023", "enun": "Considerando os diferentes tipos de tributos, julgue o item subsequente. A União pode instituir empréstimo compulsório, mediante lei complementar, para atender a despesas extraordinárias decorrentes de calamidade pública, de guerra externa ou de sua iminência.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Realmente, o art. 148, da CF/88, prevê a competência da União para instituir empréstimo compulsório, mediante lei complementar, para atender a despesas extraordinárias decorrentes de calamidade pública, de guerra externa ou de sua iminência."], "tema": "Empréstimos compulsórios"}, {"n": 33, "fonte": "CEBRASPE/Proc -TCE-RJ/2023", "enun": "Acerca das modalidades de intervenção do Estado brasileiro na ordem econômica e do sistema brasileiro de defesa da concorrência, julgue o item a seguir. Tanto a União quanto os estados e os municípios podem instituir contribuições de intervenção no domínio econômico, sendo cada ente limitado, todavia, à sua área de atuação.", "alts": [], "tipo": "ce", "resp": "E", "com": ["As contribuições de intervenção no domínio econômico são tributos de competência privativa da União, conforme preceitua o art. 149, da CF/88."], "tema": "Contribuições especiais"}, {"n": 34, "fonte": "CEBRASPE/Proc -AGU/2023", "enun": "Acerca das contribuições de intervenção no domínio econômico previstas na Constituição Federal de 1988 (CF), é correto afirmar que", "alts": [["a", "elas não podem incidir sobre a importação de produtos estrangeiros ou serviços."], ["b", "elas podem ter alíquotas ad valorem cuja base seja o faturamento."], ["c", "a cobrança de uma hipotética contribuição de intervenção no domínio econômico criada por lei publicada em maio de 2022 poderia ser iniciada noventa dias após a publicação dessa lei."], ["d", "lei complementar deve instituí-las e discipliná-las."], ["e", "elas podem incidir sobre receitas decorrentes de exportação."]], "tipo": "mc", "resp": "b", "com": ["Alternativa A: De acordo com o art. 149, § 2º, as contribuições sociais e as CIDEs incidirão também sobre a importação de produtos estrangeiros ou serviços. Errada.", "Alternativa B: De acordo com o art. 149, § 2º, as contribuições sociais e as CIDEs poderão ter alíquotas ad valorem, tendo por base o faturamento, a receita bruta ou o valor da operação e, no caso de importação, o valor aduaneiro. Correta.", "Alternativa C: Não é tema desta aula, mas vamos lá! De acordo com o art. 149, § 2º, as CIDES de um modo geral devem se sujeitar ao princípio da anterioridade anual, que exige que a cobrança seja feita apenas a partir do ano seguinte ao da publicação da lei (exceto a CID E-Combustíveis, em caso de redução e restabelecimento de alíquotas). Errada.", "Alternativa D: As contribuições sociais e as CIDEs podem ser instituídas por meio de lei, vez que não há reserva de lei complementar. Errada.", "Alternativa E: De acordo com o art. 149, § 2º, as contribuições sociais e as CIDEs não incidirão sobre as receitas decorrentes de exportação. Errada."], "tema": "Contribuições especiais"}, {"n": 35, "fonte": "CEBRASPE/Proc -TCE-RJ/2023", "enun": "A respeito do sistema tributário nacional, julgue o item a seguir. Para o custeio do regime de previdência social, o estado do Rio de Janeiro pode cobrar contribuição de aposentados e pensionistas sobre o valor dos proventos de aposentadoria e de pensões que supere o salário-mínimo.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De acordo com o art. 149, § 1º-A, em relação ao regime de previdência social dos servidores públicos (federais, estaduais, distritais ou municipais), quando houver deficit atuarial, a contribuição ordinária dos aposentados e pensionistas poderá incidir sobre o valor dos proventos de aposentadoria e de pensões que supere o salário-mínimo."], "tema": "Contribuições especiais"}, {"n": 36, "fonte": "CEBRASPE/Pref Fortaleza-Auditor/2023", "enun": "Considerando os diferentes tipos de tributos, julgue o item subsequente. O tributo cobrado em razão do exercício do poder de polícia pela União, pelos estados e pelos municípios é chamado de contribuição de melhoria.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A redação do art. 77, do CTN, comprova que tal tributo é da espécie “taxa”: Art. 77. As taxas cobradas pela União, pelos Estados, pelo Distrito Federal ou pelos Municípios, no âmbito de suas respectivas atribuições, têm como fato gerador o exercício regular do poder de polícia, ou a utilização, efetiva ou potencial, de serviço público específico e divisível, prestado ao contribuinte ou posto à sua disposição."], "tema": "Espécies tributárias (visão geral)"}, {"n": 37, "fonte": "CEBRASPE/PPNT (PETROBRAS)/PETROBRAS/Suprimento de Bens e Serviços/Administração/2023", "enun": "No que se refere à administração tributária, julgue o item a seguir. Impostos, taxas e multas são tipos de tributos que podem ser instituídos por qualquer ente federativo, respeitadas as restrições legais.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Como se depreende do art. 3º, do CTN, os tributos não possuem caráter punitivo. Portanto, as multas não podem ser consideradas como tributos, já que são sanções aplicadas aos contribuintes. Em suma, impostos e taxas são espécies tributárias, mas as multas não."], "tema": "Conceito e natureza jurídica"}, {"n": 38, "fonte": "CEBRASPE/PGFN-PROCURADOR/2023", "enun": "O Ministério da Fazenda, a fim de obter recursos para custear crescentes gastos com a manutenção do sistema informatizado de controle de importações, propôs a criação de tributo via medida provisória, em cuja minuta se lê o seguinte. Art. 1.º Fica instituído encargo especial para utilização do sistema de registro de importação, administrado pela Receita Federal do Brasil (RFB). § 1.º A taxa a que se refere o artigo anterior será devida à razão de R$ 20,00 (vinte reais), no momento do registro da declaração de importação. § 2.º O produto da arrecadação será destinado integralmente para custear a manutenção do sistema a que se refere o caput. A minuta em questão foi encaminhada para análise jurídica da Coordenação-Geral de Assuntos Tributários da Procuradoria-Geral da Fazenda Nacional (PGFN). Na situação hipotética apresentada, considerando a disciplina legal e constitucional das espécies tributárias, o procurador da PGFN deverá sugerir, ao emitir seu parecer, a alteração da nomenclatura “encargo especial”, no caput do artigo 1.º, para", "alts": [["a", "contribuição de melhoria."], ["b", "contribuição social alfandegária."], ["c", "contribuição de intervenção no domínio econômico."], ["d", "taxa."], ["e", "imposto."]], "tipo": "mc", "resp": "d", "com": ["Temos no presente caso os seguintes pontos de destaque: - Tributo instituído por medida provisória; - Tributo relacionado com a utilização do sistema de registro de importação; - Tributo com produto da arrecadação destinado integralmente para custear a manutenção desse sistema.", "Alternativa A: A contribuição de melhoria tem relação com obras públicas das quais resulte valorização imobiliária para o contribuinte (CTN, art. 81). Errada.", "Alternativa B: Não existe atualmente a figura da contribuição social alfandegária. Assim, se fosse instituída, deveria ser na forma de contribuição residual, respeitando a necessidade de lei complementar (conforme art. 195, § 4º, da CF). Cabe destacar que a medida provi sória (utilizada na questão) não pode tratar de assuntos reservados a lei complementar. Errada.", "Alternativa C: A CIDE é tributo de caráter extrafiscal, com caráter interventivo, visando fomentar determinados setores ou atividades, dentro dos moldes definidos na CF/88. Errada.", "Alternativa D: Conforme comentado, trata-se de taxa (CF, art. 145, II). Lembrando que não há vedação expressa na CF em relação à vinculação das receitas das taxas. Correta.", "Alternativa E: Os impostos são tributos não vinculados, isto é, seus fatos geradores não se relacionam com a atividade estatal voltada ao contribuinte (CTN, art. 16). Errada."], "tema": "Taxas e preços públicos"}, {"n": 39, "fonte": "CEBRASPE/Pref Fortaleza-Auditor/2023", "enun": "A respeito de sistemas tributários progressivos e regressivos, julgue o item seguinte. Uma estrutura tributária progressiva melhora a distribuição de renda.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A tributação progressiva faz com que a alíquota aumente conforme o aumento da base de cálculo. Assim, quem ganha mais paga mais, e quem ganha menos paga menos."], "tema": "Classificações dos tributos"}, {"n": 40, "fonte": "CEBRASPE/Pref Fortaleza-Auditor/2023", "enun": "A respeito de sistemas tributários progressivos e regressivos, julgue o item seguinte. Sistemas tributários que privilegiam impostos indiretos, como os impostos de consumo, são considerados regressivos.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A lógica dos impostos indiretos é transferir o encargo do tributo para o consumidor final. Assim, o mesmo produto, vendido pelo mesmo valor, onera proporcionalmente mais aqueles que recebem menos. Assim, quem ganha menos, paga uma parcela maior de sua renda como tributo. Isso faz com que sejam considerados tributos regressivos."], "tema": "Classificações dos tributos"}, {"n": 41, "fonte": "CEBRASPE/Pref Fortaleza-Auditor/2023", "enun": "A respeito de sistemas tributários progressivos e regressivos, julgue o item seguinte. Na categoria de impostos regressivos, pessoas com menor renda são tributadas com maior intensidade do que pessoas com maior renda.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A lógica do tributo regressivo é justamente essa: quem ganha mais, paga menos; e quem ganha menos, paga mais."], "tema": "Classificações dos tributos"}, {"n": 42, "fonte": "CEBRASPE/PGFN-PROCURADOR/2023", "enun": "O STF e o STJ reconhecem a validade da tributação de rendimentos provenientes de atos ilícitos, pois a interpretação legal do fato gerador é feita abstraindo-se a validade jurídica dos atos praticados, a natureza do objeto ou os efeitos desses atos. Trata-se da aplicação do princípio tributário", "alts": [["a", "da tipicidade."], ["b", "da legalidade."], ["c", "do non olet."], ["d", "da capacidade contributiva."], ["e", "da isonomia."]], "tipo": "mc", "resp": "c", "com": ["O caso em questão é o princípio pecúnia non olet , que tem relação com a tributação de rendimentos provenientes de atos ilícitos. É o posicionamento da jurisprudência ,que encontra, inclusive, previsão no CTN: Art. 118. A definição legal do fato gerador é interpretada abstraindo-se: I - da validade jurídica dos atos efetivamente praticados pelos contribuintes, responsáveis, ou terceiros, bem como da natureza do seu objeto ou dos seus efeitos; II - dos efeitos dos fatos efetivamente ocorridos."], "tema": "Conceito e natureza jurídica"}, {"n": 43, "fonte": "CEBRASPE/Pref Maringá-Auditor/2022", "enun": "Conforme disposto no Código Tributário Nacional, a definição de tributo abrange o (a)", "alts": [["a", "multa por ato ilícito de natureza fiscal."], ["b", "obrigação de fazer perante a fazenda municipal."], ["c", "taxa cobrada em razão da concessão de serviços públicos."], ["d", "prestação pecuniária compulsória."], ["e", "princípio da livre iniciativa."]], "tipo": "mc", "resp": "d", "com": ["Alternativa A: o conceito de tributo previsto no código tributário nacional estabelece que o tributo não constitui sanção pela prática de ato ilícito. Errada.", "Alternativa B: Embora não seja tema desta aula, a obrigação de fazer perante a fazenda municipal é uma obrigação acessória e os tributos configuram obrigação principal. Errada.", "Alternativa C: A taxa em si é um tributo, mas não há que se falar em tributo pela concessão de serviços públicos. Errada.", "Alternativa D: O conceito previsto no art. 3º, do CTN, estabelece que o tributo é sim uma prestação pecuniária (em moeda ou cujo valor nela se possa exprimir), sendo compulsório para o contribuinte. Correta.", "Alternativa E: A definição de tributo não tem qualquer relação com o princípio da livre iniciativa. Errada."], "tema": "Conceito e natureza jurídica"}, {"n": 44, "fonte": "CEBRASPE/SEFAZ-CE-AUDITOR/2021", "enun": "Considerando a doutrina clássica e majoritária de direito tributário, julgue o item que se segue. O efeito extrafiscal de um tributo pode tanto ser uma decorrência secundária da tributação como ser deliberadamente planejado para dissuadir ou estimular certas condutas econômicas.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De fato, a extrafiscalidade pode ser utilizada como plano secundário na tributação. É o caso, por exemplo, do imposto de renda, que é um tributo com finalidade precipuamente arrecadatória, mas que pode sofrer alterações em sua legislação, onerando de forma mais gravosa determinadas fontes ou níveis de renda, e isso pode repercutir na mudança no comportamento das pessoas ou mesmo desestimulando determinados tipos de negócios ou investimentos. Mas podemos ter também a tributação extrafiscal como principal finalidade. Por exemplo, é o caso previsto na CF sobre a incidência de um imposto sobre propriedade com caráter progressivo para desestimular a manutenção de propriedade rurais improdutivas."], "tema": "Classificações dos tributos"}, {"n": 45, "fonte": "CEBRASPE/SEFAZ-AL-AUDITOR/2021", "enun": "Julgue o item a seguir, a respeito das diversas espécies de tributos. No caso específico dos impostos, a União só pode fixar ou alterar as respectivas alíquotas de tributação por meio de lei em sentido estrito.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Existem impostos de competência da União que podem ter suas alíquotas alteradas por ato do Poder Executivo (ato infralegal), conforme estabelece o art. 153, § 1º, da CF. Exemplos: II, IE, IPI e IOF."], "tema": "Impostos"}, {"n": 46, "fonte": "CEBRASPE/ATT (SEFAZ SE)/SEFAZ SE/2022", "enun": "A respeito do regime jurídico tributário das taxas, assinale a opção correta.", "alts": [["a", "É constitucional a destinação da receita de custas e emolumentos judiciais a fundo do Poder Judiciário, a seccional estadual da OAB e à respectiva caixa de assistência dos advogados."], ["b", "É constitucional a instituição pelos estados de taxa para a expedição por órgão de segurança pública de alvarás de funcionamento de estabelecimentos que fabriquem, transportem ou comercializem armas de fogo."], ["c", "É constitucional a instituição pelos estados de taxa a ser satisfeita por sociedade seguradora, tendo em conta atendimento, no âmbito do SUS, de vítima de sinistro coberto pelo DPVAT."], ["d", "O pedágio cobrado pela efetiva utilização de rodovias conservadas pelo poder público tem natureza jurídica de taxa de serviço público."], ["e", "É inconstitucional a instituição pelos estados de taxa de polícia sobre a atividade de exploração de recursos hídricos em seu território."]], "tipo": "mc", "resp": "b", "com": ["Alternativa A: De acordo com a jurisprudência do STF, é inconstitucional a destinação da receita de custas e emolumentos judiciais a fundo do Poder Judiciário, a seccional estadual da OAB e à respectiva caixa de assistência dos advogados. Errada.", "Alternativa B: De fato, o STF (ADI 3770) considera constitucional a instituição pelos estados de taxa para a expedição por órgão de segurança pública de alvarás de funcionamento de estabelecimentos que fabriquem, transportem ou comercializem armas de fogo. Correta.", "Alternativa C: De acordo com o STF, conflita com a Constituição Federal a criação, pelo Estado, de taxa a ser satisfeita por sociedade seguradora, tendo em conta atendimento, no âmbito do SUS, de vítima de sinistro coberto pelo DPVAT. Errada.", "Alternativa D: De acordo com o STF, o pedágio cobrado em rodovias conservadas pelo poder público não tem natureza jurídica de taxa, e sim de preço público. Errada.", "Alternativa E: Conforme a ementa do STF, considerado o princípio da proporcionalidade, conflita com a Constituição Federal instituição de taxa ausente equivalência entre o valor exigido do contribuinte e os custos alusivos ao exercício do poder de polícia – artigo 145, inciso II, da Lei Maior –, sob pena de ter-se espécie tributária de caráter arrecadatório cujo alcance extrapola a obtenção do fim que lhe fundamenta a existência, dificultando ou mesmo inviabilizando o desenvolvimento da atividade econômica. Errada."], "tema": "Taxas e preços públicos"}, {"n": 47, "fonte": "CEBRASPE/SEFAZ-AL-AUDITOR/2021", "enun": "Julgue o item a seguir, a respeito das diversas espécies de tributos. As taxas, por não possuírem cunho sinalagmático, podem ser instituídas com a finalidade específica de cumprimento de funções extrafiscais.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Vejamos o que diz o art. 77, do CTN: Art. 77. As taxas cobradas pela União, pelos Estados, pelo Distrito Federal ou pelos Municípios, no âmbito de suas respectivas atribuições, têm como fato gerador o exercício regular do poder de polícia, ou a utilização, efetiva ou potencial, de serviço público específico e divisível, prestado ao contribuinte ou posto à sua disposição. Veja que a taxa é um tributo vinculado, sendo assim considerado cunho sinalagmático. Portanto, a sua finalidade sempre será remunerar uma atividade do Estado."], "tema": "Taxas e preços públicos"}, {"n": 48, "fonte": "CEBRASPE/SEFAZ-RR-AUDITOR/2021", "enun": "Um exemplo de serviço público remunerado por meio de preço público é", "alts": [["a", "a emissão de passaportes."], ["b", "a distribuição de energia."], ["c", "a coleta de lixo."], ["d", "o serviço jurisdicional."], ["e", "o serviço de sepultamento."]], "tipo": "mc", "resp": "b", "com": ["Esta questão toma como base o acórdão do RE n. 89.876/RJ, cujo relator foi o Ministro Moreira Alves. Trata-se um julgado bem antigo, que foi comentado e resumido posteriormente. Em decorrência disso, temos a classificação dos serviços públicos em serviços públicos propriamente estatais, serviços públicos essenciais ao interesse público e serviços públicos não essenciais. Os dois primeiros são remunerados por meio de taxa, e os últimos, mediante preço público.", "Alternativa A: Emissão de passaportes deve ser remunerada por meio de taxa. Errada.", "Alternativa B: A distribuição de energia é remunerada por meio de preço público. Correta.", "Alternativa C: A coleta de lixo deve ser remunerada por meio de taxa. Errada.", "Alternativa D: O serviço judiciário deve ser remunerada por meio de taxa. Errada.", "Alternativa E: O serviço de sepultamento deve ser remunerada por meio de taxa. Errada."], "tema": "Taxas e preços públicos"}, {"n": 49, "fonte": "CEBRASPE/Pref. Aracaju-Auditor/2021", "enun": "O preço público tem como característica o fato de", "alts": [["a", "submeter-se às limitações do poder de tributar."], ["b", "ser utilizado para custear poder de polícia."], ["c", "decorrer de expressa previsão legal."], ["d", "ser utilizado para custear a iluminação pública."], ["e", "ser uma prestação pecuniária facultativa."]], "tipo": "mc", "resp": "e", "com": ["Primeiramente, precisamos diferenciar preço público de taxas. Essas são tributos, enquanto aqueles não possuem natureza tributária.", "Alternativa A: Somente os tributos submetem-se às limitações do poder de tributar. Errada.", "Alternativa B: São as taxas a serem utilizadas para custear poder de polícia. Errada.", "Alternativa C: São os tributos que decorrem de expressa previsão legal. Errada.", "Alternativa D: É a contribuição de iluminação pública (tributo) destinada ao custeio, à expansão e à melhoria do serviço de iluminação pública e de sistemas de monitoramento para segurança e preservação de logradouros públicos, conforme EC 132/2023. Errada.", "Alternativa E: De fato, os preços públicos configuram prestação pecuniária facultativa, ao passo que os tributos tem natureza compulsória. Correta."], "tema": "Taxas e preços públicos"}, {"n": 50, "fonte": "CEBRASPE/SEFAZ-AL-AUDITOR/2021", "enun": "Julgue o item a seguir, a respeito das diversas espécies de tributos. A contribuição de melhoria deve ser instituída para cada obra, demandando -se lei específica para a sua instituição.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De fato, a contribuição de melhoria deve ser instituída para cada obra, afinal, o pressuposto para sua instituição é a valorização imobiliária. Portanto, deve-se analisar cada obra especificamente. Ademais, por ser tributo, deve ser instituída sempre por meio de lei. Art. 81. A contribuição de melhoria cobrada pela União, pelos Estados, pelo Distrito Federal ou pelos Municípios, no âmbito de suas respectivas atribuições, é instituída para fazer face ao custo de obras públicas de que decorra valorização imobiliária, tendo como limite total a despesa realizada e como limite individual o acréscimo de valor que da obra resultar para cada imóvel beneficiado."], "tema": "Contribuição de melhoria"}, {"n": 51, "fonte": "CEBRASPE/SEFAZ-AL-AUDITOR/2021", "enun": "Julgue o item a seguir, a respeito das diversas espécies de tributos. A União pode instituir empréstimos compulsórios, desde que mediante lei complementar.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O art. 148, da CF/88, autoriza que a União institua empréstimos compulsórios, desde que mediante lei complementar. As situações que ensejam sua instituição são as seguintes: Art. 148. A União, mediante lei complementar, poderá instituir empréstimos compulsórios: I - para atender a despesas extraordinárias, decorrentes de calamidade pública, de guerra externa ou sua iminência; II - no caso de investimento público de caráter urgente e de relevante interesse nacional, observado o disposto no art. 150, III, \"b\"."], "tema": "Empréstimos compulsórios"}, {"n": 52, "fonte": "CESPE/SEFAZ-AL-Auditor Fiscal/2020", "enun": "Os impostos são tributos não vinculados cuja obrigação tem como fato gerador uma situação independente de qualquer atividade estatal específica relativa ao contribuinte.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Com base no art. 16, do CTN, extraímos que realmente a obrigação de pagar impostos surge por um fato que não tem relação com atuação estatal direcionada especificamente a determinado contribuinte, o que faz com que sejam classificados como tributos \"não vinculados\"."], "tema": "Impostos"}, {"n": 53, "fonte": "CESPE/SEFAZ-AL-Auditor Fiscal/2020", "enun": "O conceito de taxa pressupõe a utilização efetiva de serviços públicos específicos e divisíveis, ou o exercício do regular poder de polícia.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Os fatos geradores das taxas são o exercício regular do poder de polícia e a utilização \"efetiva ou potencial\" de serviços públicos que sejam necessariamente específicos e divisíveis."], "tema": "Taxas e preços públicos"}];
+
+const FLASH = [
+ // Aula 00
+ ["a00","Quais são os 5 elementos do conceito de tributo (artigo 3º CTN)?","Prestação <b>pecuniária</b>, <b>compulsória</b>, que <b>não constitui sanção de ato ilícito</b>, <b>instituída em lei</b> e cobrada por <b>atividade administrativa plenamente vinculada</b>."],
+ ["a00","Receita originária × derivada: em qual o tributo se encaixa? Dê exemplos de cada.","Tributo é receita <b>derivada</b> (patrimônio do particular, poder de império, lei). Originárias vêm do patrimônio do Estado e de contrato: aluguéis, tarifas, multas contratuais. Derivadas: tributos, multas pecuniárias, reparações de guerra."],
+ ["a00","Pode-se pagar tributo com bens?","<b>Imóveis: sim</b>, por dação em pagamento (CTN 156, XI), na forma da lei de cada ente (União: Lei 13.259/16). <b>Móveis</b>: o CTN não prevê. A ADI 1.917 derrubou lei distrital por ofensa à licitação, mas a ADI 2.405 admite que o ente crie hipóteses de extinção dos próprios créditos."],
+ ["a00","Legalidade e compulsoriedade: qual é requisito de existência e qual é de validade do tributo?","<b>Compulsoriedade = existência</b>. <b>Legalidade = validade</b> (tributo por decreto existe, mas é inválido). Classificação de Paulsen."],
+ ["a00","Medida provisória pode instituir tributo?","Sim, o STF admite, salvo nas matérias reservadas a <b>lei complementar</b>, como empréstimo compulsório e impostos e contribuições residuais (CF 62, parágrafo 1º, III)."],
+ ["a00","O que é o princípio <i>pecunia non olet</i>?","O \"dinheiro não cheira\" (CTN 118): o fato gerador é interpretado abstraindo-se a validade jurídica dos atos. A <b>renda do tráfico é tributável</b> (HC 77.530), em nome da isonomia fiscal. O ilícito, porém, <b>não pode ser a hipótese de incidência</b>."],
+ ["a00","O que determina a natureza jurídica específica do tributo (artigo 4º CTN)? O que é irrelevante?","O <b>fato gerador</b>. São irrelevantes: I) a denominação e as características formais; II) a destinação legal da arrecadação. <i>Não se aplica a empréstimos compulsórios e contribuições especiais, que são finalísticos.</i>"],
+ ["a00","Teoria tripartida × pentapartida: quem adota cada uma?","<b>CTN, artigo 5º</b>: tripartida (impostos, taxas, contribuições de melhoria). <b>STF e CF/88</b>: pentapartida, que acrescenta empréstimos compulsórios e contribuições especiais."],
+ ["a00","Tributo vinculado × arrecadação vinculada × cobrança vinculada?","<b>Tributo vinculado</b>: o fato gerador é atividade estatal (taxa, contribuição de melhoria). <b>Arrecadação vinculada</b>: o dinheiro tem destino (empréstimo compulsório, contribuições). <b>Cobrança vinculada</b>: a atividade do fiscal, o que vale para <b>todos</b> os tributos."],
+ ["a00","Definição de imposto (artigo 16 CTN)","Tributo cuja obrigação tem por fato gerador uma <b>situação independente de qualquer atividade estatal específica</b> relativa ao contribuinte. É não vinculado e não contraprestacional, e custeia serviços <i>uti universi</i>."],
+ ["a00","O que a LC deve definir sobre os impostos discriminados na CF (146, III, a)? E as alíquotas?","<b>Fatos geradores, bases de cálculo e contribuintes</b>. Alíquotas <b>não</b>. A exigência vale só para impostos, não para contribuições."],
+ ["a00","Requisitos da competência residual da União (artigo 154, I)","<b>Lei complementar</b> + <b>não cumulatividade</b> + fato gerador ou base de cálculo <b>diferentes</b> dos já discriminados. Impostos residuais comparam com <u>impostos</u>; contribuições residuais (195, parágrafo 4º), com <u>contribuições</u>."],
+ ["a00","O que é a competência cumulativa do DF?","O DF institui os impostos <b>estaduais</b> (ICMS, IPVA, ITCMD) <b>e</b> os <b>municipais</b> (ISS, IPTU, ITBI)."],
+ ["a00","Fatos geradores da taxa (artigo 77 CTN / 145, II CF)","<b>Exercício regular do poder de polícia</b> ou <b>utilização, efetiva ou potencial, de serviço público específico e divisível</b>, prestado ao contribuinte ou posto à sua disposição."],
+ ["a00","Quando a utilização do serviço é \"potencial\" (artigo 79)?","Quando o serviço é de <b>utilização compulsória</b> e está posto à disposição por atividade administrativa <b>em efetivo funcionamento</b>. A disponibilização tem de ser efetiva; o que pode ser potencial é o uso."],
+ ["a00","Serviço específico × divisível (artigo 79, II e III)","<b>Específico</b>: pode ser destacado em unidades autônomas de intervenção, utilidade ou necessidade pública. <b>Divisível</b>: suscetível de utilização separada por cada usuário."],
+ ["a00","Iluminação, segurança e limpeza de logradouros podem ser custeadas por taxa?","<b>Não</b>, são serviços <i>uti universi</i>. Iluminação: Súmula Vinculante 41, e por isso existe a COSIP. Segurança: ADI 1.942. Limpeza de logradouros: RE 576.321. Já a <b>coleta de lixo domiciliar pode</b> (Súmula Vinculante 19)."],
+ ["a00","Taxa de incêndio é constitucional?","Atualmente <b>sim</b> para os Estados: RE 1.417.155, <b>Tema 1.282 (2025)</b>, sobre prevenção e combate a incêndio, busca, salvamento e resgate. Antes, a ADI 2.908 (2020) tinha considerado inconstitucional a taxa de Sergipe."],
+ ["a00","Taxa de polícia exige fiscalização efetiva porta a porta?","<b>Não</b>. Basta a existência de órgão e estrutura competentes (RE 588.322). Mas a taxa que excede de forma desproporcional o custo da fiscalização é inconstitucional (ADI 7.400)."],
+ ["a00","Restrições à base de cálculo das taxas","Não pode ser a <b>base própria de imposto</b> (CF 145, parágrafo 2º) nem o <b>capital das empresas</b> (CTN 77, parágrafo único). <b>Súmula Vinculante 29</b>: pode usar elementos da base de imposto sem identidade integral. Vale a razoável equivalência com o custo."],
+ ["a00","Súmulas 595, 665 e 667 do STF","<b>595</b>: taxa municipal de conservação de estradas com base do ITR é inconstitucional. <b>665</b>: taxa da CVM é constitucional. <b>667</b>: taxa judiciária sem limite sobre o valor da causa viola o acesso à jurisdição."],
+ ["a00","Custas, taxa judiciária e emolumentos de cartório têm qual natureza?","<b>Taxas</b> de serviço (específicos e divisíveis), mesmo quando os emolumentos são auferidos por particulares. A receita de custas não pode ser destinada a pessoa jurídica de direito privado."],
+ ["a00","Cite 6 diferenças entre taxa e preço público","Taxa: tributo, <b>lei</b>, <b>compulsória</b>, direito público, cobrada só por pessoa jurídica de direito público, receita <b>derivada</b>. Tarifa: <b>contrato</b>, <b>facultativa</b>, direito privado, cobrada por pessoa jurídica de direito público ou privado, receita <b>originária</b>, admite rescisão."],
+ ["a00","O que diz a Súmula 545 do STF e qual o cuidado na prova?","Preços públicos e taxas não se confundem, porque as taxas são compulsórias e têm cobrança condicionada a prévia autorização orçamentária. A parte final (anualidade) está superada, mas a <b>banca já aceitou a literalidade como correta</b>."],
+ ["a00","Água e esgoto prestados por concessionária: taxa ou tarifa?","<b>Tarifa</b>. A Súmula 412 do STJ aplica à repetição do indébito o prazo do Código Civil; a Súmula 407 do STJ admite tarifa por categoria e faixa de consumo."],
+ ["a00","Fato gerador e limites da contribuição de melhoria","fato gerador: <b>valorização imobiliária</b> decorrente de obra pública, não a obra em si. Limite <b>total</b>: despesa realizada. Limite <b>individual</b>: acréscimo de valor do imóvel. Os limites estão no CTN; a CF é omissa."],
+ ["a00","Requisitos mínimos da lei de contribuição de melhoria (artigo 82)","Publicação prévia de: memorial <b>descritivo</b>; orçamento; <b>determinação</b> da parcela custeada; delimitação da zona; fator de absorção. Prazo de <b>no mínimo 30 dias</b> para impugnação e regulamentação do processo."],
+ ["a00","Quando pode ser cobrada a contribuição de melhoria?","Só <b>após</b> a obra, total ou em parte suficiente para beneficiar os imóveis (DL 195/67, artigo 9º). Exige <b>lei específica para cada obra</b>."],
+ ["a00","Empréstimo compulsório: quem institui, por qual veículo e em quais hipóteses?","<b>Só a União</b>, por <b>lei complementar</b> (nunca MP). Hipóteses: <b>I</b> calamidade pública ou guerra externa (ou sua iminência); <b>II</b> investimento público urgente e de relevante interesse nacional, que observa a anterioridade anual."],
+ ["a00","Absorção temporária de poder aquisitivo autoriza empréstimo compulsório?","<b>Não</b>. O artigo 15, III do CTN não foi recepcionado pela CF/88."],
+ ["a00","Empréstimo compulsório é tributo vinculado?","Tem <b>arrecadação vinculada</b> (148, parágrafo único), mas o fato gerador é livre, então <b>não é necessariamente vinculado</b>. A devolução é em moeda (RE 175.385). A Súmula 418 (tese contratual) está superada."],
+ ["a00","Quem institui cada contribuição especial?","Sociais, CIDE e corporativas: <b>União</b>. RPPS: <b>todos os entes</b>, para os próprios servidores. COSIP: <b>Municípios e DF</b>."],
+ ["a00","Regras comuns às contribuições sociais e à CIDE (149, parágrafo 2º)","<b>Não</b> incidem sobre receitas de exportação; <b>incidem</b> sobre a importação; alíquota <b>ad valorem</b> ou <b>específica</b>. Podem ser monofásicas (parágrafo 4º)."],
+ ["a00","Contribuição social precisa de lei complementar?","Se a <b>base está prevista na CF</b>, basta <b>lei ordinária</b> (COFINS e PIS são materialmente ordinários). <b>Fonte nova</b> (residual, 195, parágrafo 4º) exige <b>LC</b>. Todas se sujeitam ao CTN como norma geral."],
+ ["a00","RPPS: sobre o que incide a contribuição dos aposentados?","Em regra, sobre o que <b>exceder o teto do RGPS</b>. Com <b>déficit atuarial</b>, sobre o que exceder o <b>salário-mínimo</b>. A contribuição extraordinária só é possível no âmbito da <b>União</b>."],
+ ["a00","CIDE-Combustíveis: peculiaridades","É a única com fato gerador e destino na CF (177, parágrafo 4º). A alíquota pode ser diferenciada por produto ou uso e <b>reduzida e restabelecida por ato do Executivo</b>, sem anterioridade anual. Destinos: subsídios, projetos ambientais do setor de petróleo e gás, infraestrutura de transportes e transporte público coletivo (EC 132)."],
+ ["a00","Estados podem instituir CIDE?","<b>Não</b>. A CIDE é exclusiva da União. Exemplos de CIDE: AFRMM, SEBRAE, INCRA, CIDE-Royalties."],
+ ["a00","COSIP: competência e o que pode custear","Competência de <b>Municípios e DF</b> (149-A). Custeia o custeio, a expansão e a melhoria da <b>iluminação pública</b> e de <b>sistemas de monitoramento</b> de logradouros (EC 132). Pode vir na conta de luz e observa o artigo 150, I e III."],
+ ["a00","Anuidade de conselho profissional × OAB: são tributo?","Conselhos (CRC, CREA, CRM): <b>sim</b>, contribuição corporativa da União. OAB: <b>não</b> (Tema 1.054, 2023)."],
+ ["a00","Contribuição confederativa e sindical são tributo?","<b>Não</b>. A confederativa só é exigível dos filiados (Súmula Vinculante 40). A sindical tornou-se facultativa com a Lei 13.467/2017, deixando de ser compulsória."],
+ ["a00","Tributo fiscal × extrafiscal × parafiscal","<b>Fiscal</b>: arrecadar. <b>Extrafiscal</b>: intervir na economia (Imposto de Importação, CIDE). <b>Parafiscal</b>: a lei nomeia outra pessoa jurídica como sujeito ativo e destinatária (conselhos, Sistema S). COFINS e CSLL não são parafiscais."],
+ ["a00","Tributo direto × indireto e o critério do STJ","Indireto: o encargo é repassado ao contribuinte de fato (ICMS). Direto: não há repasse (IPVA). O STJ classifica <b>pela lei</b>, não por critério econômico."],
+ ["a00","Progressivo, proporcional e regressivo: qual melhora a distribuição de renda?","Progressivo (a alíquota sobe com a base, como no IRPF) <b>melhora</b> a distribuição. Tributos sobre consumo, embora proporcionais, têm <b>efeito regressivo</b>: pesam mais sobre a renda de quem ganha menos."],
+ // Reforma
+ ["ref","Quais tributos a Reforma criou e quais eles substituem?","<b>CBS</b> (União) substitui <b>PIS e COFINS</b>. <b>IBS</b> (Estados, DF e Municípios) substitui <b>ICMS e ISS</b>. <b>IS</b> (União) é novo e extrafiscal. O IPI é zerado, salvo produtos ligados à ZFM."],
+ ["ref","Qual a competência do IBS e onde está na CF?","<b>Compartilhada</b> entre Estados, DF e Municípios (artigo 156-A), com gestão pelo <b>Comitê Gestor do IBS</b> (artigo 156-B)."],
+ ["ref","Sobre o que incide o Imposto Seletivo (artigo 153, VIII)?","Produção, extração, comercialização ou importação de bens e serviços <b>prejudiciais à saúde ou ao meio ambiente</b>. É de competência da União e tem caráter extrafiscal."],
+ ["ref","O IVA dual é imposto direto sobre o lucro?","<b>Não</b>. É <b>indireto, sobre consumo</b>, e incide de forma incremental em cada etapa (valor agregado), com não cumulatividade plena."],
+ ["ref","Princípio do destino na Reforma: o que significa?","A arrecadação do IBS e da CBS vai para o ente onde está o <b>consumidor</b> (destino), e não onde está o produtor. Isso reduz a guerra fiscal."],
+ ["ref","Marcos da transição (2026, 2027, 2029-2032, 2033)","<b>2026</b>: teste (CBS 0,9% e IBS 0,1%). <b>2027</b>: CBS plena, PIS e COFINS extintos, IS começa, IPI zerado (salvo ZFM). <b>2029-2032</b>: ICMS e ISS caem gradualmente. <b>2033</b>: ICMS e ISS extintos."],
+ ["ref","Qual lei complementar regulamentou o IBS, a CBS e o IS?","A <b>LC 214/2025</b>. A LC 227/2026 trouxe ajustes, entre eles o artigo 82-A do CTN sobre a COSIP."],
+ ["ref","O que o ADCT, artigo 136, permitiu aos Estados?","Instituir <b>contribuições transitórias</b> sobre produtos primários e semielaborados, quando já tinham fundos desse tipo atrelados a benefícios de ICMS."],
+ // Panorama
+ ["pan","Princípios constitucionais tributários: cite os principais","Legalidade (150, I), isonomia (II), irretroatividade (III, a), anterioridade anual (III, b), anterioridade nonagesimal (III, c), não confisco (IV), liberdade de tráfego (V)."],
+ ["pan","Quais as imunidades genéricas do artigo 150, VI?","a) <b>Recíproca</b> entre os entes; b) <b>templos</b> de qualquer culto; c) partidos, sindicatos de trabalhadores, entidades de educação e assistência social sem fins lucrativos; d) <b>livros, jornais, periódicos</b> e papel; e) fonogramas e videofonogramas musicais brasileiros."],
+ ["pan","Obrigação principal × acessória (artigo 113)","Principal: <b>pagar</b> tributo ou penalidade. Acessória: prestações positivas ou negativas no interesse da fiscalização. A acessória descumprida <b>converte-se em principal</b> quanto à penalidade."],
+ ["pan","Modalidades de lançamento","<b>De ofício</b> (149), <b>por declaração</b> (147) e <b>por homologação</b> (150). Na homologação tácita, o prazo é de 5 anos contados do fato gerador."],
+ ["pan","Hipóteses de suspensão da exigibilidade (artigo 151)","<b>MO-DE-RE-CO-LI-PA</b>: moratória, depósito integral, reclamações e recursos administrativos, concessão de liminar em MS, liminar ou tutela antecipada em outras ações, parcelamento."],
+ ["pan","Hipóteses de exclusão do crédito tributário (artigo 175)","Apenas <b>isenção</b> e <b>anistia</b>."],
+ ["pan","Decadência e prescrição: prazos e termos iniciais","Decadência: 5 anos. Regra geral (173, I): 1º dia do exercício seguinte. Homologação com pagamento (150, parágrafo 4º): data do fato gerador. Prescrição (174): 5 anos da <b>constituição definitiva</b> do crédito."],
+ ["pan","Analogia e equidade no CTN (artigo 108)","A analogia <b>não pode exigir tributo</b> não previsto em lei (parágrafo 1º). A equidade <b>não pode dispensar</b> tributo devido (parágrafo 2º)."],
+ ["pan","O que se interpreta literalmente (artigo 111)?","Suspensão ou exclusão do crédito, outorga de <b>isenção</b> e dispensa de obrigações <b>acessórias</b>."],
+ ["pan","Quando a lei tributária retroage (artigo 106)?","I) lei <b>expressamente interpretativa</b>; II) em ato <b>não definitivamente julgado</b>, quando deixa de defini-lo como infração ou comina penalidade menos severa."],
+ ["pan","Responsabilidade do sócio-gerente (artigo 135)","Responde pessoalmente por atos com <b>excesso de poderes ou infração de lei</b>, contrato social ou estatuto. O <b>mero inadimplemento</b> não gera responsabilidade (Súmula 430 STJ)."],
+ ["pan","Denúncia espontânea (artigo 138)","Exclui a <b>multa</b> se o contribuinte paga tributo e juros antes de qualquer procedimento fiscal. Não vale para tributo declarado e pago fora do prazo (Súmula 360 STJ)."]
+];
+
+/* ---------- mapa mental: cada item tem explicação, exemplo, base legal e pegadinha ---------- */
+const MM_ROOT = {k: "root", t: "TRIBUTO", s: "Artigo 3º do CTN: pecuniário · compulsório · não é sanção · instituído em lei · cobrança vinculada<br><small>Natureza definida pelo fato gerador (artigo 4º) · STF: cinco espécies</small>",
+  e: "Tributo é toda prestação em dinheiro, obrigatória, que não é punição por ato ilícito, criada por lei e cobrada por atividade administrativa sem margem de escolha. Os cinco elementos precisam estar presentes ao mesmo tempo; faltando a compulsoriedade, nem existe tributo. Para saber <b>qual</b> espécie é, olha-se o fato gerador (artigo 4º do CTN), e não o nome dado pela lei. Desde a CF/88, o STF reconhece cinco espécies: impostos, taxas, contribuições de melhoria, empréstimos compulsórios e contribuições especiais.",
+  x: "O IPVA que o DF cobra do seu carro: é pago em dinheiro, você não pode recusar, não é castigo por nada, está previsto em lei distrital e o auditor não pode dispensá-lo por simpatia. Já a <b>multa</b> por pagar o IPVA atrasado <b>não</b> é tributo, porque é sanção por ato ilícito, embora seja cobrada junto.",
+  l: "CTN, artigos 3º, 4º e 5º; CF/88, artigos 145, 148 e 149.",
+  p: "\"Multa pecuniária, prevista em lei e cobrada por atividade vinculada é tributo\": ERRADO. Pagar com imóvel (dação em pagamento) é permitido, pois o imóvel pode ser expresso em moeda."};
+
+const MM = [
+ {k: "imp", c: "#2f5bd3", t: "Impostos", s: "Artigo 16 do CTN · não vinculado",
+  e: "O fato gerador do imposto é uma situação do próprio contribuinte (ganhar renda, ser dono de algo, consumir), sem qualquer atuação estatal específica em favor dele. Por isso é o tributo <b>não vinculado</b> por excelência. A receita, em regra, não pode ser carimbada para um destino (artigo 167, inciso IV, da CF/88) e financia os serviços gerais, como a segurança pública.",
+  x: "Você compra uma casa no Lago Sul e passa a pagar IPTU todos os anos, mesmo que a sua rua não receba nenhum serviço novo. O imposto nasce do fato de você ser proprietário, e não de algo que o Estado fez por você.",
+  l: "CTN, artigo 16; CF/88, artigos 145 (inciso I), 153, 155, 156, 156-A e 167 (inciso IV).",
+  p: "\"Um imposto pode ter como fato gerador a valorização imobiliária\": ERRADO, isso é contribuição de melhoria. \"Imposto é cobrado pela utilização de serviço público\": ERRADO, isso é taxa.",
+  f: [
+   {k: "imp1", t: "Fato gerador = fato do contribuinte (renda, patrimônio, consumo)",
+    e: "Os impostos tributam manifestações de riqueza. Uma forma prática de classificá-los é pela base econômica: <b>renda</b> (Imposto de Renda), <b>patrimônio</b> (IPTU, IPVA, ITR) e <b>consumo</b> (ICMS, ISS, IPI e, no futuro, IBS).",
+    x: "Num mesmo dia, um morador do DF pode gerar os três: recebe o salário (renda, IR), é dono do carro (patrimônio, IPVA) e compra um celular na loja (consumo, ICMS embutido no preço).",
+    l: "CTN, artigo 16; CF/88, artigos 153, 155 e 156.",
+    p: "Questão 2 da lista: o imposto sobre <b>patrimônio</b> era o IPVA; IOF, ICMS e ISS não incidem sobre patrimônio."},
+   {k: "imp2", t: "Lei complementar define fato gerador, base de cálculo e contribuintes",
+    e: "Para os impostos discriminados na Constituição, uma lei complementar nacional precisa definir <b>fato gerador, base de cálculo e contribuintes</b>. A alíquota <b>não</b> está nessa lista e pode ser fixada pela lei de cada ente. A exigência vale apenas para impostos, e não para contribuições.",
+    x: "A Lei Complementar 87/1996 (Lei Kandir) define o fato gerador, a base e os contribuintes do ICMS para o país todo; a alíquota interna aplicada no DF vem da lei distrital.",
+    l: "CF/88, artigo 146, inciso III, alínea \"a\"; STF, RE 148.754.",
+    p: "\"A lei complementar deve definir as alíquotas dos impostos\": ERRADO. \"Contribuições precisam de lei complementar definindo fato gerador e base\": ERRADO."},
+   {k: "imp3", t: "Competência residual: só da União, por lei complementar",
+    e: "Além dos impostos listados, só a União pode criar outros (impostos residuais ou inominados), e com três requisitos: <b>lei complementar</b>, <b>não cumulatividade</b> e fato gerador ou base de cálculo <b>diferentes</b> dos impostos já previstos na Constituição.",
+    x: "Imagine que a União queira tributar a propriedade de embarcações de luxo, fato que não está entre os impostos já discriminados. Teria de fazê-lo por lei complementar (nunca por medida provisória), com um imposto não cumulativo e que não repita a base de outro imposto existente.",
+    l: "CF/88, artigo 154, inciso I.",
+    p: "O imposto residual não pode repetir fato gerador ou base de outro <b>imposto</b>, mas pode coincidir com o de uma contribuição. Estados e municípios não têm competência residual."},
+   {k: "imp4", t: "Imposto extraordinário de guerra · IBS compartilhado · DF cumulativo",
+    e: "Três situações especiais: (1) na iminência ou em caso de guerra externa, a União pode criar impostos extraordinários, inclusive sobre fatos que seriam de outros entes; (2) o IBS, criado pela Reforma, é de competência <b>compartilhada</b> entre Estados, DF e Municípios; (3) o DF tem competência <b>cumulativa</b>, ou seja, institui impostos estaduais e municipais.",
+    x: "O DF cobra, ao mesmo tempo, ICMS (imposto estadual) e ISS (imposto municipal). Com o IBS, receberá tanto a parcela que caberia a um Estado quanto a que caberia a um Município.",
+    l: "CF/88, artigos 147, 154 (inciso II) e 156-A.",
+    p: "\"O Sistema Tributário Nacional não prevê imposto de competência compartilhada\": ERRADO, existe o IBS."}
+  ]},
+ {k: "tax", c: "#1f8a4c", t: "Taxas", s: "Artigo 77 do CTN · vinculada · competência comum",
+  e: "A taxa remunera uma atuação do Estado dirigida ao contribuinte: o <b>exercício regular do poder de polícia</b> ou um <b>serviço público específico e divisível</b>, usado ou posto à disposição. O fato gerador é um fato do Estado, por isso a taxa é tributo <b>vinculado</b> e contraprestacional. Todos os entes podem criá-las, cada um no âmbito das suas atribuições.",
+  x: "Para abrir uma loja em Taguatinga, o comerciante paga a taxa de licença de funcionamento ao DF, porque o governo fiscaliza o estabelecimento (poder de polícia). Ao tirar passaporte, paga uma taxa à União pelo serviço de emissão.",
+  l: "CF/88, artigo 145, inciso II e parágrafo 2º; CTN, artigos 77 a 80.",
+  p: "A espécie \"taxa\" é de competência comum, mas cada taxa concreta só pode ser criada pelo ente que presta aquele serviço ou exerce aquela fiscalização.",
+  f: [
+   {k: "tax1", t: "Poder de polícia regular (não exige fiscalização porta a porta)",
+    e: "Poder de polícia é a atividade que limita direitos em nome do interesse público (segurança, higiene, ordem, mercado). Para cobrar taxa, o exercício precisa ser <b>regular</b>: órgão competente, dentro da lei, com devido processo. O STF entende que basta existir um <b>órgão estruturado</b> para fiscalizar; não é preciso provar a visita ao estabelecimento.",
+    x: "Um município cobra todo ano a taxa de renovação do alvará de funcionamento. Uma padaria nunca recebeu visita do fiscal, mas o município mantém secretaria e equipe de fiscalização: a cobrança é válida.",
+    l: "CTN, artigo 78 e parágrafo único; STF, RE 588.322 e ADI 7.400.",
+    p: "\"A taxa de polícia só pode ser cobrada se houver fiscalização presencial em cada estabelecimento\": ERRADO. Mas a taxa cujo valor excede de forma desproporcional o custo da fiscalização é inconstitucional."},
+   {k: "tax2", t: "Serviço específico e divisível, de uso efetivo ou potencial",
+    e: "<b>Específico</b>: o serviço pode ser destacado em unidade autônoma, e o usuário sabe qual serviço recebe. <b>Divisível</b>: cada usuário pode utilizá-lo separadamente. O uso pode ser <b>efetivo</b> (usou de fato) ou <b>potencial</b> (o serviço, de utilização compulsória, está disponível e em efetivo funcionamento). O que pode ser potencial é a utilização, nunca a existência do serviço.",
+    x: "Você viaja de férias por um mês. O caminhão de lixo continua passando na sua porta: você paga a taxa de coleta mesmo sem ter produzido lixo, porque o serviço foi posto à sua disposição (uso potencial).",
+    l: "CTN, artigo 79; CF/88, artigo 145, inciso II.",
+    p: "Questão 53 da lista: \"O conceito de taxa pressupõe a utilização <b>efetiva</b>\": ERRADO, a utilização pode ser potencial."},
+   {k: "tax3", t: "Base de cálculo diferente da de imposto (Súmula Vinculante 29)",
+    e: "A taxa não pode ter base de cálculo própria de imposto nem ser calculada sobre o capital das empresas, senão vira um \"imposto disfarçado\". Mas a Súmula Vinculante 29 permite usar <b>um ou mais elementos</b> da base de um imposto, desde que não haja identidade integral. O valor deve guardar razoável equivalência com o custo da atividade.",
+    x: "Taxa de lixo calculada pela <b>área construída</b> do imóvel (um dos elementos da base do IPTU): válida. Taxa de lixo igual a 1% do <b>valor venal</b> do imóvel (a própria base do IPTU): inválida.",
+    l: "CF/88, artigo 145, parágrafo 2º; CTN, artigo 77, parágrafo único; Súmula Vinculante 29; Súmulas 595, 665 e 667 do STF.",
+    p: "O capital social não pode ser a base de cálculo, mas pode servir de <b>faixa de referência</b> para um valor fixo (taxa da CVM, Súmula 665). Taxa calculada pelo número de empregados é inconstitucional."},
+   {k: "tax4", t: "Lixo domiciliar pode (SV 19) · iluminação pública não pode (SV 41)",
+    e: "Só serviços <i>uti singuli</i> (específicos e divisíveis) admitem taxa. Serviços <i>uti universi</i>, prestados à coletividade sem identificar quem usa, são custeados por impostos. Por isso não cabe taxa de iluminação pública, de segurança pública nem de limpeza de logradouros (varrição, capina), mas cabe taxa de coleta de lixo domiciliar.",
+    x: "O lixo recolhido na porta de cada casa permite identificar cada imóvel atendido. Já o poste da avenida ilumina qualquer pessoa que passe por ali, e por isso a iluminação é custeada pela COSIP, uma contribuição, e não por taxa.",
+    l: "Súmula Vinculante 19; Súmula Vinculante 41; STF, ADI 1.942 e RE 576.321.",
+    p: "Taxa de incêndio: em 2020 o STF a julgou inconstitucional (ADI 2.908), mas em 2025, no Tema 1.282, admitiu as taxas <b>estaduais</b> de prevenção e combate a incêndio, busca, salvamento e resgate."}
+  ]},
+ {k: "mel", c: "#b07400", t: "Contribuição de melhoria", s: "Artigos 81 e 82 do CTN · vinculada · competência comum",
+  e: "É cobrada quando uma <b>obra pública</b> gera <b>valorização imobiliária</b>. O objetivo é evitar que alguns proprietários enriqueçam à custa de dinheiro de toda a sociedade. Todos os entes podem instituí-la, e ela é tributo vinculado, pois depende de uma atuação estatal (a obra).",
+  x: "O DF constrói uma nova estação de metrô e os imóveis do entorno valorizam. O governo pode cobrar contribuição de melhoria dos proprietários beneficiados, como na questão da SEFAZ-AM.",
+  l: "CF/88, artigo 145, inciso III; CTN, artigos 81 e 82; Decreto-Lei 195/1967.",
+  p: "O fato gerador é a <b>valorização</b>, e não a obra. É preciso uma lei específica para cada obra.",
+  f: [
+   {k: "mel1", t: "Fato gerador = valorização imobiliária",
+    e: "Sem valorização não há fato gerador, por mais cara que tenha sido a obra. O Decreto-Lei 195/1967 é explícito: o fato gerador é o acréscimo do valor do imóvel situado na área beneficiada, direta ou indiretamente, pela obra pública.",
+    x: "Um viaduto construído em frente a um condomínio traz barulho e desvaloriza os apartamentos. Não cabe contribuição de melhoria, porque não houve valorização.",
+    l: "Decreto-Lei 195/1967, artigo 1º; CTN, artigo 81.",
+    p: "\"O fato gerador da contribuição de melhoria é o aumento da capacidade contributiva do proprietário\": ERRADO. \"Pode ser cobrada independentemente da valorização\": ERRADO."},
+   {k: "mel2", t: "Limite total = despesa realizada",
+    e: "A soma de tudo o que o poder público arrecadar com a contribuição não pode passar do custo da obra. O tributo serve para recuperar o gasto, e não para gerar lucro ao Estado.",
+    x: "A obra custou R$ 10 milhões e os imóveis da região valorizaram R$ 30 milhões no total. O máximo arrecadável é R$ 10 milhões.",
+    l: "CTN, artigo 81.",
+    p: "A Constituição é <b>omissa</b> quanto aos limites; eles estão apenas no CTN."},
+   {k: "mel3", t: "Limite individual = acréscimo de valor do imóvel",
+    e: "De cada proprietário só se pode cobrar até o quanto o <b>seu</b> imóvel valorizou por causa da obra, respeitado também o limite total. A distribuição é feita por rateio da parcela do custo, segundo fatores individuais de valorização.",
+    x: "Exemplo da aula: a casa do Sr. João valia R$ 50 mil e passou a valer R$ 200 mil depois das obras no bairro. A contribuição dele pode chegar a R$ 150 mil, desde que a soma de todos não ultrapasse o custo da obra.",
+    l: "CTN, artigos 81 e 82, parágrafo 1º.",
+    p: "Os dois limites valem ao mesmo tempo; não basta respeitar só um deles."},
+   {k: "mel4", t: "Cobrança só depois da obra · impugnação em no mínimo 30 dias",
+    e: "Antes de cobrar, a lei deve publicar: memorial <b>descritivo</b> do projeto, orçamento, <b>determinação</b> da parcela do custo a ser financiada, delimitação da zona beneficiada e fator de absorção do benefício. Os interessados têm prazo de <b>no mínimo 30 dias</b> para impugnar. A cobrança só ocorre depois da obra, concluída ou em parte suficiente para beneficiar os imóveis.",
+    x: "O DF publica o edital da obra de pavimentação com memorial, orçamento e mapa da zona beneficiada. Um proprietário discorda do fator de valorização do seu lote e apresenta impugnação dentro do prazo, que é decidida em processo administrativo.",
+    l: "CTN, artigo 82; Decreto-Lei 195/1967, artigo 9º.",
+    p: "A banca troca \"memorial <b>descritivo</b>\" por \"executivo\" e \"<b>determinação</b>\" por \"estimativa\". \"Convênio com o ente onde a obra ocorre\" não é requisito."}
+  ]},
+ {k: "emp", c: "#8a3ac2", t: "Empréstimo compulsório", s: "Artigo 148 da CF/88 · tributo finalístico",
+  e: "É um tributo que a União cobra com a promessa de <b>devolver</b>. O STF já o tratou como contrato (Súmula 418), mas esse entendimento está superado: a restituição não descaracteriza o tributo, porque o artigo 3º do CTN não exige que a receita seja definitiva. É uma espécie tributária autônoma.",
+  x: "Situação hipotética: uma enchente de grandes proporções atinge vários Estados. A União edita lei complementar criando empréstimo compulsório e, anos depois, devolve os valores em dinheiro aos contribuintes.",
+  l: "CF/88, artigo 148; CTN, artigo 15; STF, RE 146.733 e RE 111.954.",
+  p: "\"Empréstimo compulsório tem natureza de contrato coativo\": ERRADO, é tributo.",
+  f: [
+   {k: "emp1", t: "Só a União, e só por lei complementar",
+    e: "A competência é <b>exclusiva da União</b>, e o veículo é obrigatoriamente a <b>lei complementar</b>. Medida provisória não pode tratar de matéria reservada a lei complementar, e lei ordinária também não serve.",
+    x: "Se o Presidente da República editasse uma medida provisória criando empréstimo compulsório para socorrer uma região atingida por desastre, ela seria inconstitucional, mesmo diante da urgência.",
+    l: "CF/88, artigos 148 (caput) e 62, parágrafo 1º, inciso III.",
+    p: "\"Empréstimos compulsórios podem ser instituídos pela União, Estados, DF e Municípios\": ERRADO."},
+   {k: "emp2", t: "Calamidade pública ou guerra externa",
+    e: "Primeira hipótese: atender a <b>despesas extraordinárias</b> decorrentes de calamidade pública ou de guerra externa, ou da sua iminência. Pela urgência, essa hipótese não precisa esperar as regras de anterioridade para ser cobrada.",
+    x: "Um terremoto destrói parte da infraestrutura de uma região: a União pode instituir o empréstimo e cobrá-lo de imediato para financiar a reconstrução.",
+    l: "CF/88, artigos 148 (inciso I) e 150, parágrafo 1º.",
+    p: "\"Conjuntura que exija absorção temporária de poder aquisitivo\" (CTN, artigo 15, inciso III) <b>não</b> foi recepcionada pela CF/88. Questões que a citam como hipótese válida estão erradas."},
+   {k: "emp3", t: "Investimento público urgente (respeita a anterioridade)",
+    e: "Segunda hipótese: <b>investimento público de caráter urgente e de relevante interesse nacional</b>. Aqui a Constituição manda observar a anterioridade anual (artigo 150, inciso III, alínea \"b\"), ou seja, só se cobra no exercício seguinte ao da publicação da lei.",
+    x: "Lei complementar publicada em agosto cria empréstimo compulsório para um investimento urgente no sistema elétrico nacional. A cobrança só pode começar no ano seguinte.",
+    l: "CF/88, artigo 148, inciso II.",
+    p: "Algumas questões juntam calamidade e guerra num único item e falam em \"duas hipóteses\". Isso não torna a questão errada."},
+   {k: "emp4", t: "Arrecadação vinculada · devolução em dinheiro",
+    e: "Tudo o que for arrecadado deve ser aplicado na despesa que justificou a criação do tributo (<b>arrecadação vinculada</b>). Isso não o torna um tributo vinculado, porque o fato gerador é livremente escolhido pelo legislador. A lei deve fixar prazo e condições de resgate, e a devolução é na <b>mesma espécie</b> do que foi pago: dinheiro.",
+    x: "O dinheiro arrecadado para socorrer vítimas de uma enchente não pode ser usado para reformar um estádio. E a União não pode \"devolver\" em títulos ou cotas de empresa: tem de pagar em moeda.",
+    l: "CF/88, artigo 148, parágrafo único; CTN, artigo 15, parágrafo único; STF, RE 175.385.",
+    p: "Arrecadação vinculada ≠ tributo vinculado. A banca adora trocar os dois conceitos."}
+  ]},
+ {k: "esp", c: "#c23a3a", t: "Contribuições especiais", s: "Artigo 149 da CF/88 · tributo finalístico",
+  e: "São tributos definidos pela <b>finalidade</b>: o destino do dinheiro é o que os identifica. Abrangem as contribuições sociais, as de intervenção no domínio econômico (CIDE), as de interesse de categorias profissionais ou econômicas (corporativas) e a de iluminação pública (COSIP). Não confunda com a contribuição <i>de melhoria</i>.",
+  x: "A CSLL paga por uma empresa sobre o seu lucro vai para a seguridade social (saúde, previdência e assistência). Se a lei desviasse esse dinheiro para outra finalidade, a própria contribuição perderia o seu fundamento.",
+  l: "CF/88, artigos 149, 149-A, 177 (parágrafo 4º) e 195.",
+  p: "Para as contribuições especiais o artigo 4º do CTN não basta: a destinação é relevante para identificar a espécie.",
+  f: [
+   {k: "esp1", t: "Sociais: seguridade, gerais e residuais",
+    e: "<b>Seguridade social</b>: fontes listadas no artigo 195 (folha, faturamento, lucro, trabalhador, prognósticos, importação, bens e serviços). Quando a fonte está na Constituição, basta lei ordinária. <b>Gerais</b>: financiam a área social fora da seguridade (salário-educação, Sistema S). <b>Residuais</b>: novas fontes, exigem lei complementar, não cumulatividade e base diferente das contribuições existentes.",
+    x: "Um supermercado do DF paga COFINS sobre o faturamento e CSLL sobre o lucro (seguridade); também recolhe para o SESC e o SENAC (contribuições gerais, destinadas a entidades privadas, por isso parafiscais).",
+    l: "CF/88, artigos 195 (incisos I a V e parágrafo 4º), 212 (parágrafo 5º) e 240; STF, RE 148.754.",
+    p: "COFINS e PIS foram criados por lei complementar, mas são materialmente ordinários e <b>não</b> são residuais."},
+   {k: "esp2", t: "Previdência dos servidores (RPPS): todos os entes",
+    e: "União, Estados, DF e Municípios cobram contribuição dos seus servidores ativos, aposentados e pensionistas para o regime próprio, com alíquotas que podem ser progressivas. Para aposentados, a regra é incidir sobre o que exceder o teto do RGPS; havendo <b>déficit atuarial</b>, sobre o que exceder o <b>salário-mínimo</b>.",
+    x: "Quando você for aprovado, o DF descontará do seu subsídio a contribuição para o regime próprio de previdência do DF, uma contribuição distrital, e não federal.",
+    l: "CF/88, artigo 149, parágrafos 1º, 1º-A e 1º-B; Emenda Constitucional 103/2019.",
+    p: "A contribuição <b>extraordinária</b> só é prevista no âmbito da União. Estados, DF e Municípios não podem ter alíquota menor que a da União, salvo se não houver déficit."},
+   {k: "esp3", t: "CIDE e corporativas: só a União",
+    e: "A <b>CIDE</b> é extrafiscal: intervém em um setor da economia e direciona recursos para ele. As <b>corporativas</b> financiam conselhos profissionais (autarquias). Ambas são de competência exclusiva da União. Contribuições sociais e CIDE não incidem sobre exportação, incidem sobre importação e podem ter alíquota ad valorem ou específica.",
+    x: "Parte do preço da gasolina que você paga no posto é CIDE-Combustíveis, cuja receita financia, por exemplo, infraestrutura de transportes. Já o contador paga anuidade ao CRC, que é tributo; a anuidade do advogado à OAB não é.",
+    l: "CF/88, artigos 149 (parágrafo 2º) e 177 (parágrafo 4º); STF, Tema 1.054 (OAB).",
+    p: "\"Estados podem instituir CIDE atrelada à exploração de petróleo no seu território\": ERRADO (questão 24 da lista). A alíquota da CIDE-Combustíveis pode ser reduzida e restabelecida por ato do Poder Executivo."},
+   {k: "esp4", t: "COSIP: Municípios e DF",
+    e: "Criada pela Emenda Constitucional 39/2002 como solução para a proibição da taxa de iluminação pública. Só Municípios e DF a instituem. Desde a Reforma Tributária, custeia o custeio, a expansão e a melhoria da iluminação pública <b>e</b> dos sistemas de monitoramento de logradouros, e deve observar legalidade, irretroatividade e anterioridades.",
+    x: "Na conta de luz de quem mora em Brasília vem a contribuição de iluminação pública. Com a Emenda Constitucional 132/2023, esse dinheiro também pode pagar câmeras de monitoramento de praças e parques.",
+    l: "CF/88, artigo 149-A e parágrafo único; CTN, artigo 82-A (Lei Complementar 227/2026).",
+    p: "A cobrança na fatura de energia é <b>facultativa</b>, e não obrigatória. A COSIP não financia a seguridade social (questão SEFAZ-AM)."}
+  ]}
+];
+
+function mmItens(){
+  const out = [MM_ROOT];
+  MM.forEach(b => { out.push(b); b.f.forEach(f => out.push(Object.assign({c: b.c, pai: b.t}, f))); });
+  return out;
+}
+function renderMapa(){
+  $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
+    <div class="mm-trunk"></div>
+    <div class="mm-branches">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+      <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
+      <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
+    el.onclick = () => abrirItem(el.dataset.k);
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirItem(el.dataset.k); } };
+  });
+  abbrify($("#mmBox"));
+}
+function abrirItem(k){
+  const itens = mmItens(), i = itens.findIndex(x => x.k === k), it = itens[i];
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", el.dataset.k === k));
+  const p = $("#mmPanel");
+  p.style.setProperty("--c", it.c || "var(--accent)");
+  p.innerHTML = `<div class="muted" style="font-size:13px">${it.pai ? "Mapa › " + it.pai : "Mapa"}</div>
+    <h4>${it.t}</h4>
+    <div class="mm-sec"><span class="lbl">Explicação</span>${it.e}</div>
+    <div class="mm-sec ex"><span class="lbl">Exemplo prático</span>${it.x}</div>
+    <div class="mm-sec"><span class="lbl">Base legal e jurisprudência</span>${it.l}</div>
+    <div class="mm-sec pg"><span class="lbl">Pegadinha da banca</span>${it.p}</div>
+    <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
+      <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
+  abbrify(p);
+  $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
+  $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
+  const r = p.getBoundingClientRect();
+  if (r.top < 120 || r.top > innerHeight - 160) p.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+/* ---------- glossário: toda sigla ganha dica com o nome por extenso ---------- */
+const GLOSS = {
+ "CF/88": "Constituição Federal de 1988", "CF": "Constituição Federal de 1988",
+ "CTN": "Código Tributário Nacional (Lei 5.172/1966)", "STF": "Supremo Tribunal Federal", "STJ": "Superior Tribunal de Justiça",
+ "LC": "Lei Complementar", "MP": "Medida Provisória", "EC": "Emenda Constitucional", "DL": "Decreto-Lei",
+ "ADCT": "Ato das Disposições Constitucionais Transitórias", "CLT": "Consolidação das Leis do Trabalho",
+ "ADI": "Ação Direta de Inconstitucionalidade", "RE": "Recurso Extraordinário", "RREE": "Recursos Extraordinários",
+ "REsp": "Recurso Especial", "HC": "Habeas Corpus", "AgR": "Agravo Regimental",
+ "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "ISS": "Imposto sobre Serviços", "ISSQN": "Imposto sobre Serviços de Qualquer Natureza",
+ "IPTU": "Imposto sobre a Propriedade Predial e Territorial Urbana", "ITBI": "Imposto sobre a Transmissão de Bens Imóveis",
+ "ITCMD": "Imposto sobre Transmissão Causa Mortis e Doação", "IPVA": "Imposto sobre a Propriedade de Veículos Automotores",
+ "IE": "Imposto de Exportação", "IR": "Imposto de Renda", "IRPF": "Imposto de Renda da Pessoa Física", "IRPJ": "Imposto de Renda da Pessoa Jurídica",
+ "IPI": "Imposto sobre Produtos Industrializados", "IOF": "Imposto sobre Operações Financeiras", "ITR": "Imposto sobre a Propriedade Territorial Rural",
+ "IGF": "Imposto sobre Grandes Fortunas", "IS": "Imposto Seletivo", "IEG": "Imposto Extraordinário de Guerra",
+ "IBS": "Imposto sobre Bens e Serviços", "CBS": "Contribuição sobre Bens e Serviços", "IVA": "Imposto sobre Valor Agregado",
+ "CIDE": "Contribuição de Intervenção no Domínio Econômico", "COSIP": "Contribuição para o Custeio do Serviço de Iluminação Pública",
+ "COFINS": "Contribuição para o Financiamento da Seguridade Social", "CSLL": "Contribuição Social sobre o Lucro Líquido",
+ "PIS": "Programa de Integração Social", "PASEP": "Programa de Formação do Patrimônio do Servidor Público",
+ "RPPS": "Regime Próprio de Previdência Social", "RGPS": "Regime Geral de Previdência Social",
+ "CVM": "Comissão de Valores Mobiliários", "AFRMM": "Adicional ao Frete para a Renovação da Marinha Mercante",
+ "SEBRAE": "Serviço Brasileiro de Apoio às Micro e Pequenas Empresas", "INCRA": "Instituto Nacional de Colonização e Reforma Agrária",
+ "SESC": "Serviço Social do Comércio", "SENAC": "Serviço Nacional de Aprendizagem Comercial", "SENAI": "Serviço Nacional de Aprendizagem Industrial",
+ "OAB": "Ordem dos Advogados do Brasil", "CRC": "Conselho Regional de Contabilidade", "CREA": "Conselho Regional de Engenharia e Agronomia",
+ "CRM": "Conselho Regional de Medicina", "CRA": "Conselho Regional de Administração", "IBAMA": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis",
+ "TCFA": "Taxa de Controle e Fiscalização Ambiental", "TFA": "Taxa de Fiscalização de Anúncios", "TFLF": "Taxa de Fiscalização, Localização e Funcionamento",
+ "TLLF": "Taxa de Licença de Localização e Funcionamento", "ZFM": "Zona Franca de Manaus", "PAF": "Processo Administrativo Fiscal",
+ "DF": "Distrito Federal", "SEFAZ": "Secretaria de Estado de Fazenda", "SEEC": "Secretaria de Estado de Economia",
+ "CEBRASPE": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos (banca)", "CESPE": "Centro de Seleção e de Promoção de Eventos (atual CEBRASPE)",
+ "PGFN": "Procuradoria-Geral da Fazenda Nacional", "AGU": "Advocacia-Geral da União", "RFB": "Receita Federal do Brasil",
+ "CAGE": "Contadoria e Auditoria-Geral do Estado", "CGE": "Controladoria-Geral do Estado", "TCE": "Tribunal de Contas do Estado",
+ "PGE": "Procuradoria-Geral do Estado", "STM": "Superior Tribunal Militar", "PF": "Polícia Federal", "PC": "Polícia Civil",
+ "ANM": "Agência Nacional de Mineração", "CAU": "Conselho de Arquitetura e Urbanismo", "INPI": "Instituto Nacional da Propriedade Industrial",
+ "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos", "EMBRAPA": "Empresa Brasileira de Pesquisa Agropecuária",
+ "CAGEPA": "Companhia de Água e Esgotos da Paraíba", "SEPLAN": "Secretaria de Planejamento", "APO": "Analista de Planejamento e Orçamento",
+ "PPNT": "Processo seletivo público (Petrobras)", "ATT": "Auditor Técnico de Tributos", "AFRE": "Auditor Fiscal da Receita Estadual",
+ "AFE": "Auditor Fiscal Estadual",
+ "art.": "artigo", "arts.": "artigos", "Art.": "artigo", "§": "parágrafo", "c/c": "combinado com", "nº": "número", "n.º": "número",
+ "Proc": "Procurador", "Pref": "Prefeitura", "Rel.": "Relator", "Min.": "Ministro", "Súm.": "Súmula", "SV": "Súmula Vinculante",
+ "FG": "fato gerador", "BC": "base de cálculo", "LO": "lei ordinária"
+};
+const GLOSS_RE = new RegExp("(?<![\\wÀ-ÿ])(" + Object.keys(GLOSS).sort((a, b) => b.length - a.length)
+  .map(s => s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")).join("|") + ")(?![\\wÀ-ÿ])", "g");
+function abbrify(root){
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+    n.parentElement.closest("abbr,script,style,select,option,kbd") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => {
+    const s = n.nodeValue; GLOSS_RE.lastIndex = 0;
+    if (!GLOSS_RE.test(s)) return;
+    const frag = document.createDocumentFragment(); let last = 0; GLOSS_RE.lastIndex = 0; let m;
+    while ((m = GLOSS_RE.exec(s))){
+      frag.append(s.slice(last, m.index));
+      const a = document.createElement("abbr"); a.textContent = m[1]; a.dataset.tip = GLOSS[m[1]]; a.setAttribute("aria-label", GLOSS[m[1]]);
+      frag.append(a); last = m.index + m[1].length;
+    }
+    frag.append(s.slice(last)); n.replaceWith(frag);
+  });
+}
+/* dica posicionada acima da sigla, sem cobrir o texto nem ficar sob o cursor */
+(() => {
+  const tip = () => document.getElementById("tip");
+  function show(el){
+    const t = tip(); t.textContent = el.dataset.tip; t.classList.add("on");
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 8) y = r.bottom + 8;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("mouseover", e => { const a = e.target.closest("abbr[data-tip]"); if (a) show(a); });
+  document.addEventListener("mouseout", e => { if (e.target.closest("abbr[data-tip]")) tip().classList.remove("on"); });
+  document.addEventListener("click", e => { const a = e.target.closest("abbr[data-tip]"); if (a){ show(a); setTimeout(() => tip().classList.remove("on"), 2500); } });
+  addEventListener("scroll", () => tip().classList.remove("on"), {passive: true});
+})();
+
+const KEY = "sefazdf_T2_dirtrib_aula00_v1";
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || {answers:{}, cards:{}};
+const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* abas */
+function showTab(t){
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("on", s.id === t));
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  if (t === "rend") renderRend();
+  if (t === "flash") renderCard();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+const active = () => document.querySelector("section.tab.on").id;
+
+/* questões */
+const TEMAS = [...new Set(QUESTOES.map(q => q.tema))];
+$("#fTema").innerHTML = '<option value="all">Todos os temas</option>' + TEMAS.map(t => `<option>${esc(t)}</option>`).join("");
+let cur = 0;
+
+function visible(){
+  const t = $("#fTema").value, st = $("#fStatus").value;
+  return QUESTOES.map((q, i) => i).filter(i => {
+    const q = QUESTOES[i], a = S.answers[q.n];
+    if (t !== "all" && q.tema !== t) return false;
+    if (st === "pend") return !a;
+    if (st === "bad") return a && !a.ok;
+    if (st === "ok") return a && a.ok;
+    return true;
+  });
+}
+function fmtCom(p){
+  return esc(p).replace(/^(Letra [A-E]|Item [IVX]+|Alternativa [A-E]|Assertiva [IVX]+)(:?)/, "<b>$1$2</b>");
+}
+function renderQ(){
+  const vis = visible();
+  const done = Object.keys(S.answers).length;
+  $("#qProg").style.width = (100 * done / QUESTOES.length) + "%";
+  $("#navQ").textContent = `${done}/${QUESTOES.length}`;
+  $("#qNav").innerHTML = vis.map(i => {
+    const a = S.answers[QUESTOES[i].n];
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].n}</button>`;
+  }).join("");
+  $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
+  if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
+  if (!vis.includes(cur)) cur = vis[0];
+  const q = QUESTOES[cur], a = S.answers[q.n];
+  const d = draft(q.n);
+  const st = v => a ? "" : (d.desc.includes(v) ? "desc" : d.sel === v ? "sel" : "");
+  let opts;
+  if (q.tipo === "ce"){
+    opts = '<div class="ce">' + [["C","Certo"],["E","Errado"]].map(([v, l]) => {
+      let cls = "";
+      if (a){ if (v === q.resp) cls = "right"; else if (v === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(v)}" data-v="${v}" ${a ? "disabled" : ""}>${l}</button>`;
+    }).join("") + "</div>";
+  } else {
+    opts = q.alts.map(([l, t]) => {
+      let cls = "";
+      if (a){ if (l === q.resp) cls = "right"; else if (l === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(l)}" data-v="${l}" ${a ? "disabled" : ""}><span class="l">${l})</span><span>${esc(t)}</span></button>`;
+    }).join("");
+  }
+  const pos = vis.indexOf(cur) + 1;
+  let com = "";
+  if (a){
+    const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
+    com = `<div class="coment"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+      ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
+  }
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>Questão ${q.n}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    <div class="enun">${esc(q.enun)}</div>
+    ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
+    ${opts}
+    ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
+    ${com}`;
+  abbrify($("#qCard"));
+  let clickTimer = null;
+  $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
+    b.ondblclick = e => { e.preventDefault(); clearTimeout(clickTimer); descartar(b.dataset.v); };
+  });
+  if ($("#qSubmit")) $("#qSubmit").onclick = submeter;
+  $("#qPrev").disabled = pos <= 1;
+  $("#qNext").textContent = pos >= vis.length ? "Ver rendimento →" : "Próxima →";
+}
+function draft(n){
+  S.draft ||= {};
+  return S.draft[n] ||= {sel: null, desc: []};
+}
+function opcoes(q){ return q.tipo === "ce" ? ["C", "E"] : q.alts.map(x => x[0]); }
+function escolher(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)){ msg("warn", "Essa opção está descartada. Clique duas vezes nela para recuperá-la antes de escolher."); return; }
+  d.sel = d.sel === v ? null : v; save(); renderQ();
+}
+function descartar(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)) d.desc = d.desc.filter(x => x !== v);
+  else { d.desc.push(v); if (d.sel === v) d.sel = null; }
+  save(); renderQ();
+  if (d.desc.length === opcoes(q).length) msg("warn", "Você descartou todas as opções. Clique duas vezes em uma delas para recuperá-la e poder responder.");
+}
+function msg(tipo, texto){
+  const m = $("#qMsg"); if (!m) return;
+  m.className = "qmsg on " + tipo; m.textContent = texto;
+}
+function submeter(){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n), todas = opcoes(q);
+  if (d.desc.length === todas.length) return msg("bad", "Você marcou todas as opções como descartadas. Recupere uma (clique duas vezes) e selecione-a antes de responder.");
+  if (!d.sel) return msg("bad", "Você não selecionou nenhuma resposta. Clique em uma opção e depois em Responder.");
+  answer(d.sel);
+}
+function answer(v){
+  const q = QUESTOES[cur];
+  if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  S.answers[q.n] = {sel: v, ok: v === q.resp, desc: d.desc.slice(), ts: Date.now()};
+  delete S.draft[q.n];
+  save(); renderQ();
+  $("#qCard .coment")?.scrollIntoView({behavior: "smooth", block: "nearest"});
+  if (Object.keys(S.answers).length === QUESTOES.length){
+    setTimeout(() => { if (confirmFinish()) showTab("rend"); }, 50);
+  }
+}
+let finishedShown = false;
+function confirmFinish(){ if (finishedShown) return false; finishedShown = true; return true; }
+function step(d){
+  const vis = visible(), p = vis.indexOf(cur);
+  if (d > 0 && p >= vis.length - 1){ showTab("rend"); return; }
+  const np = Math.min(Math.max(p + d, 0), vis.length - 1);
+  cur = vis[np]; renderQ(); $("#qCard").scrollIntoView({block: "nearest"});
+}
+$("#qPrev").onclick = () => step(-1);
+$("#qNext").onclick = () => step(1);
+$("#fTema").onchange = $("#fStatus").onchange = () => { cur = -1; renderQ(); };
+
+/* flashcards */
+let deck = [], fcI = 0;
+FLASH.forEach((c, i) => c.id = "f" + i);
+function buildDeck(shuffle){
+  const d = $("#fcDeck").value;
+  deck = FLASH.filter(c => d === "all" || c[0] === d);
+  const box = c => (S.cards[c.id] || {box: 1}).box;
+  deck = deck.map(c => [c, Math.random()]).sort((x, y) => shuffle ? x[1] - y[1] : (box(x[0]) - box(y[0])) || (x[1] - y[1])).map(x => x[0]);
+  fcI = 0; renderCard();
+}
+function renderCard(){
+  if (!deck.length) buildDeck();
+  const c = deck[fcI];
+  $("#fc").classList.remove("flip");
+  $("#fcQ").innerHTML = c[1];
+  $("#fcA").innerHTML = c[2];
+  const b = (S.cards[c.id] || {box: 1}).box;
+  $("#fcPos").textContent = `Cartão ${fcI + 1} de ${deck.length}`;
+  $("#fcBox").textContent = `Caixa ${b}`;
+  const cnt = [0, 0, 0, 0, 0];
+  deck.forEach(x => cnt[((S.cards[x.id] || {box: 1}).box) - 1]++);
+  abbrify($("#fcQ")); abbrify($("#fcA"));
+  $("#fcBoxes").innerHTML = cnt.map((n, i) => `<span>Caixa ${i + 1}: ${n}</span>`).join("");
+}
+function grade(g){
+  const c = deck[fcI], st = S.cards[c.id] || {box: 1};
+  st.box = g === 0 ? 1 : g === 1 ? Math.max(1, st.box) : Math.min(5, st.box + 1);
+  st.seen = (st.seen || 0) + 1; S.cards[c.id] = st; save();
+  fcI = (fcI + 1) % deck.length; renderCard();
+}
+$("#fc").onclick = () => $("#fc").classList.toggle("flip");
+$("#fcBad").onclick = () => grade(0);
+$("#fcMid").onclick = () => grade(1);
+$("#fcOk").onclick = () => grade(2);
+$("#fcDeck").onchange = () => buildDeck();
+$("#fcShuffle").onclick = () => buildDeck(true);
+$("#fcReset").onclick = () => { if (confirm("Zerar as caixas de todos os flashcards?")){ S.cards = {}; save(); buildDeck(); } };
+
+/* rendimento */
+function renderRend(){
+  const ans = S.answers, n = QUESTOES.length, done = QUESTOES.filter(q => ans[q.n]);
+  const ok = done.filter(q => ans[q.n].ok).length;
+  if (!done.length){ $("#rendBody").innerHTML = '<div class="card"><p class="muted">Você ainda não respondeu nenhuma questão. Vá para a aba <b>Questões</b>.</p></div>'; return; }
+  const pct = Math.round(100 * ok / done.length);
+  const ce = done.filter(q => q.tipo === "ce"), ceOk = ce.filter(q => ans[q.n].ok).length, ceBad = ce.length - ceOk;
+  const mc = done.filter(q => q.tipo === "mc"), mcOk = mc.filter(q => ans[q.n].ok).length;
+  const complete = done.length === n;
+  const msg = pct >= 85 ? ["ok", "Excelente! Acima da meta de 80% do seu plano."] : pct >= 70 ? ["warn", "Bom, mas abaixo da meta de 80%. Revise os temas em amarelo e vermelho."] : ["bad", "Abaixo de 70%. Releia o Resumo dos temas fracos antes de refazer as erradas."];
+  const byT = TEMAS.map(t => {
+    const qs = done.filter(q => q.tema === t), o = qs.filter(q => ans[q.n].ok).length;
+    return {t, tot: QUESTOES.filter(q => q.tema === t).length, d: qs.length, o, p: qs.length ? Math.round(100 * o / qs.length) : null};
+  }).sort((a, b) => (a.p ?? 101) - (b.p ?? 101));
+  const wrong = done.filter(q => !ans[q.n].ok);
+  $("#rendBody").innerHTML = `
+    ${complete ? "" : `<div class="call warn"><b>Resultado parcial</b>Você respondeu ${done.length} de ${n}. O rendimento final aparece quando terminar todas.</div>`}
+    <div class="grid3">
+      <div class="card"><div class="muted">Aproveitamento</div><div class="big" style="color:var(--${pct >= 80 ? "ok" : pct >= 70 ? "warn" : "bad"})">${pct}%</div><div class="muted">${ok} certas de ${done.length}</div></div>
+      <div class="card"><div class="muted">Certo/Errado (nota CEBRASPE)</div><div class="big">${ceOk - ceBad}</div><div class="muted">${ceOk} certas − ${ceBad} erradas, em ${ce.length} itens</div></div>
+      <div class="card"><div class="muted">Múltipla escolha</div><div class="big">${mc.length ? Math.round(100 * mcOk / mc.length) : 0}%</div><div class="muted">${mcOk} de ${mc.length}</div></div>
+    </div>
+    <div class="call ${msg[0]}"><b>Diagnóstico</b>${msg[1]}</div>
+    <h3>Desempenho por tema (do mais fraco ao mais forte)</h3>
+    <div class="card">${byT.map(r => `<div class="bar"><span>${esc(r.t)}</span><div class="t"><div class="${r.p === null ? "" : r.p < 70 ? "low" : r.p < 85 ? "mid" : ""}" style="width:${r.p ?? 0}%"></div></div><span>${r.p === null ? "—" : r.p + "%"} <small class="muted">${r.o}/${r.d}</small></span></div>`).join("")}</div>
+    <h3>Questões erradas (${wrong.length})</h3>
+    <div class="card">${wrong.length ? wrong.map(q => `<div style="margin:6px 0"><a href="#" data-n="${q.n}">Q${q.n}</a> · <span class="pill">${esc(q.tema)}</span> <span class="muted">${esc(q.enun.slice(-120).replace(/^\S*\s/, "…"))}</span></div>`).join("") : '<p class="muted">Nenhuma! 🎯</p>'}</div>`;
+  abbrify($("#rendBody"));
+  $("#rendBody").querySelectorAll("a[data-n]").forEach(a => a.onclick = e => {
+    e.preventDefault(); $("#fTema").value = "all"; $("#fStatus").value = "all";
+    cur = QUESTOES.findIndex(q => q.n === +a.dataset.n); showTab("questoes"); renderQ();
+  });
+}
+$("#expBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `T2_dirtrib_respostas_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+};
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; save(); renderQ(); renderRend(); });
+};
+$("#redoBad").onclick = () => {
+  const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
+  if (!bad.length) return;
+  bad.forEach(k => delete S.answers[k]); save(); finishedShown = false;
+  $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
+};
+$("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* teclado */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase(), tab = active();
+  if (tab === "questoes"){
+    const q = QUESTOES[cur];
+    if (k === "arrowright") step(1);
+    else if (k === "arrowleft") step(-1);
+    else if (q && !S.answers[q.n]){
+      const v = q.tipo === "ce" ? k.toUpperCase() : k;
+      if (k === "enter"){ e.preventDefault(); submeter(); }
+      else if (opcoes(q).includes(v)){ e.shiftKey ? descartar(v) : escolher(v); }
+    }
+  } else if (tab === "flash"){
+    if (k === " "){ e.preventDefault(); $("#fc").classList.toggle("flip"); }
+    else if (k === "1") grade(0); else if (k === "2") grade(1); else if (k === "3") grade(2);
+  }
+});
+
+renderMapa();
+["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
+cur = 0; renderQ(); buildDeck();
+</script>
+</body>
+</html>
