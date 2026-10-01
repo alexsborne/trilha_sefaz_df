@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T3 · Trilha 00 · Contabilidade Geral — SEFAZ-DF</title>
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;
+  --accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;
+  --warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;
+  --accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;
+  --warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:16px;padding:12px 0 6px;flex-wrap:wrap}
+.badge{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px;letter-spacing:.5px}
+.top h1{font-size:18px;margin:0;font-weight:650}
+.top .sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px}
+nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--surface2);color:var(--text)}
+nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{padding:24px 0 80px}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.call.warn{border-color:var(--warn);background:var(--warn-soft)}
+.call.bad{border-color:var(--bad);background:var(--bad-soft)}
+.call.ok{border-color:var(--ok);background:var(--ok-soft)}
+.call b:first-child{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.tbl table th:first-child,.tbl table td:first-child{padding-left:14px}
+.k{font-weight:650;color:var(--accent)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+/* roteiro */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
+
+/* mapa mental */
+.mm{padding:22px 16px}
+.mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
+.mm-root b{display:block;font-size:17px;letter-spacing:.5px}
+.mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
+.mm-branches{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-br{display:flex;flex-direction:column;align-items:stretch}
+.mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
+.mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
+.mm-h b{display:block;font-size:14.5px;color:var(--c)}
+.mm-br ul{list-style:none;margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--c)}
+.mm-br li{font-size:13px;line-height:1.4;background:var(--surface2);border-radius:8px;padding:6px 9px;margin:6px 0;position:relative}
+.mm-br li::before{content:"";position:absolute;left:-12px;top:50%;width:10px;border-top:2px solid var(--c)}
+@media(max-width:860px){.mm-branches{grid-template-columns:1fr 1fr;border-top:0}}
+@media(max-width:520px){.mm-branches{grid-template-columns:1fr}}
+
+
+/* abreviações com dica */
+abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+#tip{position:fixed;z-index:100;max-width:300px;background:#1d2330;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+@media (prefers-color-scheme:dark){#tip{background:#e6e9ef;color:#12151b}}
+
+/* mapa clicável */
+.mm [data-k]{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mm [data-k]:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.mm [data-k].sel{outline:3px solid var(--c,var(--accent));outline-offset:2px}
+.mm-root[data-k].sel{outline-color:var(--text)}
+.mm-hint{text-align:center;color:var(--muted);font-size:13px;margin:-4px 0 12px}
+#mmPanel{border-left:6px solid var(--c,var(--accent));scroll-margin-top:140px}
+#mmPanel h4{margin:0 0 4px;font-size:18px;color:var(--c,var(--accent))}
+#mmPanel .mm-sec{margin:12px 0 0}
+#mmPanel .lbl{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+#mmPanel .ex{background:var(--ok-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .pg{background:var(--bad-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+
+/* questões */
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 16px}
+.qnav button{width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:12.5px;cursor:pointer}
+.qnav button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.qnav button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.qnav button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.progress{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:width .3s}
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
+.enun{white-space:pre-line;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ce{display:flex;gap:10px}.ce .opt{justify-content:center;font-weight:650}
+.opt{user-select:none;-webkit-user-select:none;position:relative}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.sel .l::before{content:"● ";color:var(--accent)}
+.opt.desc{opacity:.55;padding-right:92px}
+.opt.desc span{text-decoration:line-through;text-decoration-thickness:2px}
+.ce .opt.desc{text-decoration:line-through;text-decoration-thickness:2px}
+.opt.desc::after{content:"descartada";position:absolute;right:10px;top:8px;font-size:11px;color:var(--muted);text-decoration:none}
+.qact{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.qmsg{font-size:14.5px;padding:8px 12px;border-radius:8px;display:none}
+.qmsg.on{display:block}
+.qmsg.warn{background:var(--warn-soft);color:var(--warn)}
+.qmsg.bad{background:var(--bad-soft);color:var(--bad)}
+.qhint{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.coment{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.coment p{margin:6px 0}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+
+/* flashcards */
+.fc{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-inner{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fc-face.back{transform:rotateY(180deg);background:var(--accent-soft);text-align:left;align-items:flex-start;font-size:15px}
+.fc-face .q{font-size:19px;font-weight:600}
+.fc-meta{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;color:var(--muted);font-size:13px}
+.boxes{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.boxes span{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line)}
+
+/* rendimento */
+.big{font-size:44px;font-weight:750;line-height:1}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.bar .t{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar .t>div{height:100%;background:var(--ok)}
+.bar .t>div.mid{background:var(--warn)}.bar .t>div.low{background:var(--bad)}
+@media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
+.btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span class="badge">T3</span>
+      <div>
+        <h1>Trilha 00 · Tarefa 3 · Contabilidade Geral</h1>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00 (Gilmar Possati): Aspectos Introdutórios da Contabilidade</div>
+      </div>
+    
+      <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
+    </div>
+    <nav id="nav">
+      <button data-t="inicio" class="on">Roteiro</button>
+      <button data-t="resumo">Resumo</button>
+      <button data-t="mapa">Mapa mental</button>
+      <button data-t="esquemas">Esquemas</button>
+      <button data-t="reforma">Estrutura Conceitual</button>
+      <button data-t="questoes">Questões <span class="pill" id="navQ">0/0</span></button>
+      <button data-t="flash">Flashcards</button>
+      <button data-t="rend">Rendimento</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ROTEIRO -->
+<section class="tab on" id="inicio">
+  <h2>Roteiro da sessão T3</h2>
+  <p class="lead">Tarefa da trilha: <i>"Estudo da aula 00, do tópico Aspectos Introdutórios; e resolução de questões"</i>. A trilha estima cerca de 1h30 por tarefa.</p>
+
+  <div class="call ok"><b>Material</b>
+    Esta página foi montada com o PDF <b>completo</b> da Aula 00 de Contabilidade Geral e Avançada (Gilmar Possati), que está em <code>estrategia/contabilidade geral/</code>. As questões são as que a trilha manda resolver: os <b>7 exercícios que aparecem no meio da teoria</b> e as <b>Questões Comentadas 1 a 10</b> (CEBRASPE). As questões 11 a 40 ficam para a T10, que é a revisão desta aula.
+  </div>
+
+  <div class="call"><b>O que o coach destacou</b>
+    • Esta parte inicial responde por cerca de <b>3,04%</b> das questões da área fiscal: é incidência mediana, então não a despreze.<br>
+    • Memorize: Contabilidade é <b>ciência</b>; o <b>objeto</b> é o patrimônio; o <b>objetivo</b> é fornecer informação útil aos usuários; o <b>campo de aplicação</b> são as aziendas (patrimônio + gestão).<br>
+    • Aziendas classificam-se quanto aos <b>fins</b> (sociais, econômicas e econômico-sociais) e quanto aos <b>proprietários</b> (públicas e particulares).<br>
+    • As questões costumam ser simples e cobrar definições. Cuidado com a pegadinha de trocar o atributo de um conceito pelo de outro, como na troca entre objeto e campo de aplicação.<br>
+    • Leia as 4 técnicas contábeis só para ter uma visão geral: elas serão aprofundadas ao longo do curso.
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><b>Pré-teste (5 min).</b> Abra os <b>Flashcards</b> (baralho da aula) e tente responder 5 cartões antes de ler.</li>
+      <li><b>Resumo (25 min).</b> Leia a aba <b>Resumo</b>, respondendo aos blocos <i>Pergunte-se</i> antes de abri-los.</li>
+      <li><b>Mapa mental e Esquemas (15 min).</b> Clique em cada item do mapa e leia a explicação com exemplo. Depois redesenhe o mapa de memória num papel.</li>
+      <li><b>Estrutura Conceitual (10 min).</b> A banca usa a norma oficial (pronunciamento CPC 00) para corrigir: veja o que ela diz sobre objetivo e usuários.</li>
+      <li><b>Questões (30 min).</b> São 17: primeiro os 7 exercícios da teoria e depois as Questões Comentadas 1 a 10. Escolha com um clique, descarte com dois e confirme em <b>Responder</b>.</li>
+      <li><b>Rendimento (5 min).</b> Veja os temas fracos e anote-os para a T10.</li>
+    </ol>
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Banca</b><br><span class="muted">CEBRASPE: itens de Certo ou Errado em que um erro anula um acerto. Na dúvida real, deixe em branco.</span></div>
+    <div class="card"><b>Peso na prova</b><br><span class="muted">Contabilidade Geral e de Custos está na prova de conhecimentos específicos (peso 3), com 15 itens, o que equivale a 45 pontos ponderados.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas e flashcards ficam no navegador. Use <i>Exportar</i> na aba Rendimento para fazer backup.</span></div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="tab" id="resumo">
+  <h2>Resumo: Aspectos Introdutórios da Contabilidade</h2>
+  <p class="lead">O resumo segue a ordem da aula. Os <span class="k">termos em destaque</span> são os que mais caem e os blocos vermelhos marcam as pegadinhas da banca.</p>
+
+  <h3>1. Conceito: a Contabilidade é uma ciência social</h3>
+  <div class="card">
+    <div class="call"><b>Conceito oficial (1º Congresso Brasileiro de Contabilidade, 1924)</b>
+      "Contabilidade é a <b>ciência</b> que <b>estuda e pratica</b> as funções de <b>orientação, de controle e de registro</b> dos atos e fatos de uma administração econômica."
+    </div>
+    <ul>
+      <li>É <span class="k">ciência social</span>, e não exata: estuda o patrimônio, que envolve pessoas e afeta a sociedade. Essa é a posição da corrente majoritária (questão comentada 9).</li>
+      <li><b>Estuda e pratica</b>: além de estudar os fenômenos patrimoniais, executa funções (orientar, controlar, registrar).</li>
+      <li>Outras definições doutrinárias: "sistema de informação e avaliação" destinado a prover usuários com demonstrações e análises; e "ciência que estuda o sistema da riqueza administrativa a fim de observar se ela atinge os fins propostos pelo sujeito aziendal" (Antônio Lopes de Sá).</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "A Contabilidade é uma ciência exata", "uma técnica" ou "uma arte": <b>ERRADO</b> para a corrente majoritária.<br>
+      • "O objetivo da contabilidade é estudar o sistema da riqueza administrativa, para verificar se ele serve aos fins da entidade": a banca considerou <b>CERTO</b> (questões comentadas 1 e 2).
+    </div>
+  </div>
+
+  <h3>2. Objeto: o patrimônio</h3>
+  <div class="card">
+    <p>O objeto da Contabilidade é o <span class="k">patrimônio</span>: o conjunto de <b>bens, direitos e obrigações</b> de uma entidade.</p>
+    <div class="tbl"><table>
+      <tr><th>Elemento</th><th>O que é</th><th>Exemplo da aula</th></tr>
+      <tr><td><b>Bens</b></td><td>Itens avaliados em moeda capazes de satisfazer às necessidades da entidade (pessoas físicas ou jurídicas)</td><td>Veículos usados nas atividades da empresa</td></tr>
+      <tr><td><b>Direitos</b></td><td>Valores a receber de terceiros, gerados pelas operações da entidade</td><td>Duplicatas a receber de vendas a prazo</td></tr>
+      <tr><td><b>Obrigações</b></td><td>Dívidas contraídas com terceiros</td><td>Valores a pagar por empréstimo bancário</td></tr>
+    </table></div>
+    <ul>
+      <li>Patrimônio tem a parte <b>positiva</b> (bens e direitos, que formam o ativo) e a parte <b>negativa</b> (obrigações, que formam o passivo).</li>
+      <li>A Contabilidade estuda o patrimônio nos aspectos <b>quantitativo</b> (valores em moeda) <b>e qualitativo</b> (natureza dos itens), ao mesmo tempo.</li>
+      <li>Na teoria atual, o objeto é <b>mais que</b> bens e direitos "de propriedade" da entidade: abrange os recursos que ela <b>controla</b>. O ativo é o "recurso econômico presente <b>controlado</b> pela entidade como resultado de eventos passados".</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "O patrimônio líquido é o conjunto de bens, direitos e obrigações": <b>ERRADO</b>. Esse conjunto é o patrimônio. O patrimônio líquido é a <b>diferença</b> entre ativo e passivo (questão comentada 4).<br>
+      • "O patrimônio compreende apenas a parte positiva do balanço": <b>ERRADO</b>.<br>
+      • "O patrimônio é composto por itens inteiramente qualitativos, por itens inteiramente quantitativos e por itens mistos": <b>ERRADO</b>, pois todo o patrimônio é visto nos dois aspectos (questão comentada 3).
+    </div>
+    <details><summary>Pergunte-se: patrimônio e patrimônio líquido são a mesma coisa?</summary><div>Não. Patrimônio = bens + direitos + obrigações. Patrimônio líquido = (bens + direitos) − obrigações, ou seja, ativo − passivo. É o que sobra para os sócios.</div></details>
+  </div>
+
+  <h3>3. Campo de aplicação: as aziendas</h3>
+  <div class="card">
+    <div class="call"><b>Fórmula para decorar</b><b>AZIENDA = GESTÃO + PATRIMÔNIO</b>A azienda surge quando há um patrimônio administrado de forma organizada. A doutrina também chama o campo de aplicação de <b>entidades econômico-administrativas</b>, expressão sinônima.</div>
+    <ul>
+      <li>Vale para entidades <b>com fins lucrativos</b> (empresas comerciais) <b>e sem fins lucrativos</b> (associações, municípios).</li>
+      <li>Modernamente, a Estrutura Conceitual usa a expressão <b>"entidade que reporta"</b>: a que é obrigada a elaborar demonstrações contábeis, ou decide fazê-lo. Pode ser uma única entidade, parte dela ou mais de uma entidade, e <b>não precisa ser uma entidade legal</b>.</li>
+    </ul>
+    <div class="grid2">
+      <div><b>Quanto aos fins</b>
+        <ul>
+          <li><b>Sociais</b>: não visam lucro (associações beneficentes, culturais, esportivas).</li>
+          <li><b>Econômicas</b>: visam lucro (sociedades comerciais, industriais, de serviços).</li>
+          <li><b>Econômico-sociais</b>: fins sociais e também lucro, para prestar benefícios a quem contribuiu (institutos de pensão, pecúlio e previdência).</li>
+        </ul></div>
+      <div><b>Quanto aos proprietários</b>
+        <ul>
+          <li><b>Públicas</b>: pertencem à sociedade, sob administração pública ou privada (sindicatos, fundações, o próprio Estado).</li>
+          <li><b>Particulares</b>: pertencem a uma pessoa ou grupo (sociedades civis ou comerciais, patrimônio de uma família).</li>
+        </ul></div>
+    </div>
+    <div class="call bad"><b>Pegadinha clássica</b>"A entidade econômico-administrativa é o objeto e o patrimônio é o campo de aplicação": <b>ERRADO</b>, os conceitos estão invertidos. O patrimônio é o <b>objeto</b>; a entidade é o <b>campo de aplicação</b>.</div>
+  </div>
+
+  <h3>4. Objetivo, finalidade e funções</h3>
+  <div class="card">
+    <p>A doutrina majoritária trata <b>objetivo</b> e <b>finalidade</b> como sinônimos: estudar e controlar o patrimônio e suas variações para <span class="k">fornecer informações úteis à tomada de decisões</span>.</p>
+    <div class="call warn"><b>Atenção ao entendimento recente do CEBRASPE (questão comentada 10)</b>
+      Quando a banca separa os termos: o <b>objetivo</b> é <b>fornecer informações úteis aos usuários</b>, conforme a Estrutura Conceitual, e <b>controlar o patrimônio</b> é <b>finalidade</b>. O professor chama isso de preciosismo, mas é como a banca corrige.
+    </div>
+    <div class="grid2">
+      <div class="call"><b>Função administrativa</b>Controlar o patrimônio, por meio do registro (escrituração) dos fatos contábeis em livros próprios.</div>
+      <div class="call"><b>Função econômica</b>Apurar o resultado líquido (o <b>rédito</b>): lucro líquido, se positivo, ou prejuízo líquido, se negativo.</div>
+    </div>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "O objetivo da contabilidade é controlar custos" ou "identificar as contas de apuração de custos": <b>ERRADO</b>.<br>
+      • "O objetivo é fornecer informações a <b>todos os interessados</b>": <b>ERRADO</b>. A informação é dirigida principalmente aos usuários primários: investidores, credores por empréstimos e outros credores (questão comentada 7).<br>
+      • "Coletar, sintetizar e registrar informações são ações para acompanhar o objeto da contabilidade": <b>CERTO</b> (questão comentada 5).
+    </div>
+  </div>
+
+  <h3>5. Técnicas contábeis</h3>
+  <div class="card">
+    <p>São os procedimentos que a Contabilidade usa para registrar ou levantar os fatos contábeis. Leitura de visão geral, como recomenda o coach: cada uma será aprofundada no curso.</p>
+    <div class="tbl"><table>
+      <tr><th>Técnica</th><th>Para que serve</th></tr>
+      <tr><td><b>Escrituração</b></td><td>Registrar os fatos contábeis</td></tr>
+      <tr><td><b>Demonstrações contábeis</b></td><td>Evidenciar (mostrar de forma organizada) os fatos escriturados</td></tr>
+      <tr><td><b>Análise das demonstrações</b></td><td>Extrair informações sobre a situação financeira, econômica e patrimonial para subsidiar decisões</td></tr>
+      <tr><td><b>Auditoria</b></td><td>Examinar se a escrituração e a evidenciação seguem as normas e os princípios contábeis</td></tr>
+    </table></div>
+    <details><summary>Pergunte-se: "Ativo + Passivo = Patrimônio Líquido" é uma técnica contábil?</summary><div>Não. Além de não ser técnica, a equação está errada: o correto é Ativo = Passivo + Patrimônio Líquido, ou seja, Patrimônio Líquido = Ativo − Passivo.</div></details>
+  </div>
+
+  <h3>6. Usuários da informação contábil</h3>
+  <div class="card">
+    <div class="grid2">
+      <div><b>Internos</b>: ligados à gestão da entidade, influenciam planejamento, preços e pessoal. Basicamente, os <b>administradores</b> e os <b>sócios controladores</b>.</div>
+      <div><b>Externos</b>: em regra fora da estrutura da entidade. São os <b>sócios não controladores (investidores)</b>, bancos, fornecedores, governo, clientes, empregados e o público.</div>
+    </div>
+    <div class="tbl"><table>
+      <tr><th>Usuário</th><th>O que quer saber</th></tr>
+      <tr><td>Investidores</td><td>Risco e retorno do investimento; se devem comprar, manter ou vender; capacidade de pagar dividendos</td></tr>
+      <tr><td>Empregados</td><td>Estabilidade e lucratividade do empregador; capacidade de pagar remuneração e aposentadoria</td></tr>
+      <tr><td>Credores por empréstimos</td><td>Capacidade de pagar o empréstimo e os juros no vencimento</td></tr>
+      <tr><td>Fornecedores e credores comerciais</td><td>Se receberão no vencimento. Interessam-se por prazo menor que os credores por empréstimos</td></tr>
+      <tr><td>Clientes</td><td><b>Continuidade</b> da entidade, sobretudo em relação de longo prazo ou quando dependem dela como fornecedor</td></tr>
+      <tr><td>Governo e suas agências</td><td>Destinação de recursos, regulamentação, política fiscal, estatísticas e renda nacional</td></tr>
+      <tr><td>Público</td><td>Evolução do desempenho e contribuição à economia local</td></tr>
+    </table></div>
+    <div class="call bad"><b>Pegadinha</b>"Os relatórios de propósito geral atendem a todas as informações de que os usuários externos necessitam": <b>ERRADO</b>. Eles <b>não</b> fornecem tudo, e os usuários precisam de outras fontes.</div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="tab" id="mapa">
+  <h2>Mapa mental: aspectos introdutórios da Contabilidade</h2>
+  <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
+  <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
+  <div class="card mm" id="mmBox"></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa para começar.</p></div>
+
+  <h3>Onde este tema se encaixa na disciplina</h3>
+  <div class="card">
+    <div class="grid3" style="font-size:14px">
+      <div><b class="k">Base</b><br>Conceito, objeto, objetivo e usuários ← <i>você está aqui</i><br>Patrimônio e equação patrimonial</div>
+      <div><b class="k">Registro</b><br>Contas, débito e crédito<br>Partidas dobradas e escrituração<br>Fatos contábeis</div>
+      <div><b class="k">Normas</b><br>Estrutura Conceitual (pronunciamento CPC 00)<br>Pronunciamentos técnicos</div>
+      <div><b class="k">Demonstrações</b><br>Balanço Patrimonial<br>Demonstração do Resultado<br>Demais demonstrações</div>
+      <div><b class="k">Mensuração</b><br>Estoques, imobilizado, intangível<br>Depreciação e provisões</div>
+      <div><b class="k">Análise</b><br>Índices e análise das demonstrações</div>
+    </div>
+    <p class="muted" style="font-size:13px;margin:10px 0 0">Blocos gerais da Contabilidade Geral, para orientar o estudo. A ordem exata das aulas está no cronograma do curso, na área do aluno.</p>
+  </div>
+</section>
+
+<!-- ESQUEMAS -->
+<section class="tab" id="esquemas">
+  <h2>Esquemas comparativos</h2>
+  <p class="lead">Tabelas de revisão rápida. Você deve conseguir reproduzi-las na véspera.</p>
+
+  <h3>Os conceitos que a banca troca entre si</h3>
+  <div class="tbl"><table>
+    <tr><th>Conceito</th><th>Resposta certa</th><th>Troca típica da banca (ERRADA)</th></tr>
+    <tr><td><b>Natureza</b></td><td>Ciência social</td><td>Ciência exata, técnica, arte, subdivisão da administração</td></tr>
+    <tr><td><b>Objeto</b></td><td>Patrimônio (bens, direitos e obrigações)</td><td>Entidade econômico-administrativa; apuração do resultado; planejamento</td></tr>
+    <tr><td><b>Campo de aplicação</b></td><td>Aziendas = entidades econômico-administrativas, com ou sem fins lucrativos</td><td>Patrimônio; só empresas com fins lucrativos</td></tr>
+    <tr><td><b>Objetivo</b> (CEBRASPE)</td><td>Fornecer informações úteis aos usuários para a tomada de decisões</td><td>Controlar custos; atender "todos os interessados"; controlar o patrimônio (isso é finalidade)</td></tr>
+    <tr><td><b>Função administrativa</b></td><td>Controle do patrimônio (escrituração)</td><td>Apurar o resultado</td></tr>
+    <tr><td><b>Função econômica</b></td><td>Apuração do resultado (rédito)</td><td>Controlar o patrimônio</td></tr>
+  </table></div>
+
+  <h3>Patrimônio × Patrimônio líquido</h3>
+  <div class="grid2">
+    <div class="card" style="border-top:4px solid var(--accent)"><b>Patrimônio</b><br>Bens + direitos + obrigações.<br><span class="muted">Parte positiva (ativo) e parte negativa (passivo). É o <b>objeto</b> da Contabilidade.</span></div>
+    <div class="card" style="border-top:4px solid var(--ok)"><b>Patrimônio líquido</b><br>Ativo − passivo.<br><span class="muted">A parte residual que pertence aos sócios: capital social, reservas e outros itens.</span></div>
+  </div>
+
+  <h3>Classificação das aziendas</h3>
+  <div class="tbl"><table>
+    <tr><th>Critério</th><th>Tipos</th><th>Exemplos</th></tr>
+    <tr><td rowspan="3"><b>Quanto aos fins</b></td><td>Sociais</td><td>Associação beneficente, clube esportivo</td></tr>
+    <tr><td>Econômicas</td><td>Indústria, comércio, prestadora de serviços</td></tr>
+    <tr><td>Econômico-sociais</td><td>Institutos de pensão, pecúlio e previdência</td></tr>
+    <tr><td rowspan="2"><b>Quanto aos proprietários</b></td><td>Públicas</td><td>Estado, fundações, sindicatos</td></tr>
+    <tr><td>Particulares</td><td>Sociedades civis ou comerciais, patrimônio de uma família</td></tr>
+  </table></div>
+
+  <h3>Usuários: internos × externos × visão da Estrutura Conceitual</h3>
+  <div class="tbl"><table>
+    <tr><th>Classificação doutrinária</th><th>Estrutura Conceitual (CPC 00)</th></tr>
+    <tr><td><b>Internos</b>: administradores e sócios controladores</td><td><b>Principais</b>: investidores, credores por empréstimos e outros credores, existentes e potenciais</td></tr>
+    <tr><td><b>Externos</b>: investidores (sócios não controladores), bancos, fornecedores, governo, clientes, empregados, público</td><td><b>Outras partes</b>, que não são o alvo dos relatórios: reguladores, público em geral e a própria administração</td></tr>
+  </table></div>
+</section>
+
+<!-- REFORMA -->
+<section class="tab" id="reforma">
+  <h2>Estrutura Conceitual: objetivo e usuários</h2>
+  <p class="lead">O pronunciamento CPC 00 (Estrutura Conceitual para Relatório Financeiro) é a base que a banca usa para corrigir os itens sobre objetivo e usuários.</p>
+
+  <div class="call"><b>Objetivo do relatório financeiro para fins gerais</b>
+    Fornecer informações financeiras sobre a entidade que reporta que sejam <b>úteis</b> para <b>investidores, credores por empréstimos e outros credores, existentes e potenciais</b>, na tomada de decisões referente à <b>oferta de recursos</b> à entidade.
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Decisão 1</b><br>Comprar, vender ou manter instrumentos de patrimônio e de dívida.</div>
+    <div class="card"><b>Decisão 2</b><br>Conceder ou liquidar empréstimos ou outras formas de crédito.</div>
+    <div class="card"><b>Decisão 3</b><br>Exercer direitos de voto ou influenciar de outro modo os atos da administração.</div>
+  </div>
+
+  <h3>As três limitações que mais caem</h3>
+  <div class="card">
+    <ol>
+      <li>Os relatórios para fins gerais <b>não fornecem nem podem fornecer todas</b> as informações de que os usuários precisam. Eles devem buscar outras fontes: economia, política, perspectivas do setor.</li>
+      <li>Os relatórios <b>não se destinam a mostrar o valor da entidade</b>. Fornecem informações que ajudam os usuários a <b>estimar</b> esse valor.</li>
+      <li>Os relatórios <b>não são direcionados</b> à administração, aos reguladores nem ao público. A administração obtém as informações internamente; reguladores e público podem achar os relatórios úteis, mas não são o seu alvo.</li>
+    </ol>
+  </div>
+
+  <h3>Por que os principais usuários são esses?</h3>
+  <div class="card">
+    <p>Muitos investidores e credores <b>não podem exigir</b> que a entidade lhes forneça informações diretamente. Dependem dos relatórios para fins gerais, por isso são os usuários principais.</p>
+    <div class="call warn"><b>Conexão com o cargo</b>Como auditor fiscal, você usará demonstrações contábeis para fiscalizar, mas o Fisco <b>não</b> é o usuário principal da Estrutura Conceitual. O governo tem poder para exigir informações específicas, como declarações e escrituração fiscal.</div>
+  </div>
+</section>
+
+<!-- QUESTÕES -->
+<section class="tab" id="questoes">
+  <h2>Questões comentadas (CEBRASPE)</h2>
+  <p class="lead">São 17 questões: os 7 exercícios da teoria (T1 a T7 na barra de navegação) e as Questões Comentadas 1 a 10 do CEBRASPE, como pede a trilha. Depois de responder, o comentário do professor aparece logo abaixo. O rendimento completo é gerado quando todas forem respondidas.</p>
+  <div class="row" style="margin-bottom:10px">
+    <label class="muted" for="fTema">Tema:</label>
+    <select id="fTema"></select>
+    <label class="muted" for="fStatus">Mostrar:</label>
+    <select id="fStatus"><option value="all">Todas</option><option value="pend">Não respondidas</option><option value="bad">Erradas</option><option value="ok">Certas</option></select>
+  </div>
+  <div class="progress"><div id="qProg"></div></div>
+  <div class="qnav" id="qNav"></div>
+  <div class="card" id="qCard"></div>
+  <div class="row" style="justify-content:space-between">
+    <button class="btn" id="qPrev">← Anterior</button>
+    <span class="muted" style="font-size:13px">Atalhos: <kbd>A</kbd>–<kbd>E</kbd> ou <kbd>C</kbd>/<kbd>E</kbd> escolhe · <kbd>Shift</kbd>+letra descarta · <kbd>Enter</kbd> responde · <kbd>←</kbd> <kbd>→</kbd> navega</span>
+    <button class="btn pri" id="qNext">Próxima →</button>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="tab" id="flash">
+  <h2>Flashcards com repetição espaçada</h2>
+  <p class="lead">Leia a pergunta, responda <b>em voz alta</b> e só então vire o cartão (clique ou <kbd>Espaço</kbd>). Marque com sinceridade: os cartões errados voltam primeiro (sistema Leitner, caixas 1 a 5).</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px">
+    <select id="fcDeck">
+      <option value="all">Todos os baralhos</option>
+      <option value="a00">Aula 00 · Aspectos introdutórios</option>
+      <option value="ref">Estrutura Conceitual</option>
+      <option value="pan">Panorama da Contabilidade Geral</option>
+    </select>
+    <button class="btn" id="fcShuffle">Embaralhar</button>
+    <button class="btn" id="fcReset">Zerar caixas</button>
+  </div>
+  <div class="fc-meta"><span id="fcPos"></span><span id="fcBox"></span></div>
+  <div class="fc" id="fc"><div class="fc-inner"><div class="fc-face front"><div class="q" id="fcQ"></div><div class="muted" style="margin-top:14px;font-size:13px">clique para virar</div></div><div class="fc-face back"><div id="fcA"></div></div></div></div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn bad" id="fcBad">✘ Errei (<kbd>1</kbd>)</button>
+    <button class="btn" id="fcMid">~ Hesitei (<kbd>2</kbd>)</button>
+    <button class="btn ok" id="fcOk">✔ Acertei (<kbd>3</kbd>)</button>
+  </div>
+  <div class="boxes" id="fcBoxes"></div>
+</section>
+
+<!-- RENDIMENTO -->
+<section class="tab" id="rend">
+  <h2>Rendimento</h2>
+  <div id="rendBody"></div>
+  <h3>Gerenciar dados</h3>
+  <div class="row">
+    <button class="btn" id="expBtn">Exportar respostas (.json)</button>
+    <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
+    <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
+  </div>
+</section>
+
+</main>
+
+<div id="tip" role="tooltip"></div>
+<script>
+const QUESTOES = [{"fonte": "Exercício da teoria (tópico Objeto)", "tema": "Objeto: o patrimônio", "enun": "O objeto da contabilidade é:", "tipo": "mc", "resp": "a", "alts": [["a", "o patrimônio das entidades."], ["b", "a apuração do resultado das entidades."], ["c", "o planejamento contábil das entidades."], ["d", "o controle e o planejamento das entidades."], ["e", "o fornecimento de informações a seus usuários de modo geral."]], "com": ["O objeto da Contabilidade é o Patrimônio, conjunto de bens, direitos e obrigações de uma determinada entidade."], "n": 1, "rot": "Exercício da teoria 1", "nav": "T1"}, {"fonte": "Exercício da teoria (tópico Funções)", "tema": "Objetivo, finalidade e funções", "enun": "Sobre conceitos, objeto, função e objetivos da Contabilidade, analise as afirmações a seguir.\nI - O principal objetivo da contabilidade consiste em identificar as contas de apuração dos custos e resultados.\nII - A função administrativa tem por objetivo o controle do patrimônio.\nIII - O objeto da contabilidade é o patrimônio que compreende apenas a parte positiva do balanço.\nIV - Os bens corpóreos e os incorpóreos são classificados no passivo.\nEstá correto APENAS o que se afirma em", "tipo": "mc", "resp": "a", "alts": [["a", "II."], ["b", "III."], ["c", "I e III."], ["d", "II e IV."], ["e", "I, III e IV."]], "com": ["I – Errado. O objetivo da Contabilidade é fornecer informações úteis para a tomada de decisões.", "II – Certo. De fato, temos que a função administrativa da Contabilidade está ligada ao controle do patrimônio.", "III – Errado. O patrimônio da entidade é o conjunto de bens, direitos e obrigações, ou seja, compreende tanto a parte positiva como também a negativa.", "IV – Errado. Os bens fazem parte do ativo da empresa. Trata-se da parte positiva do balanço."], "n": 2, "rot": "Exercício da teoria 2", "nav": "T2"}, {"fonte": "Exercício da teoria (tópico Funções)", "tema": "Campo de aplicação (aziendas)", "enun": "Assinale abaixo a única opção que contém uma afirmativa falsa.", "tipo": "mc", "resp": "e", "alts": [["a", "A finalidade da Contabilidade é assegurar o controle do patrimônio administrado e fornecer informações sobre a composição e as variações patrimoniais, bem como sobre o resultado das atividades econômicas desenvolvidas pela entidade para alcançar seus fins."], ["b", "A Contabilidade pode ser conceituada como sendo “a ciência que estuda, registra, controla e interpreta os fatos ocorridos no patrimônio das entidades com fins lucrativos ou não”."], ["c", "Pode-se dizer que o campo de aplicação da Contabilidade é a entidade econômico-administrativa, seja ou não de fins lucrativos."], ["d", "O objeto da Contabilidade é definido como o conjunto de bens, direitos e obrigações vinculado a uma entidade econômico-administrativa."], ["e", "Enquanto a entidade econômico-administrativa é o objeto da Contabilidade, o patrimônio é o seu campo de aplicação."]], "com": ["Letra A: Certo. O item refere-se corretamente à finalidade da contabilidade: controlar o patrimônio administrado e fornecer informações úteis para a tomada de decisão.", "Letra B: Certo. Perfeito o conceito. Observe que o item confirma o fato de que a Contabilidade é aplicada em entidades com ou sem fins lucrativos.", "Letra C: Certo. O item refere-se corretamente ao campo de aplicação da Contabilidade, qual seja: as entidades econômico-administrativas. Destaca-se que se o item colocasse aziendas estaria igualmente correto, pois as expressões acabam sendo sinônimas.", "Letra D: Certo. O item refere-se corretamente ao objeto da Contabilidade, o patrimônio, conjunto de bens, direitos e obrigações vinculado a uma entidade econômico-administrativa.", "Letra E: Errado. É o nosso gabarito. Observe que o item inverte os conceitos. A entidade econômico-administrativa que é o campo de aplicação. O patrimônio, por sua vez, é o objeto da Contabilidade."], "n": 3, "rot": "Exercício da teoria 3", "nav": "T3"}, {"fonte": "Exercício da teoria (tópico Funções)", "tema": "Campo de aplicação (aziendas)", "enun": "O campo de atuação da Contabilidade é a entidade econômico-administrativa, cuja classificação, quanto aos fins a que se destinam, faz-se, corretamente, dividindo-as em", "tipo": "mc", "resp": "e", "alts": [["a", "pessoas físicas e pessoas jurídicas."], ["b", "entidades abertas e entidades fechadas."], ["c", "entidades públicas e entidades privadas."], ["d", "entidades civis e entidades comerciais."], ["e", "entidades sociais, econômicas e econômico-sociais."]], "com": ["Conforme já estudamos, o campo de aplicação da Contabilidade abrange todas as entidades econômico-administrativas (Aziendas).", "Quanto aos fins a que se destinam, as aziendas classificam-se em: sociais (não visam lucros; exemplo: associações beneficentes, culturais, esportivas, recreativas); econômico-sociais (além das finalidades sociais, visam também ao lucro, com o objetivo de prestar serviços, pecúlios e benefícios às pessoas que contribuíram para sua constituição; exemplo: institutos de pensão, pecúlio, aposentadoria e previdência); econômicas (finalidade é a geração de lucros; exemplo: sociedades comerciais, agrícolas, industriais, de serviços).", "Quanto aos seus proprietários, as aziendas classificam-se em públicas (pertencem à sociedade; exemplo: sindicatos, fundações e o próprio Estado) e particulares (pertencentes a uma pessoa ou a um grupo de pessoas).", "Portanto, quanto aos fins a que se destinam, as entidades são: sociais, econômicas e econômico-sociais."], "n": 4, "rot": "Exercício da teoria 4", "nav": "T4"}, {"fonte": "Exercício da teoria (tópico Técnicas)", "tema": "Técnicas contábeis", "enun": "Assinale a alternativa que apresenta as técnicas aplicadas em ciências contábeis.", "tipo": "mc", "resp": "e", "alts": [["a", "Receitas, Despesas, Ativo e Passivo"], ["b", "Ativo + Passivo = Patrimônio Líquido"], ["c", "As contas do ativo (bens e direitos) são, em regra, de natureza devedora"], ["d", "Os fatos mistos representam a junção dos fatos permutativos e modificativos"], ["e", "Escrituração, análises, demonstrações contábeis e auditoria"]], "com": ["As técnicas aplicadas pela Contabilidade são as seguintes: Escrituração (registro dos fatos contábeis); Demonstrações Contábeis (evidenciar os fatos contábeis escriturados); Análise das Demonstrações Contábeis (extrair informações sobre a situação financeira, econômica e patrimonial, para subsidiar a tomada de decisões); Auditoria (examinar a escrituração e a evidenciação, verificando se foram elaboradas de acordo com as normas vigentes e os princípios contábeis)."], "n": 5, "rot": "Exercício da teoria 5", "nav": "T5"}, {"fonte": "Exercício da teoria (tópico Usuários)", "tema": "Usuários da informação contábil", "enun": "Diversos são os tipos de usuários interessados nas informações contidas nas demonstrações contábeis das entidades. Um desses grupos é constituído pelos clientes, cujo interesse é tanto maior quanto maior forem a sua dependência e a concentração nos fornecimentos de algumas poucas entidades.", "tipo": "ce", "resp": "C", "alts": [], "com": ["Os clientes têm interesse em informações sobre a continuidade operacional da entidade, especialmente quando têm um relacionamento a longo prazo com ela, ou dela dependem como fornecedor importante."], "n": 6, "rot": "Exercício da teoria 6", "nav": "T6"}, {"fonte": "Exercício da teoria (tópico Usuários)", "tema": "Usuários da informação contábil", "enun": "Os relatórios contábil-financeiros de propósitos gerais não são os instrumentos que atendem a todas as informações de que os usuários externos — investidores, credores por empréstimos e outros credores, existentes e em potencial — necessitam.", "tipo": "ce", "resp": "C", "alts": [], "com": ["De fato, relatórios financeiros para fins gerais não fornecem nem podem fornecer todas as informações de que necessitam investidores, credores por empréstimos e outros credores, existentes e potenciais. Esses usuários precisam considerar informações pertinentes de outras fontes, como, por exemplo, condições e expectativas econômicas gerais, eventos políticos e ambiente político e perspectivas do setor e da empresa."], "n": 7, "rot": "Exercício da teoria 7", "nav": "T7"}, {"n": 8, "fonte": "CEBRASPE/Técnico/TRF6/2025", "enun": "O objetivo da contabilidade é estudar o sistema da riqueza administrativa, com a finalidade de verificar se ele vem servindo ao alcance dos fins propostas pela entidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A contabilidade, de fato, estuda o sistema da riqueza administrativa, ou seja, o patrimônio das entidades, com o objetivo de fornecer informações que ajudem a verificar se os recursos estão sendo utilizados de maneira eficaz para alcançar os fins propostos pela entidade.", "Esse estudo envolve a análise e o registro (escrituração) das transações econômicas e financeiras, a preparação de demonstrações contábeis/financeiras e a avaliação da performance financeira da entidade. A contabilidade fornece uma base sólida de informações que auxiliam os seus usuários a tomar decisões mais assertivas e a avaliar se os fins propostos pela entidade estão sendo atingidos.", "Segundo a definição de Contabilidade contida no Dicionário da Contabilidade, do saudoso Dr. Antônio Lopes de Sá, temos:", "Ciência que estuda os fenômenos patrimoniais sob o aspecto do fim aziendal; é a ciência que tem por objetivo estudar o sistema da riqueza administrativa a fim de observar se ela atinge os fins propostos pelo sujeito aziendal."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 1", "nav": "1"}, {"n": 9, "fonte": "CEBRASPE/Técnico/Petrobras/2023", "enun": "Uma finalidade da ciência contábil é observar se a riqueza administrativa está atingindo os fins propostos pelo sujeito contábil.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Inseri essa questão aqui para você ver que a banca costuma repetir as exigências. Essa assertiva, assim como a anterior, tomou como base a definição acima descrita no Dicionário de Contabilidade. Os comentários acima se aplicam em sua integridade a essa questão."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 2", "nav": "2"}, {"n": 10, "fonte": "CEBRASPE/Técnico/TRF6/2025", "enun": "O patrimônio de uma entidade, na visão da ciência contábil, é composto por itens de natureza inteiramente qualitativa, por itens de natureza inteiramente quantitativa e por itens que tem natureza tanto qualitativa quanto quantitativa.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A contabilidade estuda o patrimônio em seus aspectos quantitativo e qualitativo. Isso significa que ela não apenas registra valores monetários ( aspecto quantitativo), mas também considera aspectos não monetários, a natureza/qualidade do patrimônio (aspecto qualitativo).", "É errado afirmar, portanto, que o patrimônio, na visão da ciência contábil, é composto por itens de natureza inteiramente qualitativa ou apenas de natureza inteiramente quantitativa. A contabilidade necessita evidenciar o patrimônio em seus aspectos qualitativos e quantitativos."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 3", "nav": "3"}, {"n": 11, "fonte": "CEBRASPE/Técnico/TRF6/2025", "enun": "Na ciência contábil, o patrimônio líquido de uma entidade é entendido como o conjunto de seus bens, direitos e obrigações.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Na ciência contábil, o patrimônio líquido de uma entidade é definido como a diferença entre os ativos (bens e direitos) e os passivos (obrigações). Em outras palavras, o patrimônio líquido representa a parte residual dos ativos da entidade depois de deduzidos todos os seus passivos. Ele é composto por itens como capital social, reservas de lucros, ajustes de avaliação patrimonial e outros elementos que refletem a riqueza líquida da entidade.", "O conjunto de seus bens, direitos e obrigações representa o patrimônio da entidade (não é o patrimônio líquido!)."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 4", "nav": "4"}, {"n": 12, "fonte": "CEBRASPE/Contador/PCDF/2025", "enun": "Considerando os conceitos, objetivos e finalidades da contabilidade, julgue o item a seguir. Coletar informações, sintetizá -las e registrá -las são algumas das ações que visam ao acompanhamento sistemático do objeto da ciência contábil.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Coletar informações, sintetizá -las e registrá -las realmente são algumas das ações essenciais para o acompanhamento sistemático do objeto da ciência contábil (patrimônio das entidades).", "Como ciência que estuda e controla o patrimônio das entidades, a contabilidade fornece informações úteis para a tomada de decisões. Nesse sentido, a fim de cumprir esse objetivo, a contabilidade realiza um processo contínuo e sistemático de coleta, síntese e registro(escrituração) de informações financeiras e patrimoniais."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 5", "nav": "5"}, {"n": 13, "fonte": "CEBRASPE/Contador/PCDF/2025", "enun": "O objeto da contabilidade, na teoria contábil atual, é mais que o conjunto de bens, direitos e obrigações de propriedade da entidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O objeto da contabilidade engloba todos os recursos econômicos controlados pela entidade. Não é preciso deter a propriedade legal do bem/direito. Isso ficará bem tranquilo de entender após o estudo da definição de ativo, oportunamente tratado em noso estudo. De qualquer forma, transcrevemos abaixo a definição com o destaque para o termo \"controlado.", "Definição de ativo : recurso econômico presente controlado pela entidade como resultado de eventos passados."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 6", "nav": "6"}, {"n": 14, "fonte": "CEBRASPE/Contador/PCDF/2025", "enun": "O objetivo fundamental da contabilidade, hoje, é fornecer informações que auxiliem a tomada de decisões econômico-financeiras a todos os interessados.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O erro da assertiva está na expressão \"todos os interessados\". O objetivo da contabilidade é proporcionar informações financeiras sobre a entidade que sejam úteis principalmente para os usuários primários, que incluem:", "• Investidores existentes e potenciais;", "• Credores por empréstimos;", "• Outros fornecedores de recursos à entidade.", "Esses usuários externos primários utilizam as informações financeiras para tomar decisões relacionadas ao fornecimento de recursos à entidade, como decidir se devem comprar, manter ou vender instrumentos patrimoniais, fornecer ou liquidar empréstimos, ou outras formas de financiamento."], "tema": "Usuários da informação contábil", "rot": "Questão comentada 7", "nav": "7"}, {"n": 15, "fonte": "CEBRASPE/Contador/CAU-BR/2024", "enun": "A contabilidade estuda o patrimônio em seus aspectos quantitativo e qualitativo, fornecendo subsídios ao processo de tomada de decisões econômico -financeiras por usuários internos e externos.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A contabilidade, de fato, estuda o patrimônio em seus aspectos quantitativo e qualitativo. Isso significa que ela não apenas registra valores monetários ( aspecto quantitativo), mas também considera aspectos não monetários, a natureza/qualidade do patrimônio (aspecto qualitativo).", "Esses subsídios fornecidos pela contabilidade são essenciais para o processo de tomada de decisões econômico-financeiras, tanto para usuários internos (como gestores e funcionários) quanto para usuários externos (como investidores, credores e reguladores)."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 8", "nav": "8"}, {"n": 16, "fonte": "CEBRASPE/Agente/PC-PE/2024", "enun": "Atualmente, a corrente majoritária de pensadores da área de contabilidade a conceitua como", "alts": [["a", "uma subdivisão da administração."], ["b", "uma forma de arte."], ["c", "uma ciência social."], ["d", "uma ciência exata."], ["e", "uma técnica."]], "tipo": "mc", "resp": "c", "com": ["Atualmente, a corrente majoritária de pensadores da área de contabilidade conceitua a contabilidade como uma ciência social . A contabilidade é considerada uma ciência social porque estuda os fenômenos relacionados ao patrimônio das entidades e suas interações com o ambiente econômico e social. Ela envolve a análise de comportamentos humanos e decisões econômicas, proporcionando informações que afetam diretamente as decisões de indivíduos e organizações."], "tema": "Conceito e natureza", "rot": "Questão comentada 9", "nav": "9"}, {"n": 17, "fonte": "CEBRASPE/Analista/APEx/2024", "enun": "A ciência contábil tem múltiplas finalidades e ramos de atuação, mas, independentemente do enfoque, a contabilidade tem por objetivo fundamental", "alts": [["a", "registrar, estimar, organizar e sintetizar as informações geradas pelas sociedades."], ["b", "fornecer informações úteis aos usuários para a tomada de decisão."], ["c", "controlar o patrimônio do ente contábil."], ["d", "mensurar o resultado do empreendimento societário."]], "tipo": "mc", "resp": "b", "com": ["Segundo o entendimento mais recente da banca CEBRASPE, o objetivo da contabilidade é fornecer informações úteis aos usuários, em linha com o disposto na Estrutura Conceitual (CPC 00). Para a banca, controlar o patrimônio é finalidade da contabilidade.", "Cabe destacar que isso é um preciosismo, pois boa parte da doutrina trata os termos como sinônimos (objetivo = finalidade). A título de exemplo, observe duas passagens na doutrina que evidenciam esse entendimento:", "Segundo o autor Osni Moura ribeiro (Contabilidade Geral Fácil, 9ª edição, pág. 4, Ed. Saraiva):", "\"1.4 Objetivo (finalidade) da Contabilidade O objetivo da contabilidade é o estudo e o controle do patrimônio e de suas variações visando ao fornecimento de informações que sejam úteis para a tomada de decisões\".", "Para o autor Ricardo Ferreira (Contabilidade Básica, 9ª edição, pág. 3, Ed. Ferreira), \"3. Finalidade ou Objetivo A Contabilidade é mantida com a finalidade de fornecer às pessoas interessadas informações sobre o patrimônio\"."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 10", "nav": "10"}];
+
+const FLASH = [
+ // Aula 00
+ ["a00","Qual é o conceito oficial de Contabilidade (Congresso de 1924)?","\"Contabilidade é a <b>ciência</b> que <b>estuda e pratica</b> as funções de <b>orientação, de controle e de registro</b> dos atos e fatos de uma administração econômica.\""],
+ ["a00","A Contabilidade é ciência exata, ciência social, técnica ou arte?","<b>Ciência social</b>, segundo a corrente majoritária: estuda o patrimônio, que envolve pessoas e afeta a sociedade."],
+ ["a00","Qual é o objeto da Contabilidade?","O <b>patrimônio</b>: conjunto de <b>bens, direitos e obrigações</b> de uma entidade."],
+ ["a00","Defina bens, direitos e obrigações, com um exemplo de cada.","<b>Bens</b>: itens avaliados em moeda que satisfazem necessidades (veículos). <b>Direitos</b>: valores a receber de terceiros (duplicatas a receber). <b>Obrigações</b>: dívidas com terceiros (empréstimo bancário a pagar)."],
+ ["a00","Patrimônio e patrimônio líquido são a mesma coisa?","Não. <b>Patrimônio</b> = bens + direitos + obrigações. <b>Patrimônio líquido</b> = ativo − passivo, a parte residual dos sócios."],
+ ["a00","A Contabilidade estuda o patrimônio em quais aspectos?","Nos aspectos <b>quantitativo</b> (valores em moeda) e <b>qualitativo</b> (natureza dos itens), ao mesmo tempo, e não em itens \"só quantitativos\" ou \"só qualitativos\"."],
+ ["a00","O objeto da Contabilidade se limita aos bens de propriedade da entidade?","Não. Na teoria atual abrange os recursos <b>controlados</b>: o ativo é o \"recurso econômico presente <b>controlado</b> pela entidade como resultado de eventos passados\"."],
+ ["a00","O que é azienda? Qual a fórmula?","<b>Azienda = gestão + patrimônio</b>: um patrimônio administrado de forma organizada. É o <b>campo de aplicação</b> da Contabilidade, sinônimo de entidade econômico-administrativa."],
+ ["a00","A Contabilidade se aplica só a entidades com fins lucrativos?","Não. Aplica-se a entidades <b>com e sem</b> fins lucrativos (empresas, associações, municípios)."],
+ ["a00","O que é \"entidade que reporta\" (Estrutura Conceitual)?","A entidade obrigada a elaborar demonstrações contábeis, ou que decide fazê-lo. Pode ser uma entidade, parte dela ou várias, e <b>não precisa ser uma entidade legal</b>."],
+ ["a00","Classificação das aziendas quanto aos fins","<b>Sociais</b> (sem lucro), <b>econômicas</b> (lucro) e <b>econômico-sociais</b> (fins sociais e lucro, como institutos de previdência)."],
+ ["a00","Classificação das aziendas quanto aos proprietários","<b>Públicas</b> (Estado, fundações, sindicatos) e <b>particulares</b> (de uma pessoa ou grupo)."],
+ ["a00","Objeto × campo de aplicação: qual é qual?","<b>Objeto</b> = patrimônio. <b>Campo de aplicação</b> = entidade econômico-administrativa (azienda). A banca inverte os dois."],
+ ["a00","Qual é o objetivo da Contabilidade, segundo o CEBRASPE?","<b>Fornecer informações úteis aos usuários para a tomada de decisões</b>, conforme a Estrutura Conceitual. Para a banca, <b>controlar o patrimônio é finalidade</b>, e não objetivo."],
+ ["a00","Objetivo e finalidade são sinônimos?","Para a doutrina majoritária, sim. Mas o CEBRASPE já os separou: objetivo = informação útil; finalidade = controle do patrimônio."],
+ ["a00","Quais são as funções da Contabilidade?","<b>Administrativa</b>: controle do patrimônio (escrituração). <b>Econômica</b>: apuração do resultado (rédito), lucro ou prejuízo."],
+ ["a00","O que é rédito?","O <b>resultado líquido</b> do período: lucro líquido, se positivo, ou prejuízo líquido, se negativo. Apurá-lo é a função <b>econômica</b>."],
+ ["a00","Quais são as 4 técnicas contábeis?","<b>Escrituração</b> (registrar), <b>demonstrações contábeis</b> (evidenciar), <b>análise das demonstrações</b> (extrair informação para decisões) e <b>auditoria</b> (verificar a conformidade com normas e princípios)."],
+ ["a00","Usuários internos × externos","<b>Internos</b>: administradores e sócios controladores. <b>Externos</b>: investidores (não controladores), bancos, fornecedores, governo, clientes, empregados, público."],
+ ["a00","O que interessa aos clientes nas demonstrações?","A <b>continuidade operacional</b> da entidade, sobretudo em relação de longo prazo ou quando dependem dela como fornecedor importante."],
+ ["a00","Credores comerciais × credores por empréstimos: diferença de interesse?","Ambos querem saber se receberão no vencimento, mas os <b>credores comerciais</b> (fornecedores) interessam-se em geral por um <b>período menor</b>."],
+ ["a00","Quem são os usuários principais na Estrutura Conceitual?","<b>Investidores, credores por empréstimos e outros credores, existentes e potenciais</b>, porque não podem exigir informações diretamente da entidade."],
+ ["a00","O objetivo da contabilidade é informar \"todos os interessados\"?","<b>Não</b> (questão comentada 7). A informação é útil <b>principalmente</b> aos usuários primários: investidores e credores."],
+ ["a00","Os relatórios para fins gerais trazem todas as informações de que os usuários precisam?","<b>Não</b>. Os usuários precisam de outras fontes (economia, política, setor). Os relatórios também não mostram o valor da entidade: ajudam a estimá-lo."],
+ ["a00","A administração é usuária principal dos relatórios para fins gerais?","Não. Ela tem interesse, mas obtém as informações <b>internamente</b>. Reguladores e público também não são o alvo principal."],
+ // Estrutura Conceitual
+ ["ref","Qual o objetivo do relatório financeiro para fins gerais (CPC 00)?","Fornecer informações financeiras <b>úteis</b> a investidores, credores por empréstimos e outros credores, existentes e potenciais, para decisões sobre <b>oferta de recursos</b> à entidade."],
+ ["ref","Quais decisões dos usuários a Estrutura Conceitual menciona?","(a) comprar, vender ou manter instrumentos de patrimônio e de dívida; (b) conceder ou liquidar empréstimos e outras formas de crédito; (c) exercer direitos de voto ou influenciar a administração."],
+ ["ref","Os relatórios para fins gerais se destinam a mostrar o valor da entidade?","<b>Não</b>. Fornecem informações para que os usuários <b>estimem</b> o valor da entidade que reporta."],
+ ["ref","Por que investidores e credores são os usuários principais?","Porque muitos deles <b>não podem exigir</b> que a entidade forneça informações diretamente a eles e dependem dos relatórios para fins gerais."],
+ // Panorama da disciplina
+ ["pan","Qual é a equação fundamental do patrimônio?","<b>Ativo = Passivo + Patrimônio Líquido</b>, ou seja, Patrimônio Líquido = Ativo − Passivo."],
+ ["pan","Situações patrimoniais possíveis","PL positivo (ativo maior que passivo); PL nulo (ativo igual ao passivo); PL negativo (ativo menor que passivo), chamado <b>passivo a descoberto</b>."],
+ ["pan","Definição de ativo (Estrutura Conceitual)","Recurso econômico <b>presente</b> <b>controlado</b> pela entidade como resultado de <b>eventos passados</b>. Recurso econômico é o direito com potencial de produzir benefícios econômicos."],
+ ["pan","Definição de passivo (Estrutura Conceitual)","Obrigação <b>presente</b> da entidade de transferir um recurso econômico como resultado de <b>eventos passados</b>."],
+ ["pan","Definição de patrimônio líquido (Estrutura Conceitual)","A <b>participação residual</b> nos ativos da entidade depois de deduzidos todos os seus passivos."],
+ ["pan","O que diz o método das partidas dobradas?","Não há devedor sem credor: a todo débito corresponde um crédito de igual valor, e a soma dos débitos é igual à soma dos créditos."],
+ ["pan","Natureza do saldo das contas","<b>Devedora</b>: ativo e despesas. <b>Credora</b>: passivo, patrimônio líquido e receitas. Contas redutoras têm natureza oposta à do grupo."],
+ ["pan","Tipos de fatos contábeis","<b>Permutativos</b> (não alteram o PL); <b>modificativos</b> (aumentam ou diminuem o PL); <b>mistos</b> (permuta + modificação ao mesmo tempo)."],
+ ["pan","Ato administrativo × fato contábil","O <b>fato contábil</b> altera o patrimônio e é escriturado. O <b>ato administrativo</b> não altera o patrimônio (ex.: contratar um empregado ainda sem pagar nada)."],
+ ["pan","O que é o regime de competência?","Receitas e despesas são reconhecidas no período em que <b>ocorrem</b> (fato gerador contábil), independentemente de recebimento ou pagamento."],
+ ["pan","Grupos do ativo no Balanço Patrimonial (Lei 6.404/1976)","<b>Circulante</b> e <b>não circulante</b>; o não circulante divide-se em realizável a longo prazo, investimentos, imobilizado e intangível."],
+ ["pan","Grupos do passivo e do patrimônio líquido","Passivo <b>circulante</b> e <b>não circulante</b>. Patrimônio líquido: capital social, reservas de capital, ajustes de avaliação patrimonial, reservas de lucros, ações em tesouraria e prejuízos acumulados."],
+ ["pan","Características qualitativas fundamentais (Estrutura Conceitual)","<b>Relevância</b> e <b>representação fidedigna</b>."],
+ ["pan","Características qualitativas de melhoria","<b>Comparabilidade</b>, <b>verificabilidade</b>, <b>tempestividade</b> e <b>compreensibilidade</b>."],
+ ["pan","Qual é o pressuposto básico das demonstrações contábeis?","<b>Continuidade operacional</b>: presume-se que a entidade continuará operando no futuro previsível."]
+];
+
+/* ---------- mapa mental: cada item tem explicação, exemplo, base legal e pegadinha ---------- */
+const MM_ROOT = {k: "root", t: "CONTABILIDADE", s: "Ciência social que estuda e pratica as funções de orientação, controle e registro<br><small>Objeto: patrimônio · Objetivo: informação útil · Campo: aziendas</small>",
+  e: "A Contabilidade é a ciência social que estuda o patrimônio das entidades e pratica funções de orientação, controle e registro dos seus atos e fatos. Tudo nesta aula se organiza em seis perguntas: <b>o que é</b> (ciência social), <b>o que estuda</b> (o patrimônio), <b>onde se aplica</b> (aziendas), <b>para que serve</b> (informação útil e controle), <b>como trabalha</b> (técnicas) e <b>para quem</b> (usuários).",
+  x: "Pense numa padaria em Ceilândia. A Contabilidade registra o forno comprado (bem), as vendas fiadas a receber (direito) e o empréstimo no banco (obrigação), e depois produz demonstrações que o dono, o banco e a SEFAZ-DF podem ler para tomar decisões.",
+  l: "Conceito do 1º Congresso Brasileiro de Contabilidade (1924); Estrutura Conceitual, pronunciamento CPC 00.",
+  p: "A banca costuma trocar os atributos: chamar o patrimônio de campo de aplicação, a entidade de objeto, ou dizer que o objetivo é controlar custos."};
+
+const MM = [
+ {k: "nat", c: "#2f5bd3", t: "Conceito e natureza", s: "Ciência social",
+  e: "A corrente majoritária vê a Contabilidade como <b>ciência social</b>: o seu foco é o patrimônio, que envolve pessoas, e as variações desse patrimônio afetam o meio em que a entidade está inserida. Não é ciência exata, nem simples técnica ou arte.",
+  x: "Quando uma grande empresa do DF demite funcionários por causa de prejuízos, o efeito vai além dos números: atinge famílias, fornecedores e a arrecadação. Por isso a Contabilidade é tratada como ciência social.",
+  l: "Doutrina majoritária; questão comentada 9 (CEBRASPE, Polícia Civil de Pernambuco, 2024).",
+  p: "\"A Contabilidade é uma ciência exata\" ou \"uma técnica\": ERRADO.",
+  f: [
+   {k: "nat1", t: "Conceito oficial de 1924",
+    e: "\"Contabilidade é a ciência que estuda e pratica as funções de orientação, de controle e de registro dos atos e fatos de uma administração econômica.\" Cada parte importa: <b>ciência</b> (conhecimento organizado), <b>estuda e pratica</b> (teoria e execução) e <b>orientação, controle e registro</b> (as funções exercidas).",
+    x: "Ao registrar a compra de mercadorias (registro), comparar o estoque físico com o contábil (controle) e mostrar ao dono que o produto X dá prejuízo (orientação), o contador exerce as três funções do conceito.",
+    l: "1º Congresso Brasileiro de Contabilidade, 1924.",
+    p: "Decore a tríade <b>orientação, controle e registro</b>: a banca pode trocar um termo por outro, como \"planejamento\"."},
+   {k: "nat2", t: "Estudo da riqueza administrativa",
+    e: "Definição de Antônio Lopes de Sá: a Contabilidade estuda o <b>sistema da riqueza administrativa</b> (o patrimônio) para verificar se ela atinge os fins propostos pelo sujeito aziendal. O CEBRASPE já usou essa definição em itens considerados certos.",
+    x: "Uma associação esportiva sem fins lucrativos usa a Contabilidade para verificar se o seu patrimônio está de fato servindo ao fim proposto, que é manter as atividades esportivas dos associados.",
+    l: "Antônio Lopes de Sá, Dicionário de Contabilidade; questões comentadas 1 e 2.",
+    p: "\"O objetivo da contabilidade é estudar o sistema da riqueza administrativa para verificar se serve aos fins da entidade\": a banca considerou CERTO."},
+   {k: "nat3", t: "Sistema de informação e avaliação",
+    e: "Outra definição doutrinária vê a Contabilidade como um <b>sistema de informação e avaliação</b> destinado a prover os usuários com demonstrações e análises de natureza econômica, financeira, física e de produtividade sobre a entidade.",
+    x: "Um banco analisa o balanço e os índices de uma empresa antes de conceder crédito: está usando a Contabilidade como sistema de informação.",
+    l: "Doutrina citada na aula.",
+    p: "As definições não se excluem; a banca pode cobrar qualquer uma delas como correta."}
+  ]},
+ {k: "obj", c: "#1f8a4c", t: "Objeto: o patrimônio", s: "Bens + direitos + obrigações",
+  e: "O objeto é o <b>patrimônio</b>: bens, direitos e obrigações de uma entidade. A Contabilidade o estuda nos aspectos <b>quantitativo</b> (valores) e <b>qualitativo</b> (natureza). Na teoria atual, abrange o que a entidade <b>controla</b>, e não apenas o que é de sua propriedade.",
+  x: "O patrimônio de uma loja inclui o caixa e as mercadorias (bens), as vendas no cartão a receber (direitos) e o aluguel a pagar (obrigação).",
+  l: "Doutrina; Estrutura Conceitual (definição de ativo); questões comentadas 3, 4, 6 e 8.",
+  p: "\"O patrimônio líquido é o conjunto de bens, direitos e obrigações\": ERRADO. Esse conjunto é o <b>patrimônio</b>.",
+  f: [
+   {k: "obj1", t: "Bens, direitos e obrigações",
+    e: "<b>Bens</b> são itens avaliáveis em moeda que satisfazem necessidades da entidade. <b>Direitos</b> são valores a receber de terceiros. <b>Obrigações</b> são dívidas com terceiros. Bens e direitos formam a parte positiva (ativo); obrigações, a parte negativa (passivo).",
+    x: "Uma transportadora tem caminhões (bens), fretes faturados a receber (direitos) e o financiamento dos caminhões (obrigação).",
+    l: "Doutrina citada na aula.",
+    p: "\"Bens corpóreos e incorpóreos ficam no passivo\": ERRADO, bens ficam no ativo. \"O patrimônio compreende só a parte positiva\": ERRADO."},
+   {k: "obj2", t: "Aspectos quantitativo e qualitativo",
+    e: "Todo o patrimônio é estudado ao mesmo tempo pelo aspecto <b>quantitativo</b> (quanto vale, em moeda) e pelo <b>qualitativo</b> (o que é cada item: dinheiro, máquina, dívida trabalhista).",
+    x: "Saber que a empresa tem R$ 500 mil em ativos é o aspecto quantitativo; saber que são R$ 400 mil em estoque e R$ 100 mil em caixa é o qualitativo. Os dois juntos mostram a situação real.",
+    l: "Questões comentadas 3 e 8.",
+    p: "\"O patrimônio tem itens inteiramente qualitativos, outros inteiramente quantitativos e outros mistos\": ERRADO."},
+   {k: "obj3", t: "Patrimônio × patrimônio líquido",
+    e: "O <b>patrimônio líquido</b> é a diferença entre ativo e passivo: a parte residual que sobra aos sócios depois de pagas todas as obrigações. Inclui capital social, reservas e ajustes. Não se confunde com o patrimônio.",
+    x: "A empresa tem R$ 1 milhão em bens e direitos e deve R$ 700 mil. O patrimônio envolve tudo isso; o patrimônio líquido é de R$ 300 mil.",
+    l: "Estrutura Conceitual; questão comentada 4.",
+    p: "Patrimônio é <b>bens + direitos + obrigações</b>; patrimônio líquido é <b>ativo − passivo</b>."},
+   {k: "obj4", t: "Controle, e não só propriedade",
+    e: "Na teoria contábil atual, o objeto vai além dos bens e direitos de propriedade legal: inclui os recursos que a entidade <b>controla</b>. O ativo é definido como o recurso econômico presente controlado pela entidade como resultado de eventos passados.",
+    x: "Uma empresa usa máquinas por meio de um contrato de arrendamento: não é a dona legal, mas controla o uso delas, e o direito de uso aparece no seu ativo.",
+    l: "Estrutura Conceitual (definição de ativo); questão comentada 6.",
+    p: "\"O objeto da contabilidade, hoje, é mais que bens, direitos e obrigações de propriedade da entidade\": CERTO."}
+  ]},
+ {k: "cam", c: "#b07400", t: "Campo de aplicação", s: "Aziendas = gestão + patrimônio",
+  e: "A Contabilidade se aplica às <b>aziendas</b>, também chamadas entidades econômico-administrativas: qualquer patrimônio administrado de forma organizada, <b>com ou sem</b> fins lucrativos. Modernamente, fala-se em \"entidade que reporta\".",
+  x: "Uma igreja, um clube, uma prefeitura e uma indústria são aziendas: todos têm patrimônio e alguém que o administra.",
+  l: "Doutrina; Estrutura Conceitual (entidade que reporta).",
+  p: "\"A entidade econômico-administrativa é o objeto e o patrimônio é o campo de aplicação\": ERRADO, estão invertidos.",
+  f: [
+   {k: "cam1", t: "Azienda = gestão + patrimônio",
+    e: "Sem gestão, há só um amontoado de bens; sem patrimônio, não há o que administrar. A azienda nasce da soma dos dois. É sinônimo de entidade econômico-administrativa.",
+    x: "Uma herança de imóveis ainda não partilhada e sem ninguém cuidando dela é só patrimônio. Quando um administrador passa a alugá-los e controlar receitas e despesas, surge uma azienda.",
+    l: "Doutrina citada na aula.",
+    p: "Se a questão trocar \"aziendas\" por \"entidades econômico-administrativas\", continua correta: são sinônimos."},
+   {k: "cam2", t: "Quanto aos fins: sociais, econômicas e econômico-sociais",
+    e: "<b>Sociais</b>: não visam lucro. <b>Econômicas</b>: visam lucro. <b>Econômico-sociais</b>: além do fim social, buscam lucro para prestar benefícios a quem contribuiu.",
+    x: "Associação de moradores (social); supermercado (econômica); instituto de previdência complementar (econômico-social).",
+    l: "Doutrina; exercício da teoria 4.",
+    p: "Classificar \"quanto aos fins\" em \"públicas e privadas\" ou \"pessoas físicas e jurídicas\": ERRADO. Isso mistura critérios."},
+   {k: "cam3", t: "Quanto aos proprietários: públicas e particulares",
+    e: "<b>Públicas</b> pertencem à sociedade, sob administração pública ou privada (Estado, fundações, sindicatos). <b>Particulares</b> pertencem a uma pessoa ou grupo (sociedades, patrimônio de família).",
+    x: "O Governo do Distrito Federal é azienda pública; a empresa familiar que vende material de construção é azienda particular.",
+    l: "Doutrina citada na aula.",
+    p: "Os dois critérios (fins e proprietários) são independentes: uma azienda pública pode ter fins sociais."},
+   {k: "cam4", t: "Entidade que reporta",
+    e: "Expressão da Estrutura Conceitual: a entidade obrigada a elaborar demonstrações contábeis, ou que decide fazê-lo. Pode ser uma única entidade, uma parte dela ou várias juntas, e <b>não precisa ser uma entidade legal</b>.",
+    x: "Um grupo de empresas que publica demonstrações consolidadas é uma entidade que reporta, embora o \"grupo\" em si não tenha personalidade jurídica própria.",
+    l: "Estrutura Conceitual (pronunciamento CPC 00).",
+    p: "\"A entidade que reporta é sempre uma pessoa jurídica\": ERRADO."}
+  ]},
+ {k: "fin", c: "#8a3ac2", t: "Objetivo e funções", s: "Informação útil · controle · resultado",
+  e: "Objetivo: <b>fornecer informações úteis</b> aos usuários para a tomada de decisões. Finalidade (na visão do CEBRASPE): <b>controlar o patrimônio</b>. Funções: <b>administrativa</b> (controle) e <b>econômica</b> (apuração do resultado).",
+  x: "Ao fechar o mês, a Contabilidade de uma farmácia controla o estoque (função administrativa), apura o lucro (função econômica) e entrega ao dono um relatório que o ajuda a decidir se abre uma filial (objetivo).",
+  l: "Estrutura Conceitual; doutrina; questões comentadas 1, 2, 5, 7 e 10.",
+  p: "\"O objetivo da contabilidade é controlar custos\": ERRADO (questão comentada 16 da aula).",
+  f: [
+   {k: "fin1", t: "Objetivo: informação útil para decisões",
+    e: "A Contabilidade existe para fornecer informações úteis que ajudem os usuários a decidir. A Estrutura Conceitual especifica: úteis a investidores e credores, existentes e potenciais, nas decisões sobre oferta de recursos à entidade.",
+    x: "Uma pessoa que controla em caderno todos os seus gastos e rendas e decide com base nisso o que fazer com o dinheiro reafirma o objetivo da Contabilidade (questão 15 da aula).",
+    l: "Estrutura Conceitual; questões comentadas 10, 11 e 12.",
+    p: "\"Todos os interessados\" é armadilha: o foco são os usuários primários (questão comentada 7)."},
+   {k: "fin2", t: "Objetivo × finalidade no CEBRASPE",
+    e: "A doutrina trata os termos como sinônimos, mas o CEBRASPE, quando os separa, entende que o <b>objetivo</b> é fornecer informação útil e que <b>controlar o patrimônio é finalidade</b>.",
+    x: "Num item com as alternativas \"controlar o patrimônio\" e \"fornecer informações úteis aos usuários\" para o <b>objetivo fundamental</b>, a resposta esperada é a segunda (questão comentada 10).",
+    l: "Questão comentada 10 (CEBRASPE, 2024).",
+    p: "Não marque \"controlar o patrimônio\" como <b>objetivo fundamental</b>."},
+   {k: "fin3", t: "Função administrativa",
+    e: "É o <b>controle do patrimônio</b>, feito por meio do registro (escrituração) dos fatos contábeis nos livros próprios.",
+    x: "Registrar diariamente as entradas e saídas do caixa e do estoque de um restaurante, para saber a qualquer momento o que existe e onde está.",
+    l: "Doutrina; exercício da teoria 2.",
+    p: "\"A função administrativa apura o lucro\": ERRADO, isso é a função econômica."},
+   {k: "fin4", t: "Função econômica",
+    e: "É a <b>apuração do resultado líquido</b> do período, chamado rédito: lucro líquido, se positivo, ou prejuízo líquido, se negativo.",
+    x: "No fim do ano, a loja confronta receitas de R$ 900 mil com despesas de R$ 750 mil e apura lucro líquido de R$ 150 mil.",
+    l: "Doutrina citada na aula.",
+    p: "Rédito = resultado (lucro ou prejuízo). A banca pode usar a palavra rédito sem explicá-la."}
+  ]},
+ {k: "tec", c: "#c23a3a", t: "Técnicas contábeis", s: "Registrar, evidenciar, analisar, verificar",
+  e: "São os procedimentos para registrar ou levantar os fatos contábeis: <b>escrituração</b>, <b>demonstrações contábeis</b>, <b>análise das demonstrações</b> e <b>auditoria</b>. Nesta aula basta a visão geral.",
+  x: "Uma empresa registra as operações (escrituração), monta o balanço (demonstração), calcula se consegue pagar as dívidas de curto prazo (análise) e contrata um auditor para conferir tudo (auditoria).",
+  l: "Doutrina; exercício da teoria 5.",
+  p: "\"Ativo + Passivo = Patrimônio Líquido\" não é técnica, e a equação ainda está errada.",
+  f: [
+   {k: "tec1", t: "Escrituração",
+    e: "É o <b>registro</b> dos fatos contábeis, em ordem cronológica, nos livros próprios. É a base de todas as outras técnicas.",
+    x: "Lançar no livro Diário a venda de R$ 2.000 em mercadorias à vista.",
+    l: "Doutrina citada na aula.",
+    p: "Escrituração registra; demonstração evidencia. Não confunda."},
+   {k: "tec2", t: "Demonstrações contábeis",
+    e: "Técnica que <b>evidencia</b>, de forma organizada e resumida, os fatos já escriturados.",
+    x: "O Balanço Patrimonial e a Demonstração do Resultado do Exercício publicados no fim do ano.",
+    l: "Doutrina citada na aula.",
+    p: "As demonstrações dependem da escrituração: não há como evidenciar o que não foi registrado."},
+   {k: "tec3", t: "Análise das demonstrações",
+    e: "<b>Extrai informações</b> sobre a situação financeira, econômica e patrimonial para subsidiar decisões, por meio de índices e comparações.",
+    x: "Calcular a liquidez corrente (ativo circulante ÷ passivo circulante) para saber se a empresa paga as dívidas de curto prazo.",
+    l: "Doutrina citada na aula.",
+    p: "A análise interpreta dados; não cria registros novos."},
+   {k: "tec4", t: "Auditoria",
+    e: "<b>Examina</b> a escrituração e a evidenciação para verificar se foram feitas de acordo com as normas vigentes e os princípios contábeis.",
+    x: "Um auditor independente revisa as demonstrações de uma companhia aberta antes da publicação. Como auditor fiscal, você também examinará registros contábeis, com foco nos tributos.",
+    l: "Doutrina citada na aula.",
+    p: "A auditoria verifica a conformidade; não é ela que registra os fatos."}
+  ]},
+ {k: "usu", c: "#0f7c8c", t: "Usuários da informação", s: "Internos · externos · principais",
+  e: "Doutrina: usuários <b>internos</b> (administradores, sócios controladores) e <b>externos</b> (investidores, credores, fornecedores, governo, clientes, empregados, público). Estrutura Conceitual: os <b>principais</b> são investidores, credores por empréstimos e outros credores, existentes e potenciais.",
+  x: "Na mesma empresa, o gerente usa relatórios internos para definir preços, o banco lê o balanço para conceder crédito e a SEFAZ-DF usa a escrituração para fiscalizar o ICMS.",
+  l: "Doutrina; Estrutura Conceitual; exercícios da teoria 6 e 7; questão comentada 7.",
+  p: "\"Os relatórios para fins gerais atendem a todas as necessidades dos usuários externos\": ERRADO.",
+  f: [
+   {k: "usu1", t: "Internos × externos",
+    e: "<b>Internos</b> participam da gestão: administradores e sócios controladores. <b>Externos</b>, em regra, não fazem parte da estrutura da entidade e buscam informações conforme o seu interesse.",
+    x: "O diretor financeiro é usuário interno; o acionista minoritário que compra ações na bolsa é usuário externo.",
+    l: "Doutrina citada na aula.",
+    p: "O sócio <b>controlador</b> é interno; o <b>não controlador</b> (investidor) é externo."},
+   {k: "usu2", t: "O que cada usuário quer saber",
+    e: "Investidores: risco e retorno, dividendos. Empregados: estabilidade e capacidade de pagar salários. Credores por empréstimos: capacidade de pagar principal e juros. Fornecedores: se receberão no vencimento, em prazo mais curto. Clientes: continuidade da entidade. Governo: destinação de recursos, regulamentação, política fiscal. Público: contribuição à economia local.",
+    x: "Uma rede de hospitais que depende de um único fornecedor de oxigênio quer saber se esse fornecedor continuará existindo (interesse do cliente).",
+    l: "Doutrina citada na aula; exercício da teoria 6.",
+    p: "O interesse do cliente é maior quanto maior a sua dependência de poucos fornecedores: CERTO."},
+   {k: "usu3", t: "Usuários principais (Estrutura Conceitual)",
+    e: "Investidores, credores por empréstimos e outros credores, <b>existentes e potenciais</b>. São os principais porque não podem exigir informações diretamente e dependem dos relatórios para fins gerais.",
+    x: "Quem pensa em comprar ações de uma empresa (investidor potencial) não pode pedir dados internos a ela: depende das demonstrações publicadas.",
+    l: "Estrutura Conceitual (pronunciamento CPC 00).",
+    p: "\"Todos os interessados\" e \"o público em geral\" não são os usuários principais."},
+   {k: "usu4", t: "Limites dos relatórios para fins gerais",
+    e: "Eles <b>não fornecem todas</b> as informações (os usuários precisam de outras fontes), <b>não mostram o valor</b> da entidade (ajudam a estimá-lo) e <b>não se dirigem</b> à administração, aos reguladores nem ao público.",
+    x: "Um investidor que analisa uma construtora também precisa acompanhar juros, política habitacional e o mercado imobiliário: o balanço sozinho não basta.",
+    l: "Estrutura Conceitual; exercício da teoria 7.",
+    p: "\"Os relatórios se destinam a apresentar o valor da entidade\": ERRADO."}
+  ]}
+];
+
+function mmItens(){
+  const out = [MM_ROOT];
+  MM.forEach(b => { out.push(b); b.f.forEach(f => out.push(Object.assign({c: b.c, pai: b.t}, f))); });
+  return out;
+}
+function renderMapa(){
+  $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
+    <div class="mm-trunk"></div>
+    <div class="mm-branches" style="--n:${MM.length}">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+      <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
+      <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
+    el.onclick = () => abrirItem(el.dataset.k);
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirItem(el.dataset.k); } };
+  });
+  abbrify($("#mmBox"));
+}
+function abrirItem(k){
+  const itens = mmItens(), i = itens.findIndex(x => x.k === k), it = itens[i];
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", el.dataset.k === k));
+  const p = $("#mmPanel");
+  p.style.setProperty("--c", it.c || "var(--accent)");
+  p.innerHTML = `<div class="muted" style="font-size:13px">${it.pai ? "Mapa › " + it.pai : "Mapa"}</div>
+    <h4>${it.t}</h4>
+    <div class="mm-sec"><span class="lbl">Explicação</span>${it.e}</div>
+    <div class="mm-sec ex"><span class="lbl">Exemplo prático</span>${it.x}</div>
+    <div class="mm-sec"><span class="lbl">Base legal e jurisprudência</span>${it.l}</div>
+    <div class="mm-sec pg"><span class="lbl">Pegadinha da banca</span>${it.p}</div>
+    <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
+      <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
+  abbrify(p);
+  $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
+  $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
+  const r = p.getBoundingClientRect();
+  if (r.top < 120 || r.top > innerHeight - 160) p.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+/* ---------- glossário: toda sigla ganha dica com o nome por extenso ---------- */
+const GLOSS = {
+ "CF/88": "Constituição Federal de 1988", "CF": "Constituição Federal de 1988",
+ "CTN": "Código Tributário Nacional (Lei 5.172/1966)", "STF": "Supremo Tribunal Federal", "STJ": "Superior Tribunal de Justiça",
+ "LC": "Lei Complementar", "MP": "Medida Provisória", "EC": "Emenda Constitucional", "DL": "Decreto-Lei",
+ "ADCT": "Ato das Disposições Constitucionais Transitórias", "CLT": "Consolidação das Leis do Trabalho",
+ "ADI": "Ação Direta de Inconstitucionalidade", "RE": "Recurso Extraordinário", "RREE": "Recursos Extraordinários",
+ "REsp": "Recurso Especial", "HC": "Habeas Corpus", "AgR": "Agravo Regimental",
+ "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "ISS": "Imposto sobre Serviços", "ISSQN": "Imposto sobre Serviços de Qualquer Natureza",
+ "IPTU": "Imposto sobre a Propriedade Predial e Territorial Urbana", "ITBI": "Imposto sobre a Transmissão de Bens Imóveis",
+ "ITCMD": "Imposto sobre Transmissão Causa Mortis e Doação", "IPVA": "Imposto sobre a Propriedade de Veículos Automotores",
+ "IE": "Imposto de Exportação", "IR": "Imposto de Renda", "IRPF": "Imposto de Renda da Pessoa Física", "IRPJ": "Imposto de Renda da Pessoa Jurídica",
+ "IPI": "Imposto sobre Produtos Industrializados", "IOF": "Imposto sobre Operações Financeiras", "ITR": "Imposto sobre a Propriedade Territorial Rural",
+ "IGF": "Imposto sobre Grandes Fortunas", "IS": "Imposto Seletivo", "IEG": "Imposto Extraordinário de Guerra",
+ "IBS": "Imposto sobre Bens e Serviços", "CBS": "Contribuição sobre Bens e Serviços", "IVA": "Imposto sobre Valor Agregado",
+ "CIDE": "Contribuição de Intervenção no Domínio Econômico", "COSIP": "Contribuição para o Custeio do Serviço de Iluminação Pública",
+ "COFINS": "Contribuição para o Financiamento da Seguridade Social", "CSLL": "Contribuição Social sobre o Lucro Líquido",
+ "PIS": "Programa de Integração Social", "PASEP": "Programa de Formação do Patrimônio do Servidor Público",
+ "RPPS": "Regime Próprio de Previdência Social", "RGPS": "Regime Geral de Previdência Social",
+ "CVM": "Comissão de Valores Mobiliários", "AFRMM": "Adicional ao Frete para a Renovação da Marinha Mercante",
+ "SEBRAE": "Serviço Brasileiro de Apoio às Micro e Pequenas Empresas", "INCRA": "Instituto Nacional de Colonização e Reforma Agrária",
+ "SESC": "Serviço Social do Comércio", "SENAC": "Serviço Nacional de Aprendizagem Comercial", "SENAI": "Serviço Nacional de Aprendizagem Industrial",
+ "OAB": "Ordem dos Advogados do Brasil", "CRC": "Conselho Regional de Contabilidade", "CREA": "Conselho Regional de Engenharia e Agronomia",
+ "CRM": "Conselho Regional de Medicina", "CRA": "Conselho Regional de Administração", "IBAMA": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis",
+ "TCFA": "Taxa de Controle e Fiscalização Ambiental", "TFA": "Taxa de Fiscalização de Anúncios", "TFLF": "Taxa de Fiscalização, Localização e Funcionamento",
+ "TLLF": "Taxa de Licença de Localização e Funcionamento", "ZFM": "Zona Franca de Manaus", "PAF": "Processo Administrativo Fiscal",
+ "DF": "Distrito Federal", "SEFAZ": "Secretaria de Estado de Fazenda", "SEEC": "Secretaria de Estado de Economia",
+ "CEBRASPE": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos (banca)", "CESPE": "Centro de Seleção e de Promoção de Eventos (atual CEBRASPE)",
+ "PGFN": "Procuradoria-Geral da Fazenda Nacional", "AGU": "Advocacia-Geral da União", "RFB": "Receita Federal do Brasil",
+ "CAGE": "Contadoria e Auditoria-Geral do Estado", "CGE": "Controladoria-Geral do Estado", "TCE": "Tribunal de Contas do Estado",
+ "PGE": "Procuradoria-Geral do Estado", "STM": "Superior Tribunal Militar", "PF": "Polícia Federal", "PC": "Polícia Civil",
+ "ANM": "Agência Nacional de Mineração", "CAU": "Conselho de Arquitetura e Urbanismo", "INPI": "Instituto Nacional da Propriedade Industrial",
+ "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos", "EMBRAPA": "Empresa Brasileira de Pesquisa Agropecuária",
+ "CAGEPA": "Companhia de Água e Esgotos da Paraíba", "SEPLAN": "Secretaria de Planejamento", "APO": "Analista de Planejamento e Orçamento",
+ "PPNT": "Processo seletivo público (Petrobras)", "ATT": "Auditor Técnico de Tributos", "AFRE": "Auditor Fiscal da Receita Estadual",
+ "AFE": "Auditor Fiscal Estadual",
+ "art.": "artigo", "arts.": "artigos", "Art.": "artigo", "§": "parágrafo", "c/c": "combinado com", "nº": "número", "n.º": "número",
+ "Proc": "Procurador", "Pref": "Prefeitura", "Rel.": "Relator", "Min.": "Ministro", "Súm.": "Súmula", "SV": "Súmula Vinculante",
+ "CPC": "Comitê de Pronunciamentos Contábeis", "CFC": "Conselho Federal de Contabilidade", "NBC": "Norma Brasileira de Contabilidade",
+ "IFRS": "Normas Internacionais de Relatório Financeiro", "PL": "Patrimônio Líquido", "TRF6": "Tribunal Regional Federal da 6ª Região",
+ "PCDF": "Polícia Civil do Distrito Federal", "APEx": "Agência Brasileira de Promoção de Exportações e Investimentos",
+ "BR": "Brasil", "PE": "Pernambuco",
+ "FG": "fato gerador", "BC": "base de cálculo", "LO": "lei ordinária"
+};
+const GLOSS_RE = new RegExp("(?<![\\wÀ-ÿ])(" + Object.keys(GLOSS).sort((a, b) => b.length - a.length)
+  .map(s => s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")).join("|") + ")(?![\\wÀ-ÿ])", "g");
+function abbrify(root){
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+    n.parentElement.closest("abbr,script,style,select,option,kbd") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => {
+    const s = n.nodeValue; GLOSS_RE.lastIndex = 0;
+    if (!GLOSS_RE.test(s)) return;
+    const frag = document.createDocumentFragment(); let last = 0; GLOSS_RE.lastIndex = 0; let m;
+    while ((m = GLOSS_RE.exec(s))){
+      frag.append(s.slice(last, m.index));
+      const a = document.createElement("abbr"); a.textContent = m[1]; a.dataset.tip = GLOSS[m[1]]; a.setAttribute("aria-label", GLOSS[m[1]]);
+      frag.append(a); last = m.index + m[1].length;
+    }
+    frag.append(s.slice(last)); n.replaceWith(frag);
+  });
+}
+/* dica posicionada acima da sigla, sem cobrir o texto nem ficar sob o cursor */
+(() => {
+  const tip = () => document.getElementById("tip");
+  function show(el){
+    const t = tip(); t.textContent = el.dataset.tip; t.classList.add("on");
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 8) y = r.bottom + 8;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("mouseover", e => { const a = e.target.closest("abbr[data-tip]"); if (a) show(a); });
+  document.addEventListener("mouseout", e => { if (e.target.closest("abbr[data-tip]")) tip().classList.remove("on"); });
+  document.addEventListener("click", e => { const a = e.target.closest("abbr[data-tip]"); if (a){ show(a); setTimeout(() => tip().classList.remove("on"), 2500); } });
+  addEventListener("scroll", () => tip().classList.remove("on"), {passive: true});
+})();
+
+const KEY = "sefazdf_T3_contgeral_aula00_v1";
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || {answers:{}, cards:{}};
+const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* abas */
+function showTab(t){
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("on", s.id === t));
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  if (t === "rend") renderRend();
+  if (t === "flash") renderCard();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+const active = () => document.querySelector("section.tab.on").id;
+
+/* questões */
+const TEMAS = [...new Set(QUESTOES.map(q => q.tema))];
+$("#fTema").innerHTML = '<option value="all">Todos os temas</option>' + TEMAS.map(t => `<option>${esc(t)}</option>`).join("");
+let cur = 0;
+
+function visible(){
+  const t = $("#fTema").value, st = $("#fStatus").value;
+  return QUESTOES.map((q, i) => i).filter(i => {
+    const q = QUESTOES[i], a = S.answers[q.n];
+    if (t !== "all" && q.tema !== t) return false;
+    if (st === "pend") return !a;
+    if (st === "bad") return a && !a.ok;
+    if (st === "ok") return a && a.ok;
+    return true;
+  });
+}
+function fmtCom(p){
+  return esc(p).replace(/^(Letra [A-E]|Item [IVX]+|Alternativa [A-E]|Assertiva [IVX]+)(:?)/, "<b>$1$2</b>");
+}
+function renderQ(){
+  const vis = visible();
+  const done = Object.keys(S.answers).length;
+  $("#qProg").style.width = (100 * done / QUESTOES.length) + "%";
+  $("#navQ").textContent = `${done}/${QUESTOES.length}`;
+  $("#qNav").innerHTML = vis.map(i => {
+    const a = S.answers[QUESTOES[i].n];
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].nav || QUESTOES[i].n}</button>`;
+  }).join("");
+  $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
+  if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
+  if (!vis.includes(cur)) cur = vis[0];
+  const q = QUESTOES[cur], a = S.answers[q.n];
+  const d = draft(q.n);
+  const st = v => a ? "" : (d.desc.includes(v) ? "desc" : d.sel === v ? "sel" : "");
+  let opts;
+  if (q.tipo === "ce"){
+    opts = '<div class="ce">' + [["C","Certo"],["E","Errado"]].map(([v, l]) => {
+      let cls = "";
+      if (a){ if (v === q.resp) cls = "right"; else if (v === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(v)}" data-v="${v}" ${a ? "disabled" : ""}>${l}</button>`;
+    }).join("") + "</div>";
+  } else {
+    opts = q.alts.map(([l, t]) => {
+      let cls = "";
+      if (a){ if (l === q.resp) cls = "right"; else if (l === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(l)}" data-v="${l}" ${a ? "disabled" : ""}><span class="l">${l})</span><span>${esc(t)}</span></button>`;
+    }).join("");
+  }
+  const pos = vis.indexOf(cur) + 1;
+  let com = "";
+  if (a){
+    const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
+    com = `<div class="coment"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+      ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
+  }
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    <div class="enun">${esc(q.enun)}</div>
+    ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
+    ${opts}
+    ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
+    ${com}`;
+  abbrify($("#qCard"));
+  let clickTimer = null;
+  $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
+    b.ondblclick = e => { e.preventDefault(); clearTimeout(clickTimer); descartar(b.dataset.v); };
+  });
+  if ($("#qSubmit")) $("#qSubmit").onclick = submeter;
+  $("#qPrev").disabled = pos <= 1;
+  $("#qNext").textContent = pos >= vis.length ? "Ver rendimento →" : "Próxima →";
+}
+function draft(n){
+  S.draft ||= {};
+  return S.draft[n] ||= {sel: null, desc: []};
+}
+function opcoes(q){ return q.tipo === "ce" ? ["C", "E"] : q.alts.map(x => x[0]); }
+function escolher(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)){ msg("warn", "Essa opção está descartada. Clique duas vezes nela para recuperá-la antes de escolher."); return; }
+  d.sel = d.sel === v ? null : v; save(); renderQ();
+}
+function descartar(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)) d.desc = d.desc.filter(x => x !== v);
+  else { d.desc.push(v); if (d.sel === v) d.sel = null; }
+  save(); renderQ();
+  if (d.desc.length === opcoes(q).length) msg("warn", "Você descartou todas as opções. Clique duas vezes em uma delas para recuperá-la e poder responder.");
+}
+function msg(tipo, texto){
+  const m = $("#qMsg"); if (!m) return;
+  m.className = "qmsg on " + tipo; m.textContent = texto;
+}
+function submeter(){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n), todas = opcoes(q);
+  if (d.desc.length === todas.length) return msg("bad", "Você marcou todas as opções como descartadas. Recupere uma (clique duas vezes) e selecione-a antes de responder.");
+  if (!d.sel) return msg("bad", "Você não selecionou nenhuma resposta. Clique em uma opção e depois em Responder.");
+  answer(d.sel);
+}
+function answer(v){
+  const q = QUESTOES[cur];
+  if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  S.answers[q.n] = {sel: v, ok: v === q.resp, desc: d.desc.slice(), ts: Date.now()};
+  delete S.draft[q.n];
+  save(); renderQ();
+  $("#qCard .coment")?.scrollIntoView({behavior: "smooth", block: "nearest"});
+  if (Object.keys(S.answers).length === QUESTOES.length){
+    setTimeout(() => { if (confirmFinish()) showTab("rend"); }, 50);
+  }
+}
+let finishedShown = false;
+function confirmFinish(){ if (finishedShown) return false; finishedShown = true; return true; }
+function step(d){
+  const vis = visible(), p = vis.indexOf(cur);
+  if (d > 0 && p >= vis.length - 1){ showTab("rend"); return; }
+  const np = Math.min(Math.max(p + d, 0), vis.length - 1);
+  cur = vis[np]; renderQ(); $("#qCard").scrollIntoView({block: "nearest"});
+}
+$("#qPrev").onclick = () => step(-1);
+$("#qNext").onclick = () => step(1);
+$("#fTema").onchange = $("#fStatus").onchange = () => { cur = -1; renderQ(); };
+
+/* flashcards */
+let deck = [], fcI = 0;
+FLASH.forEach((c, i) => c.id = "f" + i);
+function buildDeck(shuffle){
+  const d = $("#fcDeck").value;
+  deck = FLASH.filter(c => d === "all" || c[0] === d);
+  const box = c => (S.cards[c.id] || {box: 1}).box;
+  deck = deck.map(c => [c, Math.random()]).sort((x, y) => shuffle ? x[1] - y[1] : (box(x[0]) - box(y[0])) || (x[1] - y[1])).map(x => x[0]);
+  fcI = 0; renderCard();
+}
+function renderCard(){
+  if (!deck.length) buildDeck();
+  const c = deck[fcI];
+  $("#fc").classList.remove("flip");
+  $("#fcQ").innerHTML = c[1];
+  $("#fcA").innerHTML = c[2];
+  const b = (S.cards[c.id] || {box: 1}).box;
+  $("#fcPos").textContent = `Cartão ${fcI + 1} de ${deck.length}`;
+  $("#fcBox").textContent = `Caixa ${b}`;
+  const cnt = [0, 0, 0, 0, 0];
+  deck.forEach(x => cnt[((S.cards[x.id] || {box: 1}).box) - 1]++);
+  abbrify($("#fcQ")); abbrify($("#fcA"));
+  $("#fcBoxes").innerHTML = cnt.map((n, i) => `<span>Caixa ${i + 1}: ${n}</span>`).join("");
+}
+function grade(g){
+  const c = deck[fcI], st = S.cards[c.id] || {box: 1};
+  st.box = g === 0 ? 1 : g === 1 ? Math.max(1, st.box) : Math.min(5, st.box + 1);
+  st.seen = (st.seen || 0) + 1; S.cards[c.id] = st; save();
+  fcI = (fcI + 1) % deck.length; renderCard();
+}
+$("#fc").onclick = () => $("#fc").classList.toggle("flip");
+$("#fcBad").onclick = () => grade(0);
+$("#fcMid").onclick = () => grade(1);
+$("#fcOk").onclick = () => grade(2);
+$("#fcDeck").onchange = () => buildDeck();
+$("#fcShuffle").onclick = () => buildDeck(true);
+$("#fcReset").onclick = () => { if (confirm("Zerar as caixas de todos os flashcards?")){ S.cards = {}; save(); buildDeck(); } };
+
+/* rendimento */
+function renderRend(){
+  const ans = S.answers, n = QUESTOES.length, done = QUESTOES.filter(q => ans[q.n]);
+  const ok = done.filter(q => ans[q.n].ok).length;
+  if (!done.length){ $("#rendBody").innerHTML = '<div class="card"><p class="muted">Você ainda não respondeu nenhuma questão. Vá para a aba <b>Questões</b>.</p></div>'; return; }
+  const pct = Math.round(100 * ok / done.length);
+  const ce = done.filter(q => q.tipo === "ce"), ceOk = ce.filter(q => ans[q.n].ok).length, ceBad = ce.length - ceOk;
+  const mc = done.filter(q => q.tipo === "mc"), mcOk = mc.filter(q => ans[q.n].ok).length;
+  const complete = done.length === n;
+  const msg = pct >= 85 ? ["ok", "Excelente! Acima da meta de 80% do seu plano."] : pct >= 70 ? ["warn", "Bom, mas abaixo da meta de 80%. Revise os temas em amarelo e vermelho."] : ["bad", "Abaixo de 70%. Releia o Resumo dos temas fracos antes de refazer as erradas."];
+  const byT = TEMAS.map(t => {
+    const qs = done.filter(q => q.tema === t), o = qs.filter(q => ans[q.n].ok).length;
+    return {t, tot: QUESTOES.filter(q => q.tema === t).length, d: qs.length, o, p: qs.length ? Math.round(100 * o / qs.length) : null};
+  }).sort((a, b) => (a.p ?? 101) - (b.p ?? 101));
+  const wrong = done.filter(q => !ans[q.n].ok);
+  $("#rendBody").innerHTML = `
+    ${complete ? "" : `<div class="call warn"><b>Resultado parcial</b>Você respondeu ${done.length} de ${n}. O rendimento final aparece quando terminar todas.</div>`}
+    <div class="grid3">
+      <div class="card"><div class="muted">Aproveitamento</div><div class="big" style="color:var(--${pct >= 80 ? "ok" : pct >= 70 ? "warn" : "bad"})">${pct}%</div><div class="muted">${ok} certas de ${done.length}</div></div>
+      <div class="card"><div class="muted">Certo/Errado (nota CEBRASPE)</div><div class="big">${ceOk - ceBad}</div><div class="muted">${ceOk} certas − ${ceBad} erradas, em ${ce.length} itens</div></div>
+      <div class="card"><div class="muted">Múltipla escolha</div><div class="big">${mc.length ? Math.round(100 * mcOk / mc.length) : 0}%</div><div class="muted">${mcOk} de ${mc.length}</div></div>
+    </div>
+    <div class="call ${msg[0]}"><b>Diagnóstico</b>${msg[1]}</div>
+    <h3>Desempenho por tema (do mais fraco ao mais forte)</h3>
+    <div class="card">${byT.map(r => `<div class="bar"><span>${esc(r.t)}</span><div class="t"><div class="${r.p === null ? "" : r.p < 70 ? "low" : r.p < 85 ? "mid" : ""}" style="width:${r.p ?? 0}%"></div></div><span>${r.p === null ? "—" : r.p + "%"} <small class="muted">${r.o}/${r.d}</small></span></div>`).join("")}</div>
+    <h3>Questões erradas (${wrong.length})</h3>
+    <div class="card">${wrong.length ? wrong.map(q => `<div style="margin:6px 0"><a href="#" data-n="${q.n}">Q${q.n}</a> · <span class="pill">${esc(q.tema)}</span> <span class="muted">${esc(q.enun.slice(-120).replace(/^\S*\s/, "…"))}</span></div>`).join("") : '<p class="muted">Nenhuma! 🎯</p>'}</div>`;
+  abbrify($("#rendBody"));
+  $("#rendBody").querySelectorAll("a[data-n]").forEach(a => a.onclick = e => {
+    e.preventDefault(); $("#fTema").value = "all"; $("#fStatus").value = "all";
+    cur = QUESTOES.findIndex(q => q.n === +a.dataset.n); showTab("questoes"); renderQ();
+  });
+}
+$("#expBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `T2_dirtrib_respostas_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+};
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; save(); renderQ(); renderRend(); });
+};
+$("#redoBad").onclick = () => {
+  const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
+  if (!bad.length) return;
+  bad.forEach(k => delete S.answers[k]); save(); finishedShown = false;
+  $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
+};
+$("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* teclado */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase(), tab = active();
+  if (tab === "questoes"){
+    const q = QUESTOES[cur];
+    if (k === "arrowright") step(1);
+    else if (k === "arrowleft") step(-1);
+    else if (q && !S.answers[q.n]){
+      const v = q.tipo === "ce" ? k.toUpperCase() : k;
+      if (k === "enter"){ e.preventDefault(); submeter(); }
+      else if (opcoes(q).includes(v)){ e.shiftKey ? descartar(v) : escolher(v); }
+    }
+  } else if (tab === "flash"){
+    if (k === " "){ e.preventDefault(); $("#fc").classList.toggle("flip"); }
+    else if (k === "1") grade(0); else if (k === "2") grade(1); else if (k === "3") grade(2);
+  }
+});
+
+renderMapa();
+["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
+cur = 0; renderQ(); buildDeck();
+</script>
+</body>
+</html>
