@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T6 · Trilha 00 · Direito Administrativo — SEFAZ-DF</title>
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;
+  --accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;
+  --warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;
+  --accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;
+  --warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:16px;padding:12px 0 6px;flex-wrap:wrap}
+.badge{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px;letter-spacing:.5px}
+.top h1{font-size:18px;margin:0;font-weight:650}
+.top .sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px}
+nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--surface2);color:var(--text)}
+nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{padding:24px 0 80px}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.call.warn{border-color:var(--warn);background:var(--warn-soft)}
+.call.bad{border-color:var(--bad);background:var(--bad-soft)}
+.call.ok{border-color:var(--ok);background:var(--ok-soft)}
+.call b:first-child{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.tbl table th:first-child,.tbl table td:first-child{padding-left:14px}
+.k{font-weight:650;color:var(--accent)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+/* roteiro */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
+
+/* mapa mental */
+.mm{padding:22px 16px}
+.mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
+.mm-root b{display:block;font-size:17px;letter-spacing:.5px}
+.mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
+.mm-branches{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-br{display:flex;flex-direction:column;align-items:stretch}
+.mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
+.mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
+.mm-h b{display:block;font-size:14.5px;color:var(--c)}
+.mm-br ul{list-style:none;margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--c)}
+.mm-br li{font-size:13px;line-height:1.4;background:var(--surface2);border-radius:8px;padding:6px 9px;margin:6px 0;position:relative}
+.mm-br li::before{content:"";position:absolute;left:-12px;top:50%;width:10px;border-top:2px solid var(--c)}
+@media(max-width:860px){.mm-branches{grid-template-columns:1fr 1fr;border-top:0}}
+@media(max-width:520px){.mm-branches{grid-template-columns:1fr}}
+
+
+/* abreviações com dica */
+abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+#tip{position:fixed;z-index:100;max-width:300px;background:#1d2330;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+@media (prefers-color-scheme:dark){#tip{background:#e6e9ef;color:#12151b}}
+
+/* mapa clicável */
+.mm [data-k]{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mm [data-k]:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.mm [data-k].sel{outline:3px solid var(--c,var(--accent));outline-offset:2px}
+.mm-root[data-k].sel{outline-color:var(--text)}
+.mm-hint{text-align:center;color:var(--muted);font-size:13px;margin:-4px 0 12px}
+#mmPanel{border-left:6px solid var(--c,var(--accent));scroll-margin-top:140px}
+#mmPanel h4{margin:0 0 4px;font-size:18px;color:var(--c,var(--accent))}
+#mmPanel .mm-sec{margin:12px 0 0}
+#mmPanel .lbl{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+#mmPanel .ex{background:var(--ok-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .pg{background:var(--bad-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+
+/* questões */
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 16px}
+.qnav button{width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:12.5px;cursor:pointer}
+.qnav button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.qnav button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.qnav button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.progress{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:width .3s}
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
+.enun{white-space:pre-line;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ce{display:flex;gap:10px}.ce .opt{justify-content:center;font-weight:650}
+.opt{user-select:none;-webkit-user-select:none;position:relative}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.sel .l::before{content:"● ";color:var(--accent)}
+.opt.desc{opacity:.55;padding-right:92px}
+.opt.desc span{text-decoration:line-through;text-decoration-thickness:2px}
+.ce .opt.desc{text-decoration:line-through;text-decoration-thickness:2px}
+.opt.desc::after{content:"descartada";position:absolute;right:10px;top:8px;font-size:11px;color:var(--muted);text-decoration:none}
+.qact{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.qmsg{font-size:14.5px;padding:8px 12px;border-radius:8px;display:none}
+.qmsg.on{display:block}
+.qmsg.warn{background:var(--warn-soft);color:var(--warn)}
+.qmsg.bad{background:var(--bad-soft);color:var(--bad)}
+.qhint{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.coment{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.coment p{margin:6px 0}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+
+/* flashcards */
+.fc{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-inner{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fc-face.back{transform:rotateY(180deg);background:var(--accent-soft);text-align:left;align-items:flex-start;font-size:15px}
+.fc-face .q{font-size:19px;font-weight:600}
+.fc-meta{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;color:var(--muted);font-size:13px}
+.boxes{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.boxes span{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line)}
+
+/* rendimento */
+.big{font-size:44px;font-weight:750;line-height:1}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.bar .t{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar .t>div{height:100%;background:var(--ok)}
+.bar .t>div.mid{background:var(--warn)}.bar .t>div.low{background:var(--bad)}
+@media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
+.btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span class="badge">T6</span>
+      <div>
+        <h1>Trilha 00 · Tarefa 6 · Direito Administrativo</h1>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00 (Herbert Almeida): Regime Jurídico Administrativo e Princípios</div>
+      </div>
+    
+      <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
+    </div>
+    <nav id="nav">
+      <button data-t="inicio" class="on">Roteiro</button>
+      <button data-t="resumo">Resumo</button>
+      <button data-t="mapa">Mapa mental</button>
+      <button data-t="esquemas">Esquemas</button>
+      <button data-t="reforma">Súmulas e leis</button>
+      <button data-t="questoes">Questões <span class="pill" id="navQ">0/0</span></button>
+      <button data-t="flash">Flashcards</button>
+      <button data-t="rend">Rendimento</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ROTEIRO -->
+<section class="tab on" id="inicio">
+<h2>Roteiro da sessão T6</h2>
+  <p class="lead">Tarefa da trilha: <i>"Estudo da teoria da aula 00; e resolução de 20 questões"</i>. A trilha estima cerca de 1h30 por tarefa.</p>
+
+  <div class="call warn"><b>Material</b>
+    Esta página usa o PDF <b>simplificado</b> da Aula 00 de Direito Administrativo (Herbert Almeida), que já estava em <code>estrategia/direito administrativo/</code>. As questões são as que a trilha manda resolver, as <b>Questões Comentadas 1 a 20</b> do CEBRASPE, mais os <b>9 exercícios</b> que aparecem no meio da teoria. As questões 21 a 70 ficam para a T16, e a revisão pelos artigos de lei para a T20.
+  </div>
+
+  <div class="call"><b>O que o coach destacou</b>
+    • Regime Jurídico Administrativo e Princípios representam cerca de <b>5,45%</b> das exigências em prova.<br>
+    • Entenda os dois regimes: no <b>público</b> prevalecem a supremacia e a indisponibilidade do interesse público, numa relação <b>vertical</b>; no <b>privado</b>, a relação é <b>horizontal</b>.<br>
+    • <b>Legalidade</b>: vincula o agente à lei em sentido amplo (atos primários e secundários). <b>Moralidade</b>: ligada à probidade.<br>
+    • A <b>impessoalidade</b> se desdobra em finalidade, isonomia, vedação à promoção pessoal e impedimento e suspeição. A banca mistura publicidade com impessoalidade.<br>
+    • Implícitos: <b>supremacia</b> (prerrogativas) e <b>indisponibilidade</b> (sujeições). Proporcionalidade tem três elementos: adequação, necessidade e proporcionalidade em sentido estrito. Dê prioridade à <b>segurança jurídica</b>.<br>
+    • Resolva as questões <b>pela lista com comentários</b> e volte à teoria quando errar.
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><b>Pré-teste (5 min).</b> Abra os <b>Flashcards</b> e tente 5 cartões antes de ler.</li>
+      <li><b>Resumo (25 min).</b> Leia a aba <b>Resumo</b>, respondendo aos blocos <i>Pergunte-se</i>.</li>
+      <li><b>Mapa mental e Esquemas (10 min).</b> Clique em cada item do mapa e leia o exemplo.</li>
+      <li><b>Súmulas e leis (5 min).</b> As súmulas e artigos que a banca copia literalmente.</li>
+      <li><b>Questões (40 min).</b> 29 itens. Escolha com um clique, descarte com dois e confirme em <b>Responder</b>; leia sempre o comentário.</li>
+      <li><b>Rendimento (5 min).</b> Anote os princípios em que errou.</li>
+    </ol>
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Banca</b><br><span class="muted">CEBRASPE: itens de Certo ou Errado em que um erro anula um acerto. Na dúvida real, deixe em branco.</span></div>
+    <div class="card"><b>Peso na prova</b><br><span class="muted">Direito Administrativo está na prova de conhecimentos básicos (peso 1), com 10 itens.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas e flashcards ficam no navegador. Use <i>Exportar</i> na aba Rendimento para fazer backup.</span></div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="tab" id="resumo">
+<h2>Resumo: Regime Jurídico Administrativo e Princípios</h2>
+  <p class="lead">O resumo segue a ordem da aula. Os <span class="k">termos em destaque</span> são os que mais caem e os blocos vermelhos marcam as pegadinhas da banca.</p>
+
+  <h3>1. Regime jurídico: público × privado</h3>
+  <div class="card">
+    <ul>
+      <li><b>Regime de direito público</b>: o Estado tem poderes especiais (impor obrigações, aplicar sanções, desapropriar), numa relação <b>vertical</b> com o particular.</li>
+      <li><b>Regime de direito privado</b>: as partes estão em igualdade, numa relação <b>horizontal</b>; um contrato só muda com a concordância das duas.</li>
+      <li>A Administração pode se submeter a <b>qualquer dos dois</b>, mas <b>nunca integralmente</b> ao privado: mesmo nele, observa regras de direito público (concurso, licitação, controle).</li>
+      <li>O <span class="k">regime jurídico administrativo</span> (Di Pietro) é só o de direito público, e se resume a um binômio: <b>prerrogativas</b> (supremacia do interesse público) e <b>sujeições</b> (indisponibilidade do interesse público).</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"A Administração só se submete ao regime de direito público": <b>ERRADO</b>. Uma empresa pública faz concurso (público) e pode firmar um contrato de financiamento (privado).</div>
+  </div>
+
+  <h3>2. Princípios: noções gerais</h3>
+  <div class="card">
+    <ul>
+      <li>Princípios orientam a elaboração das leis, direcionam a atuação administrativa e condicionam a validade dos atos.</li>
+      <li><b>Expressos</b> (escritos de forma taxativa) ou <b>implícitos/reconhecidos</b> (decorrem da doutrina e da jurisprudência). Implícito na Constituição pode ser expresso numa lei, como os da Lei 9.784/1999.</li>
+      <li>Os 5 do artigo 37 (<b>LIMPE</b>: legalidade, impessoalidade, moralidade, publicidade e eficiência) valem para a administração <b>direta e indireta</b>, de <b>todos os Poderes</b> e de <b>todas as esferas</b>.</li>
+      <li><b>Não há hierarquia entre princípios</b>: em conflito aparente, faz-se ponderação no caso concreto.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "Os princípios estão subordinados à legalidade": <b>ERRADO</b>.<br>
+      • "São princípios expressos: legalidade, <b>indivisibilidade</b>, moralidade...": <b>ERRADO</b>.<br>
+      • "A legalidade se aplica apenas ao Poder Executivo federal": <b>ERRADO</b>.
+    </div>
+  </div>
+
+  <h3>3. Os princípios expressos (LIMPE)</h3>
+  <div class="card">
+    <div class="tbl"><table>
+      <tr><th>Princípio</th><th>Ideia central</th><th>Pontos que caem</th></tr>
+      <tr><td><b>Legalidade</b></td><td>A Administração só age quando a lei <b>determina</b> (vinculação) ou <b>autoriza</b> (discricionariedade): age <i>secundum legem</i>. O particular pode fazer tudo o que a lei não proíbe.</td><td>Não confundir com <b>reserva legal</b> (matéria que exige lei formal). Exceções: medidas provisórias, estado de defesa e de sítio. <b>Juridicidade</b>: sujeição a todo o ordenamento, inclusive princípios.</td></tr>
+      <tr><td><b>Impessoalidade</b></td><td>Atuação sem favorecimentos nem perseguições.</td><td>Cinco sentidos: <b>finalidade</b>, <b>validade dos atos do agente de fato</b>, <b>isonomia</b>, <b>vedação à promoção pessoal</b> (artigo 37, parágrafo 1º) e <b>impedimento e suspeição</b>.</td></tr>
+      <tr><td><b>Moralidade</b></td><td>Conduta ética, além da legal.</td><td>Analisada de forma <b>objetiva</b> (não importa a intenção). Vale também para particulares que se relacionam com a Administração. Base da <b>Súmula Vinculante 13</b> (nepotismo), que dispensa lei.</td></tr>
+      <tr><td><b>Publicidade</b></td><td>Duplo sentido: <b>publicação oficial</b> como requisito de <b>eficácia</b> (e não de validade) e <b>transparência</b>.</td><td>Não é absoluta: ressalvados o sigilo imprescindível à segurança da sociedade e do Estado e os dados pessoais. É legítimo divulgar nome e remuneração de servidores (RE 652.777).</td></tr>
+      <tr><td><b>Eficiência</b></td><td>Excelência: qualidade, menor custo e menor tempo.</td><td>Incluído pela Emenda Constitucional 19/1998 (reforma gerencial). Dois aspectos (Di Pietro): modo de <b>atuação do agente</b> e modo de <b>organizar</b> a Administração. Avaliação de políticas públicas (artigo 37, parágrafo 16) é desdobramento da eficiência.</td></tr>
+    </table></div>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "A vedação à promoção pessoal decorre do princípio da adequação": <b>ERRADO</b>, decorre da <b>impessoalidade</b>.<br>
+      • "A publicidade pode conter nomes e imagens dos agentes políticos responsáveis": <b>ERRADO</b>.<br>
+      • "A publicidade impede de forma absoluta informações sigilosas": <b>ERRADO</b>.<br>
+      • "A eficiência obriga a contratar pelo menor preço": <b>ERRADO</b>.<br>
+      • "O nepotismo só é proibido se houver lei": <b>ERRADO</b>, a vedação decorre da Constituição (Súmula Vinculante 13).
+    </div>
+    <details><summary>Pergunte-se: a publicação oficial é requisito de validade ou de eficácia do ato?</summary><div>De <b>eficácia</b>: o ato pode ser válido, mas só produz efeitos externos depois de publicado.</div></details>
+  </div>
+
+  <h3>4. Princípios implícitos ou reconhecidos</h3>
+  <div class="card">
+    <div class="grid2">
+      <div class="call"><b>Supremacia do interesse público</b>Representa as <b>prerrogativas</b>: atributos dos atos (presunção de legitimidade, imperatividade), cláusulas exorbitantes, poder de polícia, desapropriação, tombamento. <b>Não se aplica</b> quando a Administração atua como empresa ou em contratos de locação e seguro.</div>
+      <div class="call"><b>Indisponibilidade do interesse público</b>Representa as <b>sujeições</b>: dever de licitar, de fazer concurso. O agente apenas gere o interesse da coletividade. Está presente em <b>toda</b> atuação administrativa.</div>
+    </div>
+    <ul>
+      <li><b>Razoabilidade e proporcionalidade</b>: proíbem excessos; exigem equilíbrio entre meios e fins. Na prova, costumam ser tratados como sinônimos. Elementos da proporcionalidade: <b>adequação</b>, <b>necessidade</b> e <b>proporcionalidade em sentido estrito</b>. Ato desarrazoado é <b>ilegal</b>, e o Judiciário pode anulá-lo.</li>
+      <li><b>Especialidade</b>: as entidades da administração indireta atuam nas finalidades definidas na lei que as criou. <b>Controle ou tutela</b>: a administração direta verifica se a indireta cumpre essas finalidades. Há <b>vinculação</b>, e não subordinação.</li>
+      <li><b>Autotutela</b>: a Administração <b>anula</b> atos ilegais e <b>revoga</b> atos inconvenientes ou inoportunos, sem precisar do Judiciário (Súmulas 346 e 473; Lei 9.784/1999, artigo 53). Limites: <b>decadência de 5 anos</b> para anular atos favoráveis, salvo má-fé (artigo 54), e <b>contraditório e ampla defesa</b> quando afetar interesses individuais.</li>
+      <li><b>Motivação</b>: indicar fundamentos de fato e de direito. Em regra, atos vinculados e discricionários devem ser motivados; exceção clássica é a exoneração de cargo em comissão (<i>ad nutum</i>).</li>
+      <li><b>Continuidade do serviço público</b>: serviço sem interrupção, mas não absoluta. Pode haver interrupção em emergência ou, com aviso prévio, por razões técnicas ou de segurança e por inadimplência do usuário. Militares e policiais civis não fazem greve.</li>
+      <li><b>Contraditório e ampla defesa</b>: valem no processo administrativo. Pela <b>Súmula Vinculante 5</b>, a falta de advogado no processo disciplinar não ofende a Constituição.</li>
+      <li><b>Segurança jurídica e proteção à confiança</b>: estabilidade das relações (aspecto objetivo) e boa-fé do administrado (aspecto subjetivo). É <b>vedada a aplicação retroativa de nova interpretação</b>.</li>
+      <li>Outros: intranscendência das sanções, hierarquia, precaução, presunção de legitimidade (relativa), sindicabilidade, responsividade, subsidiariedade e consensualidade.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "A autotutela dispensa contraditório e motivação, mesmo afetando direitos individuais": <b>ERRADO</b>.<br>
+      • "O interesse público se opõe necessariamente ao privado": <b>ERRADO</b>.<br>
+      • "Nova interpretação pode retroagir se atender ao interesse público": <b>ERRADO</b>.<br>
+      • "A defesa por advogado é imprescindível no processo disciplinar": <b>ERRADO</b> (Súmula Vinculante 5).
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="tab" id="mapa">
+  <h2>Mapa mental: regime jurídico administrativo e princípios</h2>
+  <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
+  <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
+  <div class="card mm" id="mmBox"></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa para começar.</p></div>
+
+  <h3>Onde este tema se encaixa na disciplina</h3>
+  <div class="card">
+    <div class="grid3" style="font-size:14px">
+      <div><b class="k">Fundamentos</b><br>Regime jurídico e princípios ← <i>você está aqui</i></div>
+      <div><b class="k">Organização</b><br>Administração direta e indireta<br>Órgãos e entidades</div>
+      <div><b class="k">Atuação</b><br>Poderes administrativos<br>Atos administrativos</div>
+      <div><b class="k">Contratações</b><br>Licitações e contratos (Lei 14.133/2021)</div>
+      <div><b class="k">Pessoas e serviços</b><br>Agentes públicos<br>Serviços públicos</div>
+      <div><b class="k">Controle e responsabilidade</b><br>Controle da Administração<br>Responsabilidade civil do Estado<br>Improbidade administrativa</div>
+    </div>
+    <p class="muted small" style="margin:10px 0 0">Blocos gerais do Direito Administrativo, para orientar o estudo. A ordem exata das aulas está no cronograma do curso.</p>
+  </div>
+</section>
+
+<!-- ESQUEMAS -->
+<section class="tab" id="esquemas">
+<h2>Esquemas comparativos</h2>
+  <p class="lead">Tabelas para revisão rápida. Você deve conseguir reproduzi-las na véspera.</p>
+
+  <h3>Supremacia × indisponibilidade</h3>
+  <div class="tbl"><table>
+    <tr><th>Supremacia do interesse público</th><th>Indisponibilidade do interesse público</th></tr>
+    <tr><td>Prerrogativas (poderes)</td><td>Sujeições (restrições)</td></tr>
+    <tr><td>Cláusulas exorbitantes, poder de polícia, desapropriação, imperatividade</td><td>Licitação, concurso público, prestação de contas</td></tr>
+    <tr><td>Não se aplica quando o Estado atua como empresário</td><td>Presente em toda atuação administrativa</td></tr>
+  </table></div>
+
+  <h3>Autotutela × controle judicial</h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Autotutela (Administração)</th><th>Controle judicial</th></tr>
+    <tr><td><b>Legalidade</b></td><td>Anula, de ofício ou por provocação</td><td>Anula, somente por provocação</td></tr>
+    <tr><td><b>Mérito</b> (conveniência e oportunidade)</td><td>Revoga, de ofício ou por provocação</td><td>Não pode revogar atos de outro Poder</td></tr>
+  </table></div>
+
+  <h3>Tutela × autotutela</h3>
+  <div class="tbl"><table>
+    <tr><th>Tutela (controle)</th><th>Autotutela</th></tr>
+    <tr><td>Administração direta controla as entidades da indireta</td><td>A Administração controla os <b>próprios</b> atos</td></tr>
+    <tr><td>Controle finalístico, nos limites da lei; há vinculação, e não subordinação</td><td>Anula atos ilegais e revoga atos inconvenientes</td></tr>
+  </table></div>
+
+  <h3>Os cinco sentidos da impessoalidade</h3>
+  <div class="tbl"><table>
+    <tr><th>Sentido</th><th>Exemplo</th></tr>
+    <tr><td>Finalidade</td><td>Todo ato deve buscar o interesse público e a finalidade específica da lei</td></tr>
+    <tr><td>Agente de fato</td><td>Licença assinada por agente com investidura irregular continua válida perante terceiros de boa-fé</td></tr>
+    <tr><td>Isonomia</td><td>Atender a todos sem favorecimentos nem perseguições</td></tr>
+    <tr><td>Vedação à promoção pessoal</td><td>Placa de obra sem nome ou foto do governador</td></tr>
+    <tr><td>Impedimento e suspeição</td><td>A autoridade não julga processo disciplinar do próprio cônjuge</td></tr>
+  </table></div>
+
+  <h3>Segurança jurídica × proteção à confiança</h3>
+  <div class="tbl"><table>
+    <tr><th>Segurança jurídica</th><th>Proteção à confiança</th></tr>
+    <tr><td>Aspecto <b>objetivo</b>: estabilidade das relações jurídicas</td><td>Aspecto <b>subjetivo</b>: boa-fé do administrado</td></tr>
+    <tr><td>Direito adquirido, ato jurídico perfeito, coisa julgada, prescrição, decadência</td><td>Manutenção dos efeitos de atos nulos perante terceiros de boa-fé</td></tr>
+  </table></div>
+</section>
+
+<!-- REFORMA -->
+<section class="tab" id="reforma">
+<h2>Súmulas e leis que a banca copia</h2>
+  <p class="lead">Itens literais são comuns no CEBRASPE. Leia estes textos pelo menos duas vezes.</p>
+  <div class="call"><b>Súmula Vinculante 13 (nepotismo)</b>A nomeação de cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, <b>até o terceiro grau</b>, inclusive, da autoridade nomeante ou de servidor da mesma pessoa jurídica investido em cargo de direção, chefia ou assessoramento, para cargo em comissão ou de confiança ou função gratificada, em qualquer dos Poderes e esferas, compreendido o ajuste mediante <b>designações recíprocas</b>, viola a Constituição Federal.</div>
+  <div class="call"><b>Súmula 473 do STF (autotutela)</b>A Administração pode <b>anular</b> seus próprios atos, quando eivados de vícios que os tornam ilegais, porque deles não se originam direitos; ou <b>revogá-los</b>, por motivo de conveniência ou oportunidade, respeitados os direitos adquiridos, e ressalvada, em todos os casos, a apreciação judicial. (A Súmula 346 diz que a Administração pode declarar a nulidade dos seus próprios atos.)</div>
+  <div class="call"><b>Súmula Vinculante 5</b>A falta de defesa técnica por advogado no processo administrativo disciplinar não ofende a Constituição.</div>
+  <div class="grid2">
+    <div class="card"><b>Lei 9.784/1999 (processo administrativo federal)</b>
+      <ul>
+        <li><b>Artigo 2º</b>: legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, segurança jurídica, interesse público e eficiência.</li>
+        <li><b>Artigo 2º, parágrafo único, VI</b>: adequação entre meios e fins, vedada a imposição de obrigações, restrições e sanções além do estritamente necessário.</li>
+        <li><b>Artigo 2º, parágrafo único, XIII</b>: vedada a aplicação retroativa de nova interpretação.</li>
+        <li><b>Artigo 53</b>: a Administração <b>deve</b> anular atos ilegais e <b>pode</b> revogá-los por conveniência ou oportunidade.</li>
+        <li><b>Artigo 54</b>: o direito de anular atos favoráveis aos destinatários <b>decai em 5 anos</b>, salvo comprovada má-fé.</li>
+      </ul></div>
+    <div class="card"><b>Constituição Federal, artigo 37</b>
+      <ul>
+        <li><b>Caput</b>: legalidade, impessoalidade, moralidade, publicidade e eficiência.</li>
+        <li><b>Parágrafo 1º</b>: a publicidade terá caráter educativo, informativo ou de orientação social, sem nomes, símbolos ou imagens que caracterizem promoção pessoal.</li>
+        <li><b>Parágrafo 16</b>: os órgãos devem avaliar as políticas públicas, divulgando o objeto e os resultados.</li>
+        <li><b>Inciso XIX</b>: lei específica cria ou autoriza a criação das entidades da administração indireta (princípio da especialidade).</li>
+      </ul></div>
+  </div>
+  <div class="call warn"><b>"Pode" ou "deve" anular?</b>A Súmula 346 usa "pode", e a Lei 9.784/1999 usa "deve". As questões costumam aceitar as duas formas. Se o item citar a fonte, siga a fonte; se não citar e você precisar escolher, prefira "deve".</div>
+</section>
+
+<!-- QUESTÕES -->
+<section class="tab" id="questoes">
+  <h2>Questões comentadas (CEBRASPE)</h2>
+  <p class="lead">São 29 itens: os 9 exercícios que aparecem no meio da teoria (T1 a T9 na barra) e as Questões Comentadas 1 a 20 do CEBRASPE, que são as que a trilha manda resolver. O comentário aparece depois de cada resposta, e o rendimento quando terminar todas.</p>
+  <div class="row" style="margin-bottom:10px">
+    <label class="muted" for="fTema">Tema:</label>
+    <select id="fTema"></select>
+    <label class="muted" for="fStatus">Mostrar:</label>
+    <select id="fStatus"><option value="all">Todas</option><option value="pend">Não respondidas</option><option value="bad">Erradas</option><option value="ok">Certas</option></select>
+  </div>
+  <div class="progress"><div id="qProg"></div></div>
+  <div class="qnav" id="qNav"></div>
+  <div class="card" id="qCard"></div>
+  <div class="row" style="justify-content:space-between">
+    <button class="btn" id="qPrev">← Anterior</button>
+    <span class="muted" style="font-size:13px">Atalhos: <kbd>A</kbd>–<kbd>E</kbd> ou <kbd>C</kbd>/<kbd>E</kbd> escolhe · <kbd>Shift</kbd>+letra descarta · <kbd>Enter</kbd> responde · <kbd>←</kbd> <kbd>→</kbd> navega</span>
+    <button class="btn pri" id="qNext">Próxima →</button>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="tab" id="flash">
+  <h2>Flashcards com repetição espaçada</h2>
+  <p class="lead">Leia a pergunta, responda <b>em voz alta</b> e só então vire o cartão (clique ou <kbd>Espaço</kbd>). Marque com sinceridade: os cartões errados voltam primeiro (sistema Leitner, caixas 1 a 5).</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px">
+    <select id="fcDeck">
+      <option value="all">Todos os baralhos</option>
+      <option value="a00">Aula 00 · Regime jurídico e princípios</option>
+      <option value="ref">Súmulas e leis da aula</option>
+      <option value="pan">Panorama do Direito Administrativo</option>
+    </select>
+    <button class="btn" id="fcShuffle">Embaralhar</button>
+    <button class="btn" id="fcReset">Zerar caixas</button>
+  </div>
+  <div class="fc-meta"><span id="fcPos"></span><span id="fcBox"></span></div>
+  <div class="fc" id="fc"><div class="fc-inner"><div class="fc-face front"><div class="q" id="fcQ"></div><div class="muted" style="margin-top:14px;font-size:13px">clique para virar</div></div><div class="fc-face back"><div id="fcA"></div></div></div></div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn bad" id="fcBad">✘ Errei (<kbd>1</kbd>)</button>
+    <button class="btn" id="fcMid">~ Hesitei (<kbd>2</kbd>)</button>
+    <button class="btn ok" id="fcOk">✔ Acertei (<kbd>3</kbd>)</button>
+  </div>
+  <div class="boxes" id="fcBoxes"></div>
+</section>
+
+<!-- RENDIMENTO -->
+<section class="tab" id="rend">
+  <h2>Rendimento</h2>
+  <div id="rendBody"></div>
+  <h3>Gerenciar dados</h3>
+  <div class="row">
+    <button class="btn" id="expBtn">Exportar respostas (.json)</button>
+    <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
+    <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
+  </div>
+</section>
+
+</main>
+
+<div id="tip" role="tooltip"></div>
+<script>
+const QUESTOES = [{"fonte": "TCE-PE, 2017", "tema": "Regime jurídico administrativo", "enun": "A administração pública pode estar sujeita tanto ao regime jurídico de direito privado quanto ao regime jurídico de direito público.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A assertiva está correta. A diferenciação entre o regime de direito público e o regime de direito privado é um trabalho doutrinário, porém difícil de se observar no mundo real. Nas relações da Administração, ora se aplica o direito público, ora o direito privado: por exemplo, a realização de concurso público (direito público) e um contrato de financiamento (direito privado) realizados por uma empresa pública."], "rot": "Exercício da teoria 1", "nav": "T1", "n": 1}, {"fonte": "SEGEP, 2018", "tema": "Visão geral dos princípios", "enun": "Os princípios que balizam a atuação da Administração pública estão todos subordinados ao princípio da legalidade, erigido pela Constituição Federal como cláusula pétrea.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A assertiva está errada. Não há hierarquia entre os princípios. Quando houver um aparente conflito entre os princípios, deverá ser adotada uma ponderação entre eles para aplicar a interpretação que melhor se harmonize com a situação concreta, sem que exista um princípio que imediatamente esteja “acima dos demais”. Por exemplo: em regra, a administração deverá anular um ato ilegal. Porém, se o ato ilegal foi praticado há muito tempo, talvez não seja mais possível anulá-lo, aplicando o princípio da segurança jurídica. Assim, ora prevalece a legalidade; ora a segurança jurídica; sem existir uma hierarquia."], "rot": "Exercício da teoria 2", "nav": "T2", "n": 2}, {"fonte": "TRE-BA, 2017", "tema": "Visão geral dos princípios", "enun": "São princípios que regem a administração pública expressos na Constituição Federal de 1988: legalidade, indivisibilidade, moralidade, publicidade e eficiência.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A assertiva está errada. essa é tranquila, mas importante! Os princípios expressos na Constituição Federal são a legalidade, a impessoalidade, a moralidade, a publicidade e a eficiência. A questão está incorreta, uma vez que “indivisibilidade” não é princípio constitucional expresso."], "rot": "Exercício da teoria 3", "nav": "T3", "n": 3}, {"fonte": "SEFAZ-RS, 2018", "tema": "Supremacia e indisponibilidade", "enun": "A previsão em lei de cláusulas exorbitantes aplicáveis aos contratos administrativos decorre diretamente do princípio da supremacia do interesse público.", "alts": [], "tipo": "ce", "resp": "C", "com": ["a assertiva está correta. As cláusulas exorbitantes são poderes especiais que a administração dispõe, nos contratos administrativos, para fazer prevalecer o interesse público. Um exemplo de cláusula exorbitante é a possibilidade de alterar unilateralmente um contrato, independentemente da concordância da outra parte, dentro dos limites permitidos em lei. Nesse caso, portanto, as cláusulas exorbitantes são exemplos de aplicação do princípio da supremacia."], "rot": "Exercício da teoria 4", "nav": "T4", "n": 4}, {"fonte": "STJ, 2018", "tema": "Razoabilidade e proporcionalidade", "enun": "O princípio da proporcionalidade, que determina a adequação entre os meios e os fins, deve ser obrigatoriamente observado no processo administrativo, sendo vedada a imposição de obrigações, restrições e sanções em medida superior àquelas estritamente necessárias ao atendimento do interesse público.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A assertiva está correta. A legislação de processo administrativo exige a aplicação de adequação entre meios e fins, vedada a imposição de obrigações, restrições e sanções em medida superior àquelas estritamente necessárias ao atendimento do interesse público (Lei 9.784/99, art. 2º, parágrafo único, VI), sendo essa justamente a aplicação dos princípios da razoabilidade e da proporcionalidade."], "rot": "Exercício da teoria 5", "nav": "T5", "n": 5}, {"fonte": "TRT 11, 2017", "tema": "Autotutela", "enun": "A atuação da Administração é pautada por determinados princípios, alguns positivados em âmbito constitucional ou legal e outros consolidados por construções doutrinárias. Exemplo de tais princípios são a tutela ou controle e a autotutela, que diferem entre si nos seguintes aspectos é através da tutela que a Administração direta exerce o controle finalístico sobre entidades da Administração indireta, enquanto pela autotutela exerce controle sobre seus próprios atos.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A assertiva está correta. A tutela trata do controle finalístico exercido pela Administração direta sobre a indireta, ou seja, trata-se de um controle que tem o objetivo de verificar o cumprimento das finalidades legais das entidades administrativas. Por outro lado, a autotutela trata do controle da administração sobre os seus próprios atos, permitindo realizar a anulação ou revogação, conforme o caso."], "rot": "Exercício da teoria 6", "nav": "T6", "n": 6}, {"fonte": "Câmara de Salvador-BA, 2018", "tema": "Contraditório e ampla defesa", "enun": "Processo administrativo é um conjunto concatenado de atos administrativos sequenciais, respeitada a ordem legal, com uma finalidade específica que não confronte com o interesse público, ensejando a prática de um ato final. Como corolário do princípio da ampla defesa vigente no processo administrativo, tem-se a defesa técnica, que é exercida pela imprescindível presença de advogado no processo administrativo disciplinar, sob pena de nulidade.", "alts": [], "tipo": "ce", "resp": "E", "com": ["conforme enunciado da Súmula Vinculante º 5 do STF, a “falta de defesa técnica por advogado no processo administrativo disciplinar não ofende a Constituição”. Logo, a defesa por advogado não é indispensável, motivo pelo qual a questão está errada."], "rot": "Exercício da teoria 7", "nav": "T7", "n": 7}, {"fonte": "STJ, 2018", "tema": "Segurança jurídica e razoabilidade", "enun": "Em decorrência do princípio da segurança jurídica, é proibido que nova interpretação de norma administrativa tenha efeitos retroativos, exceto quando isso se der para atender o interesse público.", "alts": [], "tipo": "ce", "resp": "E", "com": ["na verdade, o princípio da segurança jurídica veda a aplicação retroativa de nova interpretação. Isso não significa que ele vede a evolução da interpretação, uma vez que, no direito, é muito comum a mudança de entendimentos conforme os acontecimentos da sociedade. O que se veda é que essa nova interpretação volte no tempo. Por isso, o novo entendimento vale do momento em que ele for proferido em diante. Nessa linha, o item está incorreto, pois não se pode alegar o interesse público para voltar no tempo com a interpretação. Por exemplo: se a administração mudar o entendimento sobre o pagamento de um benefício, “voltar no tempo” pode atender ao interesse público, pois isso representaria a devolução de dinheiro já pago. Contudo, isso fere o princípio da segurança jurídica (tanto no aspecto objetivo como subjetivo)."], "rot": "Exercício da teoria 8", "nav": "T8", "n": 8}, {"fonte": "TRE-PE, 2017", "tema": "Continuidade do serviço público", "enun": "O princípio da continuidade dos serviços públicos", "alts": [["a", "afasta a possibilidade de interrupção, ainda que se trate de sistema de remuneração por tarifa no qual o usuário dos referidos serviços esteja inadimplente."], ["b", "diz respeito, apenas, a serviços públicos, não alcançando as demais atividades administrativas."], ["c", "torna ilegal a greve de servidores públicos."], ["d", "tem relação direta com os princípios da eficiência e da supremacia do interesse público."], ["e", "impede a paralisação, ainda que a justificativa desta seja o aperfeiçoamento das atividades."]], "tipo": "mc", "resp": "d", "com": ["a) a legislação permite a interrupção dos serviços por falta de pagamento da tarifa da prestação dos serviços. Nesse caso, prevalece o interesse público em detrimento do interesse privado, pois se não fosse possível a interrupção do serviço por inadimplência, consequentemente o custeio dos serviços poderia ser tornar inviável pela falta de pagamento de vários usuários – ERRADA;", "b) o princípio aplica-se predominantemente aos serviços públicos, porém alcança todas as atividades administrativas, já que a interrupção destas também afeta o interesse público – ERRADA;", "c) a greve dos servidores públicos não é, em si, ilegal, pois se trata de um direito assegurado na Constituição Federal. A falta de regulamentação específica, entretanto, fez o STF determinar a aplicação das normas privadas aos servidores públicos, até que o Poder Legislativo elabore a norma correspondente. Porém, ressalva-se que algumas categorias não podem exercer o direito de greve, seja por expressa previsão constitucional (militares), ou por entendimento do STF (policiais civis, categorias de segurança pública) – ERRADA;", "d) o princípio da continuidade tem relação com o princípio da supremacia, pois deve prevalecer o interesse público em detrimento do interesse privado da empresa ou do agente que pretende paralisar a sua prestação; e também tem relação com o princípio da eficiência, pois a qualidade do serviço é diretamente ligada à sua prestação continuada – CORRETA;", "e) o princípio não é absoluto, uma vez que pode ocorrer a paralisação temporária, seja por manutenção ou aperfeiçoamento do serviço, ou ainda em virtude de inadimplência no pagamento da fatura – ERRADA."], "rot": "Exercício da teoria 9", "nav": "T9", "n": 9}, {"fonte": "Cebraspe – MPE CE/2025", "enun": "A proibição de constar nome, símbolos ou imagens que caracterizem promoção pessoal de autoridades ou servidores públicos em publicidade de atos dos órgãos públicos representa aplicação do princípio da adequação na prestação do serviço público.", "alts": [], "tipo": "ce", "resp": "E", "com": ["a vedação à promoção pessoal de autoridades ou servidores públicos decorre do princípio da impessoalidade, e não da adequação. De acordo com o princípio da impessoalidade, os agentes públicos atuam em nome do Estado. Dessa forma, não poderá ocorrer a pessoalização ou promoção pessoal do agente público pelos atos realizados. Tal princípio está presente no § 1º do art. 37 da CF/88, que dispõe:", "§ 1º - A publicidade dos atos, programas, obras, serviços e campanhas dos órgãos públicos deverá ter caráter educativo, informativo ou de orientação social, dela não podendo constar nomes, símbolos ou imagens que caracterizem promoção pessoal de autoridades ou servidores públicos.", "Portanto, a afirmativa está incorreta.", "O “princípio da adequação” tem significados específicos em cada ramo do direito. Por exemplo, no direito administrativo, ele pode ser visto como uma “parte” do princípio da proporcionalidade, que significa que o meio empregado deve ser compatível com o fim desejado."], "tema": "Impessoalidade", "rot": "Questão comentada 1", "nav": "1", "n": 10}, {"fonte": "Cebraspe – MPE CE/2025", "enun": "O princípio da segurança jurídica preceitua que os atos administrativos — no que se incluem os contratos — devem ser praticados com prudência, moderação e bom senso.", "alts": [], "tipo": "ce", "resp": "E", "com": ["a afirmativa está errada. O princípio da segurança jurídica tem por objetivo assegurar a estabilidade das relações jurídicas já consolidadas, através da proteção ao direito adquirido, o ato jurídico perfeito e a coisa julgada.", "O princípio que dispõe que os atos deverão ser praticados com moderação e bom senso, de acordo com Fernanda Marinela, é o princípio da razoabilidade, ou proibição de excessos. Ela ensina que “tal princípio proíbe a atuação do administrador de forma despropositada ou tresloucada, quando, com a desculpa de cumprir a lei, age de forma arbitrária e sem qualquer bom senso. Trata-se do princípio da proibição de excessos”.1"], "tema": "Segurança jurídica e razoabilidade", "rot": "Questão comentada 2", "nav": "2", "n": 11}, {"fonte": "Cebraspe – MPE CE/2025", "enun": "No exercício da função pública, deve-se tratar a todos conforme valores e regras comuns, evitando-se distinções subjetivas, em observância ao princípio da impessoalidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["a alternativa está correta. O princípio da impessoalidade possui vários sentidos, e um deles é a ideia de isonomia e igualdade. De acordo com tal princípio, a Administração deve atender a todos os administrados sem distinções entre os indivíduos, sem favorecer pessoas determinadas. Nesse sentido, de acordo com a CF/88 todos são iguais perante a lei (art. 5º, caput), sendo que eventuais tratamentos diferenciados só podem ocorrer quando houver previsão legal."], "tema": "Impessoalidade", "rot": "Questão comentada 3", "nav": "3", "n": 12}, {"fonte": "Cebraspe – TRT 10/2025", "enun": "A autotutela é um princípio administrativo que permite à administração pública rever e anular, de forma unilateral, seus próprios atos quando eivados de vício de legalidade, não havendo necessidade de motivação, ainda que direitos individuais sejam afetados.", "alts": [], "tipo": "ce", "resp": "E", "com": ["de fato, a autotutela permite que a administração reveja seus atos, anulando os ilegais, de forma unilateral. No entanto, é necessário oportunizar o contraditório e a ampla defesa, por meio de processo administrativo, às pessoas cujos interesses serão afetados negativamente em decorrência do desfazimento do ato. Além do direito de defesa, há necessidade de motivar o ato. Segundo a Lei 9.784/1999, os atos administrativos deverão ser motivados, com indicação dos fatos e dos fundamentos jurídicos, quando “neguem, limitem ou afetem direitos ou interesses” (art. 50, I)."], "tema": "Autotutela", "rot": "Questão comentada 4", "nav": "4", "n": 13}, {"fonte": "Cebraspe – BDMG/2025", "enun": "A autotutela, um dos princípios implícitos da administração pública, é a prerrogativa que lhe permite corrigir os próprios erros de forma autônoma.", "alts": [], "tipo": "ce", "resp": "C", "com": ["a autotutela é uma forma de a administração corrigir os seus próprios atos, anulando-os quando ilegais ou revogando-os quando inconvenientes ou inoportunos. Assim, a administração não precisa recorrer ao Poder Judiciário para corrigir os seus atos, podendo fazê-lo diretamente (de forma autônoma)."], "tema": "Autotutela", "rot": "Questão comentada 5", "nav": "5", "n": 14}, {"fonte": "Cebraspe – BDMG/2025", "enun": "O interesse público se opõe necessariamente ao interesse privado.", "alts": [], "tipo": "ce", "resp": "E", "com": ["nem sempre ocorrerá essa oposição. Por exemplo: um médico poderá ser nomeado para um cargo público efetivo. A nomeação atende ao interesse público, pois são necessários médicos no atendimento do sistema de saúde. Ao mesmo tempo, o interesse privado do médico está sendo atendido, pois ele terá um novo emprego.", "Há casos em que os interesses serão opostos. Por exemplo: uma família não quer vender o seu terreno, mas o Estado determina a desapropriação.", "Todavia, o “necessariamente” tornou o item errado."], "tema": "Supremacia e indisponibilidade", "rot": "Questão comentada 6", "nav": "6", "n": 15}, {"fonte": "Cebraspe – BDMG/2025", "enun": "Segundo o princípio da indisponibilidade do interesse público, a administração pública não tem a livre disposição dos bens e interesses públicos confiados à sua guarda e realização.", "alts": [], "tipo": "ce", "resp": "C", "com": ["uma pessoa tem disposição de um bem quando é o seu proprietário. Contudo, essa não é a realidade da administração ou de seus agentes. De acordo com José dos Santos Carvalho Filho, cabe aos agentes públicos apenas gerir e conservar o interesse público em prol da coletividade, essa sim a verdadeira titular dos direitos e interesses públicos. Dessa forma, a administração não possui livre disposição dos bens e interesses públicos, uma vez que atua em nome de terceiros, a coletividade. Logo, o item está certo."], "tema": "Supremacia e indisponibilidade", "rot": "Questão comentada 7", "nav": "7", "n": 16}, {"fonte": "Cebraspe – BDMG/2025", "enun": "O regime jurídico administrativo é constituído pelo conjunto das prerrogativas e restrições a que está sujeita a administração pública e que não se encontram nas relações entre particulares.", "alts": [], "tipo": "ce", "resp": "C", "com": ["o regime jurídico‐administrativo é formado por uma “balança”, tendo de um lado as prerrogativas (poderes) e de outro as sujeições (restrições). Dessa forma, ele é formado pelo binômio: supremacia do interesse público (prerrogativas) e indisponibilidade do interesse público (sujeições).", "As prerrogativas ou privilégios são regras, desconhecidas no direito privado, que colocam a administração em condições de superioridade nas relações com o particular. Por outro lado, o regime de direito privado, normalmente direcionado para os particulares, trata das relações individuais da população. Neste regime, não há aplicação das prerrogativas do poder público, colocando os indivíduos em igualdade de condições em suas relações jurídicas (horizontalidade)."], "tema": "Regime jurídico administrativo", "rot": "Questão comentada 8", "nav": "8", "n": 17}, {"fonte": "Cebraspe – ANM/2025", "enun": "A administração pública pode anular seus próprios atos, quando eivados de ilegalidade, independentemente de contraditório, mesmo quando interferirem na esfera jurídica de interesses individuais de seus administrados, haja vista a prevalência do interesse público sobre o privado e o princípio da legalidade.", "alts": [], "tipo": "ce", "resp": "E", "com": ["de acordo com o princípio da autotutela, a administração pode anular seus próprios atos, quando eivados de vícios que os tornam ilegais, ou revogá-los, por motivo de conveniência ou oportunidade. Entretanto, nos casos de atos individuais, que são os atos que afetam pessoas determinadas, é necessário oportunizar o contraditório e a ampla defesa, por meio de processo administrativo, às pessoas cujos interesses serão afetados negativamente em decorrência do desfazimento do ato."], "tema": "Autotutela", "rot": "Questão comentada 9", "nav": "9", "n": 18}, {"fonte": "Cebraspe – MPS/2025", "enun": "Constitui violação à CF a nomeação de cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, inclusive da autoridade nomeante ou de servidor da mesma pessoa jurídica investido em cargo de direção, chefia ou assessoramento, para o exercício de cargo em comissão ou de confiança ou, ainda, de função gratificada na administração pública direta e indireta em qualquer dos poderes da União, dos estados, do Distrito Federal e dos municípios, compreendido o ajuste mediante designações recíprocas.", "alts": [], "tipo": "ce", "resp": "C", "com": ["a afirmativa reproduz o disposto na Súmula Vinculante 13 do STF:", "A nomeação de cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, inclusive, da autoridade nomeante ou de servidor da mesma pessoa jurídica investido em cargo de direção, chefia ou assessoramento, para o exercício de cargo em comissão ou de confiança ou, ainda, de função gratificada na administração pública direta e indireta em qualquer dos Poderes da União, dos Estados, do Distrito Federal e dos Municípios, compreendido o ajuste mediante designações recíprocas, viola a Constituição Federal."], "tema": "Moralidade e nepotismo", "rot": "Questão comentada 10", "nav": "10", "n": 19}, {"fonte": "Cebraspe – MPS/2025", "enun": "A publicidade dos atos, programas, obras, serviços e campanhas dos órgãos públicos deverá ter caráter educativo, informativo ou de orientação social, admitida a veiculação de nomes, símbolos ou imagens dos agentes políticos responsáveis por sua implementação.", "alts": [], "tipo": "ce", "resp": "E", "com": ["na verdade, não é permitido constar nomes, símbolos ou imagens que caracterizem promoção pessoal de autoridades ou servidores públicos. Nesse sentido, o § 1º do art. 37 da CF/88 dispõe que:", "§ 1º - A publicidade dos atos, programas, obras, serviços e campanhas dos órgãos públicos deverá ter caráter educativo, informativo ou de orientação social, dela não podendo constar nomes, símbolos ou imagens que caracterizem promoção pessoal de autoridades ou servidores públicos."], "tema": "Impessoalidade", "rot": "Questão comentada 11", "nav": "11", "n": 20}, {"fonte": "Cebraspe – MPS/2025", "enun": "Órgãos e entidades da administração pública devem realizar avaliação das políticas públicas, o que pode ser considerado expressão do princípio da eficiência.", "alts": [], "tipo": "ce", "resp": "C", "com": ["o princípio da eficiência diz respeito a uma atuação da administração pública com excelência, fornecendo serviços públicos de qualidade à população, com o menor custo possível (desde que mantidos os padrões de qualidade) e no menor tempo.", "Ademais, a Constituição Federal dispõe que os órgãos e entidades da administração pública, individual ou conjuntamente, devem realizar avaliação das políticas públicas, inclusive com divulgação do objeto a ser avaliado e dos resultados alcançados, na forma da lei (CF, art. 37, § 16). Esse regramento foi inserido na Constituição por intermédio da Emenda Constitucional 109/2021, com o objetivo de evidenciar o foco da administração para os resultados, exigindo a efetividade das políticas públicas."], "tema": "Eficiência", "rot": "Questão comentada 12", "nav": "12", "n": 21}, {"fonte": "Cebraspe – InoversaSul/2025", "enun": "O princípio da publicidade impede de forma absoluta a existência de informações sigilosas que não possam ser fornecidas pela administração pública ao cidadão.", "alts": [], "tipo": "ce", "resp": "E", "com": ["a publicidade é a regra, mas não é um dever absoluto. Nessa linha, o art. 5º, XXXIII, da CF/88 determina que todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade, ressalvadas aquelas cujo sigilo seja imprescindível à segurança da sociedade e do Estado."], "tema": "Publicidade", "rot": "Questão comentada 13", "nav": "13", "n": 22}, {"fonte": "Cebraspe – InoversaSul/2025", "enun": "O princípio da eficiência obriga a administração pública a contratar considerando, com prioridade, o critério do menor preço ofertado.", "alts": [], "tipo": "ce", "resp": "E", "com": ["o princípio da eficiência determina que a administração pública busque fornecer serviços públicos de qualidade à população, no menor tempo, e com o menor custo possível, desde que mantidos os padrões de qualidade. Não necessariamente o critério adotado será o de menor preço, visto que, se o produto de menor preço tiver uma qualidade inferior, não será eficiente tal contratação."], "tema": "Eficiência", "rot": "Questão comentada 14", "nav": "14", "n": 23}, {"fonte": "Cebraspe – InoversaSul/2025", "enun": "A vedação ao nepotismo tem por base o princípio da moralidade administrativa.", "alts": [], "tipo": "ce", "resp": "C", "com": ["o princípio da moralidade, que também está previsto de forma expressa no caput do art. 37 da Constituição Federal, impõe que o administrador público não dispense os preceitos éticos que devem estar presentes em sua conduta.", "Com base nos princípios previstos no caput do art. 37, o Supremo Tribunal Federal firmou entendimento sobre a vedação do nepotismo na Administração Pública, sendo que o fundamento decorre diretamente da Constituição, não havendo necessidade de lei específica para disciplinar a vedação. Vejamos:", "Súmula Vinculante nº 13 - A nomeação de cônjuge, companheiro ou parente em linha reta, colateral ou por afinidade, até o terceiro grau, inclusive, da autoridade nomeante ou de servidor da mesma pessoa jurídica investido em cargo de direção, chefia ou assessoramento, para o exercício de cargo em comissão ou de confiança ou, ainda, de função gratificada na administração pública direta e indireta em qualquer dos Poderes da União, dos estados, do Distrito Federal e dos municípios, compreendido o ajuste mediante designações recíprocas, viola a Constituição Federal.", "Dessa forma, podemos considerar que os princípios constitucionais fundamentam diretamente a vedação ao nepotismo, especialmente os princípios da moralidade e da impessoalidade."], "tema": "Moralidade e nepotismo", "rot": "Questão comentada 15", "nav": "15", "n": 24}, {"fonte": "Cebraspe – TRF 6/2025", "enun": "O princípio da impessoalidade determina que a publicidade dos atos, programas, obras, serviços e campanhas dos órgãos públicos deverá ter caráter educativo, informativo ou de orientação social.", "alts": [], "tipo": "ce", "resp": "C", "com": ["o princípio da impessoalidade veda a pessoalização ou promoção pessoal do agente público pelos atos realizados e determina que a publicidade tenha caráter educativo, informativo ou de orientação social. Dessa forma, o § 1º do art. 37 da CF/88 dispõe:", "§ 1º - A publicidade dos atos, programas, obras, serviços e campanhas dos órgãos públicos deverá ter caráter educativo, informativo ou de orientação social, dela não podendo constar nomes, símbolos ou imagens que caracterizem promoção pessoal de autoridades ou servidores públicos.", "Portanto, a afirmativa está correta."], "tema": "Impessoalidade", "rot": "Questão comentada 16", "nav": "16", "n": 25}, {"fonte": "Cebraspe – TRF 6/2025", "enun": "A avaliação das políticas públicas realizada pelos órgãos e entidades da administração pública, inclusive com divulgação do objeto a ser avaliado e dos resultados alcançados, pode ser considerada um desdobramento do princípio da eficiência.", "alts": [], "tipo": "ce", "resp": "C", "com": ["de acordo com a CF/88, os órgãos e entidades da administração pública, individual ou conjuntamente, devem realizar avaliação das políticas públicas, inclusive com divulgação do objeto a ser avaliado e dos resultados alcançados, na forma da lei (CF, art. 37, § 16). Trata-se de um desdobramento do princípio da eficiência, que determina que a administração atue com excelência, fornecendo serviços públicos de qualidade à população, com o menor custo possível (desde que mantidos os padrões de qualidade) e no menor tempo."], "tema": "Eficiência", "rot": "Questão comentada 17", "nav": "17", "n": 26}, {"fonte": "Cebraspe – STJ/2024", "enun": "Com base no princípio da autotutela, a administração pública pode não só anular um ato administrativo por ilegalidade, como também revogar ato administrativo por motivos de conveniência.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O princípio da autotutela estabelece que a Administração Pública possui o poder de controlar os seus próprios atos, anulando-os quando ilegais ou revogando-os quando inconvenientes ou inoportunos. Assim, a Administração não precisa recorrer ao Poder Judiciário para corrigir os seus atos, podendo fazê-lo diretamente."], "tema": "Autotutela", "rot": "Questão comentada 18", "nav": "18", "n": 27}, {"fonte": "Cebraspe – STJ/2024", "enun": "A prática do nepotismo viola o princípio da moralidade, mesmo que não haja lei que expressamente a proíba.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O nepotismo é a nomeação de parentes de autoridades e políticos para exercerem cargos em comissão ou funções de confiança. O princípio da moralidade está previsto de forma expressa no caput do art. 37 da Constituição Federal de 1988 e impõe que o administrador público não dispense os preceitos éticos que devem estar presentes em sua conduta. Dessa forma, além da legalidade, os atos administrativos devem subordinar-se à moralidade administrativa.", "O Supremo Tribunal Federal firmou entendimento sobre a vedação do nepotismo na Administração Pública, afirmando que o fundamento decorre diretamente da Constituição, não havendo necessidade de lei específica para disciplinar a vedação (Súmula Vinculante nº 13)."], "tema": "Moralidade e nepotismo", "rot": "Questão comentada 19", "nav": "19", "n": 28}, {"fonte": "Cebraspe – PC PE/2024", "enun": "No que se refere aos princípios da administração pública, assinale a opção correta.", "alts": [["a", "O princípio da proporcionalidade impõe à administração pública permanente adequação entre os meios e os fins, de forma a evitar medidas abusivas."], ["b", "Os princípios explícitos guardam supremacia sobre os princípios implícitos, mesmo que ambos decorram da Constituição Federal."], ["c", "O princípio da legalidade na administração pública é aplicado de forma que esta somente pode praticar ato previsto em lei aprovada pelo Congresso Nacional."], ["d", "De acordo com o princípio constitucional da publicidade, todo ato da administração pública deve ser divulgado, não havendo exceção, em decorrência de seu dever de transparência."], ["e", "Devido ao princípio da supremacia do interesse público, não há aplicação do princípio da segurança jurídica na administração pública."]], "tipo": "mc", "resp": "a", "com": ["a) Certa. A adequação é um dos desdobramentos do princípio da proporcionalidade, significando que o meio empregado deve ser compatível com o fim desejado. Os meios devem ser efetivos para os resultados que se deseja alcançar. É a relação meio e fim. Por exemplo: não adianta desapropriar um imóvel para duplicar uma rodovia, se a via não vai passar no local do terreno.", "b) Errada. Não existe hierarquia entre os princípios. As questões, às vezes, afirmam (incorretamente) que os princípios expressos, ou a legalidade ou a supremacia são superiores aos demais. Mas não são! Os princípios são analisados em cada caso, a partir da ponderação, inexistindo qualquer hierarquia.", "c) Errada. O princípio da legalidade é analisado em sentido amplo, abrangendo ainda a Constituição, os demais atos primários (como as medidas provisórias, leis delegadas, resoluções etc) e os atos normativos secundários. Ademais, mesmo limitando somente aos atos primários (aqueles que podem inovar), ainda teríamos atos que não são editados pelo Congresso Nacional, como as medidas provisórias.", "d) Errada. Em regra, os atos da Administração devem ser divulgados, atendendo ao princípio da publicidade. Contudo, a Constituição admite o sigilo quando imprescindível à segurança da sociedade ou do Estado.", "e) Errada. O princípio da segurança jurídica admite a estabilidade das relações jurídicas, utilizando instrumentos como as súmulas vinculantes, a prescrição, a decadência e a vedação à aplicação retroativa de nova interpretação. Esse princípio é sim admitido na Administração Pública."], "tema": "Visão geral dos princípios", "rot": "Questão comentada 20", "nav": "20", "n": 29}];
+
+const FLASH = [
+ // Aula 00
+ ["a00","Regime de direito público × privado: tipo de relação","Público: relação <b>vertical</b> (o Estado tem poderes especiais). Privado: relação <b>horizontal</b> (igualdade entre as partes)."],
+ ["a00","A Administração pode se submeter ao direito privado?","Sim, mas <b>nunca integralmente</b>: continua sujeita a regras públicas (concurso, licitação, controle)."],
+ ["a00","Do que se compõe o regime jurídico administrativo?","Do binômio <b>prerrogativas</b> (supremacia do interesse público) e <b>sujeições</b> (indisponibilidade do interesse público)."],
+ ["a00","Princípios expressos × implícitos","Expressos: escritos de forma taxativa. Implícitos (reconhecidos): decorrem da doutrina e da jurisprudência. Implícito na Constituição pode ser expresso em lei."],
+ ["a00","A quem se aplicam os princípios do artigo 37?","Administração <b>direta e indireta</b>, de <b>todos os Poderes</b> e de <b>todas as esferas</b> (União, Estados, DF e Municípios)."],
+ ["a00","Existe hierarquia entre princípios?","<b>Não</b>. Em conflito aparente, faz-se ponderação no caso concreto."],
+ ["a00","Legalidade para a Administração × para o particular","Administração: só age quando a lei determina ou autoriza (<i>secundum legem</i>). Particular: pode tudo o que a lei não proíbe."],
+ ["a00","Legalidade × reserva legal","Reserva legal: certas matérias exigem <b>lei formal</b> (em sentido estrito). Legalidade: sujeição à lei em sentido amplo, inclusive atos secundários."],
+ ["a00","Exceções (restrições) à legalidade apontadas pela doutrina","Medidas provisórias, estado de defesa e estado de sítio."],
+ ["a00","O que é o princípio da juridicidade?","Ampliação da legalidade: o agente se sujeita a <b>todo o ordenamento</b>, inclusive aos princípios."],
+ ["a00","Os cinco sentidos da impessoalidade","Finalidade; validade dos atos do agente de fato; isonomia; vedação à promoção pessoal; impedimento e suspeição."],
+ ["a00","A moralidade depende da intenção do agente?","<b>Não</b>. É analisada de forma <b>objetiva</b>."],
+ ["a00","O nepotismo precisa de lei para ser proibido?","<b>Não</b>. Decorre diretamente da Constituição (Súmula Vinculante 13). Hoje também é improbidade (Lei 8.429/1992, artigo 11, inciso XI)."],
+ ["a00","Nepotismo: até que grau de parentesco?","Até o <b>terceiro grau</b>, em linha reta, colateral ou por afinidade, incluindo as <b>designações recíprocas</b>."],
+ ["a00","A publicação oficial é requisito de quê?","De <b>eficácia</b> do ato (e não de validade)."],
+ ["a00","A publicidade é absoluta?","<b>Não</b>. Ressalvam-se o sigilo imprescindível à segurança da sociedade e do Estado e os dados pessoais."],
+ ["a00","Pode-se divulgar nome e remuneração de servidores?","<b>Sim</b> (RE 652.777), mas não dados meramente pessoais, como CPF completo e endereço."],
+ ["a00","Quando a eficiência entrou no artigo 37?","Com a <b>Emenda Constitucional 19/1998</b> (reforma gerencial)."],
+ ["a00","Os dois aspectos da eficiência (Di Pietro)","Modo de <b>atuação do agente</b> e modo de <b>organizar, estruturar e disciplinar</b> a Administração."],
+ ["a00","Supremacia do interesse público: onde aparece?","Atributos dos atos, cláusulas exorbitantes, poder de polícia, desapropriação, servidão, tombamento. Não se aplica ao Estado-empresário."],
+ ["a00","Indisponibilidade do interesse público: exemplos","Dever de licitar, de fazer concurso, de prestar contas. Presente em <b>toda</b> atuação administrativa."],
+ ["a00","Elementos da proporcionalidade","<b>Adequação</b>, <b>necessidade</b> e <b>proporcionalidade em sentido estrito</b>."],
+ ["a00","Ato desarrazoado é inconveniente ou ilegal?","<b>Ilegal</b>: pode ser anulado, inclusive pelo Judiciário, sem invadir o mérito."],
+ ["a00","Especialidade × tutela","Especialidade: a entidade atua só nas finalidades da lei que a criou. Tutela: controle finalístico da direta sobre a indireta, nos limites da lei (vinculação, e não subordinação)."],
+ ["a00","Autotutela: o que a Administração pode fazer?","<b>Anular</b> atos ilegais e <b>revogar</b> atos inconvenientes ou inoportunos, sem recorrer ao Judiciário."],
+ ["a00","Prazo para anular atos favoráveis ao destinatário","<b>5 anos</b> da prática do ato, salvo comprovada <b>má-fé</b> (Lei 9.784/1999, artigo 54)."],
+ ["a00","A autotutela dispensa contraditório?","Não, quando afetar interesses individuais: exige contraditório, ampla defesa e motivação."],
+ ["a00","Exceção clássica ao dever de motivar","Exoneração de cargo em comissão (<i>ad nutum</i>)."],
+ ["a00","Quando a interrupção do serviço público é permitida?","Em emergência ou, após aviso prévio, por razões técnicas ou de segurança e por inadimplência do usuário."],
+ ["a00","Quem não pode fazer greve?","<b>Militares</b> (vedação constitucional) e <b>policiais civis</b> (entendimento do STF)."],
+ ["a00","Advogado é obrigatório no processo administrativo disciplinar?","<b>Não</b> (Súmula Vinculante 5)."],
+ ["a00","Segurança jurídica × proteção à confiança","Segurança jurídica: aspecto <b>objetivo</b> (estabilidade). Proteção à confiança: aspecto <b>subjetivo</b> (boa-fé)."],
+ ["a00","Nova interpretação de norma administrativa pode retroagir?","<b>Não</b> (Lei 9.784/1999, artigo 2º, parágrafo único, inciso XIII)."],
+ ["a00","O que é o princípio da intranscendência das sanções?","A sanção atinge só quem cometeu a irregularidade. O novo prefeito não sofre a penalidade pelo que o anterior fez."],
+ // Súmulas e leis
+ ["ref","Súmula 473 do STF","A Administração pode <b>anular</b> atos ilegais e <b>revogar</b> atos por conveniência ou oportunidade, respeitados os direitos adquiridos e ressalvada a apreciação judicial."],
+ ["ref","Súmula 346 do STF","A Administração Pública pode declarar a nulidade dos seus próprios atos."],
+ ["ref","Lei 9.784/1999, artigo 53","A Administração <b>deve</b> anular atos ilegais e <b>pode</b> revogá-los por conveniência ou oportunidade."],
+ ["ref","Princípios do artigo 2º da Lei 9.784/1999","Legalidade, finalidade, motivação, razoabilidade, proporcionalidade, moralidade, ampla defesa, contraditório, segurança jurídica, interesse público e eficiência."],
+ ["ref","Artigo 37, parágrafo 1º","A publicidade terá caráter educativo, informativo ou de orientação social, sem nomes, símbolos ou imagens que caracterizem promoção pessoal."],
+ ["ref","Artigo 37, parágrafo 16","Os órgãos e entidades devem avaliar as políticas públicas, divulgando o objeto e os resultados (Emenda Constitucional 109/2021)."],
+ // Panorama
+ ["pan","Entidades da administração indireta","Autarquias, fundações públicas, empresas públicas e sociedades de economia mista."],
+ ["pan","Desconcentração × descentralização","Desconcentração: distribuição de competências <b>dentro</b> da mesma pessoa jurídica (cria órgãos). Descentralização: transferência para <b>outra</b> pessoa."],
+ ["pan","Poderes administrativos","Vinculado, discricionário, hierárquico, disciplinar, regulamentar e de polícia."],
+ ["pan","Elementos (requisitos) do ato administrativo","Competência, finalidade, forma, motivo e objeto."],
+ ["pan","Atributos do ato administrativo","Presunção de legitimidade e veracidade, imperatividade, autoexecutoriedade e tipicidade."],
+ ["pan","Responsabilidade civil do Estado (artigo 37, parágrafo 6º)","<b>Objetiva</b>: pessoas de direito público e de direito privado prestadoras de serviço público respondem pelos danos de seus agentes, assegurado o regresso contra o responsável em caso de dolo ou culpa."]
+];
+
+/* ---------- mapa mental: cada item tem explicação, exemplo, base legal e pegadinha ---------- */
+const MM_ROOT = {k: "root", t: "REGIME JURÍDICO ADMINISTRATIVO", s: "Prerrogativas + sujeições<br><small>Supremacia e indisponibilidade do interesse público · Princípios expressos e implícitos</small>",
+  e: "O regime jurídico administrativo é o conjunto de regras de direito público que dá à Administração <b>prerrogativas</b> (para fazer prevalecer o interesse público) e lhe impõe <b>sujeições</b> (para que não disponha desse interesse como se fosse dono). Os princípios são os mandamentos que orientam e limitam toda essa atuação.",
+  x: "Como auditor fiscal da SEFAZ-DF, você poderá lavrar um auto de infração sem pedir licença ao contribuinte (prerrogativa), mas não poderá perdoar a dívida dele por conta própria nem deixar de motivar o lançamento (sujeições).",
+  l: "Constituição Federal, artigo 37; Lei 9.784/1999; doutrina de Di Pietro e Bandeira de Mello.",
+  p: "\"O regime jurídico administrativo abrange também as relações regidas pelo direito privado\": a doutrina restringe a expressão ao regime de direito público."};
+
+const MM = [
+ {k: "reg", c: "#2f5bd3", t: "Regime jurídico", s: "Público × privado",
+  e: "No regime <b>público</b>, a relação é vertical: o Estado pode impor obrigações e sanções. No <b>privado</b>, é horizontal: as partes negociam em igualdade. A Administração usa os dois, mas nunca se submete integralmente ao privado.",
+  x: "Uma empresa pública faz concurso para contratar empregados (direito público) e também contrata um financiamento bancário (direito privado).",
+  l: "Doutrina; exercício da teoria T1; questão comentada 8.",
+  p: "\"A Administração está sujeita apenas ao regime de direito público\": ERRADO.",
+  f: [
+   {k: "reg1", t: "Prerrogativas",
+    e: "Regras desconhecidas no direito privado que colocam a Administração em posição de superioridade, sempre para alcançar o interesse público.",
+    x: "Num contrato administrativo, a Administração pode alterar cláusulas unilateralmente, dentro dos limites da lei. Entre dois particulares, isso exigiria acordo.",
+    l: "Questão comentada 8; exercício da teoria T4.",
+    p: "As cláusulas exorbitantes decorrem diretamente da <b>supremacia</b> do interesse público: CERTO."},
+   {k: "reg2", t: "Sujeições",
+    e: "Restrições que diminuem a liberdade da Administração em comparação com o particular, sob pena de nulidade do ato ou responsabilização do agente.",
+    x: "Um particular escolhe livremente quem contratar; a Administração precisa, em regra, licitar e fazer concurso.",
+    l: "Doutrina citada na aula.",
+    p: "Sujeições estão ligadas à <b>indisponibilidade</b>, e não à supremacia."},
+   {k: "reg3", t: "Uso do direito privado é sempre parcial",
+    e: "Mesmo quando adota modelos privados, a Administração continua sujeita a regras públicas (concurso, licitação, controle, princípios).",
+    x: "Um banco estatal concorre no mercado como empresa privada, mas os empregados entram por concurso e as contas são fiscalizadas pelo Tribunal de Contas.",
+    l: "Doutrina citada na aula.",
+    p: "\"Quando aplica o direito privado, a Administração se iguala totalmente ao particular\": ERRADO."}
+  ]},
+ {k: "lim", c: "#1f8a4c", t: "Legalidade e impessoalidade", s: "Os dois primeiros do LIMPE",
+  e: "<b>Legalidade</b>: a Administração só atua quando a lei determina ou autoriza; o particular pode tudo o que a lei não proíbe. <b>Impessoalidade</b>: atuação sem favorecimentos, voltada ao interesse público, com cinco sentidos.",
+  x: "O fiscal só pode exigir do contribuinte a documentação que a lei ou o regulamento preveem (legalidade), e deve tratar igualmente dois contribuintes na mesma situação (impessoalidade).",
+  l: "Constituição Federal, artigos 5º, inciso II, e 37.",
+  p: "A banca mistura impessoalidade com publicidade: a vedação à promoção pessoal é <b>impessoalidade</b>.",
+  f: [
+   {k: "lim1", t: "Legalidade estrita e juridicidade",
+    e: "A Administração age <i>secundum legem</i> (nunca contra nem além da lei) e também deve obedecer aos atos normativos secundários. A <b>juridicidade</b> amplia a ideia: o agente se sujeita a todo o ordenamento, inclusive aos princípios.",
+    x: "Um ato que cumpre a lei mas fere a moralidade pode ser anulado, até pelo Judiciário, em nome da juridicidade.",
+    l: "Constituição Federal, artigo 37; doutrina.",
+    p: "Não confunda legalidade com <b>reserva legal</b>, que exige lei formal para certas matérias."},
+   {k: "lim2", t: "Exceções à legalidade",
+    e: "A doutrina aponta restrições excepcionais à legalidade: edição de medidas provisórias, decretação de estado de defesa e de estado de sítio.",
+    x: "No estado de sítio, a Administração pode restringir a liberdade de reunião sem uma lei ordinária específica para aquele caso.",
+    l: "Constituição Federal, artigos 62, 136 e 137 a 139.",
+    p: "Essas são as três exceções citadas pela doutrina."},
+   {k: "lim3", t: "Cinco sentidos da impessoalidade",
+    e: "Finalidade; validade dos atos do agente de fato; isonomia; vedação à promoção pessoal; impedimento e suspeição.",
+    x: "A placa de uma obra do GDF não pode trazer a foto do governador (vedação à promoção pessoal, artigo 37, parágrafo 1º).",
+    l: "Constituição Federal, artigo 37, parágrafo 1º; questões comentadas 1, 3, 11 e 16.",
+    p: "Questão comentada 1: atribuir a vedação à promoção pessoal ao \"princípio da adequação\" é ERRADO."}
+  ]},
+ {k: "mpe", c: "#b07400", t: "Moralidade, publicidade e eficiência", s: "Os três últimos do LIMPE",
+  e: "<b>Moralidade</b>: conduta ética, analisada objetivamente. <b>Publicidade</b>: publicação como requisito de eficácia e transparência, com exceções. <b>Eficiência</b>: qualidade, menor custo e menor tempo, incluída pela Emenda Constitucional 19/1998.",
+  x: "O Portal da Transparência do DF, que divulga salários de servidores, aplica a publicidade; a avaliação dos resultados de um programa de saúde aplica a eficiência.",
+  l: "Constituição Federal, artigo 37, caput e parágrafo 16.",
+  p: "\"A eficiência obriga a contratar pelo menor preço\": ERRADO (questão comentada 14).",
+  f: [
+   {k: "mpe1", t: "Moralidade e nepotismo",
+    e: "A moralidade é aferida de forma <b>objetiva</b>, independentemente da intenção do agente. Fundamenta a vedação ao nepotismo, que decorre diretamente da Constituição (Súmula Vinculante 13) e hoje também é ato de improbidade (Lei 8.429/1992, artigo 11, inciso XI).",
+    x: "Um secretário nomeia o sobrinho para cargo em comissão acreditando que ele é o mais competente: mesmo sem má intenção, há nepotismo (parente até o terceiro grau).",
+    l: "Súmula Vinculante 13; Lei 14.230/2021; questões comentadas 10, 15 e 19.",
+    p: "Para cargos de natureza política, o STF analisa caso a caso (falta de qualificação técnica ou troca de favores)."},
+   {k: "mpe2", t: "Publicidade: eficácia e transparência",
+    e: "A publicação oficial é requisito de <b>eficácia</b> (e não de validade). A transparência permite o controle social. A publicidade não é absoluta: há sigilo imprescindível à segurança da sociedade e do Estado e proteção de dados pessoais.",
+    x: "É legítimo publicar o nome do servidor e o valor que ele recebe, mas não o número completo do CPF nem o endereço (RE 652.777).",
+    l: "Constituição Federal, artigo 5º, inciso XXXIII; Lei 12.527/2011; questão comentada 13.",
+    p: "\"A publicidade impede de forma absoluta informações sigilosas\": ERRADO."},
+   {k: "mpe3", t: "Eficiência",
+    e: "Dois aspectos (Di Pietro): o modo de <b>atuação do agente</b> (melhor desempenho possível) e o modo de <b>organizar</b> a Administração (gestão gerencial, controle por resultados). Deve conviver com os demais princípios.",
+    x: "A avaliação especial de desempenho para adquirir estabilidade e a avaliação de políticas públicas (artigo 37, parágrafo 16) são expressões da eficiência.",
+    l: "Emenda Constitucional 19/1998; Constituição Federal, artigo 37, parágrafo 16; questões comentadas 12 e 17.",
+    p: "Ser eficiente não autoriza desrespeitar a legalidade para obter resultados."}
+  ]},
+ {k: "sup", c: "#8a3ac2", t: "Supremacia e indisponibilidade", s: "Os pilares do regime",
+  e: "A <b>supremacia</b> do interesse público sobre o privado fundamenta as prerrogativas; a <b>indisponibilidade</b> fundamenta as sujeições. São os dois princípios-base do regime jurídico administrativo.",
+  x: "O DF pode desapropriar um terreno para construir uma escola, pagando indenização (supremacia); mas o administrador não pode doar esse terreno a um amigo (indisponibilidade).",
+  l: "Bandeira de Mello; questões comentadas 6 e 7.",
+  p: "\"O interesse público se opõe necessariamente ao privado\": ERRADO. A nomeação de um médico aprovado atende aos dois.",
+  f: [
+   {k: "sup1", t: "Onde a supremacia aparece",
+    e: "Atributos dos atos (presunção de veracidade e legitimidade, imperatividade), cláusulas exorbitantes, poder de polícia e intervenção na propriedade (desapropriação, servidão, tombamento, ocupação temporária). Toda restrição ao particular depende de lei.",
+    x: "A vigilância sanitária interdita um restaurante sem autorização judicial prévia, com base no poder de polícia.",
+    l: "Doutrina citada na aula.",
+    p: "Não se invoca a supremacia quando o Estado age como empresário ou em contratos de locação e seguro."},
+   {k: "sup2", t: "Indisponibilidade",
+    e: "O agente apenas gere o interesse público, cujo titular é a coletividade. Por isso há licitação, concurso, prestação de contas. Está presente em <b>toda</b> atuação administrativa.",
+    x: "Uma estatal que explora atividade econômica não invoca supremacia contra o consumidor, mas continua obrigada a fazer concurso: a indisponibilidade não some.",
+    l: "Carvalho Filho; questão comentada 7.",
+    p: "A administração <b>não tem a livre disposição</b> dos bens e interesses públicos: CERTO."},
+   {k: "sup3", t: "Razoabilidade e proporcionalidade",
+    e: "Proíbem excessos: restrições e sanções só na medida necessária ao interesse público. A proporcionalidade tem três elementos: <b>adequação</b>, <b>necessidade</b> e <b>proporcionalidade em sentido estrito</b>. Ato desproporcional é <b>ilegal</b> e pode ser anulado pelo Judiciário.",
+    x: "Aplicar a pena máxima de demissão a um servidor que atrasou um relatório uma única vez seria desproporcional.",
+    l: "Lei 9.784/1999, artigo 2º, parágrafo único, inciso VI; exercício da teoria T5; questão comentada 20.",
+    p: "O controle da razoabilidade não invade o mérito: o ato desarrazoado é ilegal, e não apenas inconveniente."}
+  ]},
+ {k: "aut", c: "#c23a3a", t: "Autotutela e tutela", s: "Controle dos atos",
+  e: "<b>Autotutela</b>: a Administração controla os próprios atos, anulando os ilegais e revogando os inconvenientes. <b>Tutela</b>: a administração direta controla a finalidade das entidades da indireta, nos limites da lei.",
+  x: "A SEFAZ percebe que concedeu um benefício fiscal sem amparo legal e o anula, depois de ouvir o contribuinte (autotutela). O Ministério da Previdência verifica se o INSS cumpre sua finalidade (tutela).",
+  l: "Súmulas 346 e 473 do STF; Lei 9.784/1999, artigos 53 e 54; exercício da teoria T6.",
+  p: "Tutela não é subordinação: entre direta e indireta há <b>vinculação</b>.",
+  f: [
+   {k: "aut1", t: "Anular × revogar",
+    e: "<b>Anula-se</b> o ato <b>ilegal</b> (a Administração de ofício ou por provocação; o Judiciário só por provocação). <b>Revoga-se</b> o ato <b>legal mas inconveniente</b> (só a própria Administração).",
+    x: "Uma licença dada sem cumprir requisitos legais é anulada; uma permissão de uso de praça que deixou de ser conveniente é revogada.",
+    l: "Súmula 473 do STF; Lei 9.784/1999, artigo 53; questões comentadas 5 e 18.",
+    p: "O Judiciário não revoga atos de outro Poder."},
+   {k: "aut2", t: "Limites: decadência e contraditório",
+    e: "O direito de anular atos favoráveis aos destinatários <b>decai em 5 anos</b>, salvo comprovada má-fé. E, quando o desfazimento afeta interesses individuais, é preciso garantir <b>contraditório e ampla defesa</b> e motivar o ato.",
+    x: "Uma gratificação paga por erro há seis anos a um servidor de boa-fé não pode mais ser anulada.",
+    l: "Lei 9.784/1999, artigos 50 e 54; questões comentadas 4 e 9.",
+    p: "\"A autotutela dispensa contraditório mesmo afetando interesses individuais\": ERRADO."},
+   {k: "aut3", t: "Especialidade e tutela",
+    e: "Pela <b>especialidade</b>, cada entidade da indireta atua só nas finalidades da lei que a criou (artigo 37, inciso XIX). A <b>tutela</b> existe para garantir essa especialidade, e só pode ser exercida nos limites da lei.",
+    x: "Uma autarquia criada para cuidar da previdência não pode passar a vender imóveis por decisão do seu presidente.",
+    l: "Constituição Federal, artigo 37, inciso XIX.",
+    p: "O controle não se presume: a regra é a autonomia da entidade."}
+  ]},
+ {k: "out", c: "#0f7c8c", t: "Outros princípios implícitos", s: "Motivação, continuidade, defesa, segurança",
+  e: "Além dos já vistos, a aula destaca a motivação, a continuidade do serviço público, o contraditório e a ampla defesa e a segurança jurídica com proteção à confiança, entre outros.",
+  x: "Uma decisão que nega o pedido de restituição de um contribuinte precisa expor fatos e fundamentos (motivação) e deixar que ele recorra (ampla defesa).",
+  l: "Lei 9.784/1999, artigo 2º; Constituição Federal, artigo 5º, incisos LIV e LV.",
+  p: "Implícito na Constituição pode ser expresso em lei, como na Lei 9.784/1999.",
+  f: [
+   {k: "out1", t: "Motivação e continuidade",
+    e: "<b>Motivação</b>: em regra, atos vinculados e discricionários devem ser motivados; exceção clássica é a exoneração de cargo em comissão (<i>ad nutum</i>). <b>Continuidade</b>: o serviço não pode parar, mas admite interrupção em emergência ou, com aviso prévio, por razões técnicas, de segurança ou inadimplência.",
+    x: "A companhia de energia pode cortar a luz de quem não paga, depois de avisar; mas militares e policiais civis não podem fazer greve.",
+    l: "Lei 8.987/1995, artigo 6º, parágrafo 3º; Constituição Federal, artigo 142, inciso IV; exercício da teoria T9.",
+    p: "A continuidade se relaciona com a <b>supremacia</b> e com a <b>eficiência</b>."},
+   {k: "out2", t: "Contraditório e ampla defesa",
+    e: "Asseguram ao interessado conhecer as alegações, contestá-las e produzir provas. A defesa técnica é facultativa no processo disciplinar.",
+    x: "Um servidor responde a processo disciplinar sem advogado e se defende sozinho: o processo é válido (Súmula Vinculante 5).",
+    l: "Constituição Federal, artigo 5º, inciso LV; Súmula Vinculante 5; exercício da teoria T7.",
+    p: "\"A presença de advogado é imprescindível, sob pena de nulidade\": ERRADO."},
+   {k: "out3", t: "Segurança jurídica e proteção à confiança",
+    e: "Estabilidade das relações (objetivo) e boa-fé do administrado (subjetivo). Fundamenta prescrição, decadência, súmulas vinculantes e a <b>vedação da aplicação retroativa de nova interpretação</b>.",
+    x: "Se a SEFAZ muda o entendimento sobre um benefício, o novo entendimento vale daí em diante; não pode cobrar de volta o que foi pago com base na interpretação antiga.",
+    l: "Lei 9.784/1999, artigo 2º, parágrafo único, inciso XIII; exercício da teoria T8; questão comentada 2.",
+    p: "\"Nova interpretação pode retroagir para atender o interesse público\": ERRADO."}
+  ]}
+];
+
+function mmItens(){
+  const out = [MM_ROOT];
+  MM.forEach(b => { out.push(b); b.f.forEach(f => out.push(Object.assign({c: b.c, pai: b.t}, f))); });
+  return out;
+}
+function renderMapa(){
+  $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
+    <div class="mm-trunk"></div>
+    <div class="mm-branches" style="--n:${MM.length}">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+      <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
+      <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
+    el.onclick = () => abrirItem(el.dataset.k);
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirItem(el.dataset.k); } };
+  });
+  abbrify($("#mmBox"));
+}
+function abrirItem(k){
+  const itens = mmItens(), i = itens.findIndex(x => x.k === k), it = itens[i];
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", el.dataset.k === k));
+  const p = $("#mmPanel");
+  p.style.setProperty("--c", it.c || "var(--accent)");
+  p.innerHTML = `<div class="muted" style="font-size:13px">${it.pai ? "Mapa › " + it.pai : "Mapa"}</div>
+    <h4>${it.t}</h4>
+    <div class="mm-sec"><span class="lbl">Explicação</span>${it.e}</div>
+    <div class="mm-sec ex"><span class="lbl">Exemplo prático</span>${it.x}</div>
+    <div class="mm-sec"><span class="lbl">Base legal e jurisprudência</span>${it.l}</div>
+    <div class="mm-sec pg"><span class="lbl">Pegadinha da banca</span>${it.p}</div>
+    <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
+      <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
+  abbrify(p);
+  $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
+  $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
+  const r = p.getBoundingClientRect();
+  if (r.top < 120 || r.top > innerHeight - 160) p.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+/* ---------- glossário: toda sigla ganha dica com o nome por extenso ---------- */
+const GLOSS = {
+ "CF/88": "Constituição Federal de 1988", "CF": "Constituição Federal de 1988",
+ "CTN": "Código Tributário Nacional (Lei 5.172/1966)", "STF": "Supremo Tribunal Federal", "STJ": "Superior Tribunal de Justiça",
+ "LC": "Lei Complementar", "MP": "Medida Provisória", "EC": "Emenda Constitucional", "DL": "Decreto-Lei",
+ "ADCT": "Ato das Disposições Constitucionais Transitórias", "CLT": "Consolidação das Leis do Trabalho",
+ "ADI": "Ação Direta de Inconstitucionalidade", "RE": "Recurso Extraordinário", "RREE": "Recursos Extraordinários",
+ "REsp": "Recurso Especial", "HC": "Habeas Corpus", "AgR": "Agravo Regimental",
+ "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "ISS": "Imposto sobre Serviços", "ISSQN": "Imposto sobre Serviços de Qualquer Natureza",
+ "IPTU": "Imposto sobre a Propriedade Predial e Territorial Urbana", "ITBI": "Imposto sobre a Transmissão de Bens Imóveis",
+ "ITCMD": "Imposto sobre Transmissão Causa Mortis e Doação", "IPVA": "Imposto sobre a Propriedade de Veículos Automotores",
+ "IE": "Imposto de Exportação", "IR": "Imposto de Renda", "IRPF": "Imposto de Renda da Pessoa Física", "IRPJ": "Imposto de Renda da Pessoa Jurídica",
+ "IPI": "Imposto sobre Produtos Industrializados", "IOF": "Imposto sobre Operações Financeiras", "ITR": "Imposto sobre a Propriedade Territorial Rural",
+ "IGF": "Imposto sobre Grandes Fortunas", "IS": "Imposto Seletivo", "IEG": "Imposto Extraordinário de Guerra",
+ "IBS": "Imposto sobre Bens e Serviços", "CBS": "Contribuição sobre Bens e Serviços", "IVA": "Imposto sobre Valor Agregado",
+ "CIDE": "Contribuição de Intervenção no Domínio Econômico", "COSIP": "Contribuição para o Custeio do Serviço de Iluminação Pública",
+ "COFINS": "Contribuição para o Financiamento da Seguridade Social", "CSLL": "Contribuição Social sobre o Lucro Líquido",
+ "PIS": "Programa de Integração Social", "PASEP": "Programa de Formação do Patrimônio do Servidor Público",
+ "RPPS": "Regime Próprio de Previdência Social", "RGPS": "Regime Geral de Previdência Social",
+ "CVM": "Comissão de Valores Mobiliários", "AFRMM": "Adicional ao Frete para a Renovação da Marinha Mercante",
+ "SEBRAE": "Serviço Brasileiro de Apoio às Micro e Pequenas Empresas", "INCRA": "Instituto Nacional de Colonização e Reforma Agrária",
+ "SESC": "Serviço Social do Comércio", "SENAC": "Serviço Nacional de Aprendizagem Comercial", "SENAI": "Serviço Nacional de Aprendizagem Industrial",
+ "OAB": "Ordem dos Advogados do Brasil", "CRC": "Conselho Regional de Contabilidade", "CREA": "Conselho Regional de Engenharia e Agronomia",
+ "CRM": "Conselho Regional de Medicina", "CRA": "Conselho Regional de Administração", "IBAMA": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis",
+ "TCFA": "Taxa de Controle e Fiscalização Ambiental", "TFA": "Taxa de Fiscalização de Anúncios", "TFLF": "Taxa de Fiscalização, Localização e Funcionamento",
+ "TLLF": "Taxa de Licença de Localização e Funcionamento", "ZFM": "Zona Franca de Manaus", "PAF": "Processo Administrativo Fiscal",
+ "DF": "Distrito Federal", "SEFAZ": "Secretaria de Estado de Fazenda", "SEEC": "Secretaria de Estado de Economia",
+ "CEBRASPE": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos (banca)", "CESPE": "Centro de Seleção e de Promoção de Eventos (atual CEBRASPE)",
+ "PGFN": "Procuradoria-Geral da Fazenda Nacional", "AGU": "Advocacia-Geral da União", "RFB": "Receita Federal do Brasil",
+ "CAGE": "Contadoria e Auditoria-Geral do Estado", "CGE": "Controladoria-Geral do Estado", "TCE": "Tribunal de Contas do Estado",
+ "PGE": "Procuradoria-Geral do Estado", "STM": "Superior Tribunal Militar", "PF": "Polícia Federal", "PC": "Polícia Civil",
+ "ANM": "Agência Nacional de Mineração", "CAU": "Conselho de Arquitetura e Urbanismo", "INPI": "Instituto Nacional da Propriedade Industrial",
+ "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos", "EMBRAPA": "Empresa Brasileira de Pesquisa Agropecuária",
+ "CAGEPA": "Companhia de Água e Esgotos da Paraíba", "SEPLAN": "Secretaria de Planejamento", "APO": "Analista de Planejamento e Orçamento",
+ "PPNT": "Processo seletivo público (Petrobras)", "ATT": "Auditor Técnico de Tributos", "AFRE": "Auditor Fiscal da Receita Estadual",
+ "AFE": "Auditor Fiscal Estadual",
+ "art.": "artigo", "arts.": "artigos", "Art.": "artigo", "§": "parágrafo", "c/c": "combinado com", "nº": "número", "n.º": "número",
+ "Proc": "Procurador", "Pref": "Prefeitura", "Rel.": "Relator", "Min.": "Ministro", "Súm.": "Súmula", "SV": "Súmula Vinculante",
+ "LIMPE": "Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência", "MPE": "Ministério Público Estadual", "CE": "Ceará", "TRT": "Tribunal Regional do Trabalho", "BDMG": "Banco de Desenvolvimento de Minas Gerais", "MPS": "Ministério da Previdência Social", "TRF": "Tribunal Regional Federal", "TCDF": "Tribunal de Contas do Distrito Federal", "SEGEP": "Secretaria de Estado da Gestão e Previdência", "TRE": "Tribunal Regional Eleitoral", "BA": "Bahia", "RS": "Rio Grande do Sul", "INSS": "Instituto Nacional do Seguro Social", "ADI": "Ação Direta de Inconstitucionalidade", "RCL": "Reclamação", "ARE": "Recurso Extraordinário com Agravo",
+ "FG": "fato gerador", "BC": "base de cálculo", "LO": "lei ordinária"
+};
+const GLOSS_RE = new RegExp("(?<![\\wÀ-ÿ])(" + Object.keys(GLOSS).sort((a, b) => b.length - a.length)
+  .map(s => s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")).join("|") + ")(?![\\wÀ-ÿ])", "g");
+function abbrify(root){
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+    n.parentElement.closest("abbr,script,style,select,option,kbd") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => {
+    const s = n.nodeValue; GLOSS_RE.lastIndex = 0;
+    if (!GLOSS_RE.test(s)) return;
+    const frag = document.createDocumentFragment(); let last = 0; GLOSS_RE.lastIndex = 0; let m;
+    while ((m = GLOSS_RE.exec(s))){
+      frag.append(s.slice(last, m.index));
+      const a = document.createElement("abbr"); a.textContent = m[1]; a.dataset.tip = GLOSS[m[1]]; a.setAttribute("aria-label", GLOSS[m[1]]);
+      frag.append(a); last = m.index + m[1].length;
+    }
+    frag.append(s.slice(last)); n.replaceWith(frag);
+  });
+}
+/* dica posicionada acima da sigla, sem cobrir o texto nem ficar sob o cursor */
+(() => {
+  const tip = () => document.getElementById("tip");
+  function show(el){
+    const t = tip(); t.textContent = el.dataset.tip; t.classList.add("on");
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 8) y = r.bottom + 8;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("mouseover", e => { const a = e.target.closest("abbr[data-tip]"); if (a) show(a); });
+  document.addEventListener("mouseout", e => { if (e.target.closest("abbr[data-tip]")) tip().classList.remove("on"); });
+  document.addEventListener("click", e => { const a = e.target.closest("abbr[data-tip]"); if (a){ show(a); setTimeout(() => tip().classList.remove("on"), 2500); } });
+  addEventListener("scroll", () => tip().classList.remove("on"), {passive: true});
+})();
+
+const KEY = "sefazdf_T6_diradm_aula00_v1";
+/* respostas já resolvidas, embutidas na publicação (usadas só se este navegador ainda não tiver dados) */
+const RESPOSTAS_INICIAIS = null;
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || (RESPOSTAS_INICIAIS ? structuredClone(RESPOSTAS_INICIAIS) : null) || {answers:{}, cards:{}};
+S.answers ||= {}; S.cards ||= {}; S.draft ||= {};
+const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* abas */
+function showTab(t){
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("on", s.id === t));
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  if (t === "rend") renderRend();
+  if (t === "flash") renderCard();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+const active = () => document.querySelector("section.tab.on").id;
+
+/* questões */
+const TEMAS = [...new Set(QUESTOES.map(q => q.tema))];
+$("#fTema").innerHTML = '<option value="all">Todos os temas</option>' + TEMAS.map(t => `<option>${esc(t)}</option>`).join("");
+let cur = 0;
+
+function visible(){
+  const t = $("#fTema").value, st = $("#fStatus").value;
+  return QUESTOES.map((q, i) => i).filter(i => {
+    const q = QUESTOES[i], a = S.answers[q.n];
+    if (t !== "all" && q.tema !== t) return false;
+    if (st === "pend") return !a;
+    if (st === "bad") return a && !a.ok;
+    if (st === "ok") return a && a.ok;
+    return true;
+  });
+}
+function fmtCom(p){
+  return esc(p).replace(/^(Letra [A-E]|Item [IVX]+|Alternativa [A-E]|Assertiva [IVX]+)(:?)/, "<b>$1$2</b>");
+}
+function renderQ(){
+  const vis = visible();
+  const done = Object.keys(S.answers).length;
+  $("#qProg").style.width = (100 * done / QUESTOES.length) + "%";
+  $("#navQ").textContent = `${done}/${QUESTOES.length}`;
+  $("#qNav").innerHTML = vis.map(i => {
+    const a = S.answers[QUESTOES[i].n];
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].nav || QUESTOES[i].n}</button>`;
+  }).join("");
+  $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
+  if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
+  if (!vis.includes(cur)) cur = vis[0];
+  const q = QUESTOES[cur], a = S.answers[q.n];
+  const d = draft(q.n);
+  const st = v => a ? "" : (d.desc.includes(v) ? "desc" : d.sel === v ? "sel" : "");
+  let opts;
+  if (q.tipo === "ce"){
+    opts = '<div class="ce">' + [["C","Certo"],["E","Errado"]].map(([v, l]) => {
+      let cls = "";
+      if (a){ if (v === q.resp) cls = "right"; else if (v === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(v)}" data-v="${v}" ${a ? "disabled" : ""}>${l}</button>`;
+    }).join("") + "</div>";
+  } else {
+    opts = q.alts.map(([l, t]) => {
+      let cls = "";
+      if (a){ if (l === q.resp) cls = "right"; else if (l === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(l)}" data-v="${l}" ${a ? "disabled" : ""}><span class="l">${l})</span><span>${esc(t)}</span></button>`;
+    }).join("");
+  }
+  const pos = vis.indexOf(cur) + 1;
+  let com = "";
+  if (a){
+    const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
+    com = `<div class="coment"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+      ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
+  }
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    <div class="enun">${esc(q.enun)}</div>
+    ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
+    ${opts}
+    ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
+    ${com}`;
+  abbrify($("#qCard"));
+  let clickTimer = null;
+  $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
+    b.ondblclick = e => { e.preventDefault(); clearTimeout(clickTimer); descartar(b.dataset.v); };
+  });
+  if ($("#qSubmit")) $("#qSubmit").onclick = submeter;
+  $("#qPrev").disabled = pos <= 1;
+  $("#qNext").textContent = pos >= vis.length ? "Ver rendimento →" : "Próxima →";
+}
+function draft(n){
+  S.draft ||= {};
+  return S.draft[n] ||= {sel: null, desc: []};
+}
+function opcoes(q){ return q.tipo === "ce" ? ["C", "E"] : q.alts.map(x => x[0]); }
+function escolher(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)){ msg("warn", "Essa opção está descartada. Clique duas vezes nela para recuperá-la antes de escolher."); return; }
+  d.sel = d.sel === v ? null : v; save(); renderQ();
+}
+function descartar(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)) d.desc = d.desc.filter(x => x !== v);
+  else { d.desc.push(v); if (d.sel === v) d.sel = null; }
+  save(); renderQ();
+  if (d.desc.length === opcoes(q).length) msg("warn", "Você descartou todas as opções. Clique duas vezes em uma delas para recuperá-la e poder responder.");
+}
+function msg(tipo, texto){
+  const m = $("#qMsg"); if (!m) return;
+  m.className = "qmsg on " + tipo; m.textContent = texto;
+}
+function submeter(){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n), todas = opcoes(q);
+  if (d.desc.length === todas.length) return msg("bad", "Você marcou todas as opções como descartadas. Recupere uma (clique duas vezes) e selecione-a antes de responder.");
+  if (!d.sel) return msg("bad", "Você não selecionou nenhuma resposta. Clique em uma opção e depois em Responder.");
+  answer(d.sel);
+}
+function answer(v){
+  const q = QUESTOES[cur];
+  if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  S.answers[q.n] = {sel: v, ok: v === q.resp, desc: d.desc.slice(), ts: Date.now()};
+  delete S.draft[q.n];
+  save(); renderQ();
+  $("#qCard .coment")?.scrollIntoView({behavior: "smooth", block: "nearest"});
+  if (Object.keys(S.answers).length === QUESTOES.length){
+    setTimeout(() => { if (confirmFinish()) showTab("rend"); }, 50);
+  }
+}
+let finishedShown = false;
+function confirmFinish(){ if (finishedShown) return false; finishedShown = true; return true; }
+function step(d){
+  const vis = visible(), p = vis.indexOf(cur);
+  if (d > 0 && p >= vis.length - 1){ showTab("rend"); return; }
+  const np = Math.min(Math.max(p + d, 0), vis.length - 1);
+  cur = vis[np]; renderQ(); $("#qCard").scrollIntoView({block: "nearest"});
+}
+$("#qPrev").onclick = () => step(-1);
+$("#qNext").onclick = () => step(1);
+$("#fTema").onchange = $("#fStatus").onchange = () => { cur = -1; renderQ(); };
+
+/* flashcards */
+let deck = [], fcI = 0;
+FLASH.forEach((c, i) => c.id = "f" + i);
+function buildDeck(shuffle){
+  const d = $("#fcDeck").value;
+  deck = FLASH.filter(c => d === "all" || c[0] === d);
+  const box = c => (S.cards[c.id] || {box: 1}).box;
+  deck = deck.map(c => [c, Math.random()]).sort((x, y) => shuffle ? x[1] - y[1] : (box(x[0]) - box(y[0])) || (x[1] - y[1])).map(x => x[0]);
+  fcI = 0; renderCard();
+}
+function renderCard(){
+  if (!deck.length) buildDeck();
+  const c = deck[fcI];
+  $("#fc").classList.remove("flip");
+  $("#fcQ").innerHTML = c[1];
+  $("#fcA").innerHTML = c[2];
+  const b = (S.cards[c.id] || {box: 1}).box;
+  $("#fcPos").textContent = `Cartão ${fcI + 1} de ${deck.length}`;
+  $("#fcBox").textContent = `Caixa ${b}`;
+  const cnt = [0, 0, 0, 0, 0];
+  deck.forEach(x => cnt[((S.cards[x.id] || {box: 1}).box) - 1]++);
+  abbrify($("#fcQ")); abbrify($("#fcA"));
+  $("#fcBoxes").innerHTML = cnt.map((n, i) => `<span>Caixa ${i + 1}: ${n}</span>`).join("");
+}
+function grade(g){
+  const c = deck[fcI], st = S.cards[c.id] || {box: 1};
+  st.box = g === 0 ? 1 : g === 1 ? Math.max(1, st.box) : Math.min(5, st.box + 1);
+  st.seen = (st.seen || 0) + 1; S.cards[c.id] = st; save();
+  fcI = (fcI + 1) % deck.length; renderCard();
+}
+$("#fc").onclick = () => $("#fc").classList.toggle("flip");
+$("#fcBad").onclick = () => grade(0);
+$("#fcMid").onclick = () => grade(1);
+$("#fcOk").onclick = () => grade(2);
+$("#fcDeck").onchange = () => buildDeck();
+$("#fcShuffle").onclick = () => buildDeck(true);
+$("#fcReset").onclick = () => { if (confirm("Zerar as caixas de todos os flashcards?")){ S.cards = {}; save(); buildDeck(); } };
+
+/* rendimento */
+function renderRend(){
+  const ans = S.answers, n = QUESTOES.length, done = QUESTOES.filter(q => ans[q.n]);
+  const ok = done.filter(q => ans[q.n].ok).length;
+  if (!done.length){ $("#rendBody").innerHTML = '<div class="card"><p class="muted">Você ainda não respondeu nenhuma questão. Vá para a aba <b>Questões</b>.</p></div>'; return; }
+  const pct = Math.round(100 * ok / done.length);
+  const ce = done.filter(q => q.tipo === "ce"), ceOk = ce.filter(q => ans[q.n].ok).length, ceBad = ce.length - ceOk;
+  const mc = done.filter(q => q.tipo === "mc"), mcOk = mc.filter(q => ans[q.n].ok).length;
+  const complete = done.length === n;
+  const msg = pct >= 85 ? ["ok", "Excelente! Acima da meta de 80% do seu plano."] : pct >= 70 ? ["warn", "Bom, mas abaixo da meta de 80%. Revise os temas em amarelo e vermelho."] : ["bad", "Abaixo de 70%. Releia o Resumo dos temas fracos antes de refazer as erradas."];
+  const byT = TEMAS.map(t => {
+    const qs = done.filter(q => q.tema === t), o = qs.filter(q => ans[q.n].ok).length;
+    return {t, tot: QUESTOES.filter(q => q.tema === t).length, d: qs.length, o, p: qs.length ? Math.round(100 * o / qs.length) : null};
+  }).sort((a, b) => (a.p ?? 101) - (b.p ?? 101));
+  const wrong = done.filter(q => !ans[q.n].ok);
+  $("#rendBody").innerHTML = `
+    ${complete ? "" : `<div class="call warn"><b>Resultado parcial</b>Você respondeu ${done.length} de ${n}. O rendimento final aparece quando terminar todas.</div>`}
+    <div class="grid3">
+      <div class="card"><div class="muted">Aproveitamento</div><div class="big" style="color:var(--${pct >= 80 ? "ok" : pct >= 70 ? "warn" : "bad"})">${pct}%</div><div class="muted">${ok} certas de ${done.length}</div></div>
+      <div class="card"><div class="muted">Certo/Errado (nota CEBRASPE)</div><div class="big">${ceOk - ceBad}</div><div class="muted">${ceOk} certas − ${ceBad} erradas, em ${ce.length} itens</div></div>
+      <div class="card"><div class="muted">Múltipla escolha</div><div class="big">${mc.length ? Math.round(100 * mcOk / mc.length) : 0}%</div><div class="muted">${mcOk} de ${mc.length}</div></div>
+    </div>
+    <div class="call ${msg[0]}"><b>Diagnóstico</b>${msg[1]}</div>
+    <h3>Desempenho por tema (do mais fraco ao mais forte)</h3>
+    <div class="card">${byT.map(r => `<div class="bar"><span>${esc(r.t)}</span><div class="t"><div class="${r.p === null ? "" : r.p < 70 ? "low" : r.p < 85 ? "mid" : ""}" style="width:${r.p ?? 0}%"></div></div><span>${r.p === null ? "—" : r.p + "%"} <small class="muted">${r.o}/${r.d}</small></span></div>`).join("")}</div>
+    <h3>Questões erradas (${wrong.length})</h3>
+    <div class="card">${wrong.length ? wrong.map(q => `<div style="margin:6px 0"><a href="#" data-n="${q.n}">Q${q.n}</a> · <span class="pill">${esc(q.tema)}</span> <span class="muted">${esc(q.enun.slice(-120).replace(/^\S*\s/, "…"))}</span></div>`).join("") : '<p class="muted">Nenhuma! 🎯</p>'}</div>`;
+  abbrify($("#rendBody"));
+  $("#rendBody").querySelectorAll("a[data-n]").forEach(a => a.onclick = e => {
+    e.preventDefault(); $("#fTema").value = "all"; $("#fStatus").value = "all";
+    cur = QUESTOES.findIndex(q => q.n === +a.dataset.n); showTab("questoes"); renderQ();
+  });
+}
+$("#expBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `T2_dirtrib_respostas_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+};
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; save(); renderQ(); renderRend(); });
+};
+$("#redoBad").onclick = () => {
+  const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
+  if (!bad.length) return;
+  bad.forEach(k => delete S.answers[k]); save(); finishedShown = false;
+  $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
+};
+$("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* teclado */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase(), tab = active();
+  if (tab === "questoes"){
+    const q = QUESTOES[cur];
+    if (k === "arrowright") step(1);
+    else if (k === "arrowleft") step(-1);
+    else if (q && !S.answers[q.n]){
+      const v = q.tipo === "ce" ? k.toUpperCase() : k;
+      if (k === "enter"){ e.preventDefault(); submeter(); }
+      else if (opcoes(q).includes(v)){ e.shiftKey ? descartar(v) : escolher(v); }
+    }
+  } else if (tab === "flash"){
+    if (k === " "){ e.preventDefault(); $("#fc").classList.toggle("flip"); }
+    else if (k === "1") grade(0); else if (k === "2") grade(1); else if (k === "3") grade(2);
+  }
+});
+
+renderMapa();
+["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
+cur = 0; renderQ(); buildDeck();
+</script>
+</body>
+</html>

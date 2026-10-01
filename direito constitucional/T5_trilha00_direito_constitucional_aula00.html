@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T5 · Trilha 00 · Direito Constitucional — SEFAZ-DF</title>
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;
+  --accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;
+  --warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;
+  --accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;
+  --warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:16px;padding:12px 0 6px;flex-wrap:wrap}
+.badge{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px;letter-spacing:.5px}
+.top h1{font-size:18px;margin:0;font-weight:650}
+.top .sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px}
+nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--surface2);color:var(--text)}
+nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{padding:24px 0 80px}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.call.warn{border-color:var(--warn);background:var(--warn-soft)}
+.call.bad{border-color:var(--bad);background:var(--bad-soft)}
+.call.ok{border-color:var(--ok);background:var(--ok-soft)}
+.call b:first-child{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.tbl table th:first-child,.tbl table td:first-child{padding-left:14px}
+.k{font-weight:650;color:var(--accent)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+/* roteiro */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
+
+/* mapa mental */
+.mm{padding:22px 16px}
+.mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
+.mm-root b{display:block;font-size:17px;letter-spacing:.5px}
+.mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
+.mm-branches{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-br{display:flex;flex-direction:column;align-items:stretch}
+.mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
+.mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
+.mm-h b{display:block;font-size:14.5px;color:var(--c)}
+.mm-br ul{list-style:none;margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--c)}
+.mm-br li{font-size:13px;line-height:1.4;background:var(--surface2);border-radius:8px;padding:6px 9px;margin:6px 0;position:relative}
+.mm-br li::before{content:"";position:absolute;left:-12px;top:50%;width:10px;border-top:2px solid var(--c)}
+@media(max-width:860px){.mm-branches{grid-template-columns:1fr 1fr;border-top:0}}
+@media(max-width:520px){.mm-branches{grid-template-columns:1fr}}
+
+
+/* abreviações com dica */
+abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+#tip{position:fixed;z-index:100;max-width:300px;background:#1d2330;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+@media (prefers-color-scheme:dark){#tip{background:#e6e9ef;color:#12151b}}
+
+/* mapa clicável */
+.mm [data-k]{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mm [data-k]:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.mm [data-k].sel{outline:3px solid var(--c,var(--accent));outline-offset:2px}
+.mm-root[data-k].sel{outline-color:var(--text)}
+.mm-hint{text-align:center;color:var(--muted);font-size:13px;margin:-4px 0 12px}
+#mmPanel{border-left:6px solid var(--c,var(--accent));scroll-margin-top:140px}
+#mmPanel h4{margin:0 0 4px;font-size:18px;color:var(--c,var(--accent))}
+#mmPanel .mm-sec{margin:12px 0 0}
+#mmPanel .lbl{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+#mmPanel .ex{background:var(--ok-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .pg{background:var(--bad-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+
+/* questões */
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 16px}
+.qnav button{width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:12.5px;cursor:pointer}
+.qnav button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.qnav button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.qnav button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.progress{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:width .3s}
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
+.enun{white-space:pre-line;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ce{display:flex;gap:10px}.ce .opt{justify-content:center;font-weight:650}
+.opt{user-select:none;-webkit-user-select:none;position:relative}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.sel .l::before{content:"● ";color:var(--accent)}
+.opt.desc{opacity:.55;padding-right:92px}
+.opt.desc span{text-decoration:line-through;text-decoration-thickness:2px}
+.ce .opt.desc{text-decoration:line-through;text-decoration-thickness:2px}
+.opt.desc::after{content:"descartada";position:absolute;right:10px;top:8px;font-size:11px;color:var(--muted);text-decoration:none}
+.qact{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.qmsg{font-size:14.5px;padding:8px 12px;border-radius:8px;display:none}
+.qmsg.on{display:block}
+.qmsg.warn{background:var(--warn-soft);color:var(--warn)}
+.qmsg.bad{background:var(--bad-soft);color:var(--bad)}
+.qhint{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.coment{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.coment p{margin:6px 0}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+
+/* flashcards */
+.fc{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-inner{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fc-face.back{transform:rotateY(180deg);background:var(--accent-soft);text-align:left;align-items:flex-start;font-size:15px}
+.fc-face .q{font-size:19px;font-weight:600}
+.fc-meta{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;color:var(--muted);font-size:13px}
+.boxes{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.boxes span{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line)}
+
+/* rendimento */
+.big{font-size:44px;font-weight:750;line-height:1}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.bar .t{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar .t>div{height:100%;background:var(--ok)}
+.bar .t>div.mid{background:var(--warn)}.bar .t>div.low{background:var(--bad)}
+@media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
+.btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span class="badge">T5</span>
+      <div>
+        <h1>Trilha 00 · Tarefa 5 · Direito Constitucional</h1>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00 (Equipe Direito Constitucional): Aplicabilidade das normas, Hierarquia e Poder Constituinte</div>
+      </div>
+    
+      <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
+    </div>
+    <nav id="nav">
+      <button data-t="inicio" class="on">Roteiro</button>
+      <button data-t="resumo">Resumo</button>
+      <button data-t="mapa">Mapa mental</button>
+      <button data-t="esquemas">Esquemas</button>
+      <button data-t="reforma">Emendas (artigo 60)</button>
+      <button data-t="questoes">Questões <span class="pill" id="navQ">0/0</span></button>
+      <button data-t="flash">Flashcards</button>
+      <button data-t="rend">Rendimento</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ROTEIRO -->
+<section class="tab on" id="inicio">
+<h2>Roteiro da sessão T5</h2>
+  <p class="lead">Tarefa da trilha: <i>"Estudo da Aula 00, do tópico Aplicabilidade das Normas Constitucionais ao tópico Poder Constituinte, inclusive"</i>. A trilha estima cerca de 1h30 por tarefa.</p>
+
+  <div class="call warn"><b>Material</b>
+    Esta página usa o PDF <b>simplificado</b> da Aula 00 de Direito Constitucional, que já estava em <code>estrategia/direito constitucional/</code>. O trecho desta tarefa vai do início da aula até o fim de "Poder Constituinte". "Princípios Fundamentais" fica para a T15, junto com "Interpretação Constitucional". A trilha não indica questões para a T5; por isso a página traz os exercícios do próprio trecho e as questões comentadas das três seções estudadas.
+  </div>
+
+  <div class="call"><b>O que o coach destacou</b>
+    • Atenção especial à <b>Aplicabilidade das Normas Constitucionais</b> (cerca de 4,92% de incidência).<br>
+    • A classificação em eficácia <b>plena, contida e limitada</b> é a mais cobrada. Não confunda <b>contida</b> (aplicação imediata; lei posterior pode restringir) com <b>limitada</b> (só produz todos os efeitos depois da lei; aplicação mediata).<br>
+    • Na Hierarquia, guarde: emendas podem ser declaradas inconstitucionais; não há hierarquia entre lei complementar e ordinária nem entre as normas primárias; tratados de direitos humanos aprovados pelo rito de emenda equivalem a emendas; os demais tratados de direitos humanos são supralegais.<br>
+    • No Poder Constituinte, as características do <b>originário</b> são essenciais, sobretudo ser <b>permanente</b> (fica em estado de latência). A Lei Orgânica do Município <b>não</b> é manifestação do poder decorrente.<br>
+    • Grife conceitos-chave, exceções e artigos de lei para as revisões.
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><b>Pré-teste (5 min).</b> Abra os <b>Flashcards</b> e tente 5 cartões do baralho da aula antes de ler.</li>
+      <li><b>Resumo (30 min).</b> Leia a aba <b>Resumo</b>, respondendo aos blocos <i>Pergunte-se</i> antes de abri-los.</li>
+      <li><b>Mapa mental e Esquemas (15 min).</b> Clique em cada item do mapa. Depois tente reproduzir de memória a tabela "plena × contida × limitada".</li>
+      <li><b>Emendas (5 min).</b> A aba <b>Emendas (artigo 60)</b> resume o processo de reforma, base do poder derivado reformador.</li>
+      <li><b>Questões (30 min).</b> São 19 itens. Escolha com um clique, descarte com dois e confirme em <b>Responder</b>.</li>
+      <li><b>Rendimento (5 min).</b> Anote os temas fracos para a revisão.</li>
+    </ol>
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Banca</b><br><span class="muted">CEBRASPE: itens de Certo ou Errado em que um erro anula um acerto. Na dúvida real, deixe em branco.</span></div>
+    <div class="card"><b>Peso na prova</b><br><span class="muted">Direito Constitucional está na prova de conhecimentos básicos (peso 1), com 10 itens.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas e flashcards ficam no navegador. Use <i>Exportar</i> na aba Rendimento para fazer backup.</span></div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="tab" id="resumo">
+<h2>Resumo: Aplicabilidade, Hierarquia e Poder Constituinte</h2>
+  <p class="lead">O resumo segue a ordem da aula. Os <span class="k">termos em destaque</span> são os que mais caem e os blocos vermelhos marcam as pegadinhas da banca.</p>
+
+  <h3>1. Aplicabilidade das normas constitucionais</h3>
+  <div class="card">
+    <p>Toda norma constitucional tem <b>juridicidade</b>: todas são imperativas e produzem algum efeito jurídico. O que varia é o <b>grau de eficácia</b>.</p>
+    <p>A doutrina americana clássica separa normas <b>autoexecutáveis</b> (completas, aplicáveis sem complemento) e <b>não autoexecutáveis</b> (dependem de lei: normas incompletas, programáticas e de estruturação). No Brasil, a classificação mais aceita é a de <span class="k">José Afonso da Silva</span>: eficácia <b>plena</b>, <b>contida</b> e <b>limitada</b>.</p>
+    <div class="tbl"><table>
+      <tr><th></th><th>Plena</th><th>Contida (prospectiva)</th><th>Limitada</th></tr>
+      <tr><td>Precisa de lei para produzir efeitos?</td><td>Não</td><td>Não</td><td><b>Sim</b></td></tr>
+      <tr><td>Lei pode restringir?</td><td>Não</td><td><b>Sim</b> (atuação do legislador é discricionária)</td><td>A lei <b>amplia</b> o alcance</td></tr>
+      <tr><td>Aplicabilidade</td><td>Direta, imediata e <b>integral</b></td><td>Direta, imediata e <b>possivelmente não integral</b></td><td><b>Indireta, mediata e reduzida</b></td></tr>
+      <tr><td>Exemplo da aula</td><td>Artigo 2º (Poderes independentes e harmônicos); prazo de validade do concurso público</td><td>Artigo 5º, inciso XIII (liberdade profissional, atendidas as qualificações da lei); greve na iniciativa privada (artigo 9º)</td><td>Artigo 37, inciso VII (greve dos servidores, nos termos de lei específica); artigo 196 (saúde)</td></tr>
+    </table></div>
+    <ul>
+      <li>Na <b>contida</b>, antes da lei o direito pode ser exercido de forma ampla. As restrições podem vir de <b>lei</b>, de <b>outra norma constitucional</b> (estado de sítio, artigo 139) ou de <b>conceitos ético-jurídicos indeterminados</b> ("iminente perigo público", artigo 5º, inciso XXV).</li>
+      <li>A <b>limitada</b> divide-se em normas de <b>princípio institutivo ou organizativo</b> (estruturam órgãos; podem ser impositivas, como o artigo 88, ou facultativas, como o artigo 125, parágrafo 3º) e de <b>princípio programático</b> (programas para o Estado, como o artigo 196). As programáticas fazem da Constituição de 1988 uma <b>Constituição dirigente</b>.</li>
+      <li>Mesmo a limitada tem <b>eficácia mínima</b>: efeito <b>negativo</b> (revoga normas anteriores contrárias e impede leis futuras contrárias, servindo de parâmetro de controle) e efeito <b>vinculativo</b> (obriga o legislador a regulamentar, sob pena de omissão combatida por mandado de injunção ou ação direta de inconstitucionalidade por omissão).</li>
+      <li>Alguns autores falam ainda em normas de <b>eficácia exaurida</b> (aplicabilidade esgotada), como vários dispositivos do ADCT. Elas não podem ser objeto de controle de constitucionalidade.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas CEBRASPE</b>
+      • "A liberdade profissional (artigo 5º, inciso XIII) é norma de eficácia plena": <b>ERRADO</b>, é contida.<br>
+      • "As normas definidoras de direitos e garantias fundamentais são programáticas": <b>ERRADO</b>, têm aplicação imediata (artigo 5º, parágrafo 1º).<br>
+      • "A irretroatividade da lei penal (artigo 5º, inciso XL) é de eficácia limitada": <b>ERRADO</b>, é plena.<br>
+      • "O prazo de validade do concurso (até dois anos, prorrogável uma vez) é norma de eficácia limitada": <b>ERRADO</b>, é plena.<br>
+      • "Norma de eficácia contida pode ter eficácia imediata e direta": <b>CERTO</b>.
+    </div>
+    <details><summary>Pergunte-se: qual a diferença entre a lei que incide sobre a norma contida e a que incide sobre a limitada?</summary><div>Na <b>contida</b>, a lei <b>restringe</b> um direito que já existe e já pode ser exercido. Na <b>limitada</b>, a lei <b>completa</b> a norma, que antes dela não produz todos os efeitos: a lei amplia o alcance.</div></details>
+  </div>
+
+  <h3>2. Hierarquia das normas (pirâmide de Kelsen)</h3>
+  <div class="card">
+    <p>As normas inferiores (fundadas) retiram seu fundamento de validade das superiores (fundantes). A <b>Constituição</b> está no topo.</p>
+    <ul>
+      <li><b>Não há hierarquia</b> entre normas constitucionais originárias, nem entre originárias e derivadas (emendas).</li>
+      <li>Mas só as <b>emendas</b> podem ser declaradas inconstitucionais. As normas <b>originárias não</b> podem ser objeto de controle. A tese de Otto Bachof, de "normas constitucionais inconstitucionais", <b>não é aceita</b> no Brasil (ADI 815).</li>
+      <li>Tratados de <b>direitos humanos</b> aprovados em cada Casa, em dois turnos, por <b>três quintos</b> (Emenda Constitucional 45/2004) equivalem a <b>emendas</b>. Os demais tratados de direitos humanos têm status <b>supralegal</b>: abaixo da Constituição e acima das leis.</li>
+      <li><b>Normas primárias</b> (sem hierarquia entre si): leis complementares, ordinárias e delegadas, medidas provisórias, decretos legislativos, resoluções legislativas, tratados em geral e decretos autônomos. Regimentos dos tribunais, resoluções do CNJ e do CNMP e regimentos das Casas Legislativas também são primários.</li>
+      <li>Leis federais, estaduais, distritais e municipais têm o <b>mesmo nível</b>: conflito entre elas se resolve pela <b>repartição de competências</b>, e uma lei municipal pode prevalecer sobre uma federal.</li>
+      <li>Há hierarquia entre <b>Constituição Federal, Constituições Estaduais e Leis Orgânicas</b> dos Municípios, nessa ordem.</li>
+      <li><b>Lei complementar × ordinária</b>: mesmo nível; a diferença é a matéria e o quórum. Lei complementar pode tratar de matéria de lei ordinária (fica <b>materialmente ordinária</b> e pode ser alterada por lei ordinária); o contrário gera <b>inconstitucionalidade formal</b>.</li>
+      <li>Abaixo das leis ficam as <b>normas secundárias</b> (decretos regulamentares, portarias, instruções normativas), que não criam direitos nem obrigações.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "Leis ordinárias, complementares, medidas provisórias e decretos regulamentares têm a mesma hierarquia": <b>ERRADO</b>, o decreto regulamentar é infralegal.<br>
+      • "A supremacia <b>material</b> decorre da rigidez constitucional": <b>ERRADO</b>, a rigidez gera a supremacia <b>formal</b>.<br>
+      • Não confunda <b>decreto autônomo</b> (primário, equiparado à lei) com <b>decreto regulamentar</b> (secundário).
+    </div>
+  </div>
+
+  <h3>3. Poder constituinte</h3>
+  <div class="card">
+    <p>Poder constituinte <b>cria ou atualiza</b> a Constituição; poderes constituídos são os que ela cria. A teoria só se aplica a Estados com Constituição <b>escrita e rígida</b>.</p>
+    <ul>
+      <li><b>Titularidade</b>: para Sieyès, da <b>nação</b>; na leitura moderna (Canotilho), do <b>povo</b>.</li>
+      <li><b>Forma de exercício</b>: democrática (convenção) ou autocrática (outorga). A titularidade é sempre do povo; muda só a forma. A forma democrática pode ser direta (plebiscito, referendo) ou indireta (assembleia constituinte). A Assembleia de 1988 era <b>soberana</b>.</li>
+    </ul>
+    <div class="grid2">
+      <div class="call"><b>Originário (primeiro grau)</b>Cria uma nova Constituição. Características: <b>político</b> (poder de fato, extrajurídico), <b>inicial</b> (inaugura a ordem jurídica), <b>incondicionado</b> (sem forma predeterminada), <b>permanente</b> (fica em latência), <b>ilimitado juridicamente</b> (não se submete ao direito anterior; não há direito adquirido contra ele) e <b>autônomo</b>.</div>
+      <div class="call"><b>Derivado (segundo grau)</b>Modifica a Constituição ou elabora as Constituições Estaduais. Características: <b>jurídico</b>, <b>derivado</b>, <b>limitado ou subordinado</b> e <b>condicionado</b> (segue o procedimento previsto, como o artigo 60).</div>
+    </div>
+    <div class="tbl"><table>
+      <tr><th>Espécie do derivado</th><th>O que faz</th><th>Detalhes</th></tr>
+      <tr><td><b>Reformador</b></td><td>Altera a Constituição por emendas</td><td>Artigo 60: dois turnos em cada Casa, três quintos dos votos</td></tr>
+      <tr><td><b>Decorrente</b></td><td>Permite aos <b>Estados</b> elaborar suas Constituições</td><td>Respeita os princípios da Constituição Federal, sobretudo os sensíveis. A Lei Orgânica <b>municipal não</b> é poder decorrente</td></tr>
+      <tr><td><b>Revisor</b></td><td>Revisão do artigo 3º do ADCT</td><td>Maioria absoluta, sessão unicameral, após 5 anos. Ocorreu em 1993 (6 emendas de revisão); hoje tem eficácia exaurida</td></tr>
+    </table></div>
+    <p class="muted small">Fala-se ainda em poder constituinte <b>supranacional</b>, como o da União Europeia.</p>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "O originário é <b>inicial</b> porque não sofre limitação do direito anterior": <b>ERRADO</b>. Isso o torna <b>ilimitado</b>; inicial é porque <b>inaugura</b> a ordem jurídica.<br>
+      • "O poder decorrente permite a Estados <b>e Municípios</b> elaborarem constituições": <b>ERRADO</b>.<br>
+      • "O poder derivado não está previsto na Constituição": <b>ERRADO</b>.<br>
+      • "O poder originário se esgota ao elaborar a Constituição": <b>ERRADO</b>, é permanente.
+    </div>
+    <details><summary>Pergunte-se: por que o STF não admite direito adquirido contra norma constitucional originária?</summary><div>Porque o poder originário é <b>ilimitado juridicamente</b>: não se submete a nenhuma regra do ordenamento anterior, inclusive a proteção do direito adquirido.</div></details>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="tab" id="mapa">
+  <h2>Mapa mental: aplicabilidade, hierarquia e poder constituinte</h2>
+  <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
+  <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
+  <div class="card mm" id="mmBox"></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa para começar.</p></div>
+
+  <h3>Onde este tema se encaixa na disciplina</h3>
+  <div class="card">
+    <div class="grid3" style="font-size:14px">
+      <div><b class="k">Teoria da Constituição</b><br>Aplicabilidade, hierarquia e poder constituinte ← <i>você está aqui</i><br>Interpretação constitucional</div>
+      <div><b class="k">Princípios fundamentais</b><br>Artigos 1º a 4º</div>
+      <div><b class="k">Direitos fundamentais</b><br>Direitos individuais, sociais, nacionalidade e políticos<br>Remédios constitucionais</div>
+      <div><b class="k">Organização do Estado</b><br>Federação e competências<br>Administração pública</div>
+      <div><b class="k">Organização dos Poderes</b><br>Legislativo e processo legislativo<br>Executivo e Judiciário</div>
+      <div><b class="k">Controle</b><br>Controle de constitucionalidade</div>
+    </div>
+    <p class="muted small" style="margin:10px 0 0">Blocos gerais do Direito Constitucional, para orientar o estudo. A ordem exata das aulas está no cronograma do curso.</p>
+  </div>
+</section>
+
+<!-- ESQUEMAS -->
+<section class="tab" id="esquemas">
+<h2>Esquemas comparativos</h2>
+  <p class="lead">Tabelas para revisão rápida. Você deve conseguir reproduzi-las na véspera.</p>
+
+  <h3>Plena × contida × limitada: os três adjetivos</h3>
+  <div class="tbl"><table>
+    <tr><th>Eficácia</th><th>Direta?</th><th>Imediata?</th><th>Integral?</th><th>Frase para lembrar</th></tr>
+    <tr><td><b>Plena</b></td><td>Sim</td><td>Sim</td><td>Sim</td><td>"Nasce pronta e ninguém mexe"</td></tr>
+    <tr><td><b>Contida</b></td><td>Sim</td><td>Sim</td><td>Possivelmente não</td><td>"Nasce pronta, mas a lei pode conter"</td></tr>
+    <tr><td><b>Limitada</b></td><td>Não (indireta)</td><td>Não (mediata)</td><td>Não (reduzida)</td><td>"Nasce incompleta e espera a lei"</td></tr>
+  </table></div>
+
+  <h3>Pirâmide de Kelsen simplificada</h3>
+  <div class="tbl"><table>
+    <tr><th>Nível</th><th>Normas</th></tr>
+    <tr><td><b>Topo</b></td><td>Constituição (originárias e emendas) + tratados de direitos humanos aprovados com rito de emenda</td></tr>
+    <tr><td><b>Supralegal</b></td><td>Demais tratados de direitos humanos</td></tr>
+    <tr><td><b>Primárias</b> (mesmo nível)</td><td>Leis complementares, ordinárias e delegadas, medidas provisórias, decretos legislativos, resoluções legislativas, tratados em geral, decretos autônomos, regimentos de tribunais e resoluções do CNJ e do CNMP</td></tr>
+    <tr><td><b>Secundárias</b></td><td>Decretos regulamentares, portarias, instruções normativas</td></tr>
+  </table></div>
+
+  <h3>Originário × derivado</h3>
+  <div class="tbl"><table>
+    <tr><th>Originário</th><th>Derivado</th></tr>
+    <tr><td>Político (de fato)</td><td>Jurídico (de direito)</td></tr>
+    <tr><td>Inicial</td><td>Derivado (fruto do originário)</td></tr>
+    <tr><td>Ilimitado juridicamente e autônomo</td><td>Limitado ou subordinado</td></tr>
+    <tr><td>Incondicionado</td><td>Condicionado</td></tr>
+    <tr><td>Permanente</td><td>Reformador, decorrente e revisor</td></tr>
+  </table></div>
+
+  <h3>A característica certa para cada justificativa</h3>
+  <div class="tbl"><table>
+    <tr><th>Se a banca disser que o originário...</th><th>A característica é</th></tr>
+    <tr><td>inaugura uma nova ordem jurídica</td><td><b>Inicial</b></td></tr>
+    <tr><td>não se sujeita a limites do direito anterior</td><td><b>Ilimitado juridicamente</b></td></tr>
+    <tr><td>não segue forma ou procedimento predeterminado</td><td><b>Incondicionado</b></td></tr>
+    <tr><td>pode se manifestar a qualquer tempo</td><td><b>Permanente</b></td></tr>
+    <tr><td>é um poder de fato, anterior ao direito</td><td><b>Político</b></td></tr>
+  </table></div>
+</section>
+
+<!-- REFORMA -->
+<section class="tab" id="reforma">
+<h2>Emendas constitucionais: o artigo 60</h2>
+  <p class="lead">O poder derivado reformador atua por emendas, e o artigo 60 define quem propõe, como se aprova e o que não pode ser abolido.</p>
+  <div class="grid3">
+    <div class="card"><b>Quem pode propor</b><ul><li>Um terço, no mínimo, dos membros da Câmara ou do Senado</li><li>O Presidente da República</li><li>Mais da metade das Assembleias Legislativas, cada uma pela maioria relativa</li></ul></div>
+    <div class="card"><b>Como se aprova</b><ul><li>Discussão e votação em <b>cada Casa</b></li><li><b>Dois turnos</b></li><li><b>Três quintos</b> dos votos dos membros</li><li>Promulgação pelas Mesas da Câmara e do Senado</li></ul></div>
+    <div class="card"><b>Quando não pode emendar</b><ul><li>Na vigência de <b>intervenção federal</b></li><li><b>Estado de defesa</b></li><li><b>Estado de sítio</b></li></ul></div>
+  </div>
+  <div class="call"><b>Cláusulas pétreas (parágrafo 4º)</b>Não será objeto de deliberação a proposta de emenda <b>tendente a abolir</b>: a forma federativa de Estado; o voto direto, secreto, universal e periódico; a separação dos Poderes; os direitos e garantias individuais.</div>
+  <div class="call warn"><b>Proposta rejeitada (parágrafo 5º)</b>A matéria de proposta de emenda rejeitada ou havida por prejudicada não pode ser objeto de nova proposta na <b>mesma sessão legislativa</b>.</div>
+  <div class="card">
+    <b>Reforma × revisão</b>
+    <div class="tbl"><table>
+      <tr><th></th><th>Emenda (reformador)</th><th>Revisão (revisor, ADCT artigo 3º)</th></tr>
+      <tr><td>Votação</td><td>Cada Casa, dois turnos</td><td>Sessão unicameral</td></tr>
+      <tr><td>Quórum</td><td>Três quintos</td><td>Maioria absoluta</td></tr>
+      <tr><td>Situação hoje</td><td>Em uso</td><td>Eficácia exaurida (revisão feita em 1993)</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- QUESTÕES -->
+<section class="tab" id="questoes">
+  <h2>Questões comentadas (CEBRASPE)</h2>
+  <p class="lead">São 19 itens de Certo ou Errado: os 6 exercícios que aparecem no meio da teoria (T1 a T6 na barra) e as 13 questões comentadas CEBRASPE das três seções desta tarefa: Aplicabilidade (A1 a A7), Hierarquia (H1 a H3) e Poder Constituinte (P1 a P3). O comentário aparece depois de cada resposta, e o rendimento quando terminar todas.</p>
+  <div class="row" style="margin-bottom:10px">
+    <label class="muted" for="fTema">Tema:</label>
+    <select id="fTema"></select>
+    <label class="muted" for="fStatus">Mostrar:</label>
+    <select id="fStatus"><option value="all">Todas</option><option value="pend">Não respondidas</option><option value="bad">Erradas</option><option value="ok">Certas</option></select>
+  </div>
+  <div class="progress"><div id="qProg"></div></div>
+  <div class="qnav" id="qNav"></div>
+  <div class="card" id="qCard"></div>
+  <div class="row" style="justify-content:space-between">
+    <button class="btn" id="qPrev">← Anterior</button>
+    <span class="muted" style="font-size:13px">Atalhos: <kbd>A</kbd>–<kbd>E</kbd> ou <kbd>C</kbd>/<kbd>E</kbd> escolhe · <kbd>Shift</kbd>+letra descarta · <kbd>Enter</kbd> responde · <kbd>←</kbd> <kbd>→</kbd> navega</span>
+    <button class="btn pri" id="qNext">Próxima →</button>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="tab" id="flash">
+  <h2>Flashcards com repetição espaçada</h2>
+  <p class="lead">Leia a pergunta, responda <b>em voz alta</b> e só então vire o cartão (clique ou <kbd>Espaço</kbd>). Marque com sinceridade: os cartões errados voltam primeiro (sistema Leitner, caixas 1 a 5).</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px">
+    <select id="fcDeck">
+      <option value="all">Todos os baralhos</option>
+      <option value="a00">Aula 00 · Aplicabilidade, hierarquia e poder constituinte</option>
+      <option value="ref">Emendas constitucionais (artigo 60)</option>
+      <option value="pan">Panorama do Direito Constitucional</option>
+    </select>
+    <button class="btn" id="fcShuffle">Embaralhar</button>
+    <button class="btn" id="fcReset">Zerar caixas</button>
+  </div>
+  <div class="fc-meta"><span id="fcPos"></span><span id="fcBox"></span></div>
+  <div class="fc" id="fc"><div class="fc-inner"><div class="fc-face front"><div class="q" id="fcQ"></div><div class="muted" style="margin-top:14px;font-size:13px">clique para virar</div></div><div class="fc-face back"><div id="fcA"></div></div></div></div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn bad" id="fcBad">✘ Errei (<kbd>1</kbd>)</button>
+    <button class="btn" id="fcMid">~ Hesitei (<kbd>2</kbd>)</button>
+    <button class="btn ok" id="fcOk">✔ Acertei (<kbd>3</kbd>)</button>
+  </div>
+  <div class="boxes" id="fcBoxes"></div>
+</section>
+
+<!-- RENDIMENTO -->
+<section class="tab" id="rend">
+  <h2>Rendimento</h2>
+  <div id="rendBody"></div>
+  <h3>Gerenciar dados</h3>
+  <div class="row">
+    <button class="btn" id="expBtn">Exportar respostas (.json)</button>
+    <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
+    <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
+  </div>
+</section>
+
+</main>
+
+<div id="tip" role="tooltip"></div>
+<script>
+const QUESTOES = [{"fonte": "TRF 6ª Região, 2025", "tema": "Aplicabilidade das normas", "enun": "A previsão constitucional segundo a qual é livre o exercício de qualquer trabalho, ofício ou profissão, desde que atendidas as qualificações profissionais estabelecidas por lei, é exemplo típico de norma constitucional de eficácia plena.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A previsão constitucional que assegura a liberdade de exercício de qualquer trabalho, ofício ou profissão, desde que observadas as qualificações profissionais previstas em lei, consagrando o direito à liberdade profissional, constitui norma constitucional de eficácia contida (redutível ou restringível). Isso ocorre porque, embora a norma tenha aplicação imediata e produza efeitos desde sua promulgação, seu alcance pode ser limitado pela própria Constituição ou por legislação infraconstitucional que estabeleça requisitos ou restrições ao exercício de determinadas atividades profissionais. Questão errada."], "rot": "Exercício da teoria 1", "nav": "T1", "n": 1}, {"fonte": "TCE-RN, 2026", "tema": "Aplicabilidade das normas", "enun": "As normas definidoras dos direitos e garantias fundamentais são programáticas, pois estipulam metas a serem implementadas e alcançadas pelo Estado.", "alts": [], "tipo": "ce", "resp": "E", "com": ["As normas definidoras dos direitos e garantias fundamentais têm aplicação imediata. Questão errada."], "rot": "Exercício da teoria 2", "nav": "T2", "n": 2}, {"fonte": "AL-MG, 2023", "tema": "Hierarquia das normas", "enun": "O ordenamento jurídico brasileiro atual estabeleceu que há equivalência hierárquica entre as leis ordinárias e complementares, medidas provisórias e Decretos Regulamentares.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Não há hierarquia entre leis ordinárias e leis complementares. Isso também se aplica às medidas provisórias, já que elas têm força de lei desde a sua publicação. Contudo, os decretos regulamentares são atos administrativos infralegais, devendo fiel observância à lei. Logo, as leis possuem nível hierárquico superior aos decretos regulamentares. Questão errada."], "rot": "Exercício da teoria 3", "nav": "T3", "n": 3}, {"fonte": "Câmara dos Deputados, 2026", "tema": "Poder constituinte", "enun": "O poder constituinte derivado não está previsto na CF, embora nela estejam previstos seus limites expressos e implícitos.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O poder constituinte derivado encontra previsão na Constituição Federal, que também estabelece os seus limites, sejam eles expressos ou implícitos. Questão errada."], "rot": "Exercício da teoria 4", "nav": "T4", "n": 4}, {"fonte": "TCU, 2026", "tema": "Poder constituinte", "enun": "O poder constituinte originário caracteriza-se pela instauração de uma nova ordem jurídica estatal, em uma ruptura da ordem anterior.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O poder constituinte originário é aquele responsável por criar uma nova Constituição e instaurar uma nova ordem jurídica estatal, geralmente decorrente de uma ruptura com a ordem constitucional anterior. Ele é considerado inicial, autônomo e ilimitado juridicamente, pois não depende das normas anteriores para sua criação. Questão correta."], "rot": "Exercício da teoria 5", "nav": "T5", "n": 5}, {"fonte": "TCU, 2026", "tema": "Poder constituinte", "enun": "O poder constituinte decorrente compreende, além do poder de reforma da constituição federal, o poder constituinte derivado, que consiste no poder atribuído pelo constituinte originário aos estados-membros de uma federação para a elaboração de suas constituições locais.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O poder constituinte derivado abrange tanto o poder de modificar a Constituição Federal, denominado poder constituinte derivado reformador, quanto o poder constituinte derivado decorrente, que é a competência conferida pelo constituinte originário aos estados-membros de uma federação para criarem suas próprias constituições estaduais. Questão errado."], "rot": "Exercício da teoria 6", "nav": "T6", "n": 6}, {"fonte": "CEBRASPE/ANM/2025", "enun": "A incidência do art. 5.º, inciso XL, da CF, que impede a lei penal de retroagir, exceto para beneficiar o réu, está condicionada à atuação do legislador ordinário por constituir norma constitucional de eficácia limitada.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A norma insculpida no inciso XL do art. 5º (a lei penal não retroagirá, salvo para beneficiar o réu), por se tratar de norma definidora de direito e garantia fundamental, tem aplicação imediata, conforme o § 1º do art. 5º da CF/88. Com isso, trata-se de uma norma constitucional de eficácia plena e aplicabilidade imediata. Por exemplo, basta a promulgação de uma lei penal mais benéfica ao réu que ela terá eficácia imediata, não dependendo de qualquer outra previsão normativa ou legislativa a respeito."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 1", "nav": "A1", "n": 7}, {"fonte": "CEBRASPE/CNPq/2024", "enun": "O inciso VIII do art. 5.º da Constituição Federal de 1988 prevê que “ninguém será privado de direitos por motivo de crença religiosa ou de convicção filosófica ou política, salvo se as invocar para eximir-se de obrigação legal a todos imposta e recusar-se a cumprir prestação alternativa, fixada em lei”. Em relação a esse dispositivo constitucional, julgue o item seguinte. O preceito constitucional mencionado consiste em norma de eficácia limitada.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Normas de eficácia limitada dependem de regulamentação futura para produzirem todos os seus efeitos. Não é o caso do inciso VIII do art. 5º, cujo efeito é imediato, ou seja, ninguém será privado de direitos por motivo de crença religiosa ou convicção filosófica. Somente no que diz respeito à fixação da prestação alternativa é que se depende de lei regulamentadora, o que torna o dispositivo constitucional de eficácia contida, podendo não ser aplicado em sua íntegra. Contudo, perceba que o direito em si assegurado pela Constituição não depende de edição de qualquer outra norma."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 2", "nav": "A2", "n": 8}, {"fonte": "CEBRASPE/CAPES/2024", "enun": "A Constituição Federal de 1988 prevê que “todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade (...)”. Acerca do conteúdo desse dispositivo, julgue o item que se segue. Segundo a tradicional classificação da aplicabilidade das normas constitucionais, o citado preceito constitucional é considerado norma de eficácia contida.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De fato, o preceito constitucional é norma de eficácia contida porque, apesar de o dispositivo constitucional ter aplicabilidade direta e imediata, ele pode não ser integralmente aplicado em função da necessidade de existência de uma norma que preveja o prazo para a prestação de informações por parte dos órgãos públicos. Normas de eficácia contida têm essa característica, de não integralidade da eficácia da norma, que depende de edição de ato normativo posterior."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 3", "nav": "A3", "n": 9}, {"fonte": "CEBRASPE/MPE GO/Analista Ambiental/2024", "enun": "A respeito dos direitos e deveres individuais e coletivos estabelecidos na CF e da classificação quanto à aplicabilidade das normas constitucionais segundo a doutrina majoritária, julgue o item a seguir. As normas constitucionais programáticas impõem um dever político ao órgão com atribuição para executar o seu comando, servem de referência teleológica para a atividade de interpretação e aplicação do direito e podem funcionar como parâmetro de controle de constitucionalidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De fato, as normas programáticas carregam em si as finalidades sociais que se pretendem atingir com sua aplicação. Para o Prof. José Afonso da Silva, normas programáticas estabelecem, dentre outras coisas, um dever para o legislador ordinário, fornecem sentido teleológico para a interpretação, integração e aplicação das normas jurídicas e condicionam a legislação futura, tornando inconstitucionais normas que as contrariem."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 4", "nav": "A4", "n": 10}, {"fonte": "CEBRASPE/CM Maceió/2024", "enun": "Em relação aos princípios fundamentais, à aplicabilidade das normas constitucionais e aos direitos e às garantias fundamentais, julgue o item seguinte. O fato de uma norma constitucional ser classificável como de eficácia contida não impede que ela possua eficácia imediata e direta em determinadas situações.", "alts": [], "tipo": "ce", "resp": "C", "com": ["É exatamente isso: uma norma constitucional de eficácia contida pode sim ter eficácia imediata e direta, mas uma norma posterior pode condicionar a aplicação dessa norma, ou restringir sua aplicação."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 5", "nav": "A5", "n": 11}, {"fonte": "CEBRASPE/CNJ/Pedagogia/2024", "enun": "Acerca da aplicabilidade das normas constitucionais, julgue o próximo item. Tem eficácia plena a norma constitucional que estabelece ser dever da família, da sociedade e do Estado assegurar à criança os direitos básicos à saúde, à alimentação, à educação, ao lazer, à profissionalização, à cultura, à dignidade, ao respeito e à convivência familiar.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Trata-se de uma norma programática, pois ela estabelece uma diretriz, um princípio para a atuação do Estado. Para que de fato ela seja implementada, ou seja, para que de fato a população tenha assegurado os direitos básicos mencionados, há que se ter atuação concreta do Estado por meio de políticas públicas. Estas, por sua vez, são implementadas por legislação infraconstitucional.", "Vale reforçar que uma norma de eficácia plena não depende de regulamentação adicional para produzir seus efeitos."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 6", "nav": "A6", "n": 12}, {"fonte": "CEBRASPE/CNJ/Judiciária/2024", "enun": "Com relação à aplicabilidade das normas constitucionais, à administração pública e aos servidores públicos, julgue o item seguinte. É de eficácia limitada a norma constitucional que prevê que o prazo de validade do concurso público é de até dois anos, prorrogável uma vez, por igual período.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A norma mencionada é de eficácia plena, não dependendo de qualquer regulamentação para produzir todos os seus efeitos práticos. Ela possui aplicabilidade imediata, direta e integral."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 7", "nav": "A7", "n": 13}, {"fonte": "CEBRASPE/Pref. Aracaju/2025", "enun": "A teoria de Otto Bachof acerca da existência de hierarquia entre normas da Constituição é plenamente admitida pela jurisprudência do STF, o que se confirma pela possibilidade do controle de constitucionalidade de normas oriundas do poder constituinte de primeiro grau no ordenamento jurídico pátrio.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O alemão Otto Bachof desenvolveu relevante obra doutrinária denominada “Normas constitucionais inconstitucionais”, na qual defende a possibilidade de que existam normas constitucionais originárias eivadas de inconstitucionalidade. Para o jurista, o texto constitucional possui dois tipos de normas: as cláusulas pétreas (normas cujo conteúdo não pode ser abolido pelo Poder Constituinte Derivado) e as normas constitucionais originárias. As cláusulas pétreas, na visão de Bachof, seriam superiores às demais normas constitucionais originárias e, portanto, serviriam de parâmetro para o controle de constitucionalidade destas. Assim, o jurista alemão considerava legítimo o controle de constitucionalidade de normas constitucionais originárias. No entanto, bastante cuidado: no Brasil, a tese de Bachof não é admitida. As cláusulas pétreas encontram-se no mesmo patamar hierárquico das demais normas constitucionais originárias."], "tema": "Hierarquia das normas", "rot": "Questão comentada · Hierarquia 1", "nav": "H1", "n": 14}, {"fonte": "CEBRASPE/PGE RR/2023", "enun": "No que diz respeito à democracia, aos tratados e convenções internacionais sobre direitos humanos e ao estatuto constitucional dos estados brasileiros, julgue o item seguinte. Leis ordinárias, medidas provisórias e outras normas de igual ou inferior hierarquia devem observar as disposições dos tratados e convenções internacionais sobre direitos humanos incorporados ao direito brasileiro com status supralegal.", "alts": [], "tipo": "ce", "resp": "C", "com": ["É exatamente isso: a doutrina constitucional reconhece que um tratado internacional sobre direitos humanos é recepcionado em nosso ordenamento com caráter supralegal. Isso significa dizer que uma norma pode ser cotejada com o tratado, podendo ser declarada incompatível com ele em razão desse controle de convencionalidade."], "tema": "Hierarquia das normas", "rot": "Questão comentada · Hierarquia 2", "nav": "H2", "n": 15}, {"fonte": "CEBRASPE/PGM Campo Grande/2019", "enun": "A supremacia material da norma constitucional decorre da rigidez constitucional, isto é, da existência de um processo legislativo distinto, mais laborioso.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A rigidez constitucional está diretamente associada à supremacia formal da Constituição, uma vez que o legislador ordinário não poderá alterá-la por simples ato infraconstitucional (cujo procedimento de elaboração é mais simples)."], "tema": "Hierarquia das normas", "rot": "Questão comentada · Hierarquia 3", "nav": "H3", "n": 16}, {"fonte": "CEBRASPE/CAU BR/2024", "enun": "Acerca da teoria da Constituição e sua classificação, bem como do poder constituinte, julgue o item a seguir. O poder constituinte decorrente refere-se ao poder de os estados-membros e os municípios elaborarem as próprias constituições, respeitando os limites impostos na Constituição Federal de 1988.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O erro da questão está em afirmar que os municípios elaboram constituições. Os estados, estes sim, elaboram suas constituições e esse fato decorre do poder constituinte derivado decorrente. Por outro lado, os municípios editam suas respectivas leis orgânicas (e não constituições), sendo que isso não é manifestação do poder constituinte decorrente, mas sim a expressão da auto-organização desses entes federativos."], "tema": "Poder constituinte", "rot": "Questão comentada · Poder Constituinte 1", "nav": "P1", "n": 17}, {"fonte": "CEBRASPE/CAU BR/2024", "enun": "Acerca da teoria da Constituição e sua classificação, bem como do poder constituinte, julgue o item a seguir. Não há possibilidade jurídica de pedido de declaração de inconstitucionalidade pelo Supremo Tribunal Federal (STF) de norma oriunda do poder constituinte originário, uma vez que a tese de que há hierarquia entre normas constitucionais originárias, dando azo à declaração de inconstitucionalidadede umas em face de outras, é incompossível com o sistema de Constituição rígida.", "alts": [], "tipo": "ce", "resp": "C", "com": ["É exatamente isso. Trata-se de entendimento do Supremo Tribunal Federal existente no julgamento da ADI 815 (Rel. Min. Moreira Alves, j. 28/03/1996):", "A tese de que há hierarquia entre normas constitucionais originárias dando azo à declaração de inconstitucionalidade de umas em face de outras e incompossível com o sistema de Constituição rígida. Na atual Carta Magna \"compete ao Supremo Tribunal Federal, precipuamente, a guarda da Constituição\" (artigo 102, \"caput\"), o que implica dizer que essa jurisdição lhe é atribuída para impedir que se desrespeite a Constituição como um todo, e não para, com relação a ela, exercer o papel de fiscal do Poder Constituinte originário, a fim de verificar se este teria, ou não, violado os princípios de direito suprapositivo que ele próprio havia incluído no texto da mesma Constituição. Por outro lado, as cláusulas pétreas não podem ser invocadas para sustentação da tese da inconstitucionalidade de normas constitucionais inferiores em face de normas constitucionais superiores, porquanto a Constituição as prevê apenas como limites ao Poder Constituinte derivado ao rever ou ao emendar a Constituição elaborada pelo Poder Constituinte originário, e não como abarcando normas cuja observância se impôs ao próprio Poder Constituinte originário com relação às outras que não sejam consideradas como cláusulas pétreas, e, portanto, possam ser emendadas."], "tema": "Poder constituinte", "rot": "Questão comentada · Poder Constituinte 2", "nav": "P2", "n": 18}, {"fonte": "CEBRASPE/CM Maceió/2024", "enun": "Julgue o item a seguir, acerca das variações do poder constituinte derivado e do mecanismo da mutação constitucional. O poder constituinte derivado reformador é um poder de reforma constitucional por meio de um procedimento específico, a exemplo das emendas constitucionais, estabelecido pelo poder constituinte originário.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A questão explica corretamente a característica do poder constituinte reformador, que de fato é um procedimento específico, fixado pelo poder constituinte originário, para que as normas constitucionais sejam atualizadas ao longo do tempo."], "tema": "Poder constituinte", "rot": "Questão comentada · Poder Constituinte 3", "nav": "P3", "n": 19}];
+
+const FLASH = [
+ // Aula 00
+ ["a00","Todas as normas constitucionais produzem efeitos jurídicos?","Sim. Todas têm <b>juridicidade</b>, são imperativas e produzem algum efeito; o que varia é o <b>grau de eficácia</b>."],
+ ["a00","Classificação de José Afonso da Silva quanto à aplicabilidade","Normas de eficácia <b>plena</b>, <b>contida</b> e <b>limitada</b>."],
+ ["a00","Características da norma de eficácia plena","Autoaplicável, não restringível; aplicabilidade <b>direta, imediata e integral</b>. Exemplo: artigo 2º (Poderes independentes e harmônicos)."],
+ ["a00","Características da norma de eficácia contida","Autoaplicável, mas <b>restringível</b>; aplicabilidade direta, imediata e <b>possivelmente não integral</b>. A atuação do legislador é discricionária."],
+ ["a00","Exemplo clássico de norma de eficácia contida","Artigo 5º, inciso XIII: livre exercício de qualquer profissão, <b>atendidas as qualificações que a lei estabelecer</b> (exemplo: exame da OAB)."],
+ ["a00","Por quais meios a norma contida pode ser restringida?","Por <b>lei</b>, por <b>outra norma constitucional</b> (estado de sítio) e por <b>conceitos ético-jurídicos indeterminados</b> (\"iminente perigo público\")."],
+ ["a00","Características da norma de eficácia limitada","Não autoaplicável; aplicabilidade <b>indireta, mediata e reduzida</b>. Depende de lei para produzir todos os efeitos."],
+ ["a00","Greve: iniciativa privada × servidores públicos","Iniciativa privada (artigo 9º): eficácia <b>contida</b>. Servidores (artigo 37, inciso VII, \"nos termos de lei específica\"): eficácia <b>limitada</b>."],
+ ["a00","Subdivisões da norma de eficácia limitada","Normas de princípio <b>institutivo ou organizativo</b> (impositivas ou facultativas) e de princípio <b>programático</b>."],
+ ["a00","Norma institutiva impositiva × facultativa: exemplos","Impositiva: artigo 88 (\"a lei <b>disporá</b> sobre Ministérios\"). Facultativa: artigo 125, parágrafo 3º (\"lei estadual <b>poderá</b> criar a Justiça Militar\")."],
+ ["a00","O que torna a Constituição de 1988 dirigente?","A presença de normas <b>programáticas</b>, que fixam programas para o Estado (exemplo: artigo 196, saúde)."],
+ ["a00","Quais efeitos a norma de eficácia limitada já produz?","<b>Negativo</b> (revoga normas contrárias e serve de parâmetro de controle) e <b>vinculativo</b> (obriga a regulamentar; omissão combatida por mandado de injunção ou ação direta por omissão)."],
+ ["a00","Normas de direitos e garantias fundamentais são programáticas?","<b>Não</b>. Têm aplicação imediata (artigo 5º, parágrafo 1º)."],
+ ["a00","O que são normas de eficácia exaurida?","Normas cujos efeitos já se esgotaram, como vários dispositivos do ADCT. Não podem ser objeto de controle de constitucionalidade."],
+ ["a00","Existe hierarquia entre normas constitucionais originárias?","<b>Não</b>, nem entre originárias e emendas. Mas só as <b>emendas</b> podem ser declaradas inconstitucionais."],
+ ["a00","O Brasil admite a tese de Otto Bachof (normas constitucionais inconstitucionais)?","<b>Não</b>. O STF (ADI 815) não admite controle de normas constitucionais originárias."],
+ ["a00","Status dos tratados de direitos humanos","Com rito de emenda (cada Casa, dois turnos, três quintos): <b>equivalentes a emendas</b>. Pelo rito comum: <b>supralegais</b>."],
+ ["a00","Quais são as normas primárias?","Leis complementares, ordinárias e delegadas, medidas provisórias, decretos legislativos, resoluções legislativas, tratados em geral e decretos autônomos (mais regimentos e resoluções do CNJ e do CNMP)."],
+ ["a00","Lei federal é superior à lei municipal?","<b>Não</b>. Têm o mesmo nível; o conflito se resolve pela <b>repartição de competências</b>."],
+ ["a00","Há hierarquia entre Constituição Federal, Estadual e Lei Orgânica?","<b>Sim</b>: Constituição Federal acima das Estaduais, que estão acima das Leis Orgânicas."],
+ ["a00","Lei complementar × lei ordinária","Mesmo nível hierárquico. Lei complementar pode tratar de matéria ordinária (fica materialmente ordinária); lei ordinária em matéria de lei complementar é <b>formalmente inconstitucional</b>."],
+ ["a00","Decreto autônomo × decreto regulamentar","Autônomo: norma <b>primária</b>, equiparada à lei. Regulamentar: norma <b>secundária</b>, infralegal."],
+ ["a00","A rigidez constitucional gera qual supremacia?","A supremacia <b>formal</b>."],
+ ["a00","Quem é o titular do poder constituinte?","Para Sieyès, a <b>nação</b>. Na leitura moderna (Canotilho), o <b>povo</b>."],
+ ["a00","Formas de exercício do poder constituinte","Democrática (<b>convenção</b>), direta ou por assembleia; ou autocrática (<b>outorga</b>). A titularidade é sempre do povo."],
+ ["a00","As 6 características do poder originário","<b>Político, inicial, incondicionado, permanente, ilimitado juridicamente e autônomo</b>."],
+ ["a00","Por que o poder originário é \"inicial\"?","Porque <b>inaugura</b> uma nova ordem jurídica. (Não sofrer limites do direito anterior é ser <b>ilimitado</b>.)"],
+ ["a00","Por que o poder originário é \"permanente\"?","Porque não se esgota: fica em <b>estado de latência</b>, aguardando um novo momento constituinte."],
+ ["a00","Características do poder derivado","<b>Jurídico, derivado, limitado (subordinado) e condicionado</b>."],
+ ["a00","Espécies do poder derivado","<b>Reformador</b> (emendas), <b>decorrente</b> (Constituições Estaduais) e <b>revisor</b> (ADCT, artigo 3º)."],
+ ["a00","A Lei Orgânica do Município é manifestação do poder decorrente?","<b>Não</b>. É expressão da auto-organização municipal; o poder decorrente é dos Estados."],
+ ["a00","Como foi a revisão constitucional do ADCT?","Após 5 anos, por <b>maioria absoluta</b>, em <b>sessão unicameral</b>. Feita em 1993 (6 emendas de revisão); hoje tem eficácia exaurida."],
+ // Emendas (artigo 60)
+ ["ref","Quem pode propor emenda à Constituição?","Um terço da Câmara ou do Senado; o Presidente da República; mais da metade das Assembleias Legislativas, cada uma pela maioria relativa."],
+ ["ref","Quórum e turnos para aprovar uma emenda","Em <b>cada Casa</b>, <b>dois turnos</b>, <b>três quintos</b> dos votos dos membros."],
+ ["ref","Quando a Constituição não pode ser emendada?","Durante <b>intervenção federal</b>, <b>estado de defesa</b> ou <b>estado de sítio</b>."],
+ ["ref","Quais são as cláusulas pétreas?","Forma federativa; voto direto, secreto, universal e periódico; separação dos Poderes; direitos e garantias individuais."],
+ ["ref","Proposta de emenda rejeitada pode ser reapresentada?","Não na <b>mesma sessão legislativa</b>."],
+ ["ref","Quem promulga a emenda constitucional?","As <b>Mesas</b> da Câmara dos Deputados e do Senado Federal, com o respectivo número de ordem."],
+ // Panorama
+ ["pan","Fundamentos da República (artigo 1º)","<b>SOCIDIVAPLU</b>: soberania, cidadania, dignidade da pessoa humana, valores sociais do trabalho e da livre iniciativa, pluralismo político."],
+ ["pan","Objetivos fundamentais (artigo 3º)","Construir sociedade livre, justa e solidária; garantir o desenvolvimento nacional; erradicar a pobreza e reduzir desigualdades; promover o bem de todos sem preconceitos."],
+ ["pan","Todo o poder emana de quem?","Do <b>povo</b>, que o exerce por representantes eleitos <b>ou diretamente</b> (artigo 1º, parágrafo único)."],
+ ["pan","Remédio contra a falta de norma regulamentadora que inviabiliza um direito","<b>Mandado de injunção</b> (artigo 5º, inciso LXXI)."],
+ ["pan","Princípio da separação dos Poderes (artigo 2º)","Legislativo, Executivo e Judiciário são <b>independentes e harmônicos</b> entre si; a separação não é rígida e admite colaboração."],
+ ["pan","Quem pode instituir tributos e por qual norma?","União, Estados, Distrito Federal e Municípios, conforme a repartição de competências da Constituição (artigos 145 a 156), em regra por lei."]
+];
+
+/* ---------- mapa mental: cada item tem explicação, exemplo, base legal e pegadinha ---------- */
+const MM_ROOT = {k: "root", t: "TEORIA DA CONSTITUIÇÃO", s: "Aplicabilidade · Hierarquia · Poder constituinte<br><small>Todas as normas têm juridicidade; o que varia é o grau de eficácia</small>",
+  e: "Esta tarefa responde a três perguntas: <b>quando</b> uma norma constitucional produz efeitos (aplicabilidade), <b>em que posição</b> ela está diante das demais normas (hierarquia) e <b>quem</b> cria e modifica a Constituição (poder constituinte).",
+  x: "Quando a Constituição garante o direito de greve aos servidores, é preciso saber se o direito já vale (aplicabilidade), se uma lei distrital poderia contrariá-lo (hierarquia) e se uma emenda poderia suprimi-lo (poder constituinte derivado e seus limites).",
+  l: "Constituição Federal de 1988; classificação de José Afonso da Silva; artigo 60; ADCT, artigo 3º.",
+  p: "A banca costuma trocar a característica pela justificativa: dizer que o poder originário é \"inicial\" porque é ilimitado, ou que a norma \"limitada\" pode ser restringida por lei."};
+
+const MM = [
+ {k: "ple", c: "#2f5bd3", t: "Eficácia plena", s: "Direta · imediata · integral",
+  e: "A norma de eficácia plena produz, desde a promulgação, todos os efeitos que o constituinte quis. É <b>autoaplicável</b> e <b>não restringível</b>: pode até existir lei sobre o assunto, mas ela não diminui o alcance da norma.",
+  x: "\"São Poderes da União, independentes e harmônicos entre si, o Legislativo, o Executivo e o Judiciário\" (artigo 2º). Não há lei que precise completar ou que possa restringir essa regra.",
+  l: "Constituição Federal, artigo 2º; José Afonso da Silva.",
+  p: "Questão comentada A7: o prazo de validade do concurso público (até dois anos, prorrogável uma vez) é de eficácia <b>plena</b>, e não limitada.",
+  f: [
+   {k: "ple1", t: "Autoaplicável",
+    e: "Independe de lei posterior que complete o seu alcance ou sentido. A existência de lei regulamentadora é possível, mas não necessária.",
+    x: "A irretroatividade da lei penal, salvo para beneficiar o réu (artigo 5º, inciso XL), vale desde 1988: basta surgir lei penal mais benéfica para que ela retroaja.",
+    l: "Constituição Federal, artigo 5º, inciso XL e parágrafo 1º.",
+    p: "Questão comentada A1: dizer que o artigo 5º, inciso XL, depende do legislador é ERRADO."},
+   {k: "ple2", t: "Não restringível",
+    e: "Se houver lei tratando do tema, ela não pode limitar a aplicação da norma de eficácia plena.",
+    x: "Uma lei que tentasse \"suspender\" a independência entre os Poderes seria inconstitucional.",
+    l: "José Afonso da Silva.",
+    p: "Se a questão disser que a lei pode \"reduzir o alcance\", a norma não é plena: é contida."},
+   {k: "ple3", t: "Direitos fundamentais: aplicação imediata",
+    e: "As normas definidoras de direitos e garantias fundamentais têm aplicação imediata (artigo 5º, parágrafo 1º). Por isso não são programáticas, ainda que algumas sejam contidas.",
+    x: "O direito de não ser privado de direitos por crença religiosa (artigo 5º, inciso VIII) vale desde já; só a prestação alternativa depende de lei.",
+    l: "Constituição Federal, artigo 5º, parágrafo 1º.",
+    p: "Exercício da teoria T2: \"normas de direitos fundamentais são programáticas\" é ERRADO."}
+  ]},
+ {k: "con", c: "#1f8a4c", t: "Eficácia contida", s: "Imediata, mas restringível",
+  e: "Também chamada de prospectiva ou redutível. Produz todos os efeitos desde a promulgação, mas o Poder Público pode restringi-la. A atuação do legislador é <b>discricionária</b>: ele pode, mas não precisa, editar a lei.",
+  x: "\"É livre o exercício de qualquer trabalho, ofício ou profissão, atendidas as qualificações profissionais que a lei estabelecer\" (artigo 5º, inciso XIII). Qualquer um pode exercer a advocacia? Não: a lei exige o exame da OAB, restringindo o direito.",
+  l: "Constituição Federal, artigo 5º, inciso XIII; artigo 9º.",
+  p: "Exercício da teoria T1: classificar a liberdade profissional como de eficácia plena é ERRADO.",
+  f: [
+   {k: "con1", t: "Restrição por lei",
+    e: "A forma mais comum: uma lei posterior restringe o exercício do direito, que até então era amplo.",
+    x: "O direito de greve na iniciativa privada (artigo 9º) já vale; mas a lei define os serviços essenciais e o atendimento das necessidades inadiáveis da comunidade.",
+    l: "Constituição Federal, artigo 9º, parágrafo 1º.",
+    p: "Antes da lei restritiva, o direito pode ser exercido de forma <b>plena</b>."},
+   {k: "con2", t: "Restrição por outra norma constitucional",
+    e: "A própria Constituição pode prever limites, como as restrições a direitos durante o estado de sítio.",
+    x: "No estado de sítio, a Constituição permite restringir a inviolabilidade da correspondência e a liberdade de reunião (artigo 139).",
+    l: "Constituição Federal, artigo 139.",
+    p: "A restrição pode vir da Constituição, e não só da lei."},
+   {k: "con3", t: "Restrição por conceitos indeterminados",
+    e: "Conceitos ético-jurídicos abertos também limitam o direito.",
+    x: "No caso de \"iminente perigo público\", o Estado pode usar propriedade particular, limitando o direito de propriedade (artigo 5º, inciso XXV).",
+    l: "Constituição Federal, artigo 5º, inciso XXV.",
+    p: "Questão comentada A3: o direito de receber informações dos órgãos públicos \"no prazo da lei\" (artigo 5º, inciso XXXIII) foi considerado de eficácia contida."}
+  ]},
+ {k: "lim", c: "#b07400", t: "Eficácia limitada", s: "Indireta · mediata · reduzida",
+  e: "Depende de regulamentação futura para produzir todos os efeitos. Enquanto a lei não vem, o direito não pode ser plenamente usufruído. A lei, aqui, <b>amplia</b> o alcance da norma.",
+  x: "\"O direito de greve será exercido nos termos e nos limites definidos em lei específica\" (artigo 37, inciso VII): o servidor tem o direito, mas a Constituição exige lei para o seu exercício.",
+  l: "Constituição Federal, artigo 37, inciso VII; José Afonso da Silva.",
+  p: "Questão comentada A6: o dever de assegurar à criança saúde, educação e lazer é norma <b>programática</b> (limitada), e não plena.",
+  f: [
+   {k: "lim1", t: "Princípio institutivo ou organizativo",
+    e: "Dependem de lei para estruturar órgãos, instituições e atribuições. Podem ser <b>impositivas</b> (obrigam o legislador) ou <b>facultativas</b> (apenas permitem).",
+    x: "Impositiva: \"a lei disporá sobre a criação e extinção de Ministérios\" (artigo 88). Facultativa: \"lei estadual <b>poderá</b> criar a Justiça Militar estadual\" (artigo 125, parágrafo 3º).",
+    l: "Constituição Federal, artigos 88 e 125, parágrafo 3º.",
+    p: "Repare no verbo: \"disporá\" (impositiva) × \"poderá\" (facultativa)."},
+   {k: "lim2", t: "Princípio programático",
+    e: "Estabelecem programas e metas para a atuação do Estado. Sua presença faz da Constituição de 1988 uma Constituição <b>dirigente</b>.",
+    x: "\"A saúde é direito de todos e dever do Estado, garantido mediante políticas sociais e econômicas\" (artigo 196).",
+    l: "Constituição Federal, artigo 196.",
+    p: "Questão comentada A4: as normas programáticas impõem dever ao legislador, orientam a interpretação e servem de parâmetro de controle: CERTO."},
+   {k: "lim3", t: "Eficácia mínima: efeitos negativo e vinculativo",
+    e: "<b>Negativo</b>: revoga normas anteriores contrárias e impede leis futuras contrárias (é parâmetro de controle). <b>Vinculativo</b>: obriga o legislador a regulamentar e o poder público a concretizar os programas; a omissão pode ser combatida por mandado de injunção ou por ação direta de inconstitucionalidade por omissão.",
+    x: "Se uma lei futura proibisse totalmente a greve dos servidores, seria inconstitucional, mesmo sem a lei específica de greve existir (efeito negativo).",
+    l: "Doutrina; Constituição Federal, artigos 5º, inciso LXXI, e 103, parágrafo 2º.",
+    p: "Dizer que a norma limitada \"não produz efeito algum\" é ERRADO."}
+  ]},
+ {k: "hie", c: "#8a3ac2", t: "Hierarquia das normas", s: "Pirâmide de Kelsen",
+  e: "As normas inferiores retiram seu fundamento de validade das superiores. A Constituição está no topo; abaixo, as normas supralegais, as primárias e, por fim, as secundárias.",
+  x: "Uma portaria da SEFAZ-DF (norma secundária) não pode contrariar a lei distrital do ICMS (primária), que por sua vez não pode contrariar a Constituição.",
+  l: "Hans Kelsen; Constituição Federal, artigo 5º, parágrafo 3º; jurisprudência do STF.",
+  p: "Exercício da teoria T3: decreto regulamentar não tem a mesma hierarquia das leis.",
+  f: [
+   {k: "hie1", t: "Normas constitucionais: sem hierarquia",
+    e: "Não há hierarquia entre normas originárias nem entre originárias e emendas. A diferença: só as <b>emendas</b> podem ser declaradas inconstitucionais. A tese de Otto Bachof não é aceita (ADI 815).",
+    x: "O artigo 242, parágrafo 2º (o Colégio Pedro II mantido na órbita federal) tem a mesma hierarquia dos direitos fundamentais.",
+    l: "STF, ADI 815; questões comentadas H1 e P2.",
+    p: "\"O STF admite controle de constitucionalidade de normas originárias\": ERRADO."},
+   {k: "hie2", t: "Tratados de direitos humanos",
+    e: "Aprovados em cada Casa, em dois turnos, por três quintos: equivalem a <b>emendas</b>. Aprovados pelo rito comum: status <b>supralegal</b>, acima das leis e abaixo da Constituição.",
+    x: "Uma lei ordinária contrária a um tratado de direitos humanos supralegal pode ser afastada por controle de convencionalidade.",
+    l: "Constituição Federal, artigo 5º, parágrafo 3º (Emenda Constitucional 45/2004); questão comentada H2.",
+    p: "Tratado internacional comum (que não é de direitos humanos) tem nível de lei ordinária."},
+   {k: "hie3", t: "Normas primárias: sem hierarquia entre si",
+    e: "Leis complementares, ordinárias e delegadas, medidas provisórias, decretos legislativos, resoluções legislativas, tratados, decretos autônomos e regimentos são do mesmo nível. Leis federais, estaduais e municipais também: o conflito se resolve pela competência.",
+    x: "Se a União editar lei sobre horário do comércio local, que é assunto municipal, a lei do Município prevalece, apesar de \"municipal\".",
+    l: "Doutrina majoritária; jurisprudência do STF.",
+    p: "Lei complementar e ordinária diferem em matéria e quórum, e não em hierarquia."},
+   {k: "hie4", t: "Supremacia formal × material",
+    e: "A <b>rigidez</b> (processo de alteração mais difícil) gera a supremacia <b>formal</b> da Constituição. A supremacia <b>material</b> decorre do conteúdo das normas.",
+    x: "Uma lei ordinária não pode alterar a Constituição porque o procedimento exigido para mudá-la é o da emenda: isso é supremacia formal.",
+    l: "Questão comentada H3.",
+    p: "\"A supremacia material decorre da rigidez\": ERRADO."}
+  ]},
+ {k: "ori", c: "#c23a3a", t: "Poder constituinte originário", s: "Cria uma nova Constituição",
+  e: "É o poder de primeiro grau, que cria uma nova Constituição e uma nova ordem jurídica. O titular é o <b>povo</b>; a forma de exercício pode ser democrática (convenção) ou autocrática (outorga).",
+  x: "A Assembleia Nacional Constituinte de 1987–1988, eleita pelo povo e soberana, elaborou e promulgou a Constituição de 1988 sem ratificação popular.",
+  l: "Sieyès; Canotilho; exercício da teoria T5.",
+  p: "Mesmo numa Constituição outorgada, a titularidade continua sendo do povo; muda só a forma de exercício.",
+  f: [
+   {k: "ori1", t: "Político, inicial e autônomo",
+    e: "<b>Político</b>: é um poder de fato, anterior ao direito. <b>Inicial</b>: inaugura a ordem jurídica, rompendo com a anterior. <b>Autônomo</b>: define livremente o conteúdo da nova Constituição.",
+    x: "Em 1988, a nova Constituição não precisou respeitar a de 1967: começou uma ordem jurídica nova.",
+    l: "Doutrina citada na aula.",
+    p: "Inicial = <b>inaugura</b>; não é sinônimo de ilimitado."},
+   {k: "ori2", t: "Incondicionado e ilimitado",
+    e: "<b>Incondicionado</b>: não segue forma ou procedimento predeterminado. <b>Ilimitado juridicamente</b>: não se submete a limites do direito anterior; por isso não há direito adquirido contra normas originárias.",
+    x: "Uma vantagem prevista em lei anterior pode ser extinta pela nova Constituição sem que o beneficiário invoque direito adquirido.",
+    l: "Jurisprudência do STF.",
+    p: "\"É inicial porque não sofre limitação do direito anterior\": ERRADO, essa justificativa é do ilimitado."},
+   {k: "ori3", t: "Permanente",
+    e: "Não se esgota ao elaborar a Constituição: permanece em <b>estado de latência</b>, aguardando um novo momento constituinte.",
+    x: "Uma ruptura institucional futura poderia levar a uma nova Assembleia Constituinte, mesmo após décadas de vigência da Constituição atual.",
+    l: "Doutrina; destaque do coach na trilha.",
+    p: "\"O poder originário se exaure com a promulgação da Constituição\": ERRADO."}
+  ]},
+ {k: "der", c: "#0f7c8c", t: "Poder constituinte derivado", s: "Jurídico · limitado · condicionado",
+  e: "É o poder de segundo grau, previsto na própria Constituição: modifica o texto constitucional ou permite aos Estados elaborar suas Constituições. É <b>jurídico, derivado, limitado e condicionado</b>.",
+  x: "Uma proposta de emenda que tente abolir o voto secreto nem pode ser votada, porque o poder derivado tem limites (cláusula pétrea).",
+  l: "Constituição Federal, artigo 60; ADCT, artigo 3º; exercícios da teoria T4 e T6.",
+  p: "\"O poder derivado não está previsto na Constituição\": ERRADO.",
+  f: [
+   {k: "der1", t: "Reformador",
+    e: "Atualiza a Constituição por meio de <b>emendas</b>, seguindo o artigo 60: dois turnos em cada Casa e três quintos dos votos.",
+    x: "A Emenda Constitucional 132/2023, que fez a Reforma Tributária, foi obra do poder reformador.",
+    l: "Constituição Federal, artigo 60; questão comentada P3.",
+    p: "Veja a aba <b>Emendas (artigo 60)</b> para os detalhes do procedimento."},
+   {k: "der2", t: "Decorrente",
+    e: "Confere aos <b>Estados</b> o poder de elaborar suas Constituições, respeitando os princípios da Constituição Federal, sobretudo os sensíveis.",
+    x: "A Constituição do Estado de Goiás é fruto do poder decorrente. Já a <b>Lei Orgânica</b> de Goiânia é expressão da auto-organização municipal, e não do poder decorrente.",
+    l: "Constituição Federal, artigo 25; questão comentada P1.",
+    p: "\"Estados e Municípios elaboram constituições pelo poder decorrente\": ERRADO."},
+   {k: "der3", t: "Revisor",
+    e: "Previsto no artigo 3º do ADCT: revisão após cinco anos da promulgação, por <b>maioria absoluta</b>, em <b>sessão unicameral</b>. Ocorreu em 1993, com seis emendas de revisão, e hoje tem eficácia exaurida.",
+    x: "A revisão de 1993 foi mais fácil de aprovar do que uma emenda comum, porque bastava a maioria absoluta do Congresso reunido em sessão única.",
+    l: "ADCT, artigo 3º.",
+    p: "Não confunda o quórum da revisão (maioria absoluta, unicameral) com o da emenda (três quintos, dois turnos em cada Casa)."}
+  ]}
+];
+
+function mmItens(){
+  const out = [MM_ROOT];
+  MM.forEach(b => { out.push(b); b.f.forEach(f => out.push(Object.assign({c: b.c, pai: b.t}, f))); });
+  return out;
+}
+function renderMapa(){
+  $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
+    <div class="mm-trunk"></div>
+    <div class="mm-branches" style="--n:${MM.length}">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+      <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
+      <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
+    el.onclick = () => abrirItem(el.dataset.k);
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirItem(el.dataset.k); } };
+  });
+  abbrify($("#mmBox"));
+}
+function abrirItem(k){
+  const itens = mmItens(), i = itens.findIndex(x => x.k === k), it = itens[i];
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", el.dataset.k === k));
+  const p = $("#mmPanel");
+  p.style.setProperty("--c", it.c || "var(--accent)");
+  p.innerHTML = `<div class="muted" style="font-size:13px">${it.pai ? "Mapa › " + it.pai : "Mapa"}</div>
+    <h4>${it.t}</h4>
+    <div class="mm-sec"><span class="lbl">Explicação</span>${it.e}</div>
+    <div class="mm-sec ex"><span class="lbl">Exemplo prático</span>${it.x}</div>
+    <div class="mm-sec"><span class="lbl">Base legal e jurisprudência</span>${it.l}</div>
+    <div class="mm-sec pg"><span class="lbl">Pegadinha da banca</span>${it.p}</div>
+    <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
+      <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
+  abbrify(p);
+  $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
+  $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
+  const r = p.getBoundingClientRect();
+  if (r.top < 120 || r.top > innerHeight - 160) p.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+/* ---------- glossário: toda sigla ganha dica com o nome por extenso ---------- */
+const GLOSS = {
+ "CF/88": "Constituição Federal de 1988", "CF": "Constituição Federal de 1988",
+ "CTN": "Código Tributário Nacional (Lei 5.172/1966)", "STF": "Supremo Tribunal Federal", "STJ": "Superior Tribunal de Justiça",
+ "LC": "Lei Complementar", "MP": "Medida Provisória", "EC": "Emenda Constitucional", "DL": "Decreto-Lei",
+ "ADCT": "Ato das Disposições Constitucionais Transitórias", "CLT": "Consolidação das Leis do Trabalho",
+ "ADI": "Ação Direta de Inconstitucionalidade", "RE": "Recurso Extraordinário", "RREE": "Recursos Extraordinários",
+ "REsp": "Recurso Especial", "HC": "Habeas Corpus", "AgR": "Agravo Regimental",
+ "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "ISS": "Imposto sobre Serviços", "ISSQN": "Imposto sobre Serviços de Qualquer Natureza",
+ "IPTU": "Imposto sobre a Propriedade Predial e Territorial Urbana", "ITBI": "Imposto sobre a Transmissão de Bens Imóveis",
+ "ITCMD": "Imposto sobre Transmissão Causa Mortis e Doação", "IPVA": "Imposto sobre a Propriedade de Veículos Automotores",
+ "IE": "Imposto de Exportação", "IR": "Imposto de Renda", "IRPF": "Imposto de Renda da Pessoa Física", "IRPJ": "Imposto de Renda da Pessoa Jurídica",
+ "IPI": "Imposto sobre Produtos Industrializados", "IOF": "Imposto sobre Operações Financeiras", "ITR": "Imposto sobre a Propriedade Territorial Rural",
+ "IGF": "Imposto sobre Grandes Fortunas", "IS": "Imposto Seletivo", "IEG": "Imposto Extraordinário de Guerra",
+ "IBS": "Imposto sobre Bens e Serviços", "CBS": "Contribuição sobre Bens e Serviços", "IVA": "Imposto sobre Valor Agregado",
+ "CIDE": "Contribuição de Intervenção no Domínio Econômico", "COSIP": "Contribuição para o Custeio do Serviço de Iluminação Pública",
+ "COFINS": "Contribuição para o Financiamento da Seguridade Social", "CSLL": "Contribuição Social sobre o Lucro Líquido",
+ "PIS": "Programa de Integração Social", "PASEP": "Programa de Formação do Patrimônio do Servidor Público",
+ "RPPS": "Regime Próprio de Previdência Social", "RGPS": "Regime Geral de Previdência Social",
+ "CVM": "Comissão de Valores Mobiliários", "AFRMM": "Adicional ao Frete para a Renovação da Marinha Mercante",
+ "SEBRAE": "Serviço Brasileiro de Apoio às Micro e Pequenas Empresas", "INCRA": "Instituto Nacional de Colonização e Reforma Agrária",
+ "SESC": "Serviço Social do Comércio", "SENAC": "Serviço Nacional de Aprendizagem Comercial", "SENAI": "Serviço Nacional de Aprendizagem Industrial",
+ "OAB": "Ordem dos Advogados do Brasil", "CRC": "Conselho Regional de Contabilidade", "CREA": "Conselho Regional de Engenharia e Agronomia",
+ "CRM": "Conselho Regional de Medicina", "CRA": "Conselho Regional de Administração", "IBAMA": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis",
+ "TCFA": "Taxa de Controle e Fiscalização Ambiental", "TFA": "Taxa de Fiscalização de Anúncios", "TFLF": "Taxa de Fiscalização, Localização e Funcionamento",
+ "TLLF": "Taxa de Licença de Localização e Funcionamento", "ZFM": "Zona Franca de Manaus", "PAF": "Processo Administrativo Fiscal",
+ "DF": "Distrito Federal", "SEFAZ": "Secretaria de Estado de Fazenda", "SEEC": "Secretaria de Estado de Economia",
+ "CEBRASPE": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos (banca)", "CESPE": "Centro de Seleção e de Promoção de Eventos (atual CEBRASPE)",
+ "PGFN": "Procuradoria-Geral da Fazenda Nacional", "AGU": "Advocacia-Geral da União", "RFB": "Receita Federal do Brasil",
+ "CAGE": "Contadoria e Auditoria-Geral do Estado", "CGE": "Controladoria-Geral do Estado", "TCE": "Tribunal de Contas do Estado",
+ "PGE": "Procuradoria-Geral do Estado", "STM": "Superior Tribunal Militar", "PF": "Polícia Federal", "PC": "Polícia Civil",
+ "ANM": "Agência Nacional de Mineração", "CAU": "Conselho de Arquitetura e Urbanismo", "INPI": "Instituto Nacional da Propriedade Industrial",
+ "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos", "EMBRAPA": "Empresa Brasileira de Pesquisa Agropecuária",
+ "CAGEPA": "Companhia de Água e Esgotos da Paraíba", "SEPLAN": "Secretaria de Planejamento", "APO": "Analista de Planejamento e Orçamento",
+ "PPNT": "Processo seletivo público (Petrobras)", "ATT": "Auditor Técnico de Tributos", "AFRE": "Auditor Fiscal da Receita Estadual",
+ "AFE": "Auditor Fiscal Estadual",
+ "art.": "artigo", "arts.": "artigos", "Art.": "artigo", "§": "parágrafo", "c/c": "combinado com", "nº": "número", "n.º": "número",
+ "Proc": "Procurador", "Pref": "Prefeitura", "Rel.": "Relator", "Min.": "Ministro", "Súm.": "Súmula", "SV": "Súmula Vinculante",
+ "RFB": "República Federativa do Brasil", "CNJ": "Conselho Nacional de Justiça", "CNMP": "Conselho Nacional do Ministério Público", "CNPq": "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "CAPES": "Coordenação de Aperfeiçoamento de Pessoal de Nível Superior", "MPE": "Ministério Público Estadual", "GO": "Goiás", "CM": "Câmara Municipal", "RR": "Roraima", "PGM": "Procuradoria-Geral do Município", "TRF": "Tribunal Regional Federal", "TCE-RN": "Tribunal de Contas do Estado do Rio Grande do Norte", "AL-MG": "Assembleia Legislativa de Minas Gerais", "TCU": "Tribunal de Contas da União", "ADO": "Ação Direta de Inconstitucionalidade por Omissão", "MI": "Mandado de Injunção", "CLT": "Consolidação das Leis do Trabalho",
+ "FG": "fato gerador", "BC": "base de cálculo", "LO": "lei ordinária"
+};
+const GLOSS_RE = new RegExp("(?<![\\wÀ-ÿ])(" + Object.keys(GLOSS).sort((a, b) => b.length - a.length)
+  .map(s => s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")).join("|") + ")(?![\\wÀ-ÿ])", "g");
+function abbrify(root){
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+    n.parentElement.closest("abbr,script,style,select,option,kbd") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => {
+    const s = n.nodeValue; GLOSS_RE.lastIndex = 0;
+    if (!GLOSS_RE.test(s)) return;
+    const frag = document.createDocumentFragment(); let last = 0; GLOSS_RE.lastIndex = 0; let m;
+    while ((m = GLOSS_RE.exec(s))){
+      frag.append(s.slice(last, m.index));
+      const a = document.createElement("abbr"); a.textContent = m[1]; a.dataset.tip = GLOSS[m[1]]; a.setAttribute("aria-label", GLOSS[m[1]]);
+      frag.append(a); last = m.index + m[1].length;
+    }
+    frag.append(s.slice(last)); n.replaceWith(frag);
+  });
+}
+/* dica posicionada acima da sigla, sem cobrir o texto nem ficar sob o cursor */
+(() => {
+  const tip = () => document.getElementById("tip");
+  function show(el){
+    const t = tip(); t.textContent = el.dataset.tip; t.classList.add("on");
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 8) y = r.bottom + 8;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("mouseover", e => { const a = e.target.closest("abbr[data-tip]"); if (a) show(a); });
+  document.addEventListener("mouseout", e => { if (e.target.closest("abbr[data-tip]")) tip().classList.remove("on"); });
+  document.addEventListener("click", e => { const a = e.target.closest("abbr[data-tip]"); if (a){ show(a); setTimeout(() => tip().classList.remove("on"), 2500); } });
+  addEventListener("scroll", () => tip().classList.remove("on"), {passive: true});
+})();
+
+const KEY = "sefazdf_T5_dirconst_aula00_v1";
+/* respostas já resolvidas, embutidas na publicação (usadas só se este navegador ainda não tiver dados) */
+const RESPOSTAS_INICIAIS = null;
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || (RESPOSTAS_INICIAIS ? structuredClone(RESPOSTAS_INICIAIS) : null) || {answers:{}, cards:{}};
+S.answers ||= {}; S.cards ||= {}; S.draft ||= {};
+const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* abas */
+function showTab(t){
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("on", s.id === t));
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  if (t === "rend") renderRend();
+  if (t === "flash") renderCard();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+const active = () => document.querySelector("section.tab.on").id;
+
+/* questões */
+const TEMAS = [...new Set(QUESTOES.map(q => q.tema))];
+$("#fTema").innerHTML = '<option value="all">Todos os temas</option>' + TEMAS.map(t => `<option>${esc(t)}</option>`).join("");
+let cur = 0;
+
+function visible(){
+  const t = $("#fTema").value, st = $("#fStatus").value;
+  return QUESTOES.map((q, i) => i).filter(i => {
+    const q = QUESTOES[i], a = S.answers[q.n];
+    if (t !== "all" && q.tema !== t) return false;
+    if (st === "pend") return !a;
+    if (st === "bad") return a && !a.ok;
+    if (st === "ok") return a && a.ok;
+    return true;
+  });
+}
+function fmtCom(p){
+  return esc(p).replace(/^(Letra [A-E]|Item [IVX]+|Alternativa [A-E]|Assertiva [IVX]+)(:?)/, "<b>$1$2</b>");
+}
+function renderQ(){
+  const vis = visible();
+  const done = Object.keys(S.answers).length;
+  $("#qProg").style.width = (100 * done / QUESTOES.length) + "%";
+  $("#navQ").textContent = `${done}/${QUESTOES.length}`;
+  $("#qNav").innerHTML = vis.map(i => {
+    const a = S.answers[QUESTOES[i].n];
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].nav || QUESTOES[i].n}</button>`;
+  }).join("");
+  $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
+  if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
+  if (!vis.includes(cur)) cur = vis[0];
+  const q = QUESTOES[cur], a = S.answers[q.n];
+  const d = draft(q.n);
+  const st = v => a ? "" : (d.desc.includes(v) ? "desc" : d.sel === v ? "sel" : "");
+  let opts;
+  if (q.tipo === "ce"){
+    opts = '<div class="ce">' + [["C","Certo"],["E","Errado"]].map(([v, l]) => {
+      let cls = "";
+      if (a){ if (v === q.resp) cls = "right"; else if (v === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(v)}" data-v="${v}" ${a ? "disabled" : ""}>${l}</button>`;
+    }).join("") + "</div>";
+  } else {
+    opts = q.alts.map(([l, t]) => {
+      let cls = "";
+      if (a){ if (l === q.resp) cls = "right"; else if (l === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(l)}" data-v="${l}" ${a ? "disabled" : ""}><span class="l">${l})</span><span>${esc(t)}</span></button>`;
+    }).join("");
+  }
+  const pos = vis.indexOf(cur) + 1;
+  let com = "";
+  if (a){
+    const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
+    com = `<div class="coment"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+      ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
+  }
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    <div class="enun">${esc(q.enun)}</div>
+    ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
+    ${opts}
+    ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
+    ${com}`;
+  abbrify($("#qCard"));
+  let clickTimer = null;
+  $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
+    b.ondblclick = e => { e.preventDefault(); clearTimeout(clickTimer); descartar(b.dataset.v); };
+  });
+  if ($("#qSubmit")) $("#qSubmit").onclick = submeter;
+  $("#qPrev").disabled = pos <= 1;
+  $("#qNext").textContent = pos >= vis.length ? "Ver rendimento →" : "Próxima →";
+}
+function draft(n){
+  S.draft ||= {};
+  return S.draft[n] ||= {sel: null, desc: []};
+}
+function opcoes(q){ return q.tipo === "ce" ? ["C", "E"] : q.alts.map(x => x[0]); }
+function escolher(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)){ msg("warn", "Essa opção está descartada. Clique duas vezes nela para recuperá-la antes de escolher."); return; }
+  d.sel = d.sel === v ? null : v; save(); renderQ();
+}
+function descartar(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)) d.desc = d.desc.filter(x => x !== v);
+  else { d.desc.push(v); if (d.sel === v) d.sel = null; }
+  save(); renderQ();
+  if (d.desc.length === opcoes(q).length) msg("warn", "Você descartou todas as opções. Clique duas vezes em uma delas para recuperá-la e poder responder.");
+}
+function msg(tipo, texto){
+  const m = $("#qMsg"); if (!m) return;
+  m.className = "qmsg on " + tipo; m.textContent = texto;
+}
+function submeter(){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n), todas = opcoes(q);
+  if (d.desc.length === todas.length) return msg("bad", "Você marcou todas as opções como descartadas. Recupere uma (clique duas vezes) e selecione-a antes de responder.");
+  if (!d.sel) return msg("bad", "Você não selecionou nenhuma resposta. Clique em uma opção e depois em Responder.");
+  answer(d.sel);
+}
+function answer(v){
+  const q = QUESTOES[cur];
+  if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  S.answers[q.n] = {sel: v, ok: v === q.resp, desc: d.desc.slice(), ts: Date.now()};
+  delete S.draft[q.n];
+  save(); renderQ();
+  $("#qCard .coment")?.scrollIntoView({behavior: "smooth", block: "nearest"});
+  if (Object.keys(S.answers).length === QUESTOES.length){
+    setTimeout(() => { if (confirmFinish()) showTab("rend"); }, 50);
+  }
+}
+let finishedShown = false;
+function confirmFinish(){ if (finishedShown) return false; finishedShown = true; return true; }
+function step(d){
+  const vis = visible(), p = vis.indexOf(cur);
+  if (d > 0 && p >= vis.length - 1){ showTab("rend"); return; }
+  const np = Math.min(Math.max(p + d, 0), vis.length - 1);
+  cur = vis[np]; renderQ(); $("#qCard").scrollIntoView({block: "nearest"});
+}
+$("#qPrev").onclick = () => step(-1);
+$("#qNext").onclick = () => step(1);
+$("#fTema").onchange = $("#fStatus").onchange = () => { cur = -1; renderQ(); };
+
+/* flashcards */
+let deck = [], fcI = 0;
+FLASH.forEach((c, i) => c.id = "f" + i);
+function buildDeck(shuffle){
+  const d = $("#fcDeck").value;
+  deck = FLASH.filter(c => d === "all" || c[0] === d);
+  const box = c => (S.cards[c.id] || {box: 1}).box;
+  deck = deck.map(c => [c, Math.random()]).sort((x, y) => shuffle ? x[1] - y[1] : (box(x[0]) - box(y[0])) || (x[1] - y[1])).map(x => x[0]);
+  fcI = 0; renderCard();
+}
+function renderCard(){
+  if (!deck.length) buildDeck();
+  const c = deck[fcI];
+  $("#fc").classList.remove("flip");
+  $("#fcQ").innerHTML = c[1];
+  $("#fcA").innerHTML = c[2];
+  const b = (S.cards[c.id] || {box: 1}).box;
+  $("#fcPos").textContent = `Cartão ${fcI + 1} de ${deck.length}`;
+  $("#fcBox").textContent = `Caixa ${b}`;
+  const cnt = [0, 0, 0, 0, 0];
+  deck.forEach(x => cnt[((S.cards[x.id] || {box: 1}).box) - 1]++);
+  abbrify($("#fcQ")); abbrify($("#fcA"));
+  $("#fcBoxes").innerHTML = cnt.map((n, i) => `<span>Caixa ${i + 1}: ${n}</span>`).join("");
+}
+function grade(g){
+  const c = deck[fcI], st = S.cards[c.id] || {box: 1};
+  st.box = g === 0 ? 1 : g === 1 ? Math.max(1, st.box) : Math.min(5, st.box + 1);
+  st.seen = (st.seen || 0) + 1; S.cards[c.id] = st; save();
+  fcI = (fcI + 1) % deck.length; renderCard();
+}
+$("#fc").onclick = () => $("#fc").classList.toggle("flip");
+$("#fcBad").onclick = () => grade(0);
+$("#fcMid").onclick = () => grade(1);
+$("#fcOk").onclick = () => grade(2);
+$("#fcDeck").onchange = () => buildDeck();
+$("#fcShuffle").onclick = () => buildDeck(true);
+$("#fcReset").onclick = () => { if (confirm("Zerar as caixas de todos os flashcards?")){ S.cards = {}; save(); buildDeck(); } };
+
+/* rendimento */
+function renderRend(){
+  const ans = S.answers, n = QUESTOES.length, done = QUESTOES.filter(q => ans[q.n]);
+  const ok = done.filter(q => ans[q.n].ok).length;
+  if (!done.length){ $("#rendBody").innerHTML = '<div class="card"><p class="muted">Você ainda não respondeu nenhuma questão. Vá para a aba <b>Questões</b>.</p></div>'; return; }
+  const pct = Math.round(100 * ok / done.length);
+  const ce = done.filter(q => q.tipo === "ce"), ceOk = ce.filter(q => ans[q.n].ok).length, ceBad = ce.length - ceOk;
+  const mc = done.filter(q => q.tipo === "mc"), mcOk = mc.filter(q => ans[q.n].ok).length;
+  const complete = done.length === n;
+  const msg = pct >= 85 ? ["ok", "Excelente! Acima da meta de 80% do seu plano."] : pct >= 70 ? ["warn", "Bom, mas abaixo da meta de 80%. Revise os temas em amarelo e vermelho."] : ["bad", "Abaixo de 70%. Releia o Resumo dos temas fracos antes de refazer as erradas."];
+  const byT = TEMAS.map(t => {
+    const qs = done.filter(q => q.tema === t), o = qs.filter(q => ans[q.n].ok).length;
+    return {t, tot: QUESTOES.filter(q => q.tema === t).length, d: qs.length, o, p: qs.length ? Math.round(100 * o / qs.length) : null};
+  }).sort((a, b) => (a.p ?? 101) - (b.p ?? 101));
+  const wrong = done.filter(q => !ans[q.n].ok);
+  $("#rendBody").innerHTML = `
+    ${complete ? "" : `<div class="call warn"><b>Resultado parcial</b>Você respondeu ${done.length} de ${n}. O rendimento final aparece quando terminar todas.</div>`}
+    <div class="grid3">
+      <div class="card"><div class="muted">Aproveitamento</div><div class="big" style="color:var(--${pct >= 80 ? "ok" : pct >= 70 ? "warn" : "bad"})">${pct}%</div><div class="muted">${ok} certas de ${done.length}</div></div>
+      <div class="card"><div class="muted">Certo/Errado (nota CEBRASPE)</div><div class="big">${ceOk - ceBad}</div><div class="muted">${ceOk} certas − ${ceBad} erradas, em ${ce.length} itens</div></div>
+      <div class="card"><div class="muted">Múltipla escolha</div><div class="big">${mc.length ? Math.round(100 * mcOk / mc.length) : 0}%</div><div class="muted">${mcOk} de ${mc.length}</div></div>
+    </div>
+    <div class="call ${msg[0]}"><b>Diagnóstico</b>${msg[1]}</div>
+    <h3>Desempenho por tema (do mais fraco ao mais forte)</h3>
+    <div class="card">${byT.map(r => `<div class="bar"><span>${esc(r.t)}</span><div class="t"><div class="${r.p === null ? "" : r.p < 70 ? "low" : r.p < 85 ? "mid" : ""}" style="width:${r.p ?? 0}%"></div></div><span>${r.p === null ? "—" : r.p + "%"} <small class="muted">${r.o}/${r.d}</small></span></div>`).join("")}</div>
+    <h3>Questões erradas (${wrong.length})</h3>
+    <div class="card">${wrong.length ? wrong.map(q => `<div style="margin:6px 0"><a href="#" data-n="${q.n}">Q${q.n}</a> · <span class="pill">${esc(q.tema)}</span> <span class="muted">${esc(q.enun.slice(-120).replace(/^\S*\s/, "…"))}</span></div>`).join("") : '<p class="muted">Nenhuma! 🎯</p>'}</div>`;
+  abbrify($("#rendBody"));
+  $("#rendBody").querySelectorAll("a[data-n]").forEach(a => a.onclick = e => {
+    e.preventDefault(); $("#fTema").value = "all"; $("#fStatus").value = "all";
+    cur = QUESTOES.findIndex(q => q.n === +a.dataset.n); showTab("questoes"); renderQ();
+  });
+}
+$("#expBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `T2_dirtrib_respostas_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+};
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; save(); renderQ(); renderRend(); });
+};
+$("#redoBad").onclick = () => {
+  const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
+  if (!bad.length) return;
+  bad.forEach(k => delete S.answers[k]); save(); finishedShown = false;
+  $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
+};
+$("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* teclado */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase(), tab = active();
+  if (tab === "questoes"){
+    const q = QUESTOES[cur];
+    if (k === "arrowright") step(1);
+    else if (k === "arrowleft") step(-1);
+    else if (q && !S.answers[q.n]){
+      const v = q.tipo === "ce" ? k.toUpperCase() : k;
+      if (k === "enter"){ e.preventDefault(); submeter(); }
+      else if (opcoes(q).includes(v)){ e.shiftKey ? descartar(v) : escolher(v); }
+    }
+  } else if (tab === "flash"){
+    if (k === " "){ e.preventDefault(); $("#fc").classList.toggle("flip"); }
+    else if (k === "1") grade(0); else if (k === "2") grade(1); else if (k === "3") grade(2);
+  }
+});
+
+renderMapa();
+["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
+cur = 0; renderQ(); buildDeck();
+</script>
+</body>
+</html>
