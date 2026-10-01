@@ -3,6 +3,8 @@
 Páginas HTML de estudo da Trilha Estratégica para Auditor Fiscal da Receita do Distrito Federal (SEFAZ-DF, banca CEBRASPE).
 Cada página corresponde a uma tarefa da trilha e traz resumo, mapa mental clicável, esquemas, questões interativas com comentário e rendimento, e flashcards com repetição espaçada.
 
+**Site:** https://alexsborne.github.io/trilha_sefaz_df/
+
 Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, com link para as que já têm página.
 
 | Tarefa | Disciplina | Página |
