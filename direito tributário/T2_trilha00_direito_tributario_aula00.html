@@ -74,7 +74,7 @@ select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px
 .mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
 .mm-root b{display:block;font-size:17px;letter-spacing:.5px}
 .mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
-.mm-branches{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-branches{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
 .mm-br{display:flex;flex-direction:column;align-items:stretch}
 .mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
 .mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
@@ -172,6 +172,8 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
         <h1>Trilha 00 · Tarefa 2 · Direito Tributário</h1>
         <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00 (Fábio Dutra): Conceito e espécies de tributos + Reforma Tributária</div>
       </div>
+    
+      <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
     </div>
     <nav id="nav">
       <button data-t="inicio" class="on">Roteiro</button>
@@ -415,7 +417,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
   <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
   <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
   <div class="card mm" id="mmBox"></div>
-  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa (TRIBUTO) para começar.</p></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa para começar.</p></div>
 
   <h3>Panorama da disciplina (estrutura do curso)</h3>
   <div class="card">
@@ -828,7 +830,7 @@ function mmItens(){
 function renderMapa(){
   $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
     <div class="mm-trunk"></div>
-    <div class="mm-branches">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+    <div class="mm-branches" style="--n:${MM.length}">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
       <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
       <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
   $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
@@ -975,7 +977,7 @@ function renderQ(){
   $("#navQ").textContent = `${done}/${QUESTOES.length}`;
   $("#qNav").innerHTML = vis.map(i => {
     const a = S.answers[QUESTOES[i].n];
-    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].n}</button>`;
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].nav || QUESTOES[i].n}</button>`;
   }).join("");
   $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
   if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
@@ -1004,7 +1006,7 @@ function renderQ(){
     com = `<div class="coment"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
       ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
   }
-  $("#qCard").innerHTML = `<div class="qhead"><span><b>Questão ${q.n}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
     <div class="enun">${esc(q.enun)}</div>
     ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
     ${opts}
