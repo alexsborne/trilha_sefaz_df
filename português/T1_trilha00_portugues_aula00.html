@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T1 · Trilha 00 · Português — SEFAZ-DF</title>
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;
+  --accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;
+  --warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;
+  --accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;
+  --warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:16px;padding:12px 0 6px;flex-wrap:wrap}
+.badge{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px;letter-spacing:.5px}
+.top h1{font-size:18px;margin:0;font-weight:650}
+.top .sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px}
+nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--surface2);color:var(--text)}
+nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{padding:24px 0 80px}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.call.warn{border-color:var(--warn);background:var(--warn-soft)}
+.call.bad{border-color:var(--bad);background:var(--bad-soft)}
+.call.ok{border-color:var(--ok);background:var(--ok-soft)}
+.call b:first-child{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.tbl table th:first-child,.tbl table td:first-child{padding-left:14px}
+.k{font-weight:650;color:var(--accent)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+/* roteiro */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
+
+/* mapa mental */
+.mm{padding:22px 16px}
+.mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
+.mm-root b{display:block;font-size:17px;letter-spacing:.5px}
+.mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
+.mm-branches{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-br{display:flex;flex-direction:column;align-items:stretch}
+.mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
+.mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
+.mm-h b{display:block;font-size:14.5px;color:var(--c)}
+.mm-br ul{list-style:none;margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--c)}
+.mm-br li{font-size:13px;line-height:1.4;background:var(--surface2);border-radius:8px;padding:6px 9px;margin:6px 0;position:relative}
+.mm-br li::before{content:"";position:absolute;left:-12px;top:50%;width:10px;border-top:2px solid var(--c)}
+@media(max-width:860px){.mm-branches{grid-template-columns:1fr 1fr;border-top:0}}
+@media(max-width:520px){.mm-branches{grid-template-columns:1fr}}
+
+
+/* abreviações com dica */
+abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+#tip{position:fixed;z-index:100;max-width:300px;background:#1d2330;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+@media (prefers-color-scheme:dark){#tip{background:#e6e9ef;color:#12151b}}
+
+/* mapa clicável */
+.mm [data-k]{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mm [data-k]:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.mm [data-k].sel{outline:3px solid var(--c,var(--accent));outline-offset:2px}
+.mm-root[data-k].sel{outline-color:var(--text)}
+.mm-hint{text-align:center;color:var(--muted);font-size:13px;margin:-4px 0 12px}
+#mmPanel{border-left:6px solid var(--c,var(--accent));scroll-margin-top:140px}
+#mmPanel h4{margin:0 0 4px;font-size:18px;color:var(--c,var(--accent))}
+#mmPanel .mm-sec{margin:12px 0 0}
+#mmPanel .lbl{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+#mmPanel .ex{background:var(--ok-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .pg{background:var(--bad-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+
+/* questões */
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 16px}
+.qnav button{width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:12.5px;cursor:pointer}
+.qnav button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.qnav button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.qnav button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.progress{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:width .3s}
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
+.enun{white-space:pre-line;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ce{display:flex;gap:10px}.ce .opt{justify-content:center;font-weight:650}
+.opt{user-select:none;-webkit-user-select:none;position:relative}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.sel .l::before{content:"● ";color:var(--accent)}
+.opt.desc{opacity:.55;padding-right:92px}
+.opt.desc span{text-decoration:line-through;text-decoration-thickness:2px}
+.ce .opt.desc{text-decoration:line-through;text-decoration-thickness:2px}
+.opt.desc::after{content:"descartada";position:absolute;right:10px;top:8px;font-size:11px;color:var(--muted);text-decoration:none}
+.qact{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.qmsg{font-size:14.5px;padding:8px 12px;border-radius:8px;display:none}
+.qmsg.on{display:block}
+.qmsg.warn{background:var(--warn-soft);color:var(--warn)}
+.qmsg.bad{background:var(--bad-soft);color:var(--bad)}
+.qhint{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.coment{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.coment p{margin:6px 0}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+
+/* flashcards */
+.fc{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-inner{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fc-face.back{transform:rotateY(180deg);background:var(--accent-soft);text-align:left;align-items:flex-start;font-size:15px}
+.fc-face .q{font-size:19px;font-weight:600}
+.fc-meta{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;color:var(--muted);font-size:13px}
+.boxes{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.boxes span{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line)}
+
+/* rendimento */
+.big{font-size:44px;font-weight:750;line-height:1}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.bar .t{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar .t>div{height:100%;background:var(--ok)}
+.bar .t>div.mid{background:var(--warn)}.bar .t>div.low{background:var(--bad)}
+@media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
+.btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+/* marca-texto */
+mark.hl{color:#1d2330;border-radius:3px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{background:#b6efc4}
+#hlBar{position:fixed;z-index:120;display:none;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 8px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+#hlBar.on{display:flex}
+#hlBar .lbl{font-size:12px;color:var(--muted);margin-right:2px}
+#hlBar button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;font-size:14px;line-height:1;color:var(--text);background:var(--surface2);padding:0}
+#hlBar button:hover{transform:scale(1.12);border-color:var(--text)}
+#hlBar button[data-c=am]{background:#fff176}#hlBar button[data-c=ro]{background:#f9c2dc}#hlBar button[data-c=ve]{background:#b6efc4}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span class="badge">T1</span>
+      <div>
+        <h1>Trilha 00 · Tarefa 1 · Português</h1>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00 (Felipe Luccas): Ortografia, Acentuação, Hífen e Expressões Problemáticas</div>
+      </div>
+    
+      <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
+    </div>
+    <nav id="nav">
+      <button data-t="inicio" class="on">Roteiro</button>
+      <button data-t="resumo">Resumo</button>
+      <button data-t="mapa">Mapa mental</button>
+      <button data-t="esquemas">Esquemas</button>
+      <button data-t="reforma">Palavras que despencam</button>
+      <button data-t="questoes">Questões <span class="pill" id="navQ">0/0</span></button>
+      <button data-t="flash">Flashcards</button>
+      <button data-t="rend">Rendimento</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ROTEIRO -->
+<section class="tab on" id="inicio">
+<h2>Roteiro da sessão T1</h2>
+  <p class="lead">Tarefa da trilha: <i>"Estudo da aula 00, de 'Noções Iniciais de Ortografia' até 'Outras regras ortográficas relevantes', inclusive"</i>. A trilha estima cerca de 1h30 por tarefa.</p>
+
+  <div class="call warn"><b>Material</b>
+    A trilha recomenda o PDF <b>completo</b>, mas em <code>estrategia/português/</code> só há o <b>simplificado</b> da Aula 00 (Equipe Português e Felipe Luccas). Pela sua regra, os simplificados já baixados continuam valendo, e esta página foi feita com ele. A trilha não indica questões; entraram as <b>Questões Comentadas</b> do CEBRASPE de todos os tópicos estudados (39 itens).
+  </div>
+
+  <div class="call"><b>O que o coach destacou</b>
+    • Acentuação e ortografia somam cerca de <b>4,94%</b> das questões da área fiscal, em nível fácil a médio. Não se prenda a detalhes.<br>
+    • Entenda os <b>encontros vocálicos</b> e a posição da <b>sílaba tônica</b> (oxítona, paroxítona, proparoxítona): isso destrava as regras.<br>
+    • Atenção à <b>acentuação do hiato</b> e aos <b>acentos diferenciais</b> (pode/pôde, por/pôr, tem/têm).<br>
+    • Regra de ouro, com ótimo custo-benefício: <b>toda proparoxítona é acentuada</b>.<br>
+    • No <b>hífen</b>, grave uma palavra-exemplo de cada regra.<br>
+    • No <b>emprego das letras</b>, grife só as palavras que chamarem sua atenção. O que funciona é <b>treino</b>.<br>
+    • As <b>expressões problemáticas</b> (mal/mau, senão/se não, porquês) <b>despencam</b>: memorize um exemplo de cada.
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><b>Pré-teste (5 min).</b> Abra os <b>Flashcards</b> e tente 5 cartões antes de ler.</li>
+      <li><b>Resumo (30 min).</b> Leia a aba <b>Resumo</b>, respondendo aos blocos <i>Pergunte-se</i>. Use o <b>marca-texto</b>: selecione um trecho e escolha amarelo, rosa ou verde.</li>
+      <li><b>Mapa mental e Esquemas (10 min).</b> Clique em cada item do mapa e leia o exemplo.</li>
+      <li><b>Palavras que despencam (5 min).</b> Leia as listas em voz alta.</li>
+      <li><b>Questões (35 min).</b> 39 itens. Escolha com um clique, descarte com dois e confirme em <b>Responder</b>; leia sempre o comentário.</li>
+      <li><b>Rendimento (5 min).</b> Anote os temas em que errou.</li>
+    </ol>
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Banca</b><br><span class="muted">CEBRASPE: itens de Certo ou Errado em que um erro anula um acerto. Na dúvida real, deixe em branco.</span></div>
+    <div class="card"><b>Marca-texto</b><br><span class="muted">Selecione qualquer trecho do Resumo, Esquemas, Roteiro, das questões ou do painel do mapa e escolha a cor. Clique numa marcação para trocar a cor ou apagar.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas, flashcards e marcações ficam no navegador. Use <i>Exportar</i> na aba Rendimento para fazer backup.</span></div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="tab" id="resumo">
+<h2>Resumo: ortografia, acentuação, hífen e expressões</h2>
+  <p class="lead">O resumo segue a ordem da aula. Os <span class="k">termos em destaque</span> são os que mais caem e os blocos vermelhos marcam as pegadinhas da banca.</p>
+
+  <h3>1. Noções iniciais: tônica, átona e acento</h3>
+  <div class="card">
+    <ul>
+      <li><b>Ortoépia</b> estuda a pronúncia correta; <b>prosódia</b> estuda a sílaba tônica e a acentuação.</li>
+      <li><span class="k">Acento tônico</span> é o da fala, a sílaba pronunciada com mais força. <span class="k">Acento gráfico</span> é o sinal escrito. "Saci" tem tônica na última sílaba e nenhum acento gráfico; "café" tem os dois.</li>
+      <li><b>Monossílabos tônicos</b> têm autonomia na fala (pé, pó, dor). <b>Átonos</b> se apoiam em outra palavra: artigos, preposições, conjunções e pronomes oblíquos (de, em, com, por, se).</li>
+      <li>O acento serve para <b>diferenciar palavras</b> e pode mudar a classe: sabia (verbo), sabiá (substantivo), sábia (adjetivo); acumulo (verbo), acúmulo (substantivo).</li>
+      <li>Agudo marca timbre <b>aberto</b>; circunflexo, timbre <b>fechado</b>: avó × avô.</li>
+    </ul>
+  </div>
+
+  <h3>2. Sons, letras, fonemas e dígrafos</h3>
+  <div class="card">
+    <ul>
+      <li><span class="k">Fonema</span> é a unidade sonora que distingue palavras (pato × gato). <span class="k">Letra</span> é o símbolo gráfico do fonema.</li>
+      <li><span class="k">Dígrafo</span>: duas letras com <b>um só som</b>. Por isso a palavra fica com mais letras do que fonemas ("chuva": 5 letras, 4 fonemas).</li>
+      <li>Dígrafos consonantais: ch, lh, nh, rr, ss, qu, gu, sc, sç, xc, xs. Separam-se na divisão silábica só <b>rr, ss, sc, sç, xc e xs</b> (car-ro, nas-cer).</li>
+      <li>Dígrafos vocálicos (nasais): am/an, em/en, im/in, om/on, um/un <b>antes de consoante</b> (campo, vento, limbo, onda, mundo). O M ou N só nasaliza a vogal, como um til.</li>
+      <li><b>Qu e gu só são dígrafos quando o U não é pronunciado</b>: "quero", "guerra" (dígrafo) × "qualidade", "aguentar" (o U soa, há ditongo).</li>
+      <li><b>Encontro consonantal</b>: duas consoantes, cada uma com seu som. Na mesma sílaba (cli-ma, le-tra) ou em sílabas diferentes (ad-ven-to, ét-ni-co).</li>
+      <li><b>Dígrafo nasal × ditongo nasal</b>: "AMplo" tem um som (ã). "ChegAM" tem dois sons (ão), porque no fim da palavra AM e EM formam ditongo.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "Em 'perspectiva', RS é dígrafo": <b>ERRADO</b>, cada letra tem seu som.<br>
+      • "Em 'qualidade', QU é dígrafo": <b>ERRADO</b>, o U é pronunciado.<br>
+      • "'Perenes' é polissílabo": <b>ERRADO</b>, é trissílabo. Polissílabo tem quatro sílabas ou mais.
+    </div>
+    <details><summary>Pergunte-se: quantas letras e quantos fonemas tem "guerra"?</summary><div>Seis letras e quatro fonemas: /g/ /e/ /r/ /a/. Há dois dígrafos, GU e RR.</div></details>
+  </div>
+
+  <h3>3. Encontros vocálicos</h3>
+  <div class="card">
+    <div class="tbl"><table>
+      <tr><th>Encontro</th><th>Estrutura</th><th>Exemplos</th></tr>
+      <tr><td><b>Ditongo crescente</b></td><td>semivogal + vogal, na mesma sílaba</td><td>histó-<b>ria</b>, pri-má-<b>rio</b>, á-<b>gua</b>, sé-<b>rie</b>, cin-<b>quen</b>-ta</td></tr>
+      <tr><td><b>Ditongo decrescente</b></td><td>vogal + semivogal, na mesma sílaba</td><td>m<b>eu</b>, j<b>ó</b>qu<b>ei</b>, imó-v<b>eis</b>, s<b>au</b>-da-de, ca-<b>tam</b> (som ão)</td></tr>
+      <tr><td><b>Tritongo</b></td><td>semivogal + vogal + semivogal</td><td>U-ru-<b>guai</b>, sa-<b>guão</b>, de-sá-<b>guem</b></td></tr>
+      <tr><td><b>Hiato</b></td><td>duas vogais em sílabas <b>diferentes</b></td><td>sa-ú-de, pa-ís, ve-í-cu-lo, ca-ó-ti-co</td></tr>
+    </table></div>
+    <p>Os ditongos <b>abertos</b> (éi, ói, éu) são decrescentes. Cada sílaba tem <b>uma única vogal</b>: em "pa-ís" há duas sílabas (hiato); em "pais", uma (ditongo, o I é semivogal).</p>
+  </div>
+
+  <h3>4. Regras gerais de acentuação</h3>
+  <div class="card">
+    <p>A sílaba tônica é sempre uma das três últimas: <b>oxítona</b> (última), <b>paroxítona</b> (penúltima), <b>proparoxítona</b> (antepenúltima). As regras combinam <b>posição da tônica + terminação</b>.</p>
+    <div class="tbl"><table>
+      <tr><th>Tipo</th><th>Acentua-se quando termina em</th><th>Exemplos</th></tr>
+      <tr><td><b>Monossílabo tônico</b></td><td>a, e, o (com ou sem s) · ditongo aberto éu, éi, ói</td><td>pá, pé, pó, mês, nós · céu, réis, dói, sóis</td></tr>
+      <tr><td><b>Oxítona</b></td><td>a, e, o (com ou sem s), em, ens · ditongo aberto éu, éi, ói</td><td>sofá, café, cipó, alguém, parabéns · chapéu, papéis, herói</td></tr>
+      <tr><td><b>Paroxítona: regra geral</b></td><td><b>todas, exceto</b> as terminadas em a, e, o, em, ens (o "espelho" da oxítona)</td><td>fácil, hífen, álbum, caráter, tórax, júri, lápis, vírus, bíceps, órfão, ímã, próton</td></tr>
+      <tr><td><b>Paroxítona: regra específica</b></td><td><b>ditongo oral</b> (crescente ou decrescente)</td><td>história, série, água, primário, imóveis, amáveis, jóquei</td></tr>
+      <tr><td><b>Proparoxítona</b></td><td><b>todas</b>, sem exceção</td><td>médico, lâmpada, página, átomo, relâmpago</td></tr>
+    </table></div>
+    <ul>
+      <li><b>Raciocínio de prova</b>: palavras de tonicidades diferentes não seguem a mesma regra (parabéns é oxítona; lúmen, paroxítona). A <b>única exceção</b> é a regra do hiato, que vale para oxítonas e paroxítonas (juízes e açaí).</li>
+      <li>Com pronome ligado ao verbo, ignore o pronome: "nomeá-la" e "apreciá-las" seguem "sofá" (oxítona em a).</li>
+      <li>Item e itens, hifens: sem acento (paroxítonas em em/ens). Hífen: com acento (termina em en, e não em em).</li>
+      <li>Prefixos paroxítonos em -r ou -i não levam acento: hiper, super, mini, anti, semi. Mas Méier e destróier, sim (terminam em r).</li>
+      <li>Verbos em -am (cantam, choram) não levam acento: "ão" e "am" nasais entram na regra geral, e não na do ditongo oral.</li>
+      <li><b>Novo Acordo</b>: paroxítonas com ditongo aberto ei/oi perderam o acento (ideia, assembleia, plateia, heroico, jiboia, boia, asteroide). Nas <b>oxítonas</b> e monossílabos ele continua (papéis, herói, constrói, dói).</li>
+      <li><b>Proparoxítona aparente</b>: história, memória e evidências podem ser lidas como his-tó-ri-a (proparoxítona). As bancas cobram como <b>paroxítona terminada em ditongo</b>, a menos que a questão sinalize as duas leituras, como no item do Tribunal Regional Federal da 1ª Região sobre "memória".</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "Elétricos, pálidas e móveis seguem a mesma regra": <b>ERRADO</b>. As duas primeiras são proparoxítonas; "móveis", paroxítona em ditongo.<br>
+      • "Dói, só e nós seguem a mesma regra": <b>ERRADO</b>. "Dói" tem ditongo aberto; "só" e "nós" são monossílabos em o.<br>
+      • "Trás, é e nós seguem a mesma regra": <b>CERTO</b>. São monossílabos tônicos em a, e, o.<br>
+      • "Juízo, extraídos e período seguem a mesma regra": <b>ERRADO</b>. "Período" é proparoxítona.
+    </div>
+    <details><summary>Pergunte-se: por que "fácil" e "caráter" têm acento, e "item" não?</summary><div>São paroxítonas. Pela regra geral, acentuam-se todas, menos as terminadas em a, e, o, em, ens. "Fácil" (l) e "caráter" (r) estão fora dessa lista; "item" (em) está nela.</div></details>
+    <details><summary>Pergunte-se: "ideia" e "papéis" têm o mesmo ditongo aberto. Por que só uma leva acento?</summary><div>O Novo Acordo tirou o acento do ditongo aberto nas <b>paroxítonas</b> (i-dei-a). Nas <b>oxítonas</b> (pa-péis) ele continua.</div></details>
+  </div>
+
+  <h3>5. Acentuação do hiato</h3>
+  <div class="card">
+    <p><span class="k">Regra</span>: acentuam-se o <b>i</b> e o <b>u tônicos</b> em hiato com a vogal anterior, quando formam a sílaba <b>sozinhos ou com s</b>: ca-í, fa-ís-ca, sa-ú-de, ba-la-ús-tre, pa-í-ses, con-te-ú-dos. Vale para oxítonas e paroxítonas.</p>
+    <div class="tbl"><table>
+      <tr><th>Caso</th><th>Acento?</th><th>Exemplos</th></tr>
+      <tr><td>i/u formam sílaba com outra letra que não s</td><td>Não</td><td>ca-ir, ju-iz, ra-ul, ru-im, a-in-da, sa-in-do</td></tr>
+      <tr><td>Hiato seguido de <b>nh</b> na sílaba seguinte</td><td>Não</td><td>rainha, bainha, moinho</td></tr>
+      <tr><td>Vogais repetidas</td><td>Não</td><td>xiita, vadiice, Saara</td></tr>
+      <tr><td>Hiatos <b>ee(m)</b> e <b>oo(s)</b> (Novo Acordo)</td><td>Não</td><td>creem, deem, leem, veem, enjoo, voo, zoo</td></tr>
+      <tr><td>i/u depois de <b>ditongo decrescente</b> em <b>paroxítona</b> (Novo Acordo)</td><td>Não</td><td>feiura, baiuca, bocaiuva, Sauipe</td></tr>
+      <tr><td>i/u depois de ditongo crescente</td><td>Sim</td><td>Guaíra, Guaíba</td></tr>
+      <tr><td>i/u depois de ditongo, na <b>última sílaba</b> (oxítona)</td><td>Sim</td><td>Piauí, tuiuiú, teiú</td></tr>
+    </table></div>
+    <div class="call bad"><b>Pegadinha</b>"Pássaros, aquático e poluídas seguem a mesma regra": <b>ERRADO</b>. As duas primeiras são proparoxítonas; "poluídas" segue a regra do hiato.</div>
+  </div>
+
+  <h3>6. Acentos diferenciais</h3>
+  <div class="card">
+    <p>A maioria caiu com o Novo Acordo (pelo, para, polo, pera não têm mais acento). <b>Ficaram só estes</b>:</p>
+    <div class="tbl"><table>
+      <tr><th>Com acento</th><th>Sem acento</th><th>O que diferencia</th></tr>
+      <tr><td><b>pôde</b> (pretérito perfeito)</td><td>pode (presente)</td><td>Tempo verbal. <b>Obrigatório.</b></td></tr>
+      <tr><td><b>pôr</b> (verbo)</td><td>por (preposição)</td><td>Classe da palavra</td></tr>
+      <tr><td><b>têm, vêm</b> (plural)</td><td>tem, vem (singular)</td><td>Número, pela concordância com o sujeito</td></tr>
+      <tr><td><b>mantêm, detêm, intervêm, provêm</b> (plural)</td><td>mantém, detém, intervém, provém (singular)</td><td>Número. Os derivados de ter e vir levam agudo no singular.</td></tr>
+      <tr><td>fôrma, dêmos (facultativos)</td><td>forma, demos</td><td>Opcional, para evitar ambiguidade</td></tr>
+    </table></div>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "O acento de 'pôde' é opcional": <b>ERRADO</b>.<br>
+      • "'Têm' concorda com 'inúmeras vantagens'": <b>ERRADO</b> quando esse termo é o objeto. O acento depende do <b>sujeito</b>.<br>
+      • "'Tem' é plural e 'têm', singular": <b>ERRADO</b>, é o contrário.
+    </div>
+    <details><summary>Pergunte-se: "Os auditores ___ autonomia" e "O auditor ___ os livros": qual a forma de ter e de manter?</summary><div>"Os auditores <b>têm</b> autonomia" (plural, circunflexo). "O auditor <b>mantém</b> os livros" (singular, agudo); no plural, "os auditores <b>mantêm</b>".</div></details>
+  </div>
+
+  <h3>7. Emprego do hífen</h3>
+  <div class="card">
+    <p><span class="k">Lógica dos prefixos: "os diferentes se atraem".</span> O hífen <b>separa letras iguais</b>; letras diferentes se unem direto.</p>
+    <div class="tbl"><table>
+      <tr><th>Prefixo termina em…</th><th>2º elemento começa com…</th><th>Resultado</th><th>Exemplos</th></tr>
+      <tr><td>vogal</td><td>a <b>mesma</b> vogal</td><td>hífen</td><td>micro-ondas, anti-inflamatório, contra-ataque, semi-internato, auto-observação</td></tr>
+      <tr><td>vogal</td><td>vogal <b>diferente</b></td><td>junto</td><td>autoestrada, extraoficial, infraestrutura, semianalfabeto, autoanálise</td></tr>
+      <tr><td>vogal</td><td><b>r ou s</b></td><td>junto e <b>dobra</b> a consoante</td><td>antissocial, contrarregra, minissaia, ultrassom, contrarrazões</td></tr>
+      <tr><td>vogal</td><td>outra consoante</td><td>junto</td><td>autodefesa, semifinal</td></tr>
+      <tr><td>consoante</td><td>a <b>mesma</b> consoante</td><td>hífen</td><td>super-resistente, hiper-realista, sub-bibliotecário, inter-regional</td></tr>
+      <tr><td>consoante</td><td>vogal ou consoante diferente</td><td>junto</td><td>hiperativo, interescolar, supermercado, hipersensibilidade</td></tr>
+      <tr><td>qualquer</td><td><b>h</b></td><td>hífen</td><td>anti-higiênico, pré-história, super-homem, sub-humano, auto-hemoterapia</td></tr>
+    </table></div>
+    <p><b>Regras especiais</b></p>
+    <ul>
+      <li><b>co</b>: sempre junto, mesmo antes de o: cooperar, coobrigado, coexistir, coautor, corresponsável.</li>
+      <li><b>não e quase</b> (como prefixos): sem hífen: não incidência, não cumulatividade, quase delito.</li>
+      <li><b>ex, vice, recém, sem, além, aquém</b>: sempre hífen: ex-sócio, vice-governador, recém-nascido, sem-terra.</li>
+      <li><b>pré, pró, pós tônicos</b>: hífen (pré-escolar, pós-graduação). Átonos se aglutinam: preestabelecer, preexistente, promover.</li>
+      <li><b>sub e sob + r ou b</b>: hífen (sub-região, sub-rogação, sub-base). <b>circum e pan + vogal, m, n</b>: hífen (pan-americano, circum-navegação).</li>
+      <li><b>bem</b>: hífen antes de vogal e de consoante (bem-vindo, bem-estar, bem-humorado), exceto derivados de querer e fazer (benquerer, benfeitor, benfeito). <b>mal</b>: hífen antes de vogal ou h (mal-estar, mal-humorado); antes de consoante se aglutina (malcriado, malfeito).</li>
+      <li><b>Compostos com elemento de ligação perdem o hífen</b>: mão de obra, dia a dia, ponto e vírgula, pé de moleque. Sem elemento de ligação, mantêm: guarda-chuva, arco-íris, boa-fé, corre-corre. Exceções que mantêm: cor-de-rosa, mais-que-perfeito, água-de-colônia, pé-de-meia, arco-da-velha e as <b>espécies</b> (bem-te-vi, erva-doce, cravo-da-índia).</li>
+      <li><b>Perda da noção de composição</b>: girassol, mandachuva, pontapé, paraquedas, madressilva.</li>
+      <li><b>Encadeamentos</b>: ponte Rio-Niterói, eixo Rio-São Paulo. Palavras como segunda-feira e mato-grossense não são formadas por prefixo e mantêm o hífen.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "Coexistem poderia ser co-existem": <b>ERRADO</b>.<br>
+      • "Bem-estar pode ser escrito 'bem estar' por ser substantivo": <b>ERRADO</b>.<br>
+      • "Hiper-ativo": <b>ERRADO</b>, o certo é hiperativo. "Recém-casado" está certo.<br>
+      • "Mão-de-obra": <b>ERRADO</b>, o certo é mão de obra.
+    </div>
+    <details><summary>Pergunte-se: como se escrevem anti + rugas, micro + ônibus, sub + reitor e co + responsável?</summary><div>Antirrugas (vogal + r: dobra), micro-ônibus (vogais iguais), sub-reitor (sub + r: hífen) e corresponsável (co sempre junto, e dobra o r).</div></details>
+  </div>
+
+  <h3>8. Emprego das letras</h3>
+  <div class="card">
+    <p><b>Dica-mestra</b>: a palavra derivada mantém as letras da primitiva. Procure a origem.</p>
+    <div class="grid2">
+      <div>
+        <p><b>Ç</b>: derivados de -to, -tor, -tivo e de ações (erudito → erudição, exceto → <b>exceção</b>, setor → seção, intuitivo → intuição, exportar → exportação). Verbos derivados de <b>ter</b>: manutenção, retenção, detenção. Substantivo em -ce → verbo em -çar: alcance → alcançar.</p>
+        <p><b>S</b>: verbos em -nder/-ndir (pretender → pretensão, compreender → compreensão, despender → despesa, expandir → expansão); em -erter/-ertir/-ergir (converter → conversão, imergir → imersão); -pelir → -puls- (expelir → expulsão); -correr → -curs- (concorrer → concurso). Sufixos -oso/-osa, -ase, -ese, -ise, -ose, -isa (exceções: gozo, gaze, deslize, baliza, coriza). Verbos <b>pôr, querer, usar</b>: pus, quis, quiseram, usasse.</p>
+        <p><b>SS</b>: -ceder → -cess- (conceder → concessão, exceder → excesso); -primir → -press- (imprimir → impressão); -gredir → -gress- (agredir → agressão); -meter → -miss-/-mess- (prometer → promessa, comprometer → compromisso).</p>
+      </div>
+      <div>
+        <p><b>S ou Z</b>: -ês/-esa para nacionalidade, título e nome próprio (português, marquesa, duquesa). -ez/-eza para substantivos abstratos vindos de adjetivos (limpeza, nobreza, lucidez). -isar se a primitiva tem s (análise → analisar, pesquisa → pesquisar, paralisia → paralisar); -izar se não tem (economia → economizar), com as exceções catequizar, sintetizar, hipnotizar e batizar. Diminutivo: -sinho se a primitiva tem s (casinha), -zinho se não tem (cafezinho, mulherzinha).</p>
+        <p><b>Ç ou S depois de ditongo</b>: som de s → ç (eleição); som de z → s (coisa, Neusa).</p>
+        <p><b>G ou J</b>: -agem, -igem, -ugem e -ágio, -égio, -ígio, -ógio, -úgio → g (viagem, pedágio, prestígio). Exceções: pajem, lambujem. Verbos em -jar mantêm o j: viajar → que eles <b>viajem</b> (verbo) × a <b>viagem</b> (substantivo). Origem tupi, africana ou popular → j (jiboia, jiló, pajé). Grave: <b>ojeriza</b>.</p>
+        <p><b>X ou CH</b>: depois de ditongo, x (ameixa, peixe, deixar; exceções: recauchutar, guache). Depois de en- inicial, x (enxada, enxerto, <b>enxergar</b>), salvo derivados de palavras com ch (cheio → encher, charco → encharcar) e enchova. Depois de me-, x (mexer, mexerica), salvo mecha.</p>
+      </div>
+    </div>
+    <div class="call warn"><b>Grafias com SC</b>acréscimo, adolescente, ascensão, consciência, discernimento, disciplina, fascínio, imprescindível, irascível, obsceno, oscilar, plebiscito, recrudescer, rescisão, ressuscitar, suscitar, transcender. Na conjugação, sç: nasço, nasça, cresça.</div>
+  </div>
+
+  <h3>9. Maiúsculas, siglas e abreviações</h3>
+  <div class="card">
+    <ul>
+      <li>A maiúscula marca o ser <b>particular</b>: nomes próprios, logradouros (Rua Ceará), instituições (Senado Federal), datas e épocas históricas (Sete de Setembro, Idade Média), títulos de obras (preposições em minúscula: Jornal do Comércio), pronomes de tratamento (Vossa Excelência), regiões (o Nordeste) e áreas do conhecimento (a Filosofia, o Português).</li>
+      <li>Nome comum personificado ganha maiúscula: o Estado (como nação), a Morte (como entidade). Ponto cardeal como direção vai em minúscula: "de norte a sul". Depois de dois-pontos, minúscula.</li>
+      <li><b>Siglas</b>: até três letras, todas maiúsculas (DF, CPF, ONU). Com mais de três, maiúsculas se cada letra é lida (BNDES, ICMS); só a inicial se é lida como palavra (Detran, Sudene). Há mistas: UnB, CNPq. Plural com s minúsculo: PDFs. <b>Siglas não levam ponto</b>.</li>
+      <li><b>Abreviação</b>: primeira sílaba + primeira letra da segunda, com ponto (gram., núm.); se a segunda sílaba começa com duas consoantes, as duas entram (constr., secr.). Exceções: apto., cia., pág. ou p.</li>
+    </ul>
+  </div>
+
+  <h3>10. Expressões problemáticas</h3>
+  <div class="card">
+    <div class="tbl"><table>
+      <tr><th>Par</th><th>Diferença</th><th>Exemplo</th></tr>
+      <tr><td><b>mal × mau</b></td><td>mal: oposto de <b>bem</b> (advérbio, substantivo, ou conjunção "logo que"). mau: oposto de <b>bom</b> (adjetivo).</td><td>"Mal cheguei, fui autuado." "Ele é um mau pagador."</td></tr>
+      <tr><td><b>há × a</b></td><td>há: tempo passado (verbo haver). a: futuro ou distância.</td><td>"O lançamento ocorreu há cinco anos." "Daqui a dois dias."</td></tr>
+      <tr><td><b>por que</b></td><td>pergunta (direta ou indireta) ou "pelo qual"</td><td>"Por que recorreu?" "As etapas por que passa o processo."</td></tr>
+      <tr><td><b>por quê</b></td><td>o mesmo, no fim da frase ou antes de pausa</td><td>"Recorreu por quê?"</td></tr>
+      <tr><td><b>porque</b></td><td>conjunção causal ou explicativa</td><td>"Foi autuado porque não emitiu nota."</td></tr>
+      <tr><td><b>porquê</b></td><td>substantivo ("o motivo"), vem com determinante</td><td>"Ninguém sabe o porquê da glosa."</td></tr>
+      <tr><td><b>onde × aonde</b></td><td>onde: verbo com "em" (lugar físico). aonde: verbo com "a" (movimento).</td><td>"Onde fica a agência?" "Aonde vai o fiscal?"</td></tr>
+      <tr><td><b>mas × mais</b></td><td>mas: oposição (porém). mais: oposto de menos.</td><td>"Pagou, mas atrasado."</td></tr>
+      <tr><td><b>a fim de × afim</b></td><td>a fim de: finalidade (para). afim: semelhante.</td><td>"Intimou o contribuinte a fim de esclarecer." "Matérias afins."</td></tr>
+      <tr><td><b>a par × ao par</b></td><td>a par: informado. ao par: equivalência cambial.</td><td>"Estou a par do edital."</td></tr>
+      <tr><td><b>acerca de × a cerca × há cerca de</b></td><td>acerca de: sobre. a cerca: artigo + substantivo. cerca de: aproximadamente.</td><td>"Falou acerca da norma." "Chegou há cerca de duas horas."</td></tr>
+      <tr><td><b>tampouco × tão pouco</b></td><td>tampouco: também não. tão pouco: muito pouco.</td><td>"Não pagou, tampouco recorreu."</td></tr>
+      <tr><td><b>trás × traz</b></td><td>trás: lugar (para trás). traz: verbo trazer.</td><td>"O contribuinte traz os livros."</td></tr>
+      <tr><td><b>cessão × sessão × seção</b></td><td>cessão: ato de ceder. sessão: reunião. seção: divisão.</td><td>"Cessão de crédito", "sessão do TARF", "seção de fiscalização".</td></tr>
+      <tr><td><b>ao invés de × em vez de</b></td><td>ao invés de: ao contrário (antônimos). em vez de: no lugar de (serve sempre).</td><td>"Em vez de multar, orientou."</td></tr>
+      <tr><td><b>de mais × demais</b></td><td>de mais: oposto de "de menos". demais: muito, ou "os outros".</td><td>"Nada de mais." "Os demais sócios."</td></tr>
+      <tr><td><b>de encontro a × ao encontro de</b></td><td>de encontro a: choque, oposição. ao encontro de: concordância.</td><td>"A decisão foi ao encontro da tese fiscal."</td></tr>
+      <tr><td><b>senão × se não</b></td><td>senão: do contrário, mas sim, exceto. se não: condição ("caso não") ou "se" integrante + não.</td><td>"Pague, senão será executado." "Se não pagar, será executado."</td></tr>
+      <tr><td><b>abaixo, debaixo, embaixo</b> × de baixo, em baixo</td><td>Juntos: advérbios, em geral seguidos de "de". Separados: preposição + adjetivo.</td><td>"Embaixo da mesa." "Roupa de baixo custo."</td></tr>
+    </table></div>
+    <div class="call bad"><b>Pegadinhas</b>
+      • "Afim de coordenar a ajuda": <b>ERRADO</b>, o certo é "a fim de".<br>
+      • "Há mil anos atrás": redundante. Use "há mil anos" ou "mil anos atrás".<br>
+      • "As empresas aonde investem": <b>ERRADO</b>. Quem investe, investe <b>em</b>.<br>
+      • "Não tem porque nutrir raiva": <b>ERRADO</b>. É "não tem por que" (razão pela qual).
+    </div>
+  </div>
+
+  <h3>11. Outras regras: o Novo Acordo</h3>
+  <div class="card">
+    <ul>
+      <li><b>O trema acabou</b>: frequente, linguiça, cinquenta, tranquilo, sequestro, consequência. Fica só em nomes estrangeiros e derivados (Müller, mülleriano).</li>
+      <li>Verbos em -guar, -quar e -quir admitem duas pronúncias, sem acento: enxaguo, delinquo, antiquo.</li>
+      <li>Arguir e redarguir perderam o acento agudo no u: ele argui, eles arguem.</li>
+      <li>Resumo das mudanças: <b>caiu o trema</b>; <b>caiu a maioria dos diferenciais</b>; <b>caiu o acento do ditongo aberto em paroxítonas</b>; <b>caiu o acento de ee(m) e oo(s)</b> e do i/u depois de ditongo em paroxítona.</li>
+      <li>Cotidiano e quotidiano estão <b>ambos corretos</b> (VOLP).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="tab" id="mapa">
+  <h2>Mapa mental: ortografia e acentuação</h2>
+  <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
+  <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
+  <div class="card mm" id="mmBox"></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa para começar.</p></div>
+
+  <h3>Onde este tema se encaixa na disciplina</h3>
+  <div class="card">
+    <div class="grid3" style="font-size:14px">
+      <div><b class="k">Ortografia</b><br>Acentuação, hífen, emprego das letras ← <i>você está aqui</i></div>
+      <div><b class="k">Morfologia</b><br>Classes de palavras<br>Verbos e pronomes</div>
+      <div><b class="k">Sintaxe</b><br>Termos da oração, período composto<br>Concordância e regência</div>
+      <div><b class="k">Crase e colocação</b><br>Crase<br>Colocação pronominal</div>
+      <div><b class="k">Pontuação</b><br>Vírgula, ponto e vírgula, dois-pontos</div>
+      <div><b class="k">Texto</b><br>Interpretação, coesão e coerência<br>Reescrita (o forte do CEBRASPE)</div>
+    </div>
+    <p class="muted small" style="margin:10px 0 0">Blocos gerais de Português, para orientar o estudo. A ordem exata das aulas está no cronograma do curso.</p>
+  </div>
+</section>
+
+<!-- ESQUEMAS -->
+<section class="tab" id="esquemas">
+<h2>Esquemas comparativos</h2>
+  <p class="lead">Tabelas para revisão rápida. Você deve conseguir reproduzi-las na véspera.</p>
+
+  <h3>Acentuação: a régua das três posições</h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Oxítona</th><th>Paroxítona</th><th>Proparoxítona</th></tr>
+    <tr><td><b>Acentua</b></td><td>a, e, o, em, ens (com ou sem s) + éu, éi, ói</td><td>tudo o que <b>não</b> termina em a, e, o, em, ens + ditongo oral</td><td><b>todas</b></td></tr>
+    <tr><td><b>Não acentua</b></td><td>i, u, l, r, z… (caju, funil, rapaz)</td><td>a, e, o, em, ens (casa, item) e ditongo aberto ei/oi (ideia)</td><td>—</td></tr>
+    <tr><td><b>Exemplo</b></td><td>sofá, alguém, papéis</td><td>fácil, hífen, história</td><td>lâmpada</td></tr>
+  </table></div>
+
+  <h3>Novo Acordo: o que mudou</h3>
+  <div class="tbl"><table>
+    <tr><th>Antes</th><th>Depois</th><th>Regra</th></tr>
+    <tr><td>idéia, heróico, jibóia</td><td>ideia, heroico, jiboia</td><td>Sem acento no ditongo aberto da paroxítona</td></tr>
+    <tr><td>vôo, crêem, lêem</td><td>voo, creem, leem</td><td>Sem acento em oo(s) e ee(m)</td></tr>
+    <tr><td>feiúra, baiúca</td><td>feiura, baiuca</td><td>Sem acento no i/u depois de ditongo em paroxítona</td></tr>
+    <tr><td>pára, pêlo, pólo</td><td>para, pelo, polo</td><td>Caíram os diferenciais (ficaram pôde, pôr, têm, vêm)</td></tr>
+    <tr><td>freqüente, lingüiça</td><td>frequente, linguiça</td><td>Fim do trema</td></tr>
+    <tr><td>anti-social, contra-regra</td><td>antissocial, contrarregra</td><td>Vogal + r/s: junta e dobra</td></tr>
+    <tr><td>auto-estrada, extra-oficial</td><td>autoestrada, extraoficial</td><td>Vogais diferentes: junto</td></tr>
+    <tr><td>microondas</td><td>micro-ondas</td><td>Vogais iguais: hífen</td></tr>
+    <tr><td>mão-de-obra, dia-a-dia</td><td>mão de obra, dia a dia</td><td>Com elemento de ligação: sem hífen</td></tr>
+    <tr><td>não-cumulatividade</td><td>não cumulatividade</td><td>"Não" como prefixo: sem hífen</td></tr>
+  </table></div>
+
+  <h3>Hífen com prefixos em uma linha</h3>
+  <div class="tbl"><table>
+    <tr><th>Iguais se separam</th><th>Diferentes se atraem</th><th>Vogal + r/s</th><th>Antes de h</th><th>Sempre junto</th><th>Sempre hífen</th></tr>
+    <tr><td>micro-ondas, inter-regional</td><td>autoescola, hiperativo</td><td>contrarrazões, antissocial</td><td>super-homem, pré-história</td><td>co (coobrigado), não, quase</td><td>ex, vice, recém, sem, além, aquém, pré/pró/pós tônicos</td></tr>
+  </table></div>
+
+  <h3>Os quatro porquês</h3>
+  <div class="tbl"><table>
+    <tr><th>Forma</th><th>Quando</th><th>Teste</th></tr>
+    <tr><td>por que</td><td>pergunta ou "pelo qual"</td><td>Cabe "por qual motivo" ou "pelo qual"</td></tr>
+    <tr><td>por quê</td><td>fim de frase</td><td>Pontuação logo depois</td></tr>
+    <tr><td>porque</td><td>causa ou explicação</td><td>Cabe "pois"</td></tr>
+    <tr><td>porquê</td><td>substantivo</td><td>Vem com "o", "um", "este"</td></tr>
+  </table></div>
+
+  <h3>Acento diferencial de número</h3>
+  <div class="tbl"><table>
+    <tr><th>Verbo</th><th>Ele (singular)</th><th>Eles (plural)</th></tr>
+    <tr><td>ter / vir</td><td>tem / vem</td><td>têm / vêm</td></tr>
+    <tr><td>manter, deter, obter / intervir, provir</td><td>mantém, detém, obtém / intervém, provém</td><td>mantêm, detêm, obtêm / intervêm, provêm</td></tr>
+    <tr><td>crer, ler, ver, dar</td><td>crê, lê, vê, dê</td><td>creem, leem, veem, deem (sem acento)</td></tr>
+  </table></div>
+</section>
+
+<!-- REFORMA -->
+<section class="tab" id="reforma">
+<h2>Palavras que despencam</h2>
+  <p class="lead">Listas para ler em voz alta e grifar só o que te causar dúvida. A técnica que funciona aqui é a memória visual.</p>
+  <div class="grid2">
+    <div class="card"><b>Grafias que a banca adora</b>
+      <ul>
+        <li><b>exceção</b>, excesso, exceto</li>
+        <li><b>enxergar</b>, enxerto, enxerido · encher, enchente, encharcar</li>
+        <li><b>ojeriza</b>, pajem, lambujem · viagem (substantivo) × viajem (verbo)</li>
+        <li>pretensão, compreensão, expansão, despesa, extensão</li>
+        <li>concessão, impressão, agressão, compromisso, promessa</li>
+        <li>ascensão, discernimento, imprescindível, rescisão, plebiscito, obsceno</li>
+        <li>analisar, pesquisar, paralisar × economizar, catequizar, sintetizar, batizar</li>
+        <li>pus, quis, quiseram, puséssemos, usasse</li>
+        <li>decrescer, convalescência (sc) × aparecer, desfalecer, enriquecer, prevalecer (c)</li>
+        <li>consertar (reparar) × concertar (harmonizar) · coser (costurar) × cozer (cozinhar)</li>
+        <li>iminente (prestes a ocorrer) × eminente (ilustre) · desprezível (z)</li>
+        <li>umedecido, úmido (sem h)</li>
+      </ul></div>
+    <div class="card"><b>Vocabulário fiscal com hífen (ou sem)</b>
+      <ul>
+        <li><b>Sem hífen</b>: não incidência, não cumulatividade, coobrigado, corresponsável, contrarrazões, autoatendimento, infraestrutura, extrafiscal, autoaplicável, semiárido, auto de infração, mão de obra</li>
+        <li><b>Com hífen</b>: sub-rogação, ex-sócio, ex-administrador, vice-governador, pós-graduação, pré-requisito, bem-estar, recém-criado, micro-ondas, inter-regional, anti-higiênico, guarda-livros</li>
+        <li>"Anticorrupção" e "antievasão": vogais diferentes ou vogal + consoante, junto. "Anti-inflacionário": vogais iguais, hífen.</li>
+      </ul></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><b>Acentuação: pares para não errar</b>
+      <ul>
+        <li>ideia, assembleia, heroico, jiboia (sem) × papéis, herói, anéis (com)</li>
+        <li>juiz, ruim, Raul, rainha (sem) × juízes, saúde, país, Piauí (com)</li>
+        <li>feiura, bocaiuva (sem) × Guaíba (com)</li>
+        <li>item, itens, hifens (sem) × hífen, pólen, próton (com)</li>
+        <li>voo, enjoo, creem, leem, deem (sem)</li>
+        <li>pôde (passado) × pode (presente) · pôr (verbo) × por (preposição)</li>
+      </ul></div>
+    <div class="card"><b>Frases-modelo das expressões</b>
+      <ul>
+        <li>"<b>Mal</b> recebeu a intimação, o <b>mau</b> contribuinte sumiu."</li>
+        <li>"<b>Há</b> três anos ele não declara; daqui <b>a</b> dois anos a dívida prescreve."</li>
+        <li>"Ninguém sabe o <b>porquê</b>; ele não disse <b>por que</b> deixou de pagar, mas pagou <b>porque</b> foi autuado. Pagou <b>por quê</b>?"</li>
+        <li>"<b>Aonde</b> vai o auditor? Ao estabelecimento <b>onde</b> fica o estoque."</li>
+        <li>"Recolha o tributo, <b>senão</b> haverá multa. <b>Se não</b> recolher, haverá multa."</li>
+        <li>"A decisão foi <b>ao encontro de</b> nossa tese (a favor) e <b>de encontro à</b> do contribuinte (contra)."</li>
+      </ul></div>
+  </div>
+</section>
+
+<!-- QUESTÕES -->
+<section class="tab" id="questoes">
+  <h2>Questões comentadas (CEBRASPE)</h2>
+  <p class="lead">São 39 itens do CEBRASPE, todas as Questões Comentadas da aula, na ordem dos tópicos (D = dígrafos, A = acentuação, H = hiato, DF = diferenciais, O = ortografia, HF = hífen, M e S = maiúsculas e siglas, E = expressões). Duas questões repetidas no PDF entraram uma vez só. O comentário aparece depois de cada resposta, e o rendimento quando terminar todas.</p>
+  <div class="row" style="margin-bottom:10px">
+    <label class="muted" for="fTema">Tema:</label>
+    <select id="fTema"></select>
+    <label class="muted" for="fStatus">Mostrar:</label>
+    <select id="fStatus"><option value="all">Todas</option><option value="pend">Não respondidas</option><option value="bad">Erradas</option><option value="ok">Certas</option></select>
+  </div>
+  <div class="progress"><div id="qProg"></div></div>
+  <div class="qnav" id="qNav"></div>
+  <div class="card" id="qCard"></div>
+  <div class="row" style="justify-content:space-between">
+    <button class="btn" id="qPrev">← Anterior</button>
+    <span class="muted" style="font-size:13px">Atalhos: <kbd>A</kbd>–<kbd>E</kbd> ou <kbd>C</kbd>/<kbd>E</kbd> escolhe · <kbd>Shift</kbd>+letra descarta · <kbd>Enter</kbd> responde · <kbd>←</kbd> <kbd>→</kbd> navega</span>
+    <button class="btn pri" id="qNext">Próxima →</button>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="tab" id="flash">
+  <h2>Flashcards com repetição espaçada</h2>
+  <p class="lead">Leia a pergunta, responda <b>em voz alta</b> e só então vire o cartão (clique ou <kbd>Espaço</kbd>). Marque com sinceridade: os cartões errados voltam primeiro (sistema Leitner, caixas 1 a 5).</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px">
+    <select id="fcDeck">
+      <option value="all">Todos os baralhos</option>
+      <option value="a00">Aula 00 · Ortografia e acentuação</option>
+      <option value="ref">Grafias e expressões</option>
+      <option value="pan">Panorama do Português</option>
+    </select>
+    <button class="btn" id="fcShuffle">Embaralhar</button>
+    <button class="btn" id="fcReset">Zerar caixas</button>
+  </div>
+  <div class="fc-meta"><span id="fcPos"></span><span id="fcBox"></span></div>
+  <div class="fc" id="fc"><div class="fc-inner"><div class="fc-face front"><div class="q" id="fcQ"></div><div class="muted" style="margin-top:14px;font-size:13px">clique para virar</div></div><div class="fc-face back"><div id="fcA"></div></div></div></div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn bad" id="fcBad">✘ Errei (<kbd>1</kbd>)</button>
+    <button class="btn" id="fcMid">~ Hesitei (<kbd>2</kbd>)</button>
+    <button class="btn ok" id="fcOk">✔ Acertei (<kbd>3</kbd>)</button>
+  </div>
+  <div class="boxes" id="fcBoxes"></div>
+</section>
+
+<!-- RENDIMENTO -->
+<section class="tab" id="rend">
+  <h2>Rendimento</h2>
+  <div id="rendBody"></div>
+  <h3>Gerenciar dados</h3>
+  <div class="row">
+    <button class="btn" id="expBtn">Exportar respostas (.json)</button>
+    <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
+    <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn" id="hlReset">Apagar marcações de texto</button>
+    <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
+  </div>
+</section>
+
+</main>
+
+<div id="tip" role="tooltip"></div>
+<div id="hlBar" role="toolbar" aria-label="Marca-texto"><span class="lbl">Marcar</span><button data-c="am" title="Amarelo" aria-label="Amarelo"></button><button data-c="ro" title="Rosa" aria-label="Rosa"></button><button data-c="ve" title="Verde" aria-label="Verde"></button><button data-c="" title="Apagar marcação" aria-label="Apagar marcação">✕</button></div>
+<script>
+const QUESTOES = [{"fonte": "CEBRASPE · Prefeitura de São Cristóvão, 2019", "tema": "Fonemas e dígrafos", "enun": "Na palavra “assado”, o segmento “ss” constitui um dígrafo, porque duas letras representam um só fonema.", "alts": [], "tipo": "ce", "resp": "C", "com": ["SS é dígrafo consonantal: duas letras com o mesmo som do “s” de “sapo”.", "Dígrafos consonantais: CH (chá), LH (malha), NH (banha), RR (carro), SS (passo), QU (quero), GU (guerra), SC (nascer), SÇ (nasça), XC (exceto), XS (exsudar)."], "rot": "Dígrafos · questão 1", "nav": "D1", "n": 1}, {"fonte": "CEBRASPE · Secretaria de Educação do DF, 2017", "tema": "Fonemas e dígrafos", "enun": "Presentes no último parágrafo do texto, os vocábulos “qualidade”, “perspectiva”, “essas”, “conjunto” e “chamada” contêm grupos de duas letras que representam um só fonema, constituindo o que se denomina dígrafo ou digrama.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A definição de dígrafo está certa, mas nem todas as palavras têm dígrafo. Têm: “essas” (ss), “conjunto” (un, dígrafo nasal) e “chamada” (ch).", "Pegadinhas: em “pers-pec-ti-va”, RS não é dígrafo, porque cada letra tem seu som. Em “qualidade”, o U é pronunciado (quA é ditongo), então QU não é dígrafo. Já em “quero”, QU é dígrafo (som de /k/)."], "rot": "Dígrafos · questão 2", "nav": "D2", "n": 2}, {"fonte": "CEBRASPE · Ministério Público de Santa Catarina, 2022", "tema": "Acentuação: regras gerais", "enun": "O emprego do acento agudo em “nomeá-la” e “ordená-la”, no primeiro parágrafo, justifica-se pela mesma regra de acentuação gráfica.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Com pronome ligado ao verbo, ignore o pronome e analise só o verbo: “nomeá” e “ordená” são oxítonas terminadas em A, como “sofá”.", "As duas seguem a mesma regra: oxítonas terminadas em A, E, O, EM, ENS."], "rot": "Acentuação · questão 1", "nav": "A1", "n": 3}, {"fonte": "CEBRASPE · Tribunal de Contas do Estado do Rio de Janeiro, 2021", "tema": "Acentuação: regras gerais", "enun": "O emprego de acento agudo nas palavras “elétricos”, “pálidas” e “móveis” justifica-se pela mesma regra de acentuação gráfica.", "alts": [], "tipo": "ce", "resp": "E", "com": ["“e-LÉ-tri-cos” e “PÁ-li-das” são proparoxítonas (todas acentuadas). “MÓ-veis” é paroxítona terminada em ditongo. São regras diferentes."], "rot": "Acentuação · questão 2", "nav": "A2", "n": 4}, {"fonte": "CEBRASPE · Secretaria de Educação do Paraná, 2021", "tema": "Acentuação: regras gerais", "enun": "Os vocábulos “países” e “línguas” possuem a mesma classificação quanto à tonicidade, porém um difere do outro quanto à regra empregada para a utilização do acento agudo. Assinale a opção que indica a correta classificação desses vocábulos quanto à tonicidade e que explica corretamente as regras de acentuação aplicadas a eles.", "alts": [["a", "Ambos os vocábulos são paroxítonos, contudo “línguas” é acentuado porque sua última sílaba contém um ditongo crescente átono, ao passo que “países” é acentuado porque sua sílaba tônica forma um hiato com a vogal da sílaba anterior."], ["b", "Ambos os vocábulos são proparoxítonos, contudo “línguas” é acentuado porque sua última sílaba contém um ditongo decrescente átono, ao passo que “países” é acentuado porque sua última sílaba termina com “s”."], ["c", "Ambos os vocábulos são paroxítonos, contudo “línguas” é acentuado porque sua última sílaba termina com “s”, ao passo que “países” é acentuado porque sua sílaba tônica forma um hiato com a vogal da sílaba anterior."], ["d", "Ambos os vocábulos são oxítonos, contudo “línguas” é acentuado porque tem três sílabas, ao passo que “países” é acentuado porque sua sílaba tônica contém um ditongo crescente."], ["e", "Ambos os vocábulos são proparoxítonos, contudo “línguas” é acentuado porque tem duas sílabas, ao passo que “países” é acentuado porque tem três sílabas."]], "tipo": "mc", "resp": "a", "com": ["PA-Í-SES: paroxítona acentuada pela regra do hiato (I tônico, com S, depois de vogal).", "LÍN-GUAS: paroxítona terminada em ditongo crescente (semivogal + vogal).", "As duas são paroxítonas, mas os motivos do acento são diferentes. Gabarito: letra A."], "rot": "Acentuação · questão 3", "nav": "A3", "n": 5}, {"fonte": "CEBRASPE · Tribunal de Contas do Estado do Rio de Janeiro, 2021", "tema": "Acentuação: regras gerais", "enun": "A correção gramatical do trecho “Para que ligar-se a um homem que viesse magoá-la, arrancar-lhe a paz de espírito?” seria mantida caso ele fosse reescrito da seguinte maneira: Ligar-se a um homem que viesse magoá-la, arrancar-lhe a paz de espírito para que?", "alts": [], "tipo": "ce", "resp": "E", "com": ["No fim da frase, o “que” vira monossílabo tônico e recebe circunflexo: “… para quê?”.", "O “que” só leva acento no final da frase ou antes de pontuação."], "rot": "Acentuação · questão 5", "nav": "A5", "n": 6}, {"fonte": "CEBRASPE · Tribunal de Justiça do Pará, 2020", "tema": "Acentuação: regras gerais", "enun": "Eurídice jamais seria uma engenheira, nunca poria os pés em um laboratório e não ousaria escrever versos, mas essa mulher se dedicou à única atividade permitida que tinha um certo quê de engenharia, ciência e poesia.\n\nA correção gramatical e o sentido do texto seriam mantidos caso se suprimisse do texto o acento do vocábulo “quê”.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Aqui “quê” é substantivo (sinônimo de “traço”, “característica”). Como monossílabo tônico terminado em E, o acento é obrigatório."], "rot": "Acentuação · questão 6", "nav": "A6", "n": 7}, {"fonte": "CEBRASPE · Prefeitura de São Cristóvão, 2019", "tema": "Acentuação: regras gerais", "enun": "Os termos “literárias” e “apreciá-las”, no segundo parágrafo, são acentuados por motivos distintos.", "alts": [], "tipo": "ce", "resp": "C", "com": ["LI-TE-RÁ-RIAS: paroxítona terminada em ditongo.", "A-PRE-CI-Á (ignorando o pronome “las”): oxítona terminada em A, como “sofá”. Motivos distintos, portanto."], "rot": "Acentuação · questão 7", "nav": "A7", "n": 8}, {"fonte": "CEBRASPE · Procuradoria-Geral do Estado de Pernambuco, 2019", "tema": "Acentuação: regras gerais", "enun": "O emprego de acento agudo nas palavras “juízo”, “extraídos” e “período” justifica-se pela mesma regra de acentuação gráfica.", "alts": [], "tipo": "ce", "resp": "E", "com": ["JU-Í-ZO e EX-TRA-Í-DOS: regra do hiato.", "PE-RÍ-O-DO: proparoxítona. Em “período”, o I tônico não forma hiato com a vogal anterior (vem depois de R), então a regra do hiato não se aplica."], "rot": "Acentuação · questão 8", "nav": "A8", "n": 9}, {"fonte": "CEBRASPE · Prefeitura de São Cristóvão, 2019", "tema": "Acentuação: regras gerais", "enun": "A palavra “domínio” recebe acento gráfico por ser paroxítona terminada em ditongo oral.", "alts": [], "tipo": "ce", "resp": "C", "com": ["DO-MÍ-NIO: paroxítona terminada em ditongo oral. A banca não considerou a hipótese de proparoxítona aparente: essa é a leitura padrão."], "rot": "Acentuação · questão 9", "nav": "A9", "n": 10}, {"fonte": "CEBRASPE · Polícia Militar de Alagoas, 2018", "tema": "Acentuação: regras gerais", "enun": "O emprego do acento gráfico nas palavras “dói”, “só” e “nós” justifica-se pela mesma regra de acentuação.", "alts": [], "tipo": "ce", "resp": "E", "com": ["“Só” e “nós”: monossílabos tônicos terminados em O(s).", "“Dói”: monossílabo com ditongo aberto (como céu, véu, sóis). São regras diferentes."], "rot": "Acentuação · questão 10", "nav": "A10", "n": 11}, {"fonte": "CEBRASPE · Banco do Nordeste, 2018", "tema": "Acentuação: regras gerais", "enun": "Os vocábulos “trás”, “é” e “nós” recebem acento gráfico em obediência à mesma regra de acentuação.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Os três são monossílabos tônicos terminados em A, E, O (seguidos ou não de S)."], "rot": "Acentuação · questão 11", "nav": "A11", "n": 12}, {"fonte": "CEBRASPE · Polícia Federal, 2018", "tema": "Acentuação: regras gerais", "enun": "Julgue o item quanto à sua correção gramatical.\n\nNessas situações, procura-se então utilizar a medicina dentária forense como técnica primária de identificação dos corpos.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Grafia correta. DEN-TÁ-RIA e PRI-MÁ-RIA: paroxítonas terminadas em ditongo. TÉC-NI-CA: proparoxítona."], "rot": "Acentuação · questão 12", "nav": "A12", "n": 13}, {"fonte": "CEBRASPE · Prefeitura de São Luís, 2017", "tema": "Acentuação: regras gerais", "enun": "O processo de democratização do sistema internacional, que é o caminho obrigatório para a busca do ideal da paz perpétua, não pode avançar sem uma gradativa ampliação do reconhecimento e da proteção dos direitos humanos.\n\nA correção gramatical do texto seria preservada se a palavra “perpétua” fosse registrada sem o acento.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O adjetivo “per-PÉ-tua” é paroxítona terminada em ditongo: tirar o acento gera erro.", "Existe o verbo “perpetua” (per-pe-TU-a), sem acento, mas ele não cabe no texto."], "rot": "Acentuação · questão 13", "nav": "A13", "n": 14}, {"fonte": "CEBRASPE · Tribunal Regional Federal da 1ª Região, 2017", "tema": "Acentuação: regras gerais", "enun": "O emprego de acento na palavra “memória” pode ser justificado por duas regras de acentuação distintas.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Caso raro: a banca cobrou a proparoxítona aparente. Pela visão clássica, me-mó-ria é paroxítona terminada em ditongo crescente; pela alternativa, me-mó-ri-a seria proparoxítona.", "Só use a segunda leitura quando a banca sinalizar, como aqui (“pode ser justificado por duas regras”)."], "rot": "Acentuação · questão 14", "nav": "A14", "n": 15}, {"fonte": "CEBRASPE · Corpo de Bombeiros Militar do DF, 2016", "tema": "Acentuação do hiato", "enun": "Os vocábulos “prejuízo” e “países” são acentuados de acordo com a mesma regra de acentuação gráfica.", "alts": [], "tipo": "ce", "resp": "C", "com": ["PRE-JU-Í-ZO e PA-Í-SES: as duas têm I tônico em hiato com a vogal anterior, sozinho ou com S. Mesma regra."], "rot": "Hiato · questão 2", "nav": "H2", "n": 16}, {"fonte": "CEBRASPE · Serviço Geológico do Brasil, 2015", "tema": "Acentuação do hiato", "enun": "A ocorrência de hiato justifica o emprego do acento agudo nas vogais i e u nas palavras “construída” e “conteúdos”.", "alts": [], "tipo": "ce", "resp": "C", "com": ["CONS-TRU-Í-DA e CON-TE-Ú-DOS: I e U tônicos em hiato, sozinhos ou com S. Regra do hiato."], "rot": "Hiato · questão 3", "nav": "H3", "n": 17}, {"fonte": "CEBRASPE · Polícia Científica de Alagoas, 2023", "tema": "Acentos diferenciais", "enun": "…Isto evidencia o fato de que a relação que se estabelece entre nós, espectadores, e os cadáveres expostos tem uma dimensão social, distinta da que teríamos se fossem apenas modelos de plástico ou cera…\n\nCaso a forma verbal “tem” fosse grafada com acento circunflexo — têm —, de forma a concordar com a expressão “os cadáveres expostos”, que a antecede, as relações sintáticas entre os termos seriam alteradas, mas a correção gramatical seria mantida.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O sujeito de “tem” é “a relação”, no singular. O circunflexo de “têm” marca plural e depende da concordância com o sujeito.", "Concordar com “os cadáveres expostos” quebraria a concordância: a correção não seria mantida."], "rot": "Diferenciais · questão 1", "nav": "DF1", "n": 18}, {"fonte": "CEBRASPE · Tribunal de Contas do DF, 2021", "tema": "Acentos diferenciais", "enun": "A forma verbal “vêm” é acentuada devido à concordância que estabelece com o termo “o planejamento urbano e a gestão das cidades e áreas metropolitanas”.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O termo é sujeito composto, e o verbo vai para a 3ª pessoa do plural: “vêm”. O circunflexo diferencial marca o plural, em oposição a “vem”."], "rot": "Diferenciais · questão 2", "nav": "DF2", "n": 19}, {"fonte": "CEBRASPE · Polícia Federal, 2018", "tema": "Acentos diferenciais", "enun": "Os peritos não intervêm antes da sentença para fazer um julgamento, mas para esclarecer a decisão dos juízes.\n\nSubentende-se a forma verbal “intervêm” logo após o vocábulo “mas” em “mas para esclarecer a decisão dos juízes”.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Lê-se “…mas [intervêm] para esclarecer…”. “Intervêm” concorda com “peritos” (plural). “Intervir” deriva de “vir” e segue o mesmo acento diferencial de número."], "rot": "Diferenciais · questão 3", "nav": "DF3", "n": 20}, {"fonte": "CEBRASPE · Instituto Rio Branco, 2016", "tema": "Acentos diferenciais", "enun": "O Sr. Menotti del Picchia ainda não pôde naturalmente desvendar o segredo da arte. Se no buscar a expressão natural do seu lirismo alcançou a arte, não se despojou ainda das incertezas dessa procura, de certa fraqueza de técnica.\n\nA forma “pôde” poderia ser corretamente substituída por pode, visto que o seu tempo verbal é depreendido pelo contexto do parágrafo e que o acento nela empregado é opcional.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O acento de “pôde” não é opcional. “Pôde” é pretérito perfeito; “pode” é presente. Trocar um pelo outro muda o tempo verbal.", "Os facultativos são outros: fôrma/forma e dêmos/demos."], "rot": "Diferenciais · questão 4", "nav": "DF4", "n": 21}, {"fonte": "CEBRASPE · Corpo de Bombeiros Militar do DF, 2016", "tema": "Acentos diferenciais", "enun": "Estrutura da frase no texto original (reconstruída a partir do comentário do professor): produtos orgânicos … têm … inúmeras vantagens.\n\nO emprego do acento circunflexo na forma verbal “têm” justifica-se pelo fato de essa forma verbal concordar com a expressão no plural “inúmeras vantagens”.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O circunflexo marca o plural, mas a concordância é com o sujeito, “produtos orgânicos”. “Inúmeras vantagens” é o complemento (objeto direto).", "Pegadinha clássica: a banca aponta o termo errado como responsável pela concordância."], "rot": "Diferenciais · questão 5", "nav": "DF5", "n": 22}, {"fonte": "CEBRASPE · Banco do Nordeste, 2022", "tema": "Ortografia oficial", "enun": "A palavra “consequências” pode ser grafada, de acordo com a ortografia oficial, com o uso do trema: conseqüências.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O trema foi abolido pelo Novo Acordo Ortográfico. Só permanece em nomes próprios estrangeiros e seus derivados (Müller, mülleriano)."], "rot": "Ortografia · questão 1", "nav": "O1", "n": 23}, {"fonte": "CEBRASPE · Prefeitura de Campo Grande, 2019", "tema": "Ortografia oficial", "enun": "Seria incorreto o emprego da forma quotidianamente em lugar de “cotidianamente”, pois aquela forma foi abolida do vocabulário oficial da língua portuguesa.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O Vocabulário Ortográfico da Língua Portuguesa registra as duas formas, cotidiano e quotidiano. As duas estão corretas."], "rot": "Ortografia · questão 2", "nav": "O2", "n": 24}, {"fonte": "CEBRASPE · Instituto Nacional do Seguro Social, 2022", "tema": "Hífen", "enun": "Hoje, ele é visto como um trabalho fundamental para assegurar o bem-estar de todos…\n\nPor constituir um substantivo, o termo ‘bem-estar’ poderia ser grafado, em conformidade com a ortografia oficial, sem o hífen: bem estar.", "alts": [], "tipo": "ce", "resp": "E", "com": ["“Bem-estar” é substantivo composto e leva hífen (o plural é “bem-estares”). Pela regra: “bem” como prefixo antes de vogal pede hífen."], "rot": "Hífen · questão 1", "nav": "HF1", "n": 25}, {"fonte": "CEBRASPE · Defensoria Pública do DF, 2022", "tema": "Hífen", "enun": "…K. torna-se o cúmplice, perplexo, porém quase impaciente, do crime perpetrado contra ele. Coexistem, em todos os suicídios, a apologia e a aquiescência.\n\nConforme as regras oficiais de grafia, “Coexistem” poderia ser grafado alternativamente como Co-existem.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O prefixo “co” se une sempre sem hífen, mesmo antes de O: cooperar, coabitar, coautor, coobrigado."], "rot": "Hífen · questão 2", "nav": "HF2", "n": 26}, {"fonte": "CEBRASPE · Secretaria de Educação do Paraná, 2021", "tema": "Hífen", "enun": "Assinale a opção em que a palavra apresentada está de acordo com a atual ortografia oficial da língua portuguesa.", "alts": [["a", "seminternato"], ["b", "hiperssensibilidade"], ["c", "contra-regra"], ["d", "mão-de-obra"], ["e", "autoanálise"]], "tipo": "mc", "resp": "e", "com": ["Letra A: errada. Vogais iguais (semi + internato) pedem hífen: semi-internato.", "Letra B: errada. Consoantes diferentes se unem direto, sem dobrar: hipersensibilidade.", "Letra C: errada. Prefixo terminado em vogal + R ou S dobra a consoante: contrarregra.", "Letra D: errada. Compostos com elemento de ligação perderam o hífen: mão de obra.", "Letra E: certa. Vogais diferentes se unem sem hífen: autoanálise, autoestrada, autoescola."], "rot": "Hífen · questão 3", "nav": "HF3", "n": 27}, {"fonte": "CEBRASPE · Diplomata, 2018", "tema": "Hífen", "enun": "Segundo preconiza o Novo Acordo Ortográfico, o vocábulo “contrassensos” é grafado conforme as mesmas regras que antissocial.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Prefixo terminado em vogal + palavra iniciada por R ou S: sem hífen e com a consoante dobrada. Exemplos: antissocial, contrassenso, minissaia, contrarregra."], "rot": "Hífen · questão 4", "nav": "HF4", "n": 28}, {"fonte": "CEBRASPE · Polícia Civil de Goiás, 2016", "tema": "Hífen", "enun": "O emprego do hífen no vocábulo “bem-estar” justifica-se pela mesma regra ortográfica que justifica a grafia do antônimo desse vocábulo: mal-estar.", "alts": [], "tipo": "ce", "resp": "C", "com": ["“Bem” e “mal” como prefixo pedem hífen antes de vogal ou H. Essa é a regra das duas palavras.", "Diferenças: “bem” não leva hífen antes de derivados de querer e fazer (benquerer, benfeito); “mal” se aglutina antes de consoante (malcriado, malfeito)."], "rot": "Hífen · questão 5", "nav": "HF5", "n": 29}, {"fonte": "CEBRASPE · Ministério da Economia, 2019", "tema": "Maiúsculas e siglas", "enun": "Desde pequeno, tive tendência para personificar as coisas. […] Mas eu ouvia o mormaço com M maiúsculo. Mormaço, para mim, era um velho que pegava crianças! […] E ainda hoje, quando leio que alguém se viu perseguido pelo clamor público, vejo com estes olhos o Sr. Clamor Público, magro, arquejante… […] Diante da minha muda interrogação, ele resolveu explicar-se, com a devida calma:\n— Pois é! Não vê que eu sou o sereno...\n(Mário Quintana)\n\nNo texto, a letra maiúscula é empregada em todos os substantivos que nomeiam aquilo que o autor personificava, seja quando criança, seja já adulto, para indicar tratar-se de nome próprio.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O autor usa maiúscula em “Mormaço” (criança) e “Clamor Público” (adulto), mas não em “sereno”, que também é personificado. Por isso, “todos” torna o item errado."], "rot": "Maiúsculas · questão 1", "nav": "M1", "n": 30}, {"fonte": "CEBRASPE · Fundação Universidade de Brasília, 2018", "tema": "Maiúsculas e siglas", "enun": "Constitui regra geral do processo de siglação a utilização de pontos em siglas constituídas somente de iniciais que não formem sílabas, porque isso evita confusão entre vocábulos.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Siglas não levam pontos, nem intermediários nem final: BCB (e não B.C.B.), APR (e não A.P.R.)."], "rot": "Siglas · questão 1", "nav": "S1", "n": 31}, {"fonte": "CEBRASPE · Telebras, 2022", "tema": "Expressões problemáticas", "enun": "As tecnologias da comunicação foram utilizadas para coordenar a ajuda, otimizar os recursos e fornecer informações sobre as vítimas…\n\nMantendo-se a correção gramatical e os sentidos originais do texto, o trecho “As tecnologias da comunicação foram utilizadas para coordenar a ajuda” poderia ser reescrito da seguinte forma: Usaram-se as tecnologias da comunicação afim de coordenar a ajuda.", "alts": [], "tipo": "ce", "resp": "E", "com": ["“Para” indica finalidade, e o equivalente é “a fim de”, separado. “Afim” (junto) significa semelhante, afinidade."], "rot": "Expressões · questão 1", "nav": "E1", "n": 32}, {"fonte": "CEBRASPE · Instituto Chico Mendes, 2022", "tema": "Expressões problemáticas", "enun": "…frequentemente com árvores das mesmas espécies das que foram cortadas na frente da sua casa ou do seu trabalho por serem supostamente inadequadas, para não causarem danos à infraestrutura.\n\nSem prejuízo da correção gramatical e dos sentidos do texto, a expressão “por serem” poderia ser substituída por que eram.", "alts": [], "tipo": "ce", "resp": "E", "com": ["“Por serem” é oração causal reduzida e equivale a “porque eram”, com a conjunção causal escrita junta. “Por que” separado está errado aqui."], "rot": "Expressões · questão 2", "nav": "E2", "n": 33}, {"fonte": "CEBRASPE · Petrobras, 2022", "tema": "Expressões problemáticas", "enun": "…Platão, utilizando-se de linguagem alegórica, discute o processo pelo qual o ser humano pode passar da visão habitual que tem das coisas…\n\nSeria mantida a correção gramatical do texto caso o trecho “pelo qual” fosse substituído por porque.", "alts": [], "tipo": "ce", "resp": "E", "com": ["“Pelo qual” é preposição “por” + pronome relativo. O equivalente é “por que”, separado: “o processo por que o ser humano pode passar”."], "rot": "Expressões · questão 3", "nav": "E3", "n": 34}, {"fonte": "CEBRASPE · Ministério Público do Ceará, 2020", "tema": "Expressões problemáticas", "enun": "Em qualquer tempo ou lugar, a vida social é sempre marcada por rituais. Essa afirmação pode ser inesperada para muitos, porque tendemos a negar tanto a existência quanto a importância dos rituais na nossa vida cotidiana.\n\nA substituição da conjunção “porque” pela locução de modo que preservaria os sentidos originais do texto.", "alts": [], "tipo": "ce", "resp": "E", "com": ["“Porque” aqui é causal/explicativo. “De modo que” indica consequência e mudaria o sentido."], "rot": "Expressões · questão 4", "nav": "E4", "n": 35}, {"fonte": "CEBRASPE · SEFAZ-DF, 2020", "tema": "Expressões problemáticas", "enun": "No trecho “Os dois professores destacam que os investidores reconhecem cada vez mais o impacto, para a sociedade, das empresas nas quais investem”, a substituição de “nas quais” por aonde prejudicaria a correção gramatical do texto.", "alts": [], "tipo": "ce", "resp": "C", "com": ["“Aonde” só cabe com verbo que pede a preposição “a” (ir a, chegar a). “Investir” pede “em”.", "Nem “onde” serviria, porque empresas não são lugar físico. Esta questão é da própria SEFAZ-DF."], "rot": "Expressões · questão 5", "nav": "E5", "n": 36}, {"fonte": "CEBRASPE · Procuradoria-Geral do Estado de Pernambuco, 2019", "tema": "Expressões problemáticas", "enun": "…propostas que concebem um Estado que seja parco em prestações sociais e no qual a própria sociedade se responsabilize pelos riscos de sua existência.\n\nA substituição de “no qual” por aonde prejudicaria a correção gramatical do texto.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Não há verbo que peça a preposição “a” (como ir ou chegar), e “Estado” não é lugar físico. “Aonde” estaria errado."], "rot": "Expressões · questão 6", "nav": "E6", "n": 37}, {"fonte": "CEBRASPE · Prefeitura de São Cristóvão, 2019", "tema": "Expressões problemáticas", "enun": "O clima de quem pensa certo é o de quem busca seriamente a segurança na argumentação, é o de quem, discordando do seu oponente, não tem por que contra ele ou contra ela nutrir uma raiva desmedida…\n\nA correção gramatical do texto seria mantida caso a expressão “por que” fosse substituída por porque.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Em “não tem por que”, a expressão significa “razão pela qual” e se escreve separada. Outros exemplos: “não há por que desistir”, “não vi por que não comprar”.", "“Porque” junto é só conjunção causal ou explicativa."], "rot": "Expressões · questão 7", "nav": "E7", "n": 38}, {"fonte": "CEBRASPE · Prefeitura de São Cristóvão, 2019", "tema": "Expressões problemáticas", "enun": "Se você ficasse doente mil anos atrás, importaria muito o lugar onde vivesse.\n\nA substituição de “mil anos atrás” por há mil anos manteria a correção gramatical e a coerência do texto.", "alts": [], "tipo": "ce", "resp": "C", "com": ["“Há” (verbo haver impessoal) indica tempo decorrido, a mesma ideia de “mil anos atrás”.", "Cuidado: “há mil anos atrás” é redundante."], "rot": "Expressões · questão 8", "nav": "E8", "n": 39}];
+
+const FLASH = [
+ // Aula 00
+ ["a00","Acento tônico × acento gráfico","Tônico: a sílaba pronunciada com mais força (existe em toda palavra de duas ou mais sílabas). Gráfico: o sinal escrito. \"Saci\" tem tônico na última sílaba e nenhum gráfico."],
+ ["a00","O que é dígrafo?","Duas letras que representam <b>um só fonema</b>: ch, lh, nh, rr, ss, qu, gu, sc, sç, xc, xs e os nasais am, an, em, en…"],
+ ["a00","Quais dígrafos se separam na divisão silábica?","<b>rr, ss, sc, sç, xc, xs</b> (car-ro, pas-so, nas-cer, ex-ce-ção)."],
+ ["a00","\"Qu\" e \"gu\" são sempre dígrafos?","Não. Só quando o <b>u não é pronunciado</b>: quero, guerra. Em qualidade e aguentar, o u soa e há ditongo."],
+ ["a00","Ditongo crescente × decrescente","Crescente: semivogal + vogal (histó-<b>ria</b>, á-<b>gua</b>). Decrescente: vogal + semivogal (m<b>eu</b>, imó-v<b>eis</b>)."],
+ ["a00","Hiato","Vogais em sílabas <b>diferentes</b>: sa-ú-de, pa-ís, ve-í-cu-lo."],
+ ["a00","Monossílabos tônicos acentuados","Terminados em <b>a, e, o</b> (com ou sem s) e em ditongo aberto <b>éu, éi, ói</b>: pá, pé, pó, mês, céu, réis, dói."],
+ ["a00","Oxítonas acentuadas","Terminadas em <b>a, e, o</b> (com ou sem s), <b>em, ens</b> e ditongo aberto <b>éu, éi, ói</b>: sofá, café, cipó, alguém, parabéns, chapéu, papéis, herói."],
+ ["a00","Paroxítonas: regra geral","Acentuam-se <b>todas, exceto</b> as terminadas em a, e, o, em, ens: fácil, hífen, álbum, caráter, tórax, júri, lápis, vírus, bíceps, órfão, ímã."],
+ ["a00","Paroxítonas: regra específica","Terminadas em <b>ditongo oral</b>: história, série, água, primário, imóveis, jóquei."],
+ ["a00","Proparoxítonas","<b>Todas</b> são acentuadas: médico, lâmpada, período, técnica."],
+ ["a00","Ditongo aberto ei/oi: quando tem acento?","Em <b>oxítonas e monossílabos</b> (papéis, herói, dói). Em <b>paroxítonas</b> caiu com o Novo Acordo (ideia, heroico, jiboia)."],
+ ["a00","Hífen tem acento? E hifens?","Hífen <b>sim</b> (paroxítona em -en). Hifens <b>não</b> (paroxítona em -ens)."],
+ ["a00","Regra do hiato","Acentuam-se o <b>i e o u tônicos</b> em hiato com a vogal anterior, <b>sozinhos ou com s</b>: saúde, país, juízes, açaí."],
+ ["a00","Por que \"juiz\" e \"ruim\" não têm acento?","O i forma sílaba com outra letra que não s (ju-iz, ru-im)."],
+ ["a00","Hiato antes de nh","Não leva acento: rainha, bainha, moinho."],
+ ["a00","Feiura, baiuca, bocaiuva: acento?","<b>Não</b>. I/u tônico depois de ditongo decrescente em paroxítona perdeu o acento. Mas Piauí e tuiuiú (oxítonas) mantêm."],
+ ["a00","Voo, enjoo, creem, leem: acento?","<b>Não</b>. O Novo Acordo eliminou o acento de oo(s) e ee(m)."],
+ ["a00","Acentos diferenciais que sobreviveram","<b>pôde</b>/pode, <b>pôr</b>/por, <b>têm</b>/tem, <b>vêm</b>/vem e derivados (mantêm, intervêm). Facultativos: fôrma, dêmos."],
+ ["a00","Mantém × mantêm","Mantém: singular (ele). Mantêm: plural (eles). Vale para detém, obtém, intervém, provém."],
+ ["a00","Hífen com prefixos: regra geral","Os diferentes se atraem: <b>letras iguais se separam</b> (micro-ondas, super-resistente); letras diferentes se unem (autoescola, hiperativo)."],
+ ["a00","Prefixo terminado em vogal + r ou s","Sem hífen e <b>dobra</b> a consoante: antissocial, contrarregra, minissaia, ultrassom."],
+ ["a00","Prefixo antes de h","Sempre hífen: anti-higiênico, pré-história, super-homem, sub-humano."],
+ ["a00","Prefixo co","Sempre <b>junto</b>, mesmo antes de o: cooperar, coobrigado, coexistir, coautor, corresponsável."],
+ ["a00","Prefixos que sempre têm hífen","ex, vice, recém, sem, além, aquém e pré, pró, pós tônicos: ex-sócio, vice-governador, recém-nascido, pós-graduação."],
+ ["a00","Bem e mal como prefixos","Bem: hífen antes de vogal e consoante (bem-vindo), exceto derivados de querer e fazer (benfeitor). Mal: hífen antes de vogal ou h (mal-estar); junto antes de consoante (malcriado)."],
+ ["a00","Sub e sob","Hífen antes de <b>r ou b</b>: sub-região, sub-rogação, sub-base."],
+ ["a00","Não e quase como prefixos","<b>Sem hífen</b>: não incidência, não cumulatividade, quase delito."],
+ ["a00","Mão de obra, dia a dia","Compostos com <b>elemento de ligação</b> perderam o hífen. Exceções: cor-de-rosa, mais-que-perfeito, água-de-colônia, pé-de-meia e espécies (bem-te-vi)."],
+ ["a00","Girassol, mandachuva, paraquedas","Sem hífen: perderam a noção de composição."],
+ ["a00","Verbos pôr, querer e usar","Conjugam-se com <b>s</b>: pus, quis, quiseram, usasse."],
+ ["a00","-isar ou -izar?","-isar se a primitiva tem s (análise → analisar). -izar se não tem (economia → economizar). Exceções: catequizar, sintetizar, hipnotizar, batizar."],
+ ["a00","-ês/-esa × -ez/-eza","-ês/-esa (s): origem, título, nome próprio (português, duquesa). -ez/-eza (z): substantivo abstrato vindo de adjetivo (limpeza, lucidez)."],
+ ["a00","Siglas: pontos e plural","Sem pontos (BCB, e não B.C.B.). Plural com s minúsculo (PDFs)."],
+ ["a00","O trema ainda existe?","Só em nomes estrangeiros e derivados (Müller, mülleriano). Frequente, linguiça e cinquenta, sem trema."],
+ // Grafias e expressões
+ ["ref","Os quatro porquês","Por que: pergunta ou \"pelo qual\". Por quê: fim de frase. Porque: causa ou explicação. Porquê: substantivo (o motivo)."],
+ ["ref","Mal × mau","Mal: oposto de <b>bem</b> (ou \"logo que\"). Mau: oposto de <b>bom</b>."],
+ ["ref","Há × a (tempo)","Há: passado (há cinco anos). A: futuro ou distância (daqui a dois dias, a 2 km)."],
+ ["ref","Onde × aonde","Onde: verbo com \"em\", lugar físico. Aonde: verbo com \"a\", movimento (aonde vai?)."],
+ ["ref","Senão × se não","Senão: do contrário, mas sim, exceto. Se não: condição (caso não) ou \"se\" + \"não\"."],
+ ["ref","A fim de × afim","A fim de: finalidade (para). Afim: semelhante."],
+ ["ref","Ao encontro de × de encontro a","Ao encontro de: a favor, concordância. De encontro a: contra, choque."],
+ ["ref","Cessão × sessão × seção","Cessão: ato de ceder. Sessão: reunião. Seção: divisão, departamento."],
+ ["ref","Iminente × eminente","Iminente: prestes a acontecer. Eminente: ilustre, destacado."],
+ ["ref","Viagem × viajem","Viagem: substantivo. Viajem: verbo (que eles viajem)."],
+ // Panorama
+ ["pan","Crase","Fusão da preposição \"a\" com o artigo \"a\". Em regra, não ocorre antes de palavra masculina nem de verbo."],
+ ["pan","Haver no sentido de existir","É <b>impessoal</b>, fica no singular: \"Havia muitas irregularidades\"."],
+ ["pan","Fazer indicando tempo","Impessoal, no singular: \"Faz dez anos que não declara\"."],
+ ["pan","Vírgula entre sujeito e verbo","<b>Não se usa</b>: \"O auditor, lavrou o auto\" está errado."],
+ ["pan","Oração adjetiva explicativa × restritiva","Explicativa vem entre vírgulas e se refere ao todo. Restritiva, sem vírgulas, delimita o termo. Tirar ou pôr as vírgulas muda o sentido."],
+ ["pan","Reescrita no CEBRASPE","O item pergunta se a troca mantém a <b>correção gramatical</b> e os <b>sentidos</b> do texto. As duas condições precisam ser atendidas."]
+];
+
+/* ---------- mapa mental: cada item tem explicação, exemplo, base legal e pegadinha ---------- */
+const MM_ROOT = {k: "root", t: "ORTOGRAFIA E ACENTUAÇÃO", s: "Escrever certo segundo o Novo Acordo<br><small>Fonologia · Acentuação · Hiato e diferenciais · Hífen · Letras · Expressões</small>",
+  e: "Ortografia é a grafia oficial das palavras. Para o CEBRASPE, o tema aparece em itens de <b>reescrita</b> (\"a correção seria mantida se…\") e de <b>justificativa de regra</b> (\"as palavras são acentuadas pela mesma regra\"). A base de tudo é saber onde está a sílaba tônica e como a palavra se divide.",
+  x: "Num auto de infração, escrever \"não-cumulatividade\", \"sub rogação\" ou \"exceção\" com erro tira a credibilidade do documento. A grafia correta é \"não cumulatividade\", \"sub-rogação\" e \"exceção\".",
+  l: "Acordo Ortográfico da Língua Portuguesa (Decreto 6.583/2008, obrigatório desde 2016); VOLP.",
+  p: "Os itens costumam juntar palavras de regras diferentes e afirmar que seguem \"a mesma regra\". Classifique cada uma antes de julgar."};
+
+const MM = [
+ {k: "fon", c: "#2f5bd3", t: "Fonologia", s: "Fonemas, dígrafos, encontros",
+  e: "Antes das regras, é preciso dividir a palavra em sílabas e saber o que é vogal, semivogal e dígrafo. Cada sílaba tem <b>uma só vogal</b>.",
+  x: "\"Pa-ís\" tem duas sílabas e hiato (leva acento); \"pais\" tem uma sílaba e ditongo (não leva).",
+  l: "Aula 00, tópicos Sons, letras, fonemas e dígrafos e Encontros vocálicos.",
+  p: "Contar letras e fonemas: com dígrafo, há menos fonemas do que letras.",
+  f: [
+   {k: "fon1", t: "Fonema × letra",
+    e: "Fonema é o som que distingue palavras; letra é o sinal gráfico. Nem sempre há correspondência um a um: o h de \"machado\" não tem som próprio.",
+    x: "Pato e gato diferem por um fonema. \"Chuva\" tem 5 letras e 4 fonemas.",
+    l: "Aula 00, Sons, letras, fonemas e dígrafos.",
+    p: "Item que diz que toda letra corresponde a um fonema: ERRADO."},
+   {k: "fon2", t: "Dígrafos",
+    e: "Duas letras, um som. Consonantais: ch, lh, nh, rr, ss, qu, gu, sc, sç, xc, xs. Vocálicos (nasais): am, an, em, en, im, in, om, on, um, un antes de consoante. Separam-se só rr, ss, sc, sç, xc, xs.",
+    x: "\"Assado\": ss é dígrafo (CERTO, questão D1). \"Qualidade\": qu não é dígrafo, porque o u soa (questão D2).",
+    l: "Questões comentadas D1 e D2.",
+    p: "RS em \"perspectiva\" não é dígrafo; é encontro consonantal."},
+   {k: "fon3", t: "Ditongo, tritongo e hiato",
+    e: "Ditongo: vogal e semivogal na mesma sílaba (crescente: his-tó-<b>ria</b>; decrescente: <b>mei</b>-o). Tritongo: semivogal + vogal + semivogal (Uru-<b>guai</b>). Hiato: vogais em sílabas diferentes (sa-ú-de).",
+    x: "\"Imóveis\" termina em ditongo decrescente; \"primário\", em ditongo crescente. As duas são paroxítonas terminadas em ditongo.",
+    l: "Aula 00, Encontros vocálicos.",
+    p: "\"Chegam\" termina em ditongo nasal (som ão), e não em dígrafo."}
+  ]},
+ {k: "ace", c: "#1f8a4c", t: "Regras gerais de acentuação", s: "Tônica + terminação",
+  e: "Monossílabos tônicos e oxítonas: acentuam-se as terminadas em a, e, o, em, ens e ditongo aberto. Paroxítonas: o espelho, ou seja, todas menos as terminadas em a, e, o, em, ens, mais as terminadas em ditongo oral. Proparoxítonas: todas.",
+  x: "\"Será\" (oxítona em a), \"incrível\" (paroxítona em l), \"técnica\" (proparoxítona).",
+  l: "Questões comentadas A1 a A14.",
+  p: "Palavras de tonicidade diferente nunca seguem a mesma regra, salvo pela regra do hiato.",
+  f: [
+   {k: "ace1", t: "Monossílabos e oxítonas",
+    e: "Terminação em a, e, o (com ou sem s); oxítonas também em em/ens (de duas sílabas ou mais); e ditongos abertos éu, éi, ói.",
+    x: "Trás, é, nós (monossílabos); café, alguém, parabéns, papéis, herói (oxítonas). Com pronome: \"nomeá-la\" segue \"sofá\".",
+    l: "Questões comentadas A1, A7, A10 e A11.",
+    p: "\"Dói\" (ditongo aberto) e \"só\" (monossílabo em o) seguem regras diferentes."},
+   {k: "ace2", t: "Paroxítonas",
+    e: "Regra geral: acentuam-se as que <b>não</b> terminam em a, e, o, em, ens (l, n, r, x, ps, i, is, us, um, uns, ã, ão, om, on). Regra específica: terminadas em <b>ditongo oral</b>. Ditongo aberto ei/oi em paroxítona perdeu o acento.",
+    x: "Fácil, hífen, caráter, tórax, bíceps, órfão; história, imóveis, primário. Sem acento: item, hifens, ideia, heroico.",
+    l: "Questões comentadas A3, A9, A12 e A13.",
+    p: "\"Hífen\" tem acento, \"hifens\" não: muda a terminação."},
+   {k: "ace3", t: "Proparoxítonas",
+    e: "Todas são acentuadas, sem exceção. Paroxítonas terminadas em ditongo crescente (história, memória) podem ser lidas como proparoxítonas aparentes, mas a banca só aceita essa leitura quando sinaliza.",
+    x: "Elétricos, pálidas, período, técnica. \"Memória\" admite duas justificativas (questão A14, CERTO).",
+    l: "Questões comentadas A2, A8 e A14.",
+    p: "\"Cérebro, ergométrica e evidências são proparoxítonas\": ERRADO, \"evidências\" é paroxítona em ditongo."}
+  ]},
+ {k: "hia", c: "#b07400", t: "Hiato e diferenciais", s: "A regra que vale para todas as posições",
+  e: "Hiato: i e u tônicos, sozinhos ou com s, depois de vogal, levam acento. Diferenciais: só ficaram pôde/pode, pôr/por e o plural de ter, vir e derivados.",
+  x: "Juízo, países, conteúdos (hiato). \"Os auditores têm prazo\" (diferencial de número).",
+  l: "Questões comentadas H2, H3 e DF1 a DF5.",
+  p: "\"Juízes\" (paroxítona) e \"açaí\" (oxítona) seguem a mesma regra: a do hiato.",
+  f: [
+   {k: "hia1", t: "Regra do hiato",
+    e: "Acentua-se o i ou u tônico que forma hiato com a vogal anterior e fica sozinho na sílaba ou com s.",
+    x: "Sa-ú-de, pre-ju-í-zo, cons-tru-í-da, ba-la-ús-tre, Pi-au-í.",
+    l: "Questões comentadas H2 e H3.",
+    p: "\"Período\" não segue a regra do hiato: o i tônico vem depois de consoante."},
+   {k: "hia2", t: "Exceções do hiato",
+    e: "Não se acentua quando o i/u forma sílaba com letra que não seja s (ju-iz, ru-im), antes de nh (rainha), em vogais repetidas (xiita), em ee/oo (creem, voo) e depois de ditongo decrescente em paroxítona (feiura).",
+    x: "Juiz (sem) × juízes (com): no singular o i forma sílaba com z; no plural fica sozinho.",
+    l: "Aula 00, Acentuação do hiato.",
+    p: "Guaíba leva acento (depois de ditongo crescente). Piauí também (oxítona)."},
+   {k: "hia3", t: "Acentos diferenciais",
+    e: "Obrigatórios: pôde (passado) × pode (presente); pôr (verbo) × por (preposição); têm/vêm e derivados (mantêm, intervêm) no plural. Facultativos: fôrma, dêmos.",
+    x: "\"O contribuinte não pôde comparecer ontem\" (passado). \"As empresas mantêm escrituração\" (plural).",
+    l: "Questões comentadas DF1 a DF5.",
+    p: "O circunflexo concorda com o <b>sujeito</b>, e não com o objeto (questão DF5)."}
+  ]},
+ {k: "hif", c: "#8a3ac2", t: "Hífen", s: "Os diferentes se atraem",
+  e: "Com prefixos, o hífen separa letras iguais e o h; letras diferentes se unem. Vogal + r/s: junta e dobra. Há prefixos com regras próprias (co, ex, vice, bem, mal, sub, pré).",
+  x: "Contrarrazões (recurso no processo administrativo fiscal), sub-rogação (responsabilidade tributária), coobrigado e corresponsável.",
+  l: "Questões comentadas HF1 a HF5.",
+  p: "A regra das letras vale só para <b>prefixos</b>. Guarda-chuva e segunda-feira mantêm o hífen.",
+  f: [
+   {k: "hif1", t: "Regra geral com prefixos",
+    e: "Vogais iguais: hífen (micro-ondas). Vogais diferentes: junto (autoescola). Consoantes iguais: hífen (super-resistente). Consoante + outra letra: junto (hiperativo). Antes de h: hífen (super-homem).",
+    x: "Semi-internato, autoanálise, hipersensibilidade (questão HF3).",
+    l: "Questão comentada HF3.",
+    p: "\"Hiper-ativo\" está errado; o certo é hiperativo."},
+   {k: "hif2", t: "Vogal + r/s e o prefixo co",
+    e: "Prefixo terminado em vogal + palavra com r ou s: sem hífen, consoante dobrada. O prefixo co é sempre junto, mesmo antes de o.",
+    x: "Antissocial, contrassenso, contrarregra, ultrassom; coexistir, cooperar, coobrigado.",
+    l: "Questões comentadas HF2 e HF4.",
+    p: "\"Co-existem\" está errado (questão HF2)."},
+   {k: "hif3", t: "Prefixos especiais e compostos",
+    e: "Sempre hífen: ex, vice, recém, sem, além, aquém, pré/pró/pós tônicos. Bem: hífen, exceto derivados de querer e fazer. Mal: hífen antes de vogal ou h. Não e quase: sem hífen. Compostos com elemento de ligação: sem hífen (mão de obra).",
+    x: "Bem-estar e mal-estar (mesma regra, questão HF5). Benfeitor, malcriado. Não incidência.",
+    l: "Questões comentadas HF1 e HF5.",
+    p: "\"Bem-vindo\" continua com hífen."}
+  ]},
+ {k: "let", c: "#c23a3a", t: "Letras, maiúsculas e siglas", s: "Memória visual e origem",
+  e: "Para o emprego das letras, procure a palavra primitiva: a derivada mantém as letras. Maiúscula marca o ser particular. Siglas não têm ponto.",
+  x: "Analisar (de análise) × economizar (de economia). \"O Estado\" (nação) × \"os estados da região\".",
+  l: "Questões comentadas O1, O2, M1 e S1.",
+  p: "Cotidiano e quotidiano estão corretos. O trema acabou (só fica em Müller).",
+  f: [
+   {k: "let1", t: "Ç, S e SS",
+    e: "Ç: derivados de -to, -tor, -tivo e de ter (manutenção). S: de -nder, -ndir, -erter, -ergir (pretensão, conversão). SS: de -ceder, -primir, -gredir, -meter (concessão, impressão, agressão, compromisso).",
+    x: "Exceto → exceção; exceder → excesso. Despender → despesa.",
+    l: "Aula 00, Emprego das letras.",
+    p: "\"Pretenção\" e \"compreenção\" são erros clássicos."},
+   {k: "let2", t: "S/Z, G/J, X/CH",
+    e: "-ês/-esa (origem, título) com s; -ez/-eza (substantivo abstrato) com z. -agem, -ágio com g, exceto pajem e lambujem. Verbos em -jar mantêm o j. Depois de ditongo e de en- inicial, x.",
+    x: "Viagem (substantivo) × que eles viajem (verbo). Enxergar × encher (de cheio).",
+    l: "Aula 00, Emprego das letras.",
+    p: "\"Ojeriza\" com j cai muito."},
+   {k: "let3", t: "Maiúsculas, siglas e trema",
+    e: "Maiúscula: nomes próprios, instituições, datas históricas, títulos, áreas do saber, personificações. Siglas: até 3 letras, todas maiúsculas; mais de 3, depende da leitura; sem ponto. Trema: abolido.",
+    x: "\"Mormaço\" e \"Clamor Público\" personificados com maiúscula; \"sereno\", não (questão M1).",
+    l: "Questões comentadas O1, M1 e S1.",
+    p: "\"Siglas levam ponto entre as iniciais\": ERRADO."}
+  ]},
+ {k: "exp", c: "#0f7c8c", t: "Expressões problemáticas", s: "Despencam nas provas",
+  e: "Pares de grafia parecida e sentido diferente. O CEBRASPE cobra em reescrita: troca uma forma por outra e pergunta se a correção e o sentido se mantêm.",
+  x: "\"Foi autuado porque não emitiu nota\" × \"Não sei por que foi autuado\".",
+  l: "Questões comentadas E1 a E8.",
+  p: "\"Afim de\" no lugar de \"para\": ERRADO (questão E1).",
+  f: [
+   {k: "exp1", t: "Os porquês",
+    e: "Por que: pergunta ou \"pelo qual\". Por quê: fim de frase. Porque: causa ou explicação. Porquê: substantivo.",
+    x: "\"O processo por que passa o contribuinte\" (pelo qual). \"Não há por que recorrer\" (razão pela qual).",
+    l: "Questões comentadas E2, E3, E4 e E7.",
+    p: "Trocar \"porque\" causal por \"de modo que\" muda o sentido para consequência (questão E4)."},
+   {k: "exp2", t: "Onde/aonde e há/a",
+    e: "Onde: verbos com \"em\" e lugar físico. Aonde: verbos com \"a\" (movimento). Há: tempo passado. A: futuro ou distância.",
+    x: "\"Empresas nas quais investem\" não vira \"aonde investem\" (questão E5, da própria SEFAZ-DF). \"Mil anos atrás\" = \"há mil anos\".",
+    l: "Questões comentadas E5, E6 e E8.",
+    p: "\"Há mil anos atrás\" é redundante."},
+   {k: "exp3", t: "Mal/mau, senão/se não e outros",
+    e: "Mal × bem; mau × bom. Senão: do contrário, mas sim, exceto; se não: condição. A fim de: finalidade; afim: semelhante. Ao encontro de: a favor; de encontro a: contra.",
+    x: "\"Pague, senão será inscrito em dívida ativa\" × \"Se não pagar, será inscrito\". \"Mau pagador\" × \"mal pago\".",
+    l: "Questão comentada E1; Aula 00, Expressões problemáticas.",
+    p: "Consertar (reparar) × concertar; coser (costurar) × cozer (cozinhar)."}
+  ]}
+];
+
+function mmItens(){
+  const out = [MM_ROOT];
+  MM.forEach(b => { out.push(b); b.f.forEach(f => out.push(Object.assign({c: b.c, pai: b.t}, f))); });
+  return out;
+}
+function renderMapa(){
+  $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
+    <div class="mm-trunk"></div>
+    <div class="mm-branches" style="--n:${MM.length}">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+      <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
+      <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
+    el.onclick = () => abrirItem(el.dataset.k);
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirItem(el.dataset.k); } };
+  });
+  abbrify($("#mmBox"));
+}
+function abrirItem(k){
+  const itens = mmItens(), i = itens.findIndex(x => x.k === k), it = itens[i];
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", el.dataset.k === k));
+  const p = $("#mmPanel");
+  p.style.setProperty("--c", it.c || "var(--accent)");
+  p.innerHTML = `<div class="muted" style="font-size:13px">${it.pai ? "Mapa › " + it.pai : "Mapa"}</div>
+    <h4>${it.t}</h4>
+    <div class="mm-sec"><span class="lbl">Explicação</span>${it.e}</div>
+    <div class="mm-sec ex"><span class="lbl">Exemplo prático</span>${it.x}</div>
+    <div class="mm-sec"><span class="lbl">Base legal e jurisprudência</span>${it.l}</div>
+    <div class="mm-sec pg"><span class="lbl">Pegadinha da banca</span>${it.p}</div>
+    <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
+      <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
+  abbrify(p);
+  p.dataset.hl = "mm-" + k; hlAplicar(p);
+  $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
+  $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
+  const r = p.getBoundingClientRect();
+  if (r.top < 120 || r.top > innerHeight - 160) p.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+/* ---------- glossário: toda sigla ganha dica com o nome por extenso ---------- */
+const GLOSS = {
+ "CF/88": "Constituição Federal de 1988", "CF": "Constituição Federal de 1988",
+ "CTN": "Código Tributário Nacional (Lei 5.172/1966)", "STF": "Supremo Tribunal Federal", "STJ": "Superior Tribunal de Justiça",
+ "LC": "Lei Complementar", "MP": "Medida Provisória", "EC": "Emenda Constitucional", "DL": "Decreto-Lei",
+ "ADCT": "Ato das Disposições Constitucionais Transitórias", "CLT": "Consolidação das Leis do Trabalho",
+ "ADI": "Ação Direta de Inconstitucionalidade", "RE": "Recurso Extraordinário", "RREE": "Recursos Extraordinários",
+ "REsp": "Recurso Especial", "HC": "Habeas Corpus", "AgR": "Agravo Regimental",
+ "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "ISS": "Imposto sobre Serviços", "ISSQN": "Imposto sobre Serviços de Qualquer Natureza",
+ "IPTU": "Imposto sobre a Propriedade Predial e Territorial Urbana", "ITBI": "Imposto sobre a Transmissão de Bens Imóveis",
+ "ITCMD": "Imposto sobre Transmissão Causa Mortis e Doação", "IPVA": "Imposto sobre a Propriedade de Veículos Automotores",
+ "IE": "Imposto de Exportação", "IR": "Imposto de Renda", "IRPF": "Imposto de Renda da Pessoa Física", "IRPJ": "Imposto de Renda da Pessoa Jurídica",
+ "IPI": "Imposto sobre Produtos Industrializados", "IOF": "Imposto sobre Operações Financeiras", "ITR": "Imposto sobre a Propriedade Territorial Rural",
+ "IGF": "Imposto sobre Grandes Fortunas", "IS": "Imposto Seletivo", "IEG": "Imposto Extraordinário de Guerra",
+ "IBS": "Imposto sobre Bens e Serviços", "CBS": "Contribuição sobre Bens e Serviços", "IVA": "Imposto sobre Valor Agregado",
+ "CIDE": "Contribuição de Intervenção no Domínio Econômico", "COSIP": "Contribuição para o Custeio do Serviço de Iluminação Pública",
+ "COFINS": "Contribuição para o Financiamento da Seguridade Social", "CSLL": "Contribuição Social sobre o Lucro Líquido",
+ "PIS": "Programa de Integração Social", "PASEP": "Programa de Formação do Patrimônio do Servidor Público",
+ "RPPS": "Regime Próprio de Previdência Social", "RGPS": "Regime Geral de Previdência Social",
+ "CVM": "Comissão de Valores Mobiliários", "AFRMM": "Adicional ao Frete para a Renovação da Marinha Mercante",
+ "SEBRAE": "Serviço Brasileiro de Apoio às Micro e Pequenas Empresas", "INCRA": "Instituto Nacional de Colonização e Reforma Agrária",
+ "SESC": "Serviço Social do Comércio", "SENAC": "Serviço Nacional de Aprendizagem Comercial", "SENAI": "Serviço Nacional de Aprendizagem Industrial",
+ "OAB": "Ordem dos Advogados do Brasil", "CRC": "Conselho Regional de Contabilidade", "CREA": "Conselho Regional de Engenharia e Agronomia",
+ "CRM": "Conselho Regional de Medicina", "CRA": "Conselho Regional de Administração", "IBAMA": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis",
+ "TCFA": "Taxa de Controle e Fiscalização Ambiental", "TFA": "Taxa de Fiscalização de Anúncios", "TFLF": "Taxa de Fiscalização, Localização e Funcionamento",
+ "TLLF": "Taxa de Licença de Localização e Funcionamento", "ZFM": "Zona Franca de Manaus", "PAF": "Processo Administrativo Fiscal",
+ "DF": "Distrito Federal", "SEFAZ": "Secretaria de Estado de Fazenda", "SEEC": "Secretaria de Estado de Economia",
+ "CEBRASPE": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos (banca)", "CESPE": "Centro de Seleção e de Promoção de Eventos (atual CEBRASPE)",
+ "PGFN": "Procuradoria-Geral da Fazenda Nacional", "AGU": "Advocacia-Geral da União", "RFB": "Receita Federal do Brasil",
+ "CAGE": "Contadoria e Auditoria-Geral do Estado", "CGE": "Controladoria-Geral do Estado", "TCE": "Tribunal de Contas do Estado",
+ "PGE": "Procuradoria-Geral do Estado", "STM": "Superior Tribunal Militar", "PF": "Polícia Federal", "PC": "Polícia Civil",
+ "ANM": "Agência Nacional de Mineração", "CAU": "Conselho de Arquitetura e Urbanismo", "INPI": "Instituto Nacional da Propriedade Industrial",
+ "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos", "EMBRAPA": "Empresa Brasileira de Pesquisa Agropecuária",
+ "CAGEPA": "Companhia de Água e Esgotos da Paraíba", "SEPLAN": "Secretaria de Planejamento", "APO": "Analista de Planejamento e Orçamento",
+ "PPNT": "Processo seletivo público (Petrobras)", "ATT": "Auditor Técnico de Tributos", "AFRE": "Auditor Fiscal da Receita Estadual",
+ "AFE": "Auditor Fiscal Estadual",
+ "art.": "artigo", "arts.": "artigos", "Art.": "artigo", "§": "parágrafo", "c/c": "combinado com", "nº": "número", "n.º": "número",
+ "Proc": "Procurador", "Pref": "Prefeitura", "Rel.": "Relator", "Min.": "Ministro", "Súm.": "Súmula", "SV": "Súmula Vinculante",
+ "VOLP": "Vocabulário Ortográfico da Língua Portuguesa (Academia Brasileira de Letras)", "TARF": "Tribunal Administrativo de Recursos Fiscais do Distrito Federal", "PUC": "Pontifícia Universidade Católica", "UFRJ": "Universidade Federal do Rio de Janeiro", "UnB": "Universidade de Brasília", "CNPq": "Conselho Nacional de Desenvolvimento Científico e Tecnológico", "BNDES": "Banco Nacional de Desenvolvimento Econômico e Social", "BCB": "Banco Central do Brasil", "ONU": "Organização das Nações Unidas", "CPF": "Cadastro de Pessoas Físicas",
+ "FG": "fato gerador", "BC": "base de cálculo", "LO": "lei ordinária"
+};
+const GLOSS_RE = new RegExp("(?<![\\wÀ-ÿ])(" + Object.keys(GLOSS).sort((a, b) => b.length - a.length)
+  .map(s => s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")).join("|") + ")(?![\\wÀ-ÿ])", "g");
+function abbrify(root){
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+    n.parentElement.closest("abbr,script,style,select,option,kbd") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => {
+    const s = n.nodeValue; GLOSS_RE.lastIndex = 0;
+    if (!GLOSS_RE.test(s)) return;
+    const frag = document.createDocumentFragment(); let last = 0; GLOSS_RE.lastIndex = 0; let m;
+    while ((m = GLOSS_RE.exec(s))){
+      frag.append(s.slice(last, m.index));
+      const a = document.createElement("abbr"); a.textContent = m[1]; a.dataset.tip = GLOSS[m[1]]; a.setAttribute("aria-label", GLOSS[m[1]]);
+      frag.append(a); last = m.index + m[1].length;
+    }
+    frag.append(s.slice(last)); n.replaceWith(frag);
+  });
+}
+/* dica posicionada acima da sigla, sem cobrir o texto nem ficar sob o cursor */
+(() => {
+  const tip = () => document.getElementById("tip");
+  function show(el){
+    const t = tip(); t.textContent = el.dataset.tip; t.classList.add("on");
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 8) y = r.bottom + 8;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("mouseover", e => { const a = e.target.closest("abbr[data-tip]"); if (a) show(a); });
+  document.addEventListener("mouseout", e => { if (e.target.closest("abbr[data-tip]")) tip().classList.remove("on"); });
+  document.addEventListener("click", e => { const a = e.target.closest("abbr[data-tip]"); if (a){ show(a); setTimeout(() => tip().classList.remove("on"), 2500); } });
+  addEventListener("scroll", () => tip().classList.remove("on"), {passive: true});
+})();
+
+const KEY = "sefazdf_T1_port_aula00_v1";
+/* respostas já resolvidas, embutidas na publicação (usadas só se este navegador ainda não tiver dados) */
+const RESPOSTAS_INICIAIS = null;
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || (RESPOSTAS_INICIAIS ? structuredClone(RESPOSTAS_INICIAIS) : null) || {answers:{}, cards:{}};
+S.answers ||= {}; S.cards ||= {}; S.draft ||= {};
+const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* abas */
+function showTab(t){
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("on", s.id === t));
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  if (t === "rend") renderRend();
+  if (t === "flash") renderCard();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+const active = () => document.querySelector("section.tab.on").id;
+
+/* questões */
+const TEMAS = [...new Set(QUESTOES.map(q => q.tema))];
+$("#fTema").innerHTML = '<option value="all">Todos os temas</option>' + TEMAS.map(t => `<option>${esc(t)}</option>`).join("");
+let cur = 0;
+
+function visible(){
+  const t = $("#fTema").value, st = $("#fStatus").value;
+  return QUESTOES.map((q, i) => i).filter(i => {
+    const q = QUESTOES[i], a = S.answers[q.n];
+    if (t !== "all" && q.tema !== t) return false;
+    if (st === "pend") return !a;
+    if (st === "bad") return a && !a.ok;
+    if (st === "ok") return a && a.ok;
+    return true;
+  });
+}
+function fmtCom(p){
+  return esc(p).replace(/^(Letra [A-E]|Item [IVX]+|Alternativa [A-E]|Assertiva [IVX]+)(:?)/, "<b>$1$2</b>");
+}
+function renderQ(){
+  const vis = visible();
+  const done = Object.keys(S.answers).length;
+  $("#qProg").style.width = (100 * done / QUESTOES.length) + "%";
+  $("#navQ").textContent = `${done}/${QUESTOES.length}`;
+  $("#qNav").innerHTML = vis.map(i => {
+    const a = S.answers[QUESTOES[i].n];
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].nav || QUESTOES[i].n}</button>`;
+  }).join("");
+  $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
+  if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
+  if (!vis.includes(cur)) cur = vis[0];
+  const q = QUESTOES[cur], a = S.answers[q.n];
+  const d = draft(q.n);
+  const st = v => a ? "" : (d.desc.includes(v) ? "desc" : d.sel === v ? "sel" : "");
+  let opts;
+  if (q.tipo === "ce"){
+    opts = '<div class="ce">' + [["C","Certo"],["E","Errado"]].map(([v, l]) => {
+      let cls = "";
+      if (a){ if (v === q.resp) cls = "right"; else if (v === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(v)}" data-v="${v}" ${a ? "disabled" : ""}>${l}</button>`;
+    }).join("") + "</div>";
+  } else {
+    opts = q.alts.map(([l, t]) => {
+      let cls = "";
+      if (a){ if (l === q.resp) cls = "right"; else if (l === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(l)}" data-v="${l}" ${a ? "disabled" : ""}><span class="l">${l})</span><span>${esc(t)}</span></button>`;
+    }).join("");
+  }
+  const pos = vis.indexOf(cur) + 1;
+  let com = "";
+  if (a){
+    const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
+    com = `<div class="coment" data-hl="q${q.n}c"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+      ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
+  }
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    <div class="enun" data-hl="q${q.n}">${esc(q.enun)}</div>
+    ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
+    ${opts}
+    ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
+    ${com}`;
+  abbrify($("#qCard"));
+  $("#qCard").querySelectorAll("[data-hl]").forEach(hlAplicar);
+  let clickTimer = null;
+  $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
+    b.ondblclick = e => { e.preventDefault(); clearTimeout(clickTimer); descartar(b.dataset.v); };
+  });
+  if ($("#qSubmit")) $("#qSubmit").onclick = submeter;
+  $("#qPrev").disabled = pos <= 1;
+  $("#qNext").textContent = pos >= vis.length ? "Ver rendimento →" : "Próxima →";
+}
+function draft(n){
+  S.draft ||= {};
+  return S.draft[n] ||= {sel: null, desc: []};
+}
+function opcoes(q){ return q.tipo === "ce" ? ["C", "E"] : q.alts.map(x => x[0]); }
+function escolher(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)){ msg("warn", "Essa opção está descartada. Clique duas vezes nela para recuperá-la antes de escolher."); return; }
+  d.sel = d.sel === v ? null : v; save(); renderQ();
+}
+function descartar(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)) d.desc = d.desc.filter(x => x !== v);
+  else { d.desc.push(v); if (d.sel === v) d.sel = null; }
+  save(); renderQ();
+  if (d.desc.length === opcoes(q).length) msg("warn", "Você descartou todas as opções. Clique duas vezes em uma delas para recuperá-la e poder responder.");
+}
+function msg(tipo, texto){
+  const m = $("#qMsg"); if (!m) return;
+  m.className = "qmsg on " + tipo; m.textContent = texto;
+}
+function submeter(){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n), todas = opcoes(q);
+  if (d.desc.length === todas.length) return msg("bad", "Você marcou todas as opções como descartadas. Recupere uma (clique duas vezes) e selecione-a antes de responder.");
+  if (!d.sel) return msg("bad", "Você não selecionou nenhuma resposta. Clique em uma opção e depois em Responder.");
+  answer(d.sel);
+}
+function answer(v){
+  const q = QUESTOES[cur];
+  if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  S.answers[q.n] = {sel: v, ok: v === q.resp, desc: d.desc.slice(), ts: Date.now()};
+  delete S.draft[q.n];
+  save(); renderQ();
+  $("#qCard .coment")?.scrollIntoView({behavior: "smooth", block: "nearest"});
+  if (Object.keys(S.answers).length === QUESTOES.length){
+    setTimeout(() => { if (confirmFinish()) showTab("rend"); }, 50);
+  }
+}
+let finishedShown = false;
+function confirmFinish(){ if (finishedShown) return false; finishedShown = true; return true; }
+function step(d){
+  const vis = visible(), p = vis.indexOf(cur);
+  if (d > 0 && p >= vis.length - 1){ showTab("rend"); return; }
+  const np = Math.min(Math.max(p + d, 0), vis.length - 1);
+  cur = vis[np]; renderQ(); $("#qCard").scrollIntoView({block: "nearest"});
+}
+$("#qPrev").onclick = () => step(-1);
+$("#qNext").onclick = () => step(1);
+$("#fTema").onchange = $("#fStatus").onchange = () => { cur = -1; renderQ(); };
+
+/* flashcards */
+let deck = [], fcI = 0;
+FLASH.forEach((c, i) => c.id = "f" + i);
+function buildDeck(shuffle){
+  const d = $("#fcDeck").value;
+  deck = FLASH.filter(c => d === "all" || c[0] === d);
+  const box = c => (S.cards[c.id] || {box: 1}).box;
+  deck = deck.map(c => [c, Math.random()]).sort((x, y) => shuffle ? x[1] - y[1] : (box(x[0]) - box(y[0])) || (x[1] - y[1])).map(x => x[0]);
+  fcI = 0; renderCard();
+}
+function renderCard(){
+  if (!deck.length) buildDeck();
+  const c = deck[fcI];
+  $("#fc").classList.remove("flip");
+  $("#fcQ").innerHTML = c[1];
+  $("#fcA").innerHTML = c[2];
+  const b = (S.cards[c.id] || {box: 1}).box;
+  $("#fcPos").textContent = `Cartão ${fcI + 1} de ${deck.length}`;
+  $("#fcBox").textContent = `Caixa ${b}`;
+  const cnt = [0, 0, 0, 0, 0];
+  deck.forEach(x => cnt[((S.cards[x.id] || {box: 1}).box) - 1]++);
+  abbrify($("#fcQ")); abbrify($("#fcA"));
+  $("#fcBoxes").innerHTML = cnt.map((n, i) => `<span>Caixa ${i + 1}: ${n}</span>`).join("");
+}
+function grade(g){
+  const c = deck[fcI], st = S.cards[c.id] || {box: 1};
+  st.box = g === 0 ? 1 : g === 1 ? Math.max(1, st.box) : Math.min(5, st.box + 1);
+  st.seen = (st.seen || 0) + 1; S.cards[c.id] = st; save();
+  fcI = (fcI + 1) % deck.length; renderCard();
+}
+$("#fc").onclick = () => $("#fc").classList.toggle("flip");
+$("#fcBad").onclick = () => grade(0);
+$("#fcMid").onclick = () => grade(1);
+$("#fcOk").onclick = () => grade(2);
+$("#fcDeck").onchange = () => buildDeck();
+$("#fcShuffle").onclick = () => buildDeck(true);
+$("#fcReset").onclick = () => { if (confirm("Zerar as caixas de todos os flashcards?")){ S.cards = {}; save(); buildDeck(); } };
+
+/* rendimento */
+function renderRend(){
+  const ans = S.answers, n = QUESTOES.length, done = QUESTOES.filter(q => ans[q.n]);
+  const ok = done.filter(q => ans[q.n].ok).length;
+  if (!done.length){ $("#rendBody").innerHTML = '<div class="card"><p class="muted">Você ainda não respondeu nenhuma questão. Vá para a aba <b>Questões</b>.</p></div>'; return; }
+  const pct = Math.round(100 * ok / done.length);
+  const ce = done.filter(q => q.tipo === "ce"), ceOk = ce.filter(q => ans[q.n].ok).length, ceBad = ce.length - ceOk;
+  const mc = done.filter(q => q.tipo === "mc"), mcOk = mc.filter(q => ans[q.n].ok).length;
+  const complete = done.length === n;
+  const msg = pct >= 85 ? ["ok", "Excelente! Acima da meta de 80% do seu plano."] : pct >= 70 ? ["warn", "Bom, mas abaixo da meta de 80%. Revise os temas em amarelo e vermelho."] : ["bad", "Abaixo de 70%. Releia o Resumo dos temas fracos antes de refazer as erradas."];
+  const byT = TEMAS.map(t => {
+    const qs = done.filter(q => q.tema === t), o = qs.filter(q => ans[q.n].ok).length;
+    return {t, tot: QUESTOES.filter(q => q.tema === t).length, d: qs.length, o, p: qs.length ? Math.round(100 * o / qs.length) : null};
+  }).sort((a, b) => (a.p ?? 101) - (b.p ?? 101));
+  const wrong = done.filter(q => !ans[q.n].ok);
+  $("#rendBody").innerHTML = `
+    ${complete ? "" : `<div class="call warn"><b>Resultado parcial</b>Você respondeu ${done.length} de ${n}. O rendimento final aparece quando terminar todas.</div>`}
+    <div class="grid3">
+      <div class="card"><div class="muted">Aproveitamento</div><div class="big" style="color:var(--${pct >= 80 ? "ok" : pct >= 70 ? "warn" : "bad"})">${pct}%</div><div class="muted">${ok} certas de ${done.length}</div></div>
+      <div class="card"><div class="muted">Certo/Errado (nota CEBRASPE)</div><div class="big">${ceOk - ceBad}</div><div class="muted">${ceOk} certas − ${ceBad} erradas, em ${ce.length} itens</div></div>
+      <div class="card"><div class="muted">Múltipla escolha</div><div class="big">${mc.length ? Math.round(100 * mcOk / mc.length) : 0}%</div><div class="muted">${mcOk} de ${mc.length}</div></div>
+    </div>
+    <div class="call ${msg[0]}"><b>Diagnóstico</b>${msg[1]}</div>
+    <h3>Desempenho por tema (do mais fraco ao mais forte)</h3>
+    <div class="card">${byT.map(r => `<div class="bar"><span>${esc(r.t)}</span><div class="t"><div class="${r.p === null ? "" : r.p < 70 ? "low" : r.p < 85 ? "mid" : ""}" style="width:${r.p ?? 0}%"></div></div><span>${r.p === null ? "—" : r.p + "%"} <small class="muted">${r.o}/${r.d}</small></span></div>`).join("")}</div>
+    <h3>Questões erradas (${wrong.length})</h3>
+    <div class="card">${wrong.length ? wrong.map(q => `<div style="margin:6px 0"><a href="#" data-n="${q.n}">Q${q.n}</a> · <span class="pill">${esc(q.tema)}</span> <span class="muted">${esc(q.enun.slice(-120).replace(/^\S*\s/, "…"))}</span></div>`).join("") : '<p class="muted">Nenhuma! 🎯</p>'}</div>`;
+  abbrify($("#rendBody"));
+  $("#rendBody").querySelectorAll("a[data-n]").forEach(a => a.onclick = e => {
+    e.preventDefault(); $("#fTema").value = "all"; $("#fStatus").value = "all";
+    cur = QUESTOES.findIndex(q => q.n === +a.dataset.n); showTab("questoes"); renderQ();
+  });
+}
+$("#expBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `${KEY}_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+};
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {}; save(); renderQ(); renderRend(); hlTudo(); });
+};
+$("#redoBad").onclick = () => {
+  const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
+  if (!bad.length) return;
+  bad.forEach(k => delete S.answers[k]); save(); finishedShown = false;
+  $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
+};
+$("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* ---------- marca-texto: selecione um trecho e escolha amarelo, rosa ou verde (salvo em S.marks) ---------- */
+S.marks ||= {};
+const hlBar = $("#hlBar");
+let hlAlvo = null;  /* {root, id} quando o clique foi numa marcação já existente */
+const hlId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const hlRaiz = n => (n.nodeType === 1 ? n : n.parentElement)?.closest("[data-hl]");
+function hlTextos(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), r = [];
+  while (w.nextNode()) r.push(w.currentNode);
+  return r;
+}
+function hlOff(root, node, off){ const r = document.createRange(); r.setStart(root, 0); r.setEnd(node, off); return r.toString().length; }
+/* posições contadas no texto puro do bloco; se o texto mudar, procura o trecho guardado */
+function hlAplicar(root){
+  if (!root) return;
+  root.querySelectorAll("mark.hl").forEach(m => m.replaceWith(...m.childNodes));
+  root.normalize();
+  const full = root.textContent;
+  (S.marks[root.dataset.hl] || []).forEach(m => {
+    if (full.slice(m.s, m.e) !== m.t){ const i = full.indexOf(m.t); if (i < 0) return; m.s = i; m.e = i + m.t.length; }
+    let pos = 0;
+    hlTextos(root).forEach(t => {
+      const a = pos, b = pos + t.length; pos = b;
+      if (b <= m.s || a >= m.e) return;
+      if (!t.nodeValue.trim() && /^(TABLE|TBODY|THEAD|TR|UL|OL|SECTION|DIV|DETAILS)$/.test(t.parentNode.nodeName)) return;
+      let n = t;
+      if (m.e - a < t.length) n.splitText(m.e - a);
+      if (m.s > a) n = n.splitText(m.s - a);
+      const mk = document.createElement("mark");
+      mk.className = "hl hl-" + m.c; mk.dataset.id = m.id;
+      n.replaceWith(mk); mk.append(n);
+    });
+  });
+}
+function hlTudo(){ document.querySelectorAll("[data-hl]").forEach(hlAplicar); }
+function hlSelecao(){
+  const sel = getSelection();
+  if (!sel.rangeCount || sel.isCollapsed) return null;
+  const r = sel.getRangeAt(0), root = hlRaiz(r.startContainer);
+  if (!root || root !== hlRaiz(r.endContainer)) return null;
+  const s = hlOff(root, r.startContainer, r.startOffset), e = hlOff(root, r.endContainer, r.endOffset);
+  return e > s ? {root, s, e, rect: r.getBoundingClientRect()} : null;
+}
+/* tira o trecho [s, e) das marcações existentes (nova cor por cima ou apagar) */
+function hlCortar(lista, s, e, full){
+  const out = [];
+  lista.forEach(m => {
+    if (m.e <= s || m.s >= e) return out.push(m);
+    if (m.s < s) out.push({...m, id: hlId(), e: s, t: full.slice(m.s, s)});
+    if (m.e > e) out.push({...m, id: hlId(), s: e, t: full.slice(e, m.e)});
+  });
+  return out;
+}
+function hlSalvar(root, lista){
+  const k = root.dataset.hl;
+  if (lista.length) S.marks[k] = lista.sort((a, b) => a.s - b.s); else delete S.marks[k];
+  save(); hlAplicar(root);
+}
+function hlMostrar(rect){
+  hlBar.classList.add("on");
+  const w = hlBar.offsetWidth, h = hlBar.offsetHeight;
+  let y = rect.top - h - 8; if (y < 8) y = rect.bottom + 8;
+  hlBar.style.left = Math.min(Math.max(8, rect.left + rect.width / 2 - w / 2), innerWidth - w - 8) + "px";
+  hlBar.style.top = y + "px";
+}
+function hlEsconder(){ hlBar.classList.remove("on"); hlAlvo = null; }
+hlBar.addEventListener("mousedown", e => e.preventDefault());
+hlBar.querySelectorAll("button").forEach(b => b.onclick = () => {
+  const c = b.dataset.c;
+  if (hlAlvo){
+    const {root, id} = hlAlvo, lista = S.marks[root.dataset.hl] || [];
+    hlSalvar(root, c ? lista.map(m => m.id === id ? {...m, c} : m) : lista.filter(m => m.id !== id));
+  } else {
+    const x = hlSelecao(); if (!x) return hlEsconder();
+    const full = x.root.textContent, lista = hlCortar(S.marks[x.root.dataset.hl] || [], x.s, x.e, full);
+    if (c) lista.push({id: hlId(), s: x.s, e: x.e, c, t: full.slice(x.s, x.e)});
+    getSelection().removeAllRanges();
+    hlSalvar(x.root, lista);
+  }
+  hlEsconder();
+});
+function hlChecar(e){
+  if (hlBar.contains(e.target)) return;
+  setTimeout(() => {
+    const x = hlSelecao();
+    if (x){ hlAlvo = null; return hlMostrar(x.rect); }
+    const mk = e.target.closest?.("mark.hl");
+    if (mk && getSelection().isCollapsed){ hlMostrar(mk.getBoundingClientRect()); hlAlvo = {root: hlRaiz(mk), id: mk.dataset.id}; return; }
+    hlEsconder();
+  }, 10);
+}
+document.addEventListener("mouseup", hlChecar);
+document.addEventListener("touchend", hlChecar);
+document.addEventListener("keyup", e => { if (e.shiftKey) hlChecar(e); });
+addEventListener("scroll", hlEsconder, {passive: true});
+$("#hlReset").onclick = () => { if (confirm("Apagar todas as marcações de texto desta página?")){ S.marks = {}; save(); hlTudo(); } };
+document.querySelectorAll("section.tab").forEach(s => { if (!["mapa", "questoes", "flash", "rend"].includes(s.id)) s.dataset.hl = s.id; });
+hlTudo();
+
+/* teclado */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase(), tab = active();
+  if (tab === "questoes"){
+    const q = QUESTOES[cur];
+    if (k === "arrowright") step(1);
+    else if (k === "arrowleft") step(-1);
+    else if (q && !S.answers[q.n]){
+      const v = q.tipo === "ce" ? k.toUpperCase() : k;
+      if (k === "enter"){ e.preventDefault(); submeter(); }
+      else if (opcoes(q).includes(v)){ e.shiftKey ? descartar(v) : escolher(v); }
+    }
+  } else if (tab === "flash"){
+    if (k === " "){ e.preventDefault(); $("#fc").classList.toggle("flip"); }
+    else if (k === "1") grade(0); else if (k === "2") grade(1); else if (k === "3") grade(2);
+  }
+});
+
+renderMapa();
+["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
+cur = 0; renderQ(); buildDeck();
+</script>
+</body>
+</html>

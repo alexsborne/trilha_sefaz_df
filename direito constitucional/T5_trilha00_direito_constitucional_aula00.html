@@ -161,6 +161,15 @@ abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor
 @media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
 kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
 .btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+/* marca-texto */
+mark.hl{color:#1d2330;border-radius:3px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{background:#b6efc4}
+#hlBar{position:fixed;z-index:120;display:none;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 8px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+#hlBar.on{display:flex}
+#hlBar .lbl{font-size:12px;color:var(--muted);margin-right:2px}
+#hlBar button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;font-size:14px;line-height:1;color:var(--text);background:var(--surface2);padding:0}
+#hlBar button:hover{transform:scale(1.12);border-color:var(--text)}
+#hlBar button[data-c=am]{background:#fff176}#hlBar button[data-c=ro]{background:#f9c2dc}#hlBar button[data-c=ve]{background:#b6efc4}
 </style>
 </head>
 <body>
@@ -445,6 +454,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
     <button class="btn" id="expBtn">Exportar respostas (.json)</button>
     <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
     <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn" id="hlReset">Apagar marcações de texto</button>
     <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
   </div>
 </section>
@@ -452,6 +462,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
 </main>
 
 <div id="tip" role="tooltip"></div>
+<div id="hlBar" role="toolbar" aria-label="Marca-texto"><span class="lbl">Marcar</span><button data-c="am" title="Amarelo" aria-label="Amarelo"></button><button data-c="ro" title="Rosa" aria-label="Rosa"></button><button data-c="ve" title="Verde" aria-label="Verde"></button><button data-c="" title="Apagar marcação" aria-label="Apagar marcação">✕</button></div>
 <script>
 const QUESTOES = [{"fonte": "TRF 6ª Região, 2025", "tema": "Aplicabilidade das normas", "enun": "A previsão constitucional segundo a qual é livre o exercício de qualquer trabalho, ofício ou profissão, desde que atendidas as qualificações profissionais estabelecidas por lei, é exemplo típico de norma constitucional de eficácia plena.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A previsão constitucional que assegura a liberdade de exercício de qualquer trabalho, ofício ou profissão, desde que observadas as qualificações profissionais previstas em lei, consagrando o direito à liberdade profissional, constitui norma constitucional de eficácia contida (redutível ou restringível). Isso ocorre porque, embora a norma tenha aplicação imediata e produza efeitos desde sua promulgação, seu alcance pode ser limitado pela própria Constituição ou por legislação infraconstitucional que estabeleça requisitos ou restrições ao exercício de determinadas atividades profissionais. Questão errada."], "rot": "Exercício da teoria 1", "nav": "T1", "n": 1}, {"fonte": "TCE-RN, 2026", "tema": "Aplicabilidade das normas", "enun": "As normas definidoras dos direitos e garantias fundamentais são programáticas, pois estipulam metas a serem implementadas e alcançadas pelo Estado.", "alts": [], "tipo": "ce", "resp": "E", "com": ["As normas definidoras dos direitos e garantias fundamentais têm aplicação imediata. Questão errada."], "rot": "Exercício da teoria 2", "nav": "T2", "n": 2}, {"fonte": "AL-MG, 2023", "tema": "Hierarquia das normas", "enun": "O ordenamento jurídico brasileiro atual estabeleceu que há equivalência hierárquica entre as leis ordinárias e complementares, medidas provisórias e Decretos Regulamentares.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Não há hierarquia entre leis ordinárias e leis complementares. Isso também se aplica às medidas provisórias, já que elas têm força de lei desde a sua publicação. Contudo, os decretos regulamentares são atos administrativos infralegais, devendo fiel observância à lei. Logo, as leis possuem nível hierárquico superior aos decretos regulamentares. Questão errada."], "rot": "Exercício da teoria 3", "nav": "T3", "n": 3}, {"fonte": "Câmara dos Deputados, 2026", "tema": "Poder constituinte", "enun": "O poder constituinte derivado não está previsto na CF, embora nela estejam previstos seus limites expressos e implícitos.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O poder constituinte derivado encontra previsão na Constituição Federal, que também estabelece os seus limites, sejam eles expressos ou implícitos. Questão errada."], "rot": "Exercício da teoria 4", "nav": "T4", "n": 4}, {"fonte": "TCU, 2026", "tema": "Poder constituinte", "enun": "O poder constituinte originário caracteriza-se pela instauração de uma nova ordem jurídica estatal, em uma ruptura da ordem anterior.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O poder constituinte originário é aquele responsável por criar uma nova Constituição e instaurar uma nova ordem jurídica estatal, geralmente decorrente de uma ruptura com a ordem constitucional anterior. Ele é considerado inicial, autônomo e ilimitado juridicamente, pois não depende das normas anteriores para sua criação. Questão correta."], "rot": "Exercício da teoria 5", "nav": "T5", "n": 5}, {"fonte": "TCU, 2026", "tema": "Poder constituinte", "enun": "O poder constituinte decorrente compreende, além do poder de reforma da constituição federal, o poder constituinte derivado, que consiste no poder atribuído pelo constituinte originário aos estados-membros de uma federação para a elaboração de suas constituições locais.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O poder constituinte derivado abrange tanto o poder de modificar a Constituição Federal, denominado poder constituinte derivado reformador, quanto o poder constituinte derivado decorrente, que é a competência conferida pelo constituinte originário aos estados-membros de uma federação para criarem suas próprias constituições estaduais. Questão errado."], "rot": "Exercício da teoria 6", "nav": "T6", "n": 6}, {"fonte": "CEBRASPE/ANM/2025", "enun": "A incidência do art. 5.º, inciso XL, da CF, que impede a lei penal de retroagir, exceto para beneficiar o réu, está condicionada à atuação do legislador ordinário por constituir norma constitucional de eficácia limitada.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A norma insculpida no inciso XL do art. 5º (a lei penal não retroagirá, salvo para beneficiar o réu), por se tratar de norma definidora de direito e garantia fundamental, tem aplicação imediata, conforme o § 1º do art. 5º da CF/88. Com isso, trata-se de uma norma constitucional de eficácia plena e aplicabilidade imediata. Por exemplo, basta a promulgação de uma lei penal mais benéfica ao réu que ela terá eficácia imediata, não dependendo de qualquer outra previsão normativa ou legislativa a respeito."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 1", "nav": "A1", "n": 7}, {"fonte": "CEBRASPE/CNPq/2024", "enun": "O inciso VIII do art. 5.º da Constituição Federal de 1988 prevê que “ninguém será privado de direitos por motivo de crença religiosa ou de convicção filosófica ou política, salvo se as invocar para eximir-se de obrigação legal a todos imposta e recusar-se a cumprir prestação alternativa, fixada em lei”. Em relação a esse dispositivo constitucional, julgue o item seguinte. O preceito constitucional mencionado consiste em norma de eficácia limitada.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Normas de eficácia limitada dependem de regulamentação futura para produzirem todos os seus efeitos. Não é o caso do inciso VIII do art. 5º, cujo efeito é imediato, ou seja, ninguém será privado de direitos por motivo de crença religiosa ou convicção filosófica. Somente no que diz respeito à fixação da prestação alternativa é que se depende de lei regulamentadora, o que torna o dispositivo constitucional de eficácia contida, podendo não ser aplicado em sua íntegra. Contudo, perceba que o direito em si assegurado pela Constituição não depende de edição de qualquer outra norma."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 2", "nav": "A2", "n": 8}, {"fonte": "CEBRASPE/CAPES/2024", "enun": "A Constituição Federal de 1988 prevê que “todos têm direito a receber dos órgãos públicos informações de seu interesse particular, ou de interesse coletivo ou geral, que serão prestadas no prazo da lei, sob pena de responsabilidade (...)”. Acerca do conteúdo desse dispositivo, julgue o item que se segue. Segundo a tradicional classificação da aplicabilidade das normas constitucionais, o citado preceito constitucional é considerado norma de eficácia contida.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De fato, o preceito constitucional é norma de eficácia contida porque, apesar de o dispositivo constitucional ter aplicabilidade direta e imediata, ele pode não ser integralmente aplicado em função da necessidade de existência de uma norma que preveja o prazo para a prestação de informações por parte dos órgãos públicos. Normas de eficácia contida têm essa característica, de não integralidade da eficácia da norma, que depende de edição de ato normativo posterior."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 3", "nav": "A3", "n": 9}, {"fonte": "CEBRASPE/MPE GO/Analista Ambiental/2024", "enun": "A respeito dos direitos e deveres individuais e coletivos estabelecidos na CF e da classificação quanto à aplicabilidade das normas constitucionais segundo a doutrina majoritária, julgue o item a seguir. As normas constitucionais programáticas impõem um dever político ao órgão com atribuição para executar o seu comando, servem de referência teleológica para a atividade de interpretação e aplicação do direito e podem funcionar como parâmetro de controle de constitucionalidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["De fato, as normas programáticas carregam em si as finalidades sociais que se pretendem atingir com sua aplicação. Para o Prof. José Afonso da Silva, normas programáticas estabelecem, dentre outras coisas, um dever para o legislador ordinário, fornecem sentido teleológico para a interpretação, integração e aplicação das normas jurídicas e condicionam a legislação futura, tornando inconstitucionais normas que as contrariem."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 4", "nav": "A4", "n": 10}, {"fonte": "CEBRASPE/CM Maceió/2024", "enun": "Em relação aos princípios fundamentais, à aplicabilidade das normas constitucionais e aos direitos e às garantias fundamentais, julgue o item seguinte. O fato de uma norma constitucional ser classificável como de eficácia contida não impede que ela possua eficácia imediata e direta em determinadas situações.", "alts": [], "tipo": "ce", "resp": "C", "com": ["É exatamente isso: uma norma constitucional de eficácia contida pode sim ter eficácia imediata e direta, mas uma norma posterior pode condicionar a aplicação dessa norma, ou restringir sua aplicação."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 5", "nav": "A5", "n": 11}, {"fonte": "CEBRASPE/CNJ/Pedagogia/2024", "enun": "Acerca da aplicabilidade das normas constitucionais, julgue o próximo item. Tem eficácia plena a norma constitucional que estabelece ser dever da família, da sociedade e do Estado assegurar à criança os direitos básicos à saúde, à alimentação, à educação, ao lazer, à profissionalização, à cultura, à dignidade, ao respeito e à convivência familiar.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Trata-se de uma norma programática, pois ela estabelece uma diretriz, um princípio para a atuação do Estado. Para que de fato ela seja implementada, ou seja, para que de fato a população tenha assegurado os direitos básicos mencionados, há que se ter atuação concreta do Estado por meio de políticas públicas. Estas, por sua vez, são implementadas por legislação infraconstitucional.", "Vale reforçar que uma norma de eficácia plena não depende de regulamentação adicional para produzir seus efeitos."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 6", "nav": "A6", "n": 12}, {"fonte": "CEBRASPE/CNJ/Judiciária/2024", "enun": "Com relação à aplicabilidade das normas constitucionais, à administração pública e aos servidores públicos, julgue o item seguinte. É de eficácia limitada a norma constitucional que prevê que o prazo de validade do concurso público é de até dois anos, prorrogável uma vez, por igual período.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A norma mencionada é de eficácia plena, não dependendo de qualquer regulamentação para produzir todos os seus efeitos práticos. Ela possui aplicabilidade imediata, direta e integral."], "tema": "Aplicabilidade das normas", "rot": "Questão comentada · Aplicabilidade 7", "nav": "A7", "n": 13}, {"fonte": "CEBRASPE/Pref. Aracaju/2025", "enun": "A teoria de Otto Bachof acerca da existência de hierarquia entre normas da Constituição é plenamente admitida pela jurisprudência do STF, o que se confirma pela possibilidade do controle de constitucionalidade de normas oriundas do poder constituinte de primeiro grau no ordenamento jurídico pátrio.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O alemão Otto Bachof desenvolveu relevante obra doutrinária denominada “Normas constitucionais inconstitucionais”, na qual defende a possibilidade de que existam normas constitucionais originárias eivadas de inconstitucionalidade. Para o jurista, o texto constitucional possui dois tipos de normas: as cláusulas pétreas (normas cujo conteúdo não pode ser abolido pelo Poder Constituinte Derivado) e as normas constitucionais originárias. As cláusulas pétreas, na visão de Bachof, seriam superiores às demais normas constitucionais originárias e, portanto, serviriam de parâmetro para o controle de constitucionalidade destas. Assim, o jurista alemão considerava legítimo o controle de constitucionalidade de normas constitucionais originárias. No entanto, bastante cuidado: no Brasil, a tese de Bachof não é admitida. As cláusulas pétreas encontram-se no mesmo patamar hierárquico das demais normas constitucionais originárias."], "tema": "Hierarquia das normas", "rot": "Questão comentada · Hierarquia 1", "nav": "H1", "n": 14}, {"fonte": "CEBRASPE/PGE RR/2023", "enun": "No que diz respeito à democracia, aos tratados e convenções internacionais sobre direitos humanos e ao estatuto constitucional dos estados brasileiros, julgue o item seguinte. Leis ordinárias, medidas provisórias e outras normas de igual ou inferior hierarquia devem observar as disposições dos tratados e convenções internacionais sobre direitos humanos incorporados ao direito brasileiro com status supralegal.", "alts": [], "tipo": "ce", "resp": "C", "com": ["É exatamente isso: a doutrina constitucional reconhece que um tratado internacional sobre direitos humanos é recepcionado em nosso ordenamento com caráter supralegal. Isso significa dizer que uma norma pode ser cotejada com o tratado, podendo ser declarada incompatível com ele em razão desse controle de convencionalidade."], "tema": "Hierarquia das normas", "rot": "Questão comentada · Hierarquia 2", "nav": "H2", "n": 15}, {"fonte": "CEBRASPE/PGM Campo Grande/2019", "enun": "A supremacia material da norma constitucional decorre da rigidez constitucional, isto é, da existência de um processo legislativo distinto, mais laborioso.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A rigidez constitucional está diretamente associada à supremacia formal da Constituição, uma vez que o legislador ordinário não poderá alterá-la por simples ato infraconstitucional (cujo procedimento de elaboração é mais simples)."], "tema": "Hierarquia das normas", "rot": "Questão comentada · Hierarquia 3", "nav": "H3", "n": 16}, {"fonte": "CEBRASPE/CAU BR/2024", "enun": "Acerca da teoria da Constituição e sua classificação, bem como do poder constituinte, julgue o item a seguir. O poder constituinte decorrente refere-se ao poder de os estados-membros e os municípios elaborarem as próprias constituições, respeitando os limites impostos na Constituição Federal de 1988.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O erro da questão está em afirmar que os municípios elaboram constituições. Os estados, estes sim, elaboram suas constituições e esse fato decorre do poder constituinte derivado decorrente. Por outro lado, os municípios editam suas respectivas leis orgânicas (e não constituições), sendo que isso não é manifestação do poder constituinte decorrente, mas sim a expressão da auto-organização desses entes federativos."], "tema": "Poder constituinte", "rot": "Questão comentada · Poder Constituinte 1", "nav": "P1", "n": 17}, {"fonte": "CEBRASPE/CAU BR/2024", "enun": "Acerca da teoria da Constituição e sua classificação, bem como do poder constituinte, julgue o item a seguir. Não há possibilidade jurídica de pedido de declaração de inconstitucionalidade pelo Supremo Tribunal Federal (STF) de norma oriunda do poder constituinte originário, uma vez que a tese de que há hierarquia entre normas constitucionais originárias, dando azo à declaração de inconstitucionalidadede umas em face de outras, é incompossível com o sistema de Constituição rígida.", "alts": [], "tipo": "ce", "resp": "C", "com": ["É exatamente isso. Trata-se de entendimento do Supremo Tribunal Federal existente no julgamento da ADI 815 (Rel. Min. Moreira Alves, j. 28/03/1996):", "A tese de que há hierarquia entre normas constitucionais originárias dando azo à declaração de inconstitucionalidade de umas em face de outras e incompossível com o sistema de Constituição rígida. Na atual Carta Magna \"compete ao Supremo Tribunal Federal, precipuamente, a guarda da Constituição\" (artigo 102, \"caput\"), o que implica dizer que essa jurisdição lhe é atribuída para impedir que se desrespeite a Constituição como um todo, e não para, com relação a ela, exercer o papel de fiscal do Poder Constituinte originário, a fim de verificar se este teria, ou não, violado os princípios de direito suprapositivo que ele próprio havia incluído no texto da mesma Constituição. Por outro lado, as cláusulas pétreas não podem ser invocadas para sustentação da tese da inconstitucionalidade de normas constitucionais inferiores em face de normas constitucionais superiores, porquanto a Constituição as prevê apenas como limites ao Poder Constituinte derivado ao rever ou ao emendar a Constituição elaborada pelo Poder Constituinte originário, e não como abarcando normas cuja observância se impôs ao próprio Poder Constituinte originário com relação às outras que não sejam consideradas como cláusulas pétreas, e, portanto, possam ser emendadas."], "tema": "Poder constituinte", "rot": "Questão comentada · Poder Constituinte 2", "nav": "P2", "n": 18}, {"fonte": "CEBRASPE/CM Maceió/2024", "enun": "Julgue o item a seguir, acerca das variações do poder constituinte derivado e do mecanismo da mutação constitucional. O poder constituinte derivado reformador é um poder de reforma constitucional por meio de um procedimento específico, a exemplo das emendas constitucionais, estabelecido pelo poder constituinte originário.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A questão explica corretamente a característica do poder constituinte reformador, que de fato é um procedimento específico, fixado pelo poder constituinte originário, para que as normas constitucionais sejam atualizadas ao longo do tempo."], "tema": "Poder constituinte", "rot": "Questão comentada · Poder Constituinte 3", "nav": "P3", "n": 19}];
 
@@ -683,6 +694,7 @@ function abrirItem(k){
     <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
       <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
   abbrify(p);
+  p.dataset.hl = "mm-" + k; hlAplicar(p);
   $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
   $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
   const r = p.getBoundingClientRect();
@@ -837,16 +849,17 @@ function renderQ(){
   let com = "";
   if (a){
     const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
-    com = `<div class="coment"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+    com = `<div class="coment" data-hl="q${q.n}c"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
       ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
   }
   $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
-    <div class="enun">${esc(q.enun)}</div>
+    <div class="enun" data-hl="q${q.n}">${esc(q.enun)}</div>
     ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
     ${opts}
     ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
     ${com}`;
   abbrify($("#qCard"));
+  $("#qCard").querySelectorAll("[data-hl]").forEach(hlAplicar);
   let clickTimer = null;
   $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
     b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
@@ -984,11 +997,11 @@ function renderRend(){
 $("#expBtn").onclick = () => {
   const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-  a.download = `T2_dirtrib_respostas_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+  a.download = `${KEY}_${new Date().toISOString().slice(0, 10)}.json`; a.click();
 };
 $("#impFile").onchange = e => {
   const f = e.target.files[0]; if (!f) return;
-  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; save(); renderQ(); renderRend(); });
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {}; save(); renderQ(); renderRend(); hlTudo(); });
 };
 $("#redoBad").onclick = () => {
   const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
@@ -997,6 +1010,105 @@ $("#redoBad").onclick = () => {
   $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
 };
 $("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* ---------- marca-texto: selecione um trecho e escolha amarelo, rosa ou verde (salvo em S.marks) ---------- */
+S.marks ||= {};
+const hlBar = $("#hlBar");
+let hlAlvo = null;  /* {root, id} quando o clique foi numa marcação já existente */
+const hlId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const hlRaiz = n => (n.nodeType === 1 ? n : n.parentElement)?.closest("[data-hl]");
+function hlTextos(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), r = [];
+  while (w.nextNode()) r.push(w.currentNode);
+  return r;
+}
+function hlOff(root, node, off){ const r = document.createRange(); r.setStart(root, 0); r.setEnd(node, off); return r.toString().length; }
+/* posições contadas no texto puro do bloco; se o texto mudar, procura o trecho guardado */
+function hlAplicar(root){
+  if (!root) return;
+  root.querySelectorAll("mark.hl").forEach(m => m.replaceWith(...m.childNodes));
+  root.normalize();
+  const full = root.textContent;
+  (S.marks[root.dataset.hl] || []).forEach(m => {
+    if (full.slice(m.s, m.e) !== m.t){ const i = full.indexOf(m.t); if (i < 0) return; m.s = i; m.e = i + m.t.length; }
+    let pos = 0;
+    hlTextos(root).forEach(t => {
+      const a = pos, b = pos + t.length; pos = b;
+      if (b <= m.s || a >= m.e) return;
+      if (!t.nodeValue.trim() && /^(TABLE|TBODY|THEAD|TR|UL|OL|SECTION|DIV|DETAILS)$/.test(t.parentNode.nodeName)) return;
+      let n = t;
+      if (m.e - a < t.length) n.splitText(m.e - a);
+      if (m.s > a) n = n.splitText(m.s - a);
+      const mk = document.createElement("mark");
+      mk.className = "hl hl-" + m.c; mk.dataset.id = m.id;
+      n.replaceWith(mk); mk.append(n);
+    });
+  });
+}
+function hlTudo(){ document.querySelectorAll("[data-hl]").forEach(hlAplicar); }
+function hlSelecao(){
+  const sel = getSelection();
+  if (!sel.rangeCount || sel.isCollapsed) return null;
+  const r = sel.getRangeAt(0), root = hlRaiz(r.startContainer);
+  if (!root || root !== hlRaiz(r.endContainer)) return null;
+  const s = hlOff(root, r.startContainer, r.startOffset), e = hlOff(root, r.endContainer, r.endOffset);
+  return e > s ? {root, s, e, rect: r.getBoundingClientRect()} : null;
+}
+/* tira o trecho [s, e) das marcações existentes (nova cor por cima ou apagar) */
+function hlCortar(lista, s, e, full){
+  const out = [];
+  lista.forEach(m => {
+    if (m.e <= s || m.s >= e) return out.push(m);
+    if (m.s < s) out.push({...m, id: hlId(), e: s, t: full.slice(m.s, s)});
+    if (m.e > e) out.push({...m, id: hlId(), s: e, t: full.slice(e, m.e)});
+  });
+  return out;
+}
+function hlSalvar(root, lista){
+  const k = root.dataset.hl;
+  if (lista.length) S.marks[k] = lista.sort((a, b) => a.s - b.s); else delete S.marks[k];
+  save(); hlAplicar(root);
+}
+function hlMostrar(rect){
+  hlBar.classList.add("on");
+  const w = hlBar.offsetWidth, h = hlBar.offsetHeight;
+  let y = rect.top - h - 8; if (y < 8) y = rect.bottom + 8;
+  hlBar.style.left = Math.min(Math.max(8, rect.left + rect.width / 2 - w / 2), innerWidth - w - 8) + "px";
+  hlBar.style.top = y + "px";
+}
+function hlEsconder(){ hlBar.classList.remove("on"); hlAlvo = null; }
+hlBar.addEventListener("mousedown", e => e.preventDefault());
+hlBar.querySelectorAll("button").forEach(b => b.onclick = () => {
+  const c = b.dataset.c;
+  if (hlAlvo){
+    const {root, id} = hlAlvo, lista = S.marks[root.dataset.hl] || [];
+    hlSalvar(root, c ? lista.map(m => m.id === id ? {...m, c} : m) : lista.filter(m => m.id !== id));
+  } else {
+    const x = hlSelecao(); if (!x) return hlEsconder();
+    const full = x.root.textContent, lista = hlCortar(S.marks[x.root.dataset.hl] || [], x.s, x.e, full);
+    if (c) lista.push({id: hlId(), s: x.s, e: x.e, c, t: full.slice(x.s, x.e)});
+    getSelection().removeAllRanges();
+    hlSalvar(x.root, lista);
+  }
+  hlEsconder();
+});
+function hlChecar(e){
+  if (hlBar.contains(e.target)) return;
+  setTimeout(() => {
+    const x = hlSelecao();
+    if (x){ hlAlvo = null; return hlMostrar(x.rect); }
+    const mk = e.target.closest?.("mark.hl");
+    if (mk && getSelection().isCollapsed){ hlMostrar(mk.getBoundingClientRect()); hlAlvo = {root: hlRaiz(mk), id: mk.dataset.id}; return; }
+    hlEsconder();
+  }, 10);
+}
+document.addEventListener("mouseup", hlChecar);
+document.addEventListener("touchend", hlChecar);
+document.addEventListener("keyup", e => { if (e.shiftKey) hlChecar(e); });
+addEventListener("scroll", hlEsconder, {passive: true});
+$("#hlReset").onclick = () => { if (confirm("Apagar todas as marcações de texto desta página?")){ S.marks = {}; save(); hlTudo(); } };
+document.querySelectorAll("section.tab").forEach(s => { if (!["mapa", "questoes", "flash", "rend"].includes(s.id)) s.dataset.hl = s.id; });
+hlTudo();
 
 /* teclado */
 document.addEventListener("keydown", e => {

@@ -161,6 +161,15 @@ abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor
 @media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
 kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
 .btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+/* marca-texto */
+mark.hl{color:#1d2330;border-radius:3px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{background:#b6efc4}
+#hlBar{position:fixed;z-index:120;display:none;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 8px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+#hlBar.on{display:flex}
+#hlBar .lbl{font-size:12px;color:var(--muted);margin-right:2px}
+#hlBar button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;font-size:14px;line-height:1;color:var(--text);background:var(--surface2);padding:0}
+#hlBar button:hover{transform:scale(1.12);border-color:var(--text)}
+#hlBar button[data-c=am]{background:#fff176}#hlBar button[data-c=ro]{background:#f9c2dc}#hlBar button[data-c=ve]{background:#b6efc4}
 </style>
 </head>
 <body>
@@ -221,7 +230,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
   <div class="grid3">
     <div class="card"><b>Banca</b><br><span class="muted">CEBRASPE: itens de Certo ou Errado em que um erro anula um acerto. Na dúvida real, deixe em branco.</span></div>
     <div class="card"><b>Peso na prova</b><br><span class="muted">Contabilidade Geral e de Custos está na prova de conhecimentos específicos (peso 3), com 15 itens, o que equivale a 45 pontos ponderados.</span></div>
-    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas e flashcards ficam no navegador. Use <i>Exportar</i> na aba Rendimento para fazer backup.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas, flashcards e marcações de texto ficam no navegador. Use <i>Exportar</i> na aba Rendimento para fazer backup.</span></div>
   </div>
 </section>
 
@@ -487,6 +496,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
     <button class="btn" id="expBtn">Exportar respostas (.json)</button>
     <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
     <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn" id="hlReset">Apagar marcações de texto</button>
     <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
   </div>
 </section>
@@ -494,6 +504,7 @@ kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-
 </main>
 
 <div id="tip" role="tooltip"></div>
+<div id="hlBar" role="toolbar" aria-label="Marca-texto"><span class="lbl">Marcar</span><button data-c="am" title="Amarelo" aria-label="Amarelo"></button><button data-c="ro" title="Rosa" aria-label="Rosa"></button><button data-c="ve" title="Verde" aria-label="Verde"></button><button data-c="" title="Apagar marcação" aria-label="Apagar marcação">✕</button></div>
 <script>
 const QUESTOES = [{"fonte": "Exercício da teoria (tópico Objeto)", "tema": "Objeto: o patrimônio", "enun": "O objeto da contabilidade é:", "tipo": "mc", "resp": "a", "alts": [["a", "o patrimônio das entidades."], ["b", "a apuração do resultado das entidades."], ["c", "o planejamento contábil das entidades."], ["d", "o controle e o planejamento das entidades."], ["e", "o fornecimento de informações a seus usuários de modo geral."]], "com": ["O objeto da Contabilidade é o Patrimônio, conjunto de bens, direitos e obrigações de uma determinada entidade."], "n": 1, "rot": "Exercício da teoria 1", "nav": "T1"}, {"fonte": "Exercício da teoria (tópico Funções)", "tema": "Objetivo, finalidade e funções", "enun": "Sobre conceitos, objeto, função e objetivos da Contabilidade, analise as afirmações a seguir.\nI - O principal objetivo da contabilidade consiste em identificar as contas de apuração dos custos e resultados.\nII - A função administrativa tem por objetivo o controle do patrimônio.\nIII - O objeto da contabilidade é o patrimônio que compreende apenas a parte positiva do balanço.\nIV - Os bens corpóreos e os incorpóreos são classificados no passivo.\nEstá correto APENAS o que se afirma em", "tipo": "mc", "resp": "a", "alts": [["a", "II."], ["b", "III."], ["c", "I e III."], ["d", "II e IV."], ["e", "I, III e IV."]], "com": ["I – Errado. O objetivo da Contabilidade é fornecer informações úteis para a tomada de decisões.", "II – Certo. De fato, temos que a função administrativa da Contabilidade está ligada ao controle do patrimônio.", "III – Errado. O patrimônio da entidade é o conjunto de bens, direitos e obrigações, ou seja, compreende tanto a parte positiva como também a negativa.", "IV – Errado. Os bens fazem parte do ativo da empresa. Trata-se da parte positiva do balanço."], "n": 2, "rot": "Exercício da teoria 2", "nav": "T2"}, {"fonte": "Exercício da teoria (tópico Funções)", "tema": "Campo de aplicação (aziendas)", "enun": "Assinale abaixo a única opção que contém uma afirmativa falsa.", "tipo": "mc", "resp": "e", "alts": [["a", "A finalidade da Contabilidade é assegurar o controle do patrimônio administrado e fornecer informações sobre a composição e as variações patrimoniais, bem como sobre o resultado das atividades econômicas desenvolvidas pela entidade para alcançar seus fins."], ["b", "A Contabilidade pode ser conceituada como sendo “a ciência que estuda, registra, controla e interpreta os fatos ocorridos no patrimônio das entidades com fins lucrativos ou não”."], ["c", "Pode-se dizer que o campo de aplicação da Contabilidade é a entidade econômico-administrativa, seja ou não de fins lucrativos."], ["d", "O objeto da Contabilidade é definido como o conjunto de bens, direitos e obrigações vinculado a uma entidade econômico-administrativa."], ["e", "Enquanto a entidade econômico-administrativa é o objeto da Contabilidade, o patrimônio é o seu campo de aplicação."]], "com": ["Letra A: Certo. O item refere-se corretamente à finalidade da contabilidade: controlar o patrimônio administrado e fornecer informações úteis para a tomada de decisão.", "Letra B: Certo. Perfeito o conceito. Observe que o item confirma o fato de que a Contabilidade é aplicada em entidades com ou sem fins lucrativos.", "Letra C: Certo. O item refere-se corretamente ao campo de aplicação da Contabilidade, qual seja: as entidades econômico-administrativas. Destaca-se que se o item colocasse aziendas estaria igualmente correto, pois as expressões acabam sendo sinônimas.", "Letra D: Certo. O item refere-se corretamente ao objeto da Contabilidade, o patrimônio, conjunto de bens, direitos e obrigações vinculado a uma entidade econômico-administrativa.", "Letra E: Errado. É o nosso gabarito. Observe que o item inverte os conceitos. A entidade econômico-administrativa que é o campo de aplicação. O patrimônio, por sua vez, é o objeto da Contabilidade."], "n": 3, "rot": "Exercício da teoria 3", "nav": "T3"}, {"fonte": "Exercício da teoria (tópico Funções)", "tema": "Campo de aplicação (aziendas)", "enun": "O campo de atuação da Contabilidade é a entidade econômico-administrativa, cuja classificação, quanto aos fins a que se destinam, faz-se, corretamente, dividindo-as em", "tipo": "mc", "resp": "e", "alts": [["a", "pessoas físicas e pessoas jurídicas."], ["b", "entidades abertas e entidades fechadas."], ["c", "entidades públicas e entidades privadas."], ["d", "entidades civis e entidades comerciais."], ["e", "entidades sociais, econômicas e econômico-sociais."]], "com": ["Conforme já estudamos, o campo de aplicação da Contabilidade abrange todas as entidades econômico-administrativas (Aziendas).", "Quanto aos fins a que se destinam, as aziendas classificam-se em: sociais (não visam lucros; exemplo: associações beneficentes, culturais, esportivas, recreativas); econômico-sociais (além das finalidades sociais, visam também ao lucro, com o objetivo de prestar serviços, pecúlios e benefícios às pessoas que contribuíram para sua constituição; exemplo: institutos de pensão, pecúlio, aposentadoria e previdência); econômicas (finalidade é a geração de lucros; exemplo: sociedades comerciais, agrícolas, industriais, de serviços).", "Quanto aos seus proprietários, as aziendas classificam-se em públicas (pertencem à sociedade; exemplo: sindicatos, fundações e o próprio Estado) e particulares (pertencentes a uma pessoa ou a um grupo de pessoas).", "Portanto, quanto aos fins a que se destinam, as entidades são: sociais, econômicas e econômico-sociais."], "n": 4, "rot": "Exercício da teoria 4", "nav": "T4"}, {"fonte": "Exercício da teoria (tópico Técnicas)", "tema": "Técnicas contábeis", "enun": "Assinale a alternativa que apresenta as técnicas aplicadas em ciências contábeis.", "tipo": "mc", "resp": "e", "alts": [["a", "Receitas, Despesas, Ativo e Passivo"], ["b", "Ativo + Passivo = Patrimônio Líquido"], ["c", "As contas do ativo (bens e direitos) são, em regra, de natureza devedora"], ["d", "Os fatos mistos representam a junção dos fatos permutativos e modificativos"], ["e", "Escrituração, análises, demonstrações contábeis e auditoria"]], "com": ["As técnicas aplicadas pela Contabilidade são as seguintes: Escrituração (registro dos fatos contábeis); Demonstrações Contábeis (evidenciar os fatos contábeis escriturados); Análise das Demonstrações Contábeis (extrair informações sobre a situação financeira, econômica e patrimonial, para subsidiar a tomada de decisões); Auditoria (examinar a escrituração e a evidenciação, verificando se foram elaboradas de acordo com as normas vigentes e os princípios contábeis)."], "n": 5, "rot": "Exercício da teoria 5", "nav": "T5"}, {"fonte": "Exercício da teoria (tópico Usuários)", "tema": "Usuários da informação contábil", "enun": "Diversos são os tipos de usuários interessados nas informações contidas nas demonstrações contábeis das entidades. Um desses grupos é constituído pelos clientes, cujo interesse é tanto maior quanto maior forem a sua dependência e a concentração nos fornecimentos de algumas poucas entidades.", "tipo": "ce", "resp": "C", "alts": [], "com": ["Os clientes têm interesse em informações sobre a continuidade operacional da entidade, especialmente quando têm um relacionamento a longo prazo com ela, ou dela dependem como fornecedor importante."], "n": 6, "rot": "Exercício da teoria 6", "nav": "T6"}, {"fonte": "Exercício da teoria (tópico Usuários)", "tema": "Usuários da informação contábil", "enun": "Os relatórios contábil-financeiros de propósitos gerais não são os instrumentos que atendem a todas as informações de que os usuários externos — investidores, credores por empréstimos e outros credores, existentes e em potencial — necessitam.", "tipo": "ce", "resp": "C", "alts": [], "com": ["De fato, relatórios financeiros para fins gerais não fornecem nem podem fornecer todas as informações de que necessitam investidores, credores por empréstimos e outros credores, existentes e potenciais. Esses usuários precisam considerar informações pertinentes de outras fontes, como, por exemplo, condições e expectativas econômicas gerais, eventos políticos e ambiente político e perspectivas do setor e da empresa."], "n": 7, "rot": "Exercício da teoria 7", "nav": "T7"}, {"n": 8, "fonte": "CEBRASPE/Técnico/TRF6/2025", "enun": "O objetivo da contabilidade é estudar o sistema da riqueza administrativa, com a finalidade de verificar se ele vem servindo ao alcance dos fins propostas pela entidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A contabilidade, de fato, estuda o sistema da riqueza administrativa, ou seja, o patrimônio das entidades, com o objetivo de fornecer informações que ajudem a verificar se os recursos estão sendo utilizados de maneira eficaz para alcançar os fins propostos pela entidade.", "Esse estudo envolve a análise e o registro (escrituração) das transações econômicas e financeiras, a preparação de demonstrações contábeis/financeiras e a avaliação da performance financeira da entidade. A contabilidade fornece uma base sólida de informações que auxiliam os seus usuários a tomar decisões mais assertivas e a avaliar se os fins propostos pela entidade estão sendo atingidos.", "Segundo a definição de Contabilidade contida no Dicionário da Contabilidade, do saudoso Dr. Antônio Lopes de Sá, temos:", "Ciência que estuda os fenômenos patrimoniais sob o aspecto do fim aziendal; é a ciência que tem por objetivo estudar o sistema da riqueza administrativa a fim de observar se ela atinge os fins propostos pelo sujeito aziendal."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 1", "nav": "1"}, {"n": 9, "fonte": "CEBRASPE/Técnico/Petrobras/2023", "enun": "Uma finalidade da ciência contábil é observar se a riqueza administrativa está atingindo os fins propostos pelo sujeito contábil.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Inseri essa questão aqui para você ver que a banca costuma repetir as exigências. Essa assertiva, assim como a anterior, tomou como base a definição acima descrita no Dicionário de Contabilidade. Os comentários acima se aplicam em sua integridade a essa questão."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 2", "nav": "2"}, {"n": 10, "fonte": "CEBRASPE/Técnico/TRF6/2025", "enun": "O patrimônio de uma entidade, na visão da ciência contábil, é composto por itens de natureza inteiramente qualitativa, por itens de natureza inteiramente quantitativa e por itens que tem natureza tanto qualitativa quanto quantitativa.", "alts": [], "tipo": "ce", "resp": "E", "com": ["A contabilidade estuda o patrimônio em seus aspectos quantitativo e qualitativo. Isso significa que ela não apenas registra valores monetários ( aspecto quantitativo), mas também considera aspectos não monetários, a natureza/qualidade do patrimônio (aspecto qualitativo).", "É errado afirmar, portanto, que o patrimônio, na visão da ciência contábil, é composto por itens de natureza inteiramente qualitativa ou apenas de natureza inteiramente quantitativa. A contabilidade necessita evidenciar o patrimônio em seus aspectos qualitativos e quantitativos."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 3", "nav": "3"}, {"n": 11, "fonte": "CEBRASPE/Técnico/TRF6/2025", "enun": "Na ciência contábil, o patrimônio líquido de uma entidade é entendido como o conjunto de seus bens, direitos e obrigações.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Na ciência contábil, o patrimônio líquido de uma entidade é definido como a diferença entre os ativos (bens e direitos) e os passivos (obrigações). Em outras palavras, o patrimônio líquido representa a parte residual dos ativos da entidade depois de deduzidos todos os seus passivos. Ele é composto por itens como capital social, reservas de lucros, ajustes de avaliação patrimonial e outros elementos que refletem a riqueza líquida da entidade.", "O conjunto de seus bens, direitos e obrigações representa o patrimônio da entidade (não é o patrimônio líquido!)."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 4", "nav": "4"}, {"n": 12, "fonte": "CEBRASPE/Contador/PCDF/2025", "enun": "Considerando os conceitos, objetivos e finalidades da contabilidade, julgue o item a seguir. Coletar informações, sintetizá -las e registrá -las são algumas das ações que visam ao acompanhamento sistemático do objeto da ciência contábil.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Coletar informações, sintetizá -las e registrá -las realmente são algumas das ações essenciais para o acompanhamento sistemático do objeto da ciência contábil (patrimônio das entidades).", "Como ciência que estuda e controla o patrimônio das entidades, a contabilidade fornece informações úteis para a tomada de decisões. Nesse sentido, a fim de cumprir esse objetivo, a contabilidade realiza um processo contínuo e sistemático de coleta, síntese e registro(escrituração) de informações financeiras e patrimoniais."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 5", "nav": "5"}, {"n": 13, "fonte": "CEBRASPE/Contador/PCDF/2025", "enun": "O objeto da contabilidade, na teoria contábil atual, é mais que o conjunto de bens, direitos e obrigações de propriedade da entidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["O objeto da contabilidade engloba todos os recursos econômicos controlados pela entidade. Não é preciso deter a propriedade legal do bem/direito. Isso ficará bem tranquilo de entender após o estudo da definição de ativo, oportunamente tratado em noso estudo. De qualquer forma, transcrevemos abaixo a definição com o destaque para o termo \"controlado.", "Definição de ativo : recurso econômico presente controlado pela entidade como resultado de eventos passados."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 6", "nav": "6"}, {"n": 14, "fonte": "CEBRASPE/Contador/PCDF/2025", "enun": "O objetivo fundamental da contabilidade, hoje, é fornecer informações que auxiliem a tomada de decisões econômico-financeiras a todos os interessados.", "alts": [], "tipo": "ce", "resp": "E", "com": ["O erro da assertiva está na expressão \"todos os interessados\". O objetivo da contabilidade é proporcionar informações financeiras sobre a entidade que sejam úteis principalmente para os usuários primários, que incluem:", "• Investidores existentes e potenciais;", "• Credores por empréstimos;", "• Outros fornecedores de recursos à entidade.", "Esses usuários externos primários utilizam as informações financeiras para tomar decisões relacionadas ao fornecimento de recursos à entidade, como decidir se devem comprar, manter ou vender instrumentos patrimoniais, fornecer ou liquidar empréstimos, ou outras formas de financiamento."], "tema": "Usuários da informação contábil", "rot": "Questão comentada 7", "nav": "7"}, {"n": 15, "fonte": "CEBRASPE/Contador/CAU-BR/2024", "enun": "A contabilidade estuda o patrimônio em seus aspectos quantitativo e qualitativo, fornecendo subsídios ao processo de tomada de decisões econômico -financeiras por usuários internos e externos.", "alts": [], "tipo": "ce", "resp": "C", "com": ["A contabilidade, de fato, estuda o patrimônio em seus aspectos quantitativo e qualitativo. Isso significa que ela não apenas registra valores monetários ( aspecto quantitativo), mas também considera aspectos não monetários, a natureza/qualidade do patrimônio (aspecto qualitativo).", "Esses subsídios fornecidos pela contabilidade são essenciais para o processo de tomada de decisões econômico-financeiras, tanto para usuários internos (como gestores e funcionários) quanto para usuários externos (como investidores, credores e reguladores)."], "tema": "Objeto: o patrimônio", "rot": "Questão comentada 8", "nav": "8"}, {"n": 16, "fonte": "CEBRASPE/Agente/PC-PE/2024", "enun": "Atualmente, a corrente majoritária de pensadores da área de contabilidade a conceitua como", "alts": [["a", "uma subdivisão da administração."], ["b", "uma forma de arte."], ["c", "uma ciência social."], ["d", "uma ciência exata."], ["e", "uma técnica."]], "tipo": "mc", "resp": "c", "com": ["Atualmente, a corrente majoritária de pensadores da área de contabilidade conceitua a contabilidade como uma ciência social . A contabilidade é considerada uma ciência social porque estuda os fenômenos relacionados ao patrimônio das entidades e suas interações com o ambiente econômico e social. Ela envolve a análise de comportamentos humanos e decisões econômicas, proporcionando informações que afetam diretamente as decisões de indivíduos e organizações."], "tema": "Conceito e natureza", "rot": "Questão comentada 9", "nav": "9"}, {"n": 17, "fonte": "CEBRASPE/Analista/APEx/2024", "enun": "A ciência contábil tem múltiplas finalidades e ramos de atuação, mas, independentemente do enfoque, a contabilidade tem por objetivo fundamental", "alts": [["a", "registrar, estimar, organizar e sintetizar as informações geradas pelas sociedades."], ["b", "fornecer informações úteis aos usuários para a tomada de decisão."], ["c", "controlar o patrimônio do ente contábil."], ["d", "mensurar o resultado do empreendimento societário."]], "tipo": "mc", "resp": "b", "com": ["Segundo o entendimento mais recente da banca CEBRASPE, o objetivo da contabilidade é fornecer informações úteis aos usuários, em linha com o disposto na Estrutura Conceitual (CPC 00). Para a banca, controlar o patrimônio é finalidade da contabilidade.", "Cabe destacar que isso é um preciosismo, pois boa parte da doutrina trata os termos como sinônimos (objetivo = finalidade). A título de exemplo, observe duas passagens na doutrina que evidenciam esse entendimento:", "Segundo o autor Osni Moura ribeiro (Contabilidade Geral Fácil, 9ª edição, pág. 4, Ed. Saraiva):", "\"1.4 Objetivo (finalidade) da Contabilidade O objetivo da contabilidade é o estudo e o controle do patrimônio e de suas variações visando ao fornecimento de informações que sejam úteis para a tomada de decisões\".", "Para o autor Ricardo Ferreira (Contabilidade Básica, 9ª edição, pág. 3, Ed. Ferreira), \"3. Finalidade ou Objetivo A Contabilidade é mantida com a finalidade de fornecer às pessoas interessadas informações sobre o patrimônio\"."], "tema": "Objetivo, finalidade e funções", "rot": "Questão comentada 10", "nav": "10"}];
 
@@ -745,6 +756,7 @@ function abrirItem(k){
     <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
       <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
   abbrify(p);
+  p.dataset.hl = "mm-" + k; hlAplicar(p);
   $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
   $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
   const r = p.getBoundingClientRect();
@@ -831,7 +843,10 @@ function abbrify(root){
 })();
 
 const KEY = "sefazdf_T3_contgeral_aula00_v1";
-let S = JSON.parse(localStorage.getItem(KEY) || "null") || {answers:{}, cards:{}};
+/* respostas já resolvidas, embutidas na publicação (usadas só se este navegador ainda não tiver dados) */
+const RESPOSTAS_INICIAIS = null;
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || (RESPOSTAS_INICIAIS ? structuredClone(RESPOSTAS_INICIAIS) : null) || {answers:{}, cards:{}};
+S.answers ||= {}; S.cards ||= {}; S.draft ||= {};
 const save = () => localStorage.setItem(KEY, JSON.stringify(S));
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -899,16 +914,17 @@ function renderQ(){
   let com = "";
   if (a){
     const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
-    com = `<div class="coment"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+    com = `<div class="coment" data-hl="q${q.n}c"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
       ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
   }
   $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
-    <div class="enun">${esc(q.enun)}</div>
+    <div class="enun" data-hl="q${q.n}">${esc(q.enun)}</div>
     ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
     ${opts}
     ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
     ${com}`;
   abbrify($("#qCard"));
+  $("#qCard").querySelectorAll("[data-hl]").forEach(hlAplicar);
   let clickTimer = null;
   $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
     b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
@@ -1046,11 +1062,11 @@ function renderRend(){
 $("#expBtn").onclick = () => {
   const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-  a.download = `T2_dirtrib_respostas_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+  a.download = `${KEY}_${new Date().toISOString().slice(0, 10)}.json`; a.click();
 };
 $("#impFile").onchange = e => {
   const f = e.target.files[0]; if (!f) return;
-  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; save(); renderQ(); renderRend(); });
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {}; save(); renderQ(); renderRend(); hlTudo(); });
 };
 $("#redoBad").onclick = () => {
   const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
@@ -1059,6 +1075,105 @@ $("#redoBad").onclick = () => {
   $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
 };
 $("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* ---------- marca-texto: selecione um trecho e escolha amarelo, rosa ou verde (salvo em S.marks) ---------- */
+S.marks ||= {};
+const hlBar = $("#hlBar");
+let hlAlvo = null;  /* {root, id} quando o clique foi numa marcação já existente */
+const hlId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const hlRaiz = n => (n.nodeType === 1 ? n : n.parentElement)?.closest("[data-hl]");
+function hlTextos(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), r = [];
+  while (w.nextNode()) r.push(w.currentNode);
+  return r;
+}
+function hlOff(root, node, off){ const r = document.createRange(); r.setStart(root, 0); r.setEnd(node, off); return r.toString().length; }
+/* posições contadas no texto puro do bloco; se o texto mudar, procura o trecho guardado */
+function hlAplicar(root){
+  if (!root) return;
+  root.querySelectorAll("mark.hl").forEach(m => m.replaceWith(...m.childNodes));
+  root.normalize();
+  const full = root.textContent;
+  (S.marks[root.dataset.hl] || []).forEach(m => {
+    if (full.slice(m.s, m.e) !== m.t){ const i = full.indexOf(m.t); if (i < 0) return; m.s = i; m.e = i + m.t.length; }
+    let pos = 0;
+    hlTextos(root).forEach(t => {
+      const a = pos, b = pos + t.length; pos = b;
+      if (b <= m.s || a >= m.e) return;
+      if (!t.nodeValue.trim() && /^(TABLE|TBODY|THEAD|TR|UL|OL|SECTION|DIV|DETAILS)$/.test(t.parentNode.nodeName)) return;
+      let n = t;
+      if (m.e - a < t.length) n.splitText(m.e - a);
+      if (m.s > a) n = n.splitText(m.s - a);
+      const mk = document.createElement("mark");
+      mk.className = "hl hl-" + m.c; mk.dataset.id = m.id;
+      n.replaceWith(mk); mk.append(n);
+    });
+  });
+}
+function hlTudo(){ document.querySelectorAll("[data-hl]").forEach(hlAplicar); }
+function hlSelecao(){
+  const sel = getSelection();
+  if (!sel.rangeCount || sel.isCollapsed) return null;
+  const r = sel.getRangeAt(0), root = hlRaiz(r.startContainer);
+  if (!root || root !== hlRaiz(r.endContainer)) return null;
+  const s = hlOff(root, r.startContainer, r.startOffset), e = hlOff(root, r.endContainer, r.endOffset);
+  return e > s ? {root, s, e, rect: r.getBoundingClientRect()} : null;
+}
+/* tira o trecho [s, e) das marcações existentes (nova cor por cima ou apagar) */
+function hlCortar(lista, s, e, full){
+  const out = [];
+  lista.forEach(m => {
+    if (m.e <= s || m.s >= e) return out.push(m);
+    if (m.s < s) out.push({...m, id: hlId(), e: s, t: full.slice(m.s, s)});
+    if (m.e > e) out.push({...m, id: hlId(), s: e, t: full.slice(e, m.e)});
+  });
+  return out;
+}
+function hlSalvar(root, lista){
+  const k = root.dataset.hl;
+  if (lista.length) S.marks[k] = lista.sort((a, b) => a.s - b.s); else delete S.marks[k];
+  save(); hlAplicar(root);
+}
+function hlMostrar(rect){
+  hlBar.classList.add("on");
+  const w = hlBar.offsetWidth, h = hlBar.offsetHeight;
+  let y = rect.top - h - 8; if (y < 8) y = rect.bottom + 8;
+  hlBar.style.left = Math.min(Math.max(8, rect.left + rect.width / 2 - w / 2), innerWidth - w - 8) + "px";
+  hlBar.style.top = y + "px";
+}
+function hlEsconder(){ hlBar.classList.remove("on"); hlAlvo = null; }
+hlBar.addEventListener("mousedown", e => e.preventDefault());
+hlBar.querySelectorAll("button").forEach(b => b.onclick = () => {
+  const c = b.dataset.c;
+  if (hlAlvo){
+    const {root, id} = hlAlvo, lista = S.marks[root.dataset.hl] || [];
+    hlSalvar(root, c ? lista.map(m => m.id === id ? {...m, c} : m) : lista.filter(m => m.id !== id));
+  } else {
+    const x = hlSelecao(); if (!x) return hlEsconder();
+    const full = x.root.textContent, lista = hlCortar(S.marks[x.root.dataset.hl] || [], x.s, x.e, full);
+    if (c) lista.push({id: hlId(), s: x.s, e: x.e, c, t: full.slice(x.s, x.e)});
+    getSelection().removeAllRanges();
+    hlSalvar(x.root, lista);
+  }
+  hlEsconder();
+});
+function hlChecar(e){
+  if (hlBar.contains(e.target)) return;
+  setTimeout(() => {
+    const x = hlSelecao();
+    if (x){ hlAlvo = null; return hlMostrar(x.rect); }
+    const mk = e.target.closest?.("mark.hl");
+    if (mk && getSelection().isCollapsed){ hlMostrar(mk.getBoundingClientRect()); hlAlvo = {root: hlRaiz(mk), id: mk.dataset.id}; return; }
+    hlEsconder();
+  }, 10);
+}
+document.addEventListener("mouseup", hlChecar);
+document.addEventListener("touchend", hlChecar);
+document.addEventListener("keyup", e => { if (e.shiftKey) hlChecar(e); });
+addEventListener("scroll", hlEsconder, {passive: true});
+$("#hlReset").onclick = () => { if (confirm("Apagar todas as marcações de texto desta página?")){ S.marks = {}; save(); hlTudo(); } };
+document.querySelectorAll("section.tab").forEach(s => { if (!["mapa", "questoes", "flash", "rend"].includes(s.id)) s.dataset.hl = s.id; });
+hlTudo();
 
 /* teclado */
 document.addEventListener("keydown", e => {
