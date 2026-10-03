@@ -30,10 +30,26 @@ tr.pend td{opacity:.75}
 .pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
 .btn{display:inline-block;text-decoration:none;font-size:14px;padding:7px 14px;border-radius:8px;border:1px solid var(--accent)}
 .btn.pri{background:var(--accent);color:#fff} .btn.pri:hover{filter:brightness(1.1)}
+/* tamanho da fonte e tela cheia: mesmo padrão das páginas de estudo */
+:root{--fz:1}
+.wrap{zoom:var(--fz)}
+.topo{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.fz{display:flex;align-items:center;gap:4px;margin-left:auto}
+.fz button{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;font-weight:650;min-width:34px;height:30px;padding:0 8px;border-radius:8px;cursor:pointer}
+.fz button:hover{background:var(--surface2)}
+.fz #fzVal{min-width:52px;font-weight:400;color:var(--muted);font-size:13px}
+@media(max-width:700px){.wrap{padding:12px 12px 40px} h1{font-size:18px} .lead{font-size:14px} .fz{margin-left:0} .stat{min-width:0;flex:1;padding:8px 12px} .stat b{font-size:20px} input{min-width:0;width:100%}}
 </style>
+<script>document.documentElement.style.setProperty("--fz", localStorage.getItem("sefazdf_fonte") || "1");</script>
 </head>
 <body><div class="wrap">
-<h1>Trilha SEFAZ-DF · Páginas de estudo</h1>
+<div class="topo"><h1>Trilha SEFAZ-DF · Páginas de estudo</h1>
+<div class="fz" role="group" aria-label="Tamanho da fonte">
+  <button id="fzMenos" title="Diminuir fonte" aria-label="Diminuir fonte">A−</button>
+  <button id="fzVal" title="Voltar ao tamanho normal" aria-label="Tamanho normal">100%</button>
+  <button id="fzMais" title="Aumentar fonte" aria-label="Aumentar fonte">A+</button>
+  <button id="telaCheia" title="Tela cheia" aria-label="Tela cheia">⛶ Tela cheia</button>
+</div></div>
 <p class="lead">Auditor Fiscal da Receita do Distrito Federal (banca CEBRASPE). Cada tarefa da Trilha Estratégica tem uma página com resumo, mapa mental clicável, esquemas, questões interativas e flashcards.</p>
 <div class="stats">
   <div class="stat"><span class="muted small">Tarefas com página</span><b>5 de 20</b><div class="bar"><div style="width:25%"></div></div></div>
@@ -50,19 +66,19 @@ tr.pend td{opacity:.75}
   <td><b>Português</b><div class="muted small">Estudo da aula 00, de “Noções Iniciais de Ortografia” até “Outras regaras ortográficas relevantes”, inclusive.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00: Ortografia, Acentuação, Hífen e Expressões Problemáticas<br>39 questões · 51 flashcards · atualizada em 03/10/2026</div></td>
   <td><span class="pill ok">publicada</span></td><td class="acao"><a class="btn pri" href="portugu%C3%AAs/T1_trilha00_portugues_aula00.html">Abrir página</a></td></tr><tr class="feita">
   <td class="t">T2</td>
-  <td><b>Direito Tributário</b><div class="muted small">Estudo da Aula 00.1 - Reforma Tributária.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00 (Fábio Dutra): Conceito e espécies de tributos + Reforma Tributária<br>53 questões · 63 flashcards · atualizada em 01/10/2026</div></td>
+  <td><b>Direito Tributário</b><div class="muted small">Estudo da Aula 00.1 - Reforma Tributária.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00: Conceito e espécies de tributos + Reforma Tributária<br>53 questões · 63 flashcards · atualizada em 03/10/2026</div></td>
   <td><span class="pill ok">publicada</span></td><td class="acao"><a class="btn pri" href="direito%20tribut%C3%A1rio/T2_trilha00_direito_tributario_aula00.html">Abrir página</a></td></tr><tr class="feita">
   <td class="t">T3</td>
-  <td><b>Contabilidade Geral</b><div class="muted small">Estudo da aula 00, do tópico “Aspectos Introdutórios”; e resolução de questões.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00 (Gilmar Possati): Aspectos Introdutórios da Contabilidade<br>17 questões · 44 flashcards · atualizada em 01/10/2026</div></td>
+  <td><b>Contabilidade Geral</b><div class="muted small">Estudo da aula 00, do tópico “Aspectos Introdutórios”; e resolução de questões.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00: Aspectos Introdutórios da Contabilidade<br>17 questões · 44 flashcards · atualizada em 03/10/2026</div></td>
   <td><span class="pill ok">publicada</span></td><td class="acao"><a class="btn pri" href="contabilidade%20geral/T3_trilha00_contabilidade_geral_aula00.html">Abrir página</a></td></tr><tr class="pend">
   <td class="t">T4</td>
   <td><b>Raciocínio Lógico</b><div class="muted small">Estudo da aula 00, do tópico “Introdução às proposições” até o tópico “Descompasso entre a língua portuguesa e a linguagem proposicional”, inclusive; e resolução de 02 questões.</div></td>
   <td><span class="pill">sem página</span></td><td class="acao"><span class="muted small">ainda não gerada</span></td></tr><tr class="feita">
   <td class="t">T5</td>
-  <td><b>Direito Constitucional</b><div class="muted small">Estudo da Aula 00, do tópico “Aplicabilidade das Normas Constitucionais” ao tópico “Poder Constituinte”, inclusive.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00 (Equipe Direito Constitucional): Aplicabilidade das normas, Hierarquia e Poder Constituinte<br>19 questões · 44 flashcards · atualizada em 01/10/2026</div></td>
+  <td><b>Direito Constitucional</b><div class="muted small">Estudo da Aula 00, do tópico “Aplicabilidade das Normas Constitucionais” ao tópico “Poder Constituinte”, inclusive.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00: Aplicabilidade das normas, Hierarquia e Poder Constituinte<br>19 questões · 44 flashcards · atualizada em 03/10/2026</div></td>
   <td><span class="pill ok">publicada</span></td><td class="acao"><a class="btn pri" href="direito%20constitucional/T5_trilha00_direito_constitucional_aula00.html">Abrir página</a></td></tr><tr class="feita">
   <td class="t">T6</td>
-  <td><b>Direito Administrativo</b><div class="muted small">Estudo da teoria da aula 00; e resolução de 20 questões.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00 (Herbert Almeida): Regime Jurídico Administrativo e Princípios<br>29 questões · 46 flashcards · atualizada em 01/10/2026</div></td>
+  <td><b>Direito Administrativo</b><div class="muted small">Estudo da teoria da aula 00; e resolução de 20 questões.</div><div class="muted small">SEFAZ-DF Auditor Fiscal · Aula 00: Regime Jurídico Administrativo e Princípios<br>29 questões · 46 flashcards · atualizada em 03/10/2026</div></td>
   <td><span class="pill ok">publicada</span></td><td class="acao"><a class="btn pri" href="direito%20administrativo/T6_trilha00_direito_administrativo_aula00.html">Abrir página</a></td></tr><tr class="pend">
   <td class="t">T7</td>
   <td><b>Auditoria Fiscal</b><div class="muted small">Estudo da aula 00 até o final da parte teórica</div></td>
@@ -108,7 +124,7 @@ tr.pend td{opacity:.75}
   <td class="t">T20</td>
   <td><b>Direito Administrativo</b><div class="muted small">Revisão da Aula 00; e revisão pelos artigos da lei.</div></td>
   <td><span class="pill">sem página</span></td><td class="acao"><span class="muted small">ainda não gerada</span></td></tr></table></div></section>
-<p class="muted small" style="margin-top:24px">Índice gerado automaticamente em 03/10/2026 17:46.</p>
+<p class="muted small" style="margin-top:24px">Índice gerado automaticamente em 03/10/2026 18:03.</p>
 </div>
 <script>
 const busca = document.getElementById("busca"), filtro = document.getElementById("filtro");
@@ -120,5 +136,25 @@ function aplicar(){
   });
 }
 busca.oninput = filtro.onchange = aplicar;
+
+const $ = s => document.querySelector(s);
+function fonte(v){
+  v = Math.min(2, Math.max(0.7, Math.round(v * 10) / 10));
+  document.documentElement.style.setProperty("--fz", v);
+  localStorage.setItem("sefazdf_fonte", v);
+  $("#fzVal").textContent = Math.round(v * 100) + "%";
+  $("#fzMenos").disabled = v <= 0.7; $("#fzMais").disabled = v >= 2;
+}
+const fzAtual = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--fz")) || 1;
+$("#fzMenos").onclick = () => fonte(fzAtual() - 0.1);
+$("#fzMais").onclick = () => fonte(fzAtual() + 0.1);
+$("#fzVal").onclick = () => fonte(1);
+fonte(fzAtual());
+$("#telaCheia").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+document.addEventListener("fullscreenchange", () => {
+  const on = !!document.fullscreenElement, b = $("#telaCheia");
+  b.textContent = on ? "✕ Sair da tela cheia" : "⛶ Tela cheia";
+  b.title = b.ariaLabel = on ? "Sair da tela cheia" : "Tela cheia";
+});
 </script>
 </body></html>

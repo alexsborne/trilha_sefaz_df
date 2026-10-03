@@ -116,6 +116,8 @@ abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor
 .progress>div{height:100%;background:var(--accent);transition:width .3s}
 .qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
 .enun{white-space:pre-line;margin-bottom:14px}
+.trecho{white-space:pre-line;margin:0 0 12px;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface2);border-radius:0 8px 8px 0;font-style:italic}
+.trecho .lbl{display:block;font-style:normal;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
 .opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
 .opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
 .opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
@@ -170,7 +172,37 @@ mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{backgroun
 #hlBar button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;font-size:14px;line-height:1;color:var(--text);background:var(--surface2);padding:0}
 #hlBar button:hover{transform:scale(1.12);border-color:var(--text)}
 #hlBar button[data-c=am]{background:#fff176}#hlBar button[data-c=ro]{background:#f9c2dc}#hlBar button[data-c=ve]{background:#b6efc4}
+
+/* tamanho da fonte: A− / A+ escalam a página inteira (zoom em header e main; #tip só a fonte, para não deslocar) */
+:root{--fz:1}
+header,main{zoom:var(--fz)}
+#tip{font-size:calc(13px * var(--fz))}
+.fz{display:flex;align-items:center;gap:4px}
+.fz button{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;font-weight:650;min-width:34px;height:30px;padding:0 8px;border-radius:8px;cursor:pointer}
+.fz button:hover{background:var(--surface2)}
+.fz #fzVal{min-width:52px;font-weight:400;color:var(--muted);font-size:13px}
+/* celular: cabeçalho compacto numa linha e menu retrátil (abas, fonte, tela cheia e índice dentro dele) */
+#menuBtn{display:none}
+@media(max-width:700px){
+  .wrap{padding:0 12px}
+  .top{flex-wrap:nowrap;gap:8px;padding:6px 0}
+  .top>div:not(.fz){min-width:0;flex:1}
+  .top h1{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top .sub{display:none}
+  .badge{font-size:12px;padding:2px 7px}
+  #menuBtn{display:inline-block;flex-shrink:0;max-width:46vw;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);font:inherit;font-size:13px;font-weight:600;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top>a,.top .fz,nav{display:none}
+  header.menu-on .top{flex-wrap:wrap}
+  header.menu-on .top>a{display:block;order:3;width:100%;margin:2px 0 0 !important}
+  header.menu-on .top .fz{display:flex;order:4;width:100%;flex-wrap:wrap}
+  header.menu-on nav{display:flex;flex-direction:column;gap:2px;max-height:60vh;overflow-y:auto}
+  header.menu-on nav button{text-align:left;padding:9px 12px}
+}
 </style>
+<script>
+/* aplica o tamanho salvo antes de desenhar a página; vale para todas as páginas do plano */
+document.documentElement.style.setProperty("--fz", localStorage.getItem("sefazdf_fonte") || "1");
+</script>
 </head>
 <body>
 <header>
@@ -179,10 +211,17 @@ mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{backgroun
       <span class="badge">T3</span>
       <div>
         <h1>Trilha 00 · Tarefa 3 · Contabilidade Geral</h1>
-        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00 (Gilmar Possati): Aspectos Introdutórios da Contabilidade</div>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00: Aspectos Introdutórios da Contabilidade</div>
       </div>
     
+      <button id="menuBtn" aria-expanded="false" aria-controls="nav" title="Abrir menu">☰ Menu</button>
       <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
+      <div class="fz" role="group" aria-label="Tamanho da fonte">
+        <button id="fzMenos" title="Diminuir fonte" aria-label="Diminuir fonte">A−</button>
+        <button id="fzVal" title="Voltar ao tamanho normal" aria-label="Tamanho normal">100%</button>
+        <button id="fzMais" title="Aumentar fonte" aria-label="Aumentar fonte">A+</button>
+        <button id="telaCheia" title="Tela cheia" aria-label="Tela cheia">⛶ Tela cheia</button>
+      </div>
     </div>
     <nav id="nav">
       <button data-t="inicio" class="on">Roteiro</button>
@@ -205,7 +244,7 @@ mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{backgroun
   <p class="lead">Tarefa da trilha: <i>"Estudo da aula 00, do tópico Aspectos Introdutórios; e resolução de questões"</i>. A trilha estima cerca de 1h30 por tarefa.</p>
 
   <div class="call ok"><b>Material</b>
-    Esta página foi montada com o PDF <b>completo</b> da Aula 00 de Contabilidade Geral e Avançada (Gilmar Possati), que está em <code>estrategia/contabilidade geral/</code>. As questões são as que a trilha manda resolver: os <b>7 exercícios que aparecem no meio da teoria</b> e as <b>Questões Comentadas 1 a 10</b> (CEBRASPE). As questões 11 a 40 ficam para a T10, que é a revisão desta aula.
+    Esta página foi montada com o PDF <b>completo</b> da Aula 00 de Contabilidade Geral e Avançada, que está em <code>estrategia/contabilidade geral/</code>. As questões são as que a trilha manda resolver: os <b>7 exercícios que aparecem no meio da teoria</b> e as <b>Questões Comentadas 1 a 10</b> (CEBRASPE). As questões 11 a 40 ficam para a T10, que é a revisão desta aula.
   </div>
 
   <div class="call"><b>O que o coach destacou</b>
@@ -918,6 +957,7 @@ function renderQ(){
       ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
   }
   $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    ${q.texto ? `<div class="trecho" data-hl="q${q.n}t"><span class="lbl">Trecho do texto</span>${esc(q.texto)}</div>` : ""}
     <div class="enun" data-hl="q${q.n}">${esc(q.enun)}</div>
     ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
     ${opts}
@@ -1197,6 +1237,44 @@ document.addEventListener("keydown", e => {
 renderMapa();
 ["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
 cur = 0; renderQ(); buildDeck();
+
+/* ---------- tamanho da fonte (70% a 200%, passo de 10%; salvo para todas as páginas) ---------- */
+function fonte(v){
+  v = Math.min(2, Math.max(0.7, Math.round(v * 10) / 10));
+  document.documentElement.style.setProperty("--fz", v);
+  localStorage.setItem("sefazdf_fonte", v);
+  $("#fzVal").textContent = Math.round(v * 100) + "%";
+  $("#fzMenos").disabled = v <= 0.7; $("#fzMais").disabled = v >= 2;
+}
+const fzAtual = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--fz")) || 1;
+$("#fzMenos").onclick = () => fonte(fzAtual() - 0.1);
+$("#fzMais").onclick = () => fonte(fzAtual() + 0.1);
+$("#fzVal").onclick = () => fonte(1);
+fonte(fzAtual());
+
+/* ---------- tela cheia: o mesmo botão entra e sai (Esc também sai) ---------- */
+$("#telaCheia").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+document.addEventListener("fullscreenchange", () => {
+  const on = !!document.fullscreenElement, b = $("#telaCheia");
+  b.textContent = on ? "✕ Sair da tela cheia" : "⛶ Tela cheia";
+  b.title = b.ariaLabel = on ? "Sair da tela cheia" : "Tela cheia";
+});
+
+/* ---------- menu retrátil no celular: mostra a aba atual e fecha ao escolher outra ---------- */
+function menuRotulo(){
+  const b = $("#nav button.on");
+  $("#menuBtn").textContent = "☰ " + (b ? b.firstChild.textContent.trim() : "Menu");
+}
+$("#menuBtn").onclick = () => {
+  const on = $("header").classList.toggle("menu-on");
+  $("#menuBtn").setAttribute("aria-expanded", on);
+};
+$("#nav").addEventListener("click", e => {
+  if (!e.target.closest("button")) return;
+  $("header").classList.remove("menu-on"); $("#menuBtn").setAttribute("aria-expanded", false); menuRotulo();
+});
+document.addEventListener("click", e => { if (!e.target.closest("header")) menuRotulo(); });
+menuRotulo();
 </script>
 </body>
 </html>
