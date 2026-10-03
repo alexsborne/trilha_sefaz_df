@@ -172,6 +172,7 @@ mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{backgroun
 #hlBar button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;font-size:14px;line-height:1;color:var(--text);background:var(--surface2);padding:0}
 #hlBar button:hover{transform:scale(1.12);border-color:var(--text)}
 #hlBar button[data-c=am]{background:#fff176}#hlBar button[data-c=ro]{background:#f9c2dc}#hlBar button[data-c=ve]{background:#b6efc4}
+@media(pointer:coarse){#hlBar{gap:10px;padding:8px 10px}#hlBar button{width:38px;height:38px;font-size:16px}#hlBar .lbl{font-size:13px}}
 /* tamanho da fonte: A− / A+ escalam a página inteira (zoom em header e main; #tip só a fonte, para não deslocar) */
 :root{--fz:1}
 header,main{zoom:var(--fz)}
@@ -1287,14 +1288,19 @@ function hlSalvar(root, lista){
   if (lista.length) S.marks[k] = lista.sort((a, b) => a.s - b.s); else delete S.marks[k];
   save(); hlAplicar(root);
 }
+const hlToque = matchMedia("(pointer:coarse)").matches;
+let hlUltima = null;  /* última seleção válida: no celular, o toque no botão pode desfazer a seleção antes do clique */
 function hlMostrar(rect){
   hlBar.classList.add("on");
   const w = hlBar.offsetWidth, h = hlBar.offsetHeight;
-  let y = rect.top - h - 8; if (y < 8) y = rect.bottom + 8;
+  /* no celular a barra vai abaixo do trecho, para não ficar sob o menu nativo de copiar */
+  let y = hlToque ? rect.bottom + 14 : rect.top - h - 8;
+  if (hlToque ? y > innerHeight - h - 8 : y < 8) y = hlToque ? rect.top - h - 14 : rect.bottom + 8;
+  y = Math.min(Math.max(8, y), innerHeight - h - 8);
   hlBar.style.left = Math.min(Math.max(8, rect.left + rect.width / 2 - w / 2), innerWidth - w - 8) + "px";
   hlBar.style.top = y + "px";
 }
-function hlEsconder(){ hlBar.classList.remove("on"); hlAlvo = null; }
+function hlEsconder(){ hlBar.classList.remove("on"); hlAlvo = null; hlUltima = null; }
 hlBar.addEventListener("mousedown", e => e.preventDefault());
 hlBar.querySelectorAll("button").forEach(b => b.onclick = () => {
   const c = b.dataset.c;
@@ -1302,7 +1308,7 @@ hlBar.querySelectorAll("button").forEach(b => b.onclick = () => {
     const {root, id} = hlAlvo, lista = S.marks[root.dataset.hl] || [];
     hlSalvar(root, c ? lista.map(m => m.id === id ? {...m, c} : m) : lista.filter(m => m.id !== id));
   } else {
-    const x = hlSelecao(); if (!x) return hlEsconder();
+    const x = hlSelecao() || hlUltima; if (!x) return hlEsconder();
     const full = x.root.textContent, lista = hlCortar(S.marks[x.root.dataset.hl] || [], x.s, x.e, full);
     if (c) lista.push({id: hlId(), s: x.s, e: x.e, c, t: full.slice(x.s, x.e)});
     getSelection().removeAllRanges();
@@ -1314,7 +1320,7 @@ function hlChecar(e){
   if (hlBar.contains(e.target)) return;
   setTimeout(() => {
     const x = hlSelecao();
-    if (x){ hlAlvo = null; return hlMostrar(x.rect); }
+    if (x){ hlAlvo = null; hlUltima = x; return hlMostrar(x.rect); }
     const mk = e.target.closest?.("mark.hl");
     if (mk && getSelection().isCollapsed){ hlMostrar(mk.getBoundingClientRect()); hlAlvo = {root: hlRaiz(mk), id: mk.dataset.id}; return; }
     hlEsconder();
@@ -1323,7 +1329,18 @@ function hlChecar(e){
 document.addEventListener("mouseup", hlChecar);
 document.addEventListener("touchend", hlChecar);
 document.addEventListener("keyup", e => { if (e.shiftKey) hlChecar(e); });
-addEventListener("scroll", hlEsconder, {passive: true});
+/* celular: a seleção por toque longo (e o ajuste das alças) não gera mouseup confiável; acompanha selectionchange */
+let hlTimer = 0;
+const hlRever = () => { const x = hlSelecao(); if (x){ hlAlvo = null; hlUltima = x; hlMostrar(x.rect); } };
+document.addEventListener("selectionchange", () => {
+  if (!hlToque) return;
+  clearTimeout(hlTimer); hlTimer = setTimeout(hlRever, 350);
+});
+addEventListener("scroll", () => {
+  if (!hlBar.classList.contains("on")) return;
+  hlBar.classList.remove("on");
+  clearTimeout(hlTimer); hlTimer = setTimeout(hlRever, 250);
+}, {passive: true});
 $("#hlReset").onclick = () => { if (confirm("Apagar todas as marcações de texto desta página?")){ S.marks = {}; save(); hlTudo(); } };
 document.querySelectorAll("section.tab").forEach(s => { if (!["mapa", "questoes", "flash", "rend"].includes(s.id)) s.dataset.hl = s.id; });
 hlTudo();
