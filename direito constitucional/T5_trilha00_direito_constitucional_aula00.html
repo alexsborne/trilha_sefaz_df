@@ -205,6 +205,18 @@ header,main{zoom:var(--fz)}
 :root[data-theme=verde]{--bg:#eef4ee;--surface:#f8fbf7;--surface2:#e3ece2;--text:#1f2d22;--muted:#536657;--line:#cfddcf;--accent:#2e7d4f;--accent-soft:#d9eddf;--ok:#1f7a45;--ok-soft:#d6efdf;--bad:#b8362f;--bad-soft:#f6dcd9;--warn:#8a5c00;--warn-soft:#f6ebcd;--shadow:none;color-scheme:light}
 :root[data-theme=noite]{--bg:#0f1a2b;--surface:#16243a;--surface2:#1e2f4a;--text:#e3ebf7;--muted:#9fb0c9;--line:#2a3d5c;--accent:#6fa8ff;--accent-soft:#1d3355;--ok:#5cc98a;--ok-soft:#173a2a;--bad:#f07a7a;--bad-soft:#3d2026;--warn:#f0b54a;--warn-soft:#3a3020;--shadow:none;color-scheme:dark}
 #tema{font:inherit;font-size:13px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer}
+/* SYNC-CSS */
+#syncBtn.on{color:var(--ok)} #syncBtn.err{color:var(--bad)}
+#syncBox{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:12px}
+#syncBox.on{display:flex}
+#syncBox .in{background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:12px;max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:16px 18px;font-size:15px;line-height:1.5}
+#syncBox h3{margin:0 0 8px} #syncBox ol{padding-left:20px;margin:6px 0}
+#syncBox input{width:100%;box-sizing:border-box;font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--text);margin:6px 0}
+#syncBox .acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+#syncBox .acoes button{border:1px solid var(--line);background:var(--surface2);color:var(--text);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer}
+#syncBox .acoes button.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+#syncMsg{margin-top:8px;font-size:14px}
+/* /SYNC-CSS */
 </style>
 <script>
 /* aplica o tamanho salvo antes de desenhar a página; vale para todas as páginas do plano */
@@ -230,6 +242,7 @@ if (localStorage.getItem("sefazdf_tema")) document.documentElement.dataset.theme
         <button id="fzMais" title="Aumentar fonte" aria-label="Aumentar fonte">A+</button>
         <select id="tema" title="Tema de cores" aria-label="Tema de cores"><option value="claro">☀ Claro</option><option value="escuro">☾ Escuro</option><option value="sepia">📜 Sépia</option><option value="verde">🌿 Verde</option><option value="noite">🌌 Azul-noite</option></select>
         <button id="telaCheia" title="Tela cheia" aria-label="Tela cheia">⛶ Tela cheia</button>
+<button id="syncBtn" title="Sincronizar entre aparelhos" aria-label="Sincronizar entre aparelhos">☁ Sincronizar</button>
       </div>
     </div>
     <nav id="nav">
@@ -830,7 +843,7 @@ const KEY = "sefazdf_T5_dirconst_aula00_v1";
 const RESPOSTAS_INICIAIS = null;
 let S = JSON.parse(localStorage.getItem(KEY) || "null") || (RESPOSTAS_INICIAIS ? structuredClone(RESPOSTAS_INICIAIS) : null) || {answers:{}, cards:{}};
 S.answers ||= {}; S.cards ||= {}; S.draft ||= {};
-const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const save = () => { S._ts = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); syncAgendar(); };
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -1239,6 +1252,143 @@ menuRotulo();
 /* ---------- tema de cores (5 opções; salvo para todas as páginas do plano) ---------- */
 $("#tema").value = localStorage.getItem("sefazdf_tema") || (matchMedia("(prefers-color-scheme:dark)").matches ? "escuro" : "claro");
 $("#tema").onchange = e => { document.documentElement.dataset.theme = e.target.value; localStorage.setItem("sefazdf_tema", e.target.value); };
+/* SYNC-JS */
+/* ---------- sincronização entre aparelhos: o S de cada página vai para um Gist secreto do GitHub ---------- */
+const SYNC_TOK = "sefazdf_sync_token", SYNC_GIST = "sefazdf_sync_gist", SYNC_DESC = "sefazdf-sync (progresso do plano SEFAZ-DF)";
+const SYNC_ARQ = KEY + ".json";
+let syncTimer = null, syncOcupado = false;
+{ /* link de configuração vindo de outro aparelho: ...#sync=<token> */
+  const m = location.hash.match(/sync=([\w-]+)/);
+  if (m){ localStorage.setItem(SYNC_TOK, m[1]); localStorage.removeItem(SYNC_GIST); history.replaceState(null, "", location.pathname + location.search); }
+}
+const syncTok = () => localStorage.getItem(SYNC_TOK);
+async function gh(caminho, op = {}){
+  const r = await fetch("https://api.github.com" + caminho, {cache: "no-store", ...op, headers: {
+    Authorization: "Bearer " + syncTok(), Accept: "application/vnd.github+json", ...(op.body ? {"Content-Type": "application/json"} : {})}});
+  if (!r.ok) throw new Error(r.status === 401 ? "token inválido ou expirado" : r.status === 404 ? "Gist não encontrado" : "GitHub respondeu " + r.status);
+  return r.json();
+}
+/* acha o Gist do plano (pela descrição) ou cria um secreto */
+async function syncGist(){
+  let id = localStorage.getItem(SYNC_GIST);
+  if (id) return id;
+  for (let p = 1; p <= 10 && !id; p++){
+    const lista = await gh(`/gists?per_page=100&page=${p}`);
+    id = lista.find(g => g.description === SYNC_DESC)?.id;
+    if (lista.length < 100) break;
+  }
+  if (!id) id = (await gh("/gists", {method: "POST", body: JSON.stringify({description: SYNC_DESC, public: false,
+    files: {"LEIA-ME.md": {content: "Progresso das páginas do plano SEFAZ-DF (um arquivo por página). Gerado automaticamente."}}})})).id;
+  localStorage.setItem(SYNC_GIST, id);
+  return id;
+}
+function syncStatus(txt, tipo){
+  const b = $("#syncBtn"); if (!b) return;
+  b.textContent = txt; b.className = tipo || "";
+}
+/* último _ts que este aparelho sabe estar igual no Gist */
+const syncBase = () => +(localStorage.getItem(KEY + "_sinc") || 0);
+const syncMarcar = ts => localStorage.setItem(KEY + "_sinc", ts || 0);
+/* junta duas versões: fica a mais recente; respostas dadas na outra depois do último sincronismo entram também */
+function syncJuntar(loc, rem){
+  const novo = (rem._ts || 0) > (loc._ts || 0) ? rem : loc, velho = novo === loc ? rem : loc;
+  const r = structuredClone(novo), base = syncBase();
+  r.answers ||= {};
+  for (const [n, a] of Object.entries(velho.answers || {}))
+    if (!r.answers[n] && (a.ts || 0) > base) r.answers[n] = a;
+  return r;
+}
+function syncAplicar(novo){
+  S = novo; S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {};
+  localStorage.setItem(KEY, JSON.stringify(S));
+  renderQ(); hlTudo();
+  if (active() === "rend") renderRend();
+  if (active() === "flash") renderCard(); else buildDeck();
+}
+async function syncPuxar(){
+  if (!syncTok() || syncOcupado) return;
+  syncOcupado = true; syncStatus("☁ …");
+  try {
+    const g = await gh("/gists/" + await syncGist());
+    const f = g.files[SYNC_ARQ];
+    let rem = null;
+    if (f) rem = JSON.parse(f.truncated ? await (await fetch(f.raw_url, {cache: "no-store"})).text() : f.content);
+    const loc = JSON.parse(localStorage.getItem(KEY) || "null");
+    const rts = rem?._ts || 0, lts = loc?._ts || 0, base = syncBase();
+    if (rem && (!lts || (rts > lts && lts <= base))){ syncAplicar(rem); syncMarcar(rts); }  /* só o outro aparelho mudou */
+    else if (lts && (!rem || (lts > rts && rts <= base))) await syncEnviar(true);         /* só este aparelho mudou */
+    else if (rem && rts !== lts){ syncAplicar(syncJuntar(loc, rem)); S._ts = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); await syncEnviar(true); }
+    else syncMarcar(lts);
+    syncStatus("☁ Sincronizado", "on");
+  } catch (e){
+    syncStatus("☁ Erro", "err"); console.warn("sincronização:", e);
+    if (/Gist não encontrado/.test(e.message)) localStorage.removeItem(SYNC_GIST);
+  } finally { syncOcupado = false; }
+}
+async function syncEnviar(direto){
+  if (!syncTok()) return;
+  if (!direto) syncStatus("☁ …");
+  try {
+    const body = JSON.stringify({files: {[SYNC_ARQ]: {content: JSON.stringify(S)}}}), ts = S._ts;
+    await gh("/gists/" + await syncGist(), {method: "PATCH", keepalive: body.length < 60000, body});
+    syncMarcar(ts);
+    if (!direto) syncStatus("☁ Sincronizado", "on");
+  } catch (e){ syncStatus("☁ Erro", "err"); console.warn("sincronização:", e); if (direto) throw e; }
+}
+function syncAgendar(){
+  if (!syncTok()) return;
+  clearTimeout(syncTimer); syncStatus("☁ …");
+  syncTimer = setTimeout(() => { syncTimer = null; syncEnviar(); }, 1500);
+}
+/* ao sair ou esconder a página, envia o que estiver pendente; ao voltar, busca o que veio do outro aparelho */
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden"){ if (syncTimer){ clearTimeout(syncTimer); syncTimer = null; syncEnviar(); } }
+  else if (!syncTimer) syncPuxar();
+});
+
+/* janela de configuração */
+function syncJanela(){
+  let box = $("#syncBox");
+  if (!box){
+    box = document.createElement("div"); box.id = "syncBox";
+    box.addEventListener("click", e => { if (e.target === box) box.classList.remove("on"); });
+    document.body.append(box);
+  }
+  const tok = syncTok();
+  box.innerHTML = `<div class="in" role="dialog" aria-label="Sincronizar entre aparelhos">
+    <h3>☁ Sincronizar entre aparelhos</h3>
+    ${tok ? `<p>Este aparelho está <b>conectado</b>. Respostas, flashcards e marcações desta página são salvos no seu GitHub (num Gist secreto) e aparecem nos outros aparelhos conectados.</p>
+      <p><b>Para conectar o celular</b>, abra nele o link abaixo (por exemplo, mande para você mesmo por e-mail ou WhatsApp). Ele configura o aparelho de uma vez, para todas as páginas.</p>
+      <input id="syncLink" readonly value="${esc(location.origin + location.pathname + "#sync=" + tok)}">
+      <div class="acoes"><button class="pri" id="syncCopiar">Copiar link</button><button id="syncAgora">Sincronizar agora</button><button id="syncSair">Desconectar este aparelho</button><button id="syncFechar">Fechar</button></div>`
+    : `<p>Conecte este aparelho para que as questões resolvidas no notebook apareçam no celular (e vice-versa). É feito uma vez por aparelho e vale para todas as páginas.</p>
+      <ol><li>No GitHub, crie um token com a permissão <b>gist</b> (só ela): <a href="https://github.com/settings/tokens/new?scopes=gist&description=sefazdf-sync" target="_blank" rel="noopener">criar token</a>. Em "Expiration", escolha uma data depois da prova.</li>
+      <li>Copie o token gerado (começa com <code>ghp_</code>) e cole aqui:</li></ol>
+      <input id="syncTokIn" placeholder="ghp_…" autocomplete="off" spellcheck="false">
+      <p class="muted" style="font-size:13px">No outro aparelho, use o link que aparece aqui depois de conectar. O token fica só no navegador de cada aparelho.</p>
+      <div class="acoes"><button class="pri" id="syncConectar">Conectar</button><button id="syncFechar">Fechar</button></div>`}
+    <div id="syncMsg"></div></div>`;
+  box.classList.add("on");
+  const msgS = (t, cor) => { const m = $("#syncMsg"); m.textContent = t; m.style.color = `var(--${cor || "muted"})`; };
+  $("#syncFechar").onclick = () => box.classList.remove("on");
+  if (tok){
+    $("#syncCopiar").onclick = () => { const i = $("#syncLink"); i.select(); navigator.clipboard?.writeText(i.value).then(() => msgS("Link copiado.", "ok"), () => msgS("Selecione e copie o link.")); };
+    $("#syncAgora").onclick = async () => { msgS("Sincronizando…"); await syncPuxar(); msgS($("#syncBtn").className === "on" ? "Pronto: esta página está sincronizada." : "Não deu certo. Confira a internet e o token.", $("#syncBtn").className === "on" ? "ok" : "bad"); };
+    $("#syncSair").onclick = () => { localStorage.removeItem(SYNC_TOK); localStorage.removeItem(SYNC_GIST); syncStatus("☁ Sincronizar"); syncJanela(); msgS("Aparelho desconectado. O progresso continua salvo neste navegador."); };
+  } else {
+    $("#syncConectar").onclick = async () => {
+      const v = $("#syncTokIn").value.trim();
+      if (!/^[\w-]{20,}$/.test(v)) return msgS("Cole o token completo (começa com ghp_).", "bad");
+      localStorage.setItem(SYNC_TOK, v); localStorage.removeItem(SYNC_GIST); msgS("Conectando…");
+      await syncPuxar();
+      if ($("#syncBtn").className === "on") syncJanela();
+      else { localStorage.removeItem(SYNC_TOK); syncStatus("☁ Sincronizar"); msgS("Não foi possível conectar. Confira se o token tem a permissão gist.", "bad"); }
+    };
+  }
+}
+$("#syncBtn").onclick = syncJanela;
+if (syncTok()) syncPuxar();
+/* /SYNC-JS */
 </script>
 </body>
 </html>
