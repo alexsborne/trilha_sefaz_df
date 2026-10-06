@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T7 · Trilha 00 · Auditoria Fiscal — SEFAZ-DF</title>
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;
+  --accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;
+  --warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;
+  --accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;
+  --warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:16px;padding:12px 0 6px;flex-wrap:wrap}
+.badge{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px;letter-spacing:.5px}
+.top h1{font-size:18px;margin:0;font-weight:650}
+.top .sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px}
+nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--surface2);color:var(--text)}
+nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{padding:24px 0 80px}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.call.warn{border-color:var(--warn);background:var(--warn-soft)}
+.call.bad{border-color:var(--bad);background:var(--bad-soft)}
+.call.ok{border-color:var(--ok);background:var(--ok-soft)}
+.call b:first-child{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.tbl table th:first-child,.tbl table td:first-child{padding-left:14px}
+.k{font-weight:650;color:var(--accent)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+/* roteiro */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
+
+/* mapa mental */
+.mm{padding:22px 16px}
+.mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
+.mm-root b{display:block;font-size:17px;letter-spacing:.5px}
+.mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
+.mm-branches{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-br{display:flex;flex-direction:column;align-items:stretch}
+.mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
+.mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
+.mm-h b{display:block;font-size:14.5px;color:var(--c)}
+.mm-br ul{list-style:none;margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--c)}
+.mm-br li{font-size:13px;line-height:1.4;background:var(--surface2);border-radius:8px;padding:6px 9px;margin:6px 0;position:relative}
+.mm-br li::before{content:"";position:absolute;left:-12px;top:50%;width:10px;border-top:2px solid var(--c)}
+@media(max-width:860px){.mm-branches{grid-template-columns:1fr 1fr;border-top:0}}
+@media(max-width:520px){.mm-branches{grid-template-columns:1fr}}
+
+
+/* abreviações com dica */
+abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+#tip{position:fixed;z-index:100;max-width:300px;background:#1d2330;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+@media (prefers-color-scheme:dark){#tip{background:#e6e9ef;color:#12151b}}
+
+/* mapa clicável */
+.mm [data-k]{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mm [data-k]:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.mm [data-k].sel{outline:3px solid var(--c,var(--accent));outline-offset:2px}
+.mm-root[data-k].sel{outline-color:var(--text)}
+.mm-hint{text-align:center;color:var(--muted);font-size:13px;margin:-4px 0 12px}
+#mmPanel{border-left:6px solid var(--c,var(--accent));scroll-margin-top:140px}
+#mmPanel h4{margin:0 0 4px;font-size:18px;color:var(--c,var(--accent))}
+#mmPanel .mm-sec{margin:12px 0 0}
+#mmPanel .lbl{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+#mmPanel .ex{background:var(--ok-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .pg{background:var(--bad-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+
+/* questões */
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 16px}
+.qnav button{width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:12.5px;cursor:pointer}
+.qnav button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.qnav button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.qnav button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.progress{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:width .3s}
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
+.enun{white-space:pre-line;margin-bottom:14px}
+.trecho{white-space:pre-line;margin:0 0 12px;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface2);border-radius:0 8px 8px 0;font-style:italic}
+.trecho .lbl{display:block;font-style:normal;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ce{display:flex;gap:10px}.ce .opt{justify-content:center;font-weight:650}
+.opt{user-select:none;-webkit-user-select:none;position:relative}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.sel .l::before{content:"● ";color:var(--accent)}
+.opt.desc{opacity:.55;padding-right:92px}
+.opt.desc span{text-decoration:line-through;text-decoration-thickness:2px}
+.ce .opt.desc{text-decoration:line-through;text-decoration-thickness:2px}
+.opt.desc::after{content:"descartada";position:absolute;right:10px;top:8px;font-size:11px;color:var(--muted);text-decoration:none}
+.qact{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.qmsg{font-size:14.5px;padding:8px 12px;border-radius:8px;display:none}
+.qmsg.on{display:block}
+.qmsg.warn{background:var(--warn-soft);color:var(--warn)}
+.qmsg.bad{background:var(--bad-soft);color:var(--bad)}
+.qhint{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.coment{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.coment p{margin:6px 0}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+
+/* flashcards */
+.fc{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-inner{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fc-face.back{transform:rotateY(180deg);background:var(--accent-soft);text-align:left;align-items:flex-start;font-size:15px}
+.fc-face .q{font-size:19px;font-weight:600}
+.fc-meta{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;color:var(--muted);font-size:13px}
+.boxes{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.boxes span{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line)}
+
+/* rendimento */
+.big{font-size:44px;font-weight:750;line-height:1}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.bar .t{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar .t>div{height:100%;background:var(--ok)}
+.bar .t>div.mid{background:var(--warn)}.bar .t>div.low{background:var(--bad)}
+@media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
+.btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+/* marca-texto */
+mark.hl{color:#1d2330;border-radius:3px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{background:#b6efc4}
+#hlBar{position:fixed;z-index:120;display:none;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 8px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+#hlBar.on{display:flex}
+#hlBar .lbl{font-size:12px;color:var(--muted);margin-right:2px}
+#hlBar button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;font-size:14px;line-height:1;color:var(--text);background:var(--surface2);padding:0}
+#hlBar button:hover{transform:scale(1.12);border-color:var(--text)}
+#hlBar button[data-c=am]{background:#fff176}#hlBar button[data-c=ro]{background:#f9c2dc}#hlBar button[data-c=ve]{background:#b6efc4}
+@media(pointer:coarse){#hlBar{gap:10px;padding:8px 10px}#hlBar button{width:38px;height:38px;font-size:16px}#hlBar .lbl{font-size:13px}}
+/* tamanho da fonte: A− / A+ escalam a página inteira (zoom em header e main; #tip só a fonte, para não deslocar) */
+:root{--fz:1}
+header,main{zoom:var(--fz)}
+#tip{font-size:calc(13px * var(--fz))}
+.fz{display:flex;align-items:center;gap:4px}
+.fz button{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;font-weight:650;min-width:34px;height:30px;padding:0 8px;border-radius:8px;cursor:pointer}
+.fz button:hover{background:var(--surface2)}
+.fz #fzVal{min-width:52px;font-weight:400;color:var(--muted);font-size:13px}
+/* celular: cabeçalho compacto numa linha e menu retrátil (abas, fonte, tela cheia e índice dentro dele) */
+#menuBtn{display:none}
+@media(max-width:700px){
+  .wrap{padding:0 12px}
+  .top{flex-wrap:nowrap;gap:8px;padding:6px 0}
+  .top>div:not(.fz){min-width:0;flex:1}
+  .top h1{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top .sub{display:none}
+  .badge{font-size:12px;padding:2px 7px}
+  #menuBtn{display:inline-block;flex-shrink:0;max-width:46vw;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);font:inherit;font-size:13px;font-weight:600;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top>a,.top .fz,nav{display:none}
+  header.menu-on .top{flex-wrap:wrap}
+  header.menu-on .top>a{display:block;order:3;width:100%;margin:2px 0 0 !important}
+  header.menu-on .top .fz{display:flex;order:4;width:100%;flex-wrap:wrap}
+  header.menu-on nav{display:flex;flex-direction:column;gap:2px;max-height:60vh;overflow-y:auto}
+  header.menu-on nav button{text-align:left;padding:9px 12px}
+}
+/* temas: escolhidos no seletor do cabeçalho; sem escolha salva, segue o claro/escuro do sistema */
+:root[data-theme=claro]{--bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;--accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;--warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);color-scheme:light}
+:root[data-theme=escuro]{--bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;--accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;--warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;color-scheme:dark}
+:root[data-theme=sepia]{--bg:#f4ecd8;--surface:#fbf6e9;--surface2:#efe4cc;--text:#3b2f22;--muted:#75644e;--line:#e0d3b8;--accent:#8a4b14;--accent-soft:#f1e0c6;--ok:#3d7a2a;--ok-soft:#e3eccf;--bad:#a8322a;--bad-soft:#f5d9cf;--warn:#94600a;--warn-soft:#f6e6c4;--shadow:none;color-scheme:light}
+:root[data-theme=verde]{--bg:#eef4ee;--surface:#f8fbf7;--surface2:#e3ece2;--text:#1f2d22;--muted:#536657;--line:#cfddcf;--accent:#2e7d4f;--accent-soft:#d9eddf;--ok:#1f7a45;--ok-soft:#d6efdf;--bad:#b8362f;--bad-soft:#f6dcd9;--warn:#8a5c00;--warn-soft:#f6ebcd;--shadow:none;color-scheme:light}
+:root[data-theme=noite]{--bg:#0f1a2b;--surface:#16243a;--surface2:#1e2f4a;--text:#e3ebf7;--muted:#9fb0c9;--line:#2a3d5c;--accent:#6fa8ff;--accent-soft:#1d3355;--ok:#5cc98a;--ok-soft:#173a2a;--bad:#f07a7a;--bad-soft:#3d2026;--warn:#f0b54a;--warn-soft:#3a3020;--shadow:none;color-scheme:dark}
+#tema{font:inherit;font-size:13px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer}
+/* SYNC-CSS */
+#syncBtn.on{color:var(--ok)} #syncBtn.err{color:var(--bad)}
+#syncBox{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:12px}
+#syncBox.on{display:flex}
+#syncBox .in{background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:12px;max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:16px 18px;font-size:15px;line-height:1.5}
+#syncBox h3{margin:0 0 8px} #syncBox ol{padding-left:20px;margin:6px 0}
+#syncBox input{width:100%;box-sizing:border-box;font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--text);margin:6px 0}
+#syncBox .acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+#syncBox .acoes button{border:1px solid var(--line);background:var(--surface2);color:var(--text);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer}
+#syncBox .acoes button.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+#syncMsg{margin-top:8px;font-size:14px}
+/* /SYNC-CSS */
+</style>
+<script>
+/* aplica o tamanho salvo antes de desenhar a página; vale para todas as páginas do plano */
+document.documentElement.style.setProperty("--fz", localStorage.getItem("sefazdf_fonte") || "1");
+if (localStorage.getItem("sefazdf_tema")) document.documentElement.dataset.theme = localStorage.getItem("sefazdf_tema");
+</script>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span class="badge">T7</span>
+      <div>
+        <h1>Trilha 00 · Tarefa 7 · Auditoria Fiscal</h1>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00: Classificação da auditoria e NBC TA 200 (objetivos gerais do auditor independente)</div>
+      </div>
+
+      <button id="menuBtn" aria-expanded="false" aria-controls="nav" title="Abrir menu">☰ Menu</button>
+      <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
+      <div class="fz" role="group" aria-label="Tamanho da fonte">
+        <button id="fzMenos" title="Diminuir fonte" aria-label="Diminuir fonte">A−</button>
+        <button id="fzVal" title="Voltar ao tamanho normal" aria-label="Tamanho normal">100%</button>
+        <button id="fzMais" title="Aumentar fonte" aria-label="Aumentar fonte">A+</button>
+        <select id="tema" title="Tema de cores" aria-label="Tema de cores"><option value="claro">☀ Claro</option><option value="escuro">☾ Escuro</option><option value="sepia">📜 Sépia</option><option value="verde">🌿 Verde</option><option value="noite">🌌 Azul-noite</option></select>
+        <button id="telaCheia" title="Tela cheia" aria-label="Tela cheia">⛶ Tela cheia</button>
+<button id="syncBtn" title="Sincronizar entre aparelhos" aria-label="Sincronizar entre aparelhos">☁ Sincronizar</button>
+      </div>
+    </div>
+    <nav id="nav">
+      <button data-t="inicio" class="on">Roteiro</button>
+      <button data-t="resumo">Resumo</button>
+      <button data-t="mapa">Mapa mental</button>
+      <button data-t="esquemas">Esquemas</button>
+      <button data-t="reforma">NBC TA 200 literal</button>
+      <button data-t="questoes">Questões <span class="pill" id="navQ">0/0</span></button>
+      <button data-t="flash">Flashcards</button>
+      <button data-t="rend">Rendimento</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ROTEIRO -->
+<section class="tab on" id="inicio">
+<h2>Roteiro da sessão T7</h2>
+  <p class="lead">Tarefa da trilha: <i>"Estudo da aula 00 até o final da parte teórica"</i>. A trilha estima cerca de 1h30 por tarefa.</p>
+
+  <div class="call warn"><b>Material</b>
+    Esta página usa o PDF <b>completo</b> da Aula 00 de Auditoria Fiscal (curso 227883), que está em <code>estrategia/auditoria/</code>. A parte teórica vai da página 9 (Contextualização) à 45 (Condução da auditoria em conformidade com as NBC TA). A trilha <b>não manda resolver questões</b> nesta tarefa: as questões da página são os <b>19 exercícios</b> que aparecem no meio da teoria. A lista de questões comentadas do PDF fica para a <b>T17</b> (revisão e questões da aula 00).
+  </div>
+
+  <div class="call"><b>O que o coach destacou</b>
+    • <b>Contextualização</b>: revise o conceito de auditoria e quem traduz e adapta as normas internacionais (<b>CFC e IBRACON</b>).<br>
+    • <b>Classificação</b>: definições de auditoria interna e o <b>quadro interna × externa</b>, que resume bem as diferenças.<br>
+    • Tipos de auditoria: <b>avaliação da gestão, acompanhamento da gestão, contábil, operacional e especial</b>.<br>
+    • <b>NBC TA 200</b>: memorize o <b>objetivo da auditoria</b>; asseguração razoável <b>não é</b> segurança absoluta. Os quadros sobre segurança razoável e sobre o que <b>não é</b> objetivo do auditor são muito relevantes.<br>
+    • Palavras-chave do <b>risco de auditoria</b> na ponta da língua.<br>
+    • Evidências: <b>suficiência = quantidade</b>, <b>adequação = qualidade</b>; diferença entre <b>julgamento</b> e <b>ceticismo</b>.<br>
+    • Quadro dos <b>princípios éticos</b>: integridade, objetividade, competência e zelo, sigilo (confidencialidade) e comportamento profissional.<br>
+    • Termine lendo os destaques de <b>Condução da auditoria em conformidade com as NBC TA</b>.
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><b>Pré-teste (5 min).</b> Abra os <b>Flashcards</b> e tente 5 cartões antes de ler.</li>
+      <li><b>Resumo (30 min).</b> Leia a aba <b>Resumo</b>, respondendo aos blocos <i>Pergunte-se</i>.</li>
+      <li><b>Mapa mental e Esquemas (15 min).</b> Clique em cada item do mapa e leia o exemplo. O coach pede para guiar a revisão pelos mapas.</li>
+      <li><b>NBC TA 200 literal (10 min).</b> Os itens que a banca copia palavra por palavra.</li>
+      <li><b>Questões (25 min).</b> 19 itens. Escolha com um clique, descarte com dois e confirme em <b>Responder</b>; leia sempre o comentário.</li>
+      <li><b>Rendimento (5 min).</b> Anote os temas em que errou.</li>
+    </ol>
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Banca</b><br><span class="muted">CEBRASPE: itens de Certo ou Errado em que um erro anula um acerto. Os exercícios desta aula são de várias bancas (muitas de múltipla escolha); o conteúdo é o mesmo.</span></div>
+    <div class="card"><b>Na prova</b><br><span class="muted">Auditoria está nos conhecimentos específicos do Auditor Fiscal. A NBC TA 200 é a "norma-mãe": quase todo tema de auditoria independente parte dela.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas e flashcards ficam no navegador. Use <i>Exportar</i> na aba Rendimento ou o botão Sincronizar.</span></div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="tab" id="resumo">
+<h2>Resumo: classificação da auditoria e NBC TA 200</h2>
+  <p class="lead">O resumo segue a ordem da aula. Os <span class="k">termos em destaque</span> são os que mais caem e os blocos vermelhos marcam as pegadinhas da banca.</p>
+
+  <h3>1. Contextualização</h3>
+  <div class="card">
+    <ul>
+      <li>As normas de auditoria fazem parte das <b>Normas Brasileiras de Contabilidade</b>, que se dividem em <b>técnicas</b> e <b>profissionais</b>. As mais importantes: <b>NBC TA</b> (técnicas de auditoria independente de informação contábil histórica), <b>NBC PA</b> (profissionais do auditor independente) e <b>NBC TI</b> (técnica de auditoria interna).</li>
+      <li>Desde 2010 as normas vêm sendo convergidas às internacionais da <b>IFAC</b>. A <span class="k">tradução e adequação</span> das normas internacionais é responsabilidade do <b>CFC</b> e do <b>IBRACON</b> (já caiu no CESPE).</li>
+      <li><b>Auditoria</b>: levantamento, estudo e avaliação sistemática das transações, procedimentos, operações, rotinas e demonstrações de uma entidade. Na auditoria das demonstrações contábeis, o objetivo é constatar se elas foram elaboradas, <b>em todos os aspectos relevantes</b>, conforme a <b>estrutura de relatório financeiro aplicável</b>.</li>
+      <li>Auditoria independente <b>obrigatória</b>: companhias abertas (Lei 6.404/1976, artigo 177, parágrafo 3º, por auditores registrados na CVM); sociedades de grande porte (ativo total acima de R$ 240 milhões ou receita bruta anual acima de R$ 300 milhões no exercício anterior); instituições financeiras, seguradoras, fundos de previdência complementar, fundações de interesse público e empresas sujeitas a agências reguladoras.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"A tradução e adequação das normas internacionais de auditoria cabe à CVM": <b>ERRADO</b>.<br><b>O erro:</b> a CVM regula o mercado de capitais e registra auditores, mas não traduz as normas.<br><b>O certo:</b> cabe ao <b>CFC</b> e ao <b>IBRACON</b>.</div>
+  </div>
+
+  <h3>2. Auditoria interna × externa</h3>
+  <div class="card">
+    <ul>
+      <li><b>Interna</b> (NBC TI 01): exames e avaliações, metodologicamente estruturados, da integridade, adequação, eficácia, eficiência e economicidade dos <b>processos, sistemas de informação, controles internos e gerenciamento de riscos</b>, para <b>assistir a administração</b> no cumprimento de seus objetivos. Finalidade: <b>agregar valor</b>, recomendando soluções para as não conformidades.</li>
+      <li><b>Externa (independente)</b>: <b>aumentar o grau de confiança</b> dos usuários nas demonstrações, por meio de uma <b>opinião</b> do auditor.</li>
+      <li>O auditor interno, em regra, é <b>funcionário</b> e se subordina à <b>alta administração</b> (presidência, conselho de administração). Tem <b>autonomia profissional</b>, mas independência <b>menor</b> que a do externo.</li>
+      <li>Quem <b>implanta</b> e responde pelos controles internos é a <b>administração</b>; o auditor interno avalia e recomenda.</li>
+      <li>Escopo: o do interno é fixado pela <b>gerência</b>; o do externo, pelas <b>normas de auditoria</b> ou por legislação específica. Os métodos de trabalho, em geral, são idênticos.</li>
+      <li><b>Formação</b>: a antiga NBC T 12 exigia contador; a NBC TI 01 não diz. Pela <b>Resolução CFC 1.640/2021</b>, auditoria interna e externa são atribuições privativas de <b>contador</b>. Leve para a prova que os dois devem ser contadores, salvo se a questão citar expressamente a NBC TI 01.</li>
+      <li>No setor público (auditor governamental), em regra não há formação específica: CGE e tribunais de contas, Auditor Fiscal (receita) e Auditor de Controle Externo (despesa).</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      "A auditoria interna deve estar subordinada à controladoria": <b>ERRADO</b>.<br><b>O erro:</b> subordinar o auditor à área que ele avalia compromete a autonomia.<br><b>O certo:</b> subordina-se à alta administração (presidência ou conselho).<br><br>
+      "A auditoria interna é feita, necessariamente, por empregado da empresa": <b>ERRADO</b>.<br><b>O erro:</b> o "necessariamente"; as normas não exigem vínculo empregatício.<br><b>O certo:</b> em regra é feita por funcionário, mas pode ser terceirizada.<br><br>
+      "No externo, o escopo é definido pelo conselho de administração": <b>ERRADO</b>.<br><b>O erro:</b> o conselho não define a extensão do exame do auditor independente.<br><b>O certo:</b> quem define são as normas de auditoria ou a legislação específica.
+    </div>
+    <details><summary>Pergunte-se: o auditor externo pode ser empregado da entidade auditada?</summary><div><b>Não.</b> A independência exigida impede o vínculo empregatício com a auditada.</div></details>
+  </div>
+
+  <h3>3. Tipos de auditoria governamental (IN 01/2001 da antiga Secretaria Federal de Controle Interno)</h3>
+  <div class="card">
+    <div class="tbl"><table>
+      <tr><th>Tipo</th><th>Palavra-chave</th></tr>
+      <tr><td><b>Avaliação da gestão</b></td><td><b>Certificar a regularidade das contas</b>, verificar a execução de contratos e convênios, a <b>probidade</b> na aplicação dos recursos. Em regra, <i>a posteriori</i>.</td></tr>
+      <tr><td><b>Acompanhamento da gestão</b></td><td>Atuar <b>em tempo real</b> sobre os atos de gestão, prevenindo gargalos.</td></tr>
+      <tr><td><b>Contábil</b></td><td>Opinar se os <b>registros contábeis</b> seguem a estrutura aplicável e se as demonstrações refletem a situação patrimonial.</td></tr>
+      <tr><td><b>Operacional</b></td><td>Opinião sobre a gestão quanto à <b>eficiência, eficácia e economicidade</b>; assessora o gestor com recomendações.</td></tr>
+      <tr><td><b>Especial</b></td><td>Fatos ou situações <b>relevantes, incomuns ou extraordinárias</b>, por determinação expressa de autoridade competente.</td></tr>
+    </table></div>
+    <p class="muted small">A IN 01/2001 foi revogada pela IN 03/2017 (Referencial Técnico da Auditoria Interna Governamental), que não traz essa classificação. As bancas continuam cobrando as definições.</p>
+    <div class="call bad"><b>Pegadinha</b>"A auditoria de avaliação da gestão atua em tempo real sobre os atos efetivos da gestão": <b>ERRADO</b>.<br><b>O erro:</b> atribuiu à avaliação a característica do acompanhamento.<br><b>O certo:</b> tempo real é a auditoria de <b>acompanhamento</b> da gestão; a avaliação certifica a regularidade das contas, em regra depois da execução.</div>
+  </div>
+
+  <h3>4. NBC TA 200: objetivo da auditoria</h3>
+  <div class="card">
+    <ul>
+      <li>A NBC TA 200 (R1) é a <b>norma-base</b> da auditoria independente: expõe os objetivos gerais do auditor e a natureza e o alcance da auditoria.</li>
+      <li><span class="k">Objetivo da auditoria</span> (item 3): <b>aumentar o grau de confiança nas demonstrações contábeis por parte dos usuários</b>, mediante a <b>expressão de uma opinião</b> sobre se foram elaboradas, em todos os aspectos relevantes, em conformidade com a estrutura de relatório financeiro aplicável.</li>
+      <li>As demonstrações são <b>da entidade</b>, elaboradas pela <b>administração</b>, com supervisão geral dos <b>responsáveis pela governança</b> (item 4). A auditoria <b>não exime</b> a administração de suas responsabilidades.</li>
+      <li><span class="k">Asseguração (segurança) razoável</span> (item 5): nível <b>elevado, mas não absoluto</b> de segurança, obtido com evidência <b>apropriada e suficiente</b> para reduzir o risco de auditoria a um nível <b>aceitavelmente baixo</b>.</li>
+      <li>Não é absoluta por causa das <b>limitações inerentes</b>: natureza das informações contábeis, natureza dos procedimentos de auditoria e necessidade de concluir em <b>tempo e custo razoáveis</b>. Por isso a maioria das evidências é <b>persuasiva, e não conclusiva</b>.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"O auditor deve obter segurança absoluta de que as demonstrações estão livres de distorção relevante": <b>ERRADO</b>.<br><b>O erro:</b> o auditor não é obrigado e nem consegue reduzir o risco de auditoria a zero.<br><b>O certo:</b> segurança <b>razoável</b> (alta, não absoluta). Desconfie de "absoluta", "total", "certeza".</div>
+    <details><summary>Pergunte-se: por que as evidências são "persuasivas" e não "conclusivas"?</summary><div>Porque há limitações inerentes: estimativas e julgamentos nas informações contábeis, possibilidade de conluio ou documentos falsos, e a auditoria precisa terminar em tempo e custo razoáveis (amostragem).</div></details>
+  </div>
+
+  <h3>5. Objetivos gerais do auditor e o que NÃO é objetivo</h3>
+  <div class="card">
+    <ul>
+      <li>Item 11: (a) <b>obter segurança razoável</b> de que as demonstrações <b>como um todo</b> estão livres de <b>distorção relevante</b>, causada por <b>fraude ou erro</b>, para expressar opinião; (b) <b>apresentar relatório</b> e <b>comunicar-se</b> como exigido pelas NBC TA.</li>
+      <li><span class="k">Distorção</span>: diferença entre o que está apresentado (valor, classificação, apresentação ou divulgação) e o que a estrutura exige. Exemplo: estoque apresentado por 40 mil que deveria estar por 100 mil, distorção de 60 mil.</li>
+      <li>Distorção é <b>relevante</b> quando é razoável esperar que influencie as <b>decisões econômicas dos usuários</b>. É julgamento do auditor.</li>
+      <li><b>Fraude</b> = ato <b>intencional</b>; <b>erro</b> = ato <b>não intencional</b>.</li>
+      <li>Item 12: se não der para obter segurança razoável e a <b>opinião com ressalva</b> for insuficiente, o auditor deve <b>abster-se de opinar</b> ou <b>renunciar</b> ao trabalho, quando a renúncia for possível pela lei.</li>
+      <li>A forma da opinião depende da estrutura de relatório financeiro aplicável e da lei.</li>
+    </ul>
+    <div class="tbl"><table>
+      <tr><th>O que NÃO é objetivo do auditor independente</th><th>Por quê</th></tr>
+      <tr><td>Assegurar a viabilidade futura da entidade</td><td>Fora do escopo</td></tr>
+      <tr><td>Atestar a eficiência ou eficácia dos negócios</td><td>Fora do escopo</td></tr>
+      <tr><td>Elaborar as demonstrações contábeis</td><td>Cabe à administração</td></tr>
+      <tr><td>Prevenir e detectar erros e fraudes</td><td>Responsabilidade primária da administração</td></tr>
+      <tr><td>Implementar controles internos</td><td>Cabe à administração</td></tr>
+      <tr><td>Auxiliar a administração a cumprir seus objetivos</td><td>Objetivo do auditor <b>interno</b></td></tr>
+    </table></div>
+    <div class="call bad"><b>Pegadinhas</b>
+      "A auditoria independente atesta a eficiência e a eficácia com que a administração conduziu os negócios": <b>ERRADO</b>.<br><b>O erro:</b> a opinião não cobre a gestão do negócio.<br><b>O certo:</b> a opinião trata só de as demonstrações estarem conforme a estrutura aplicável (salvo lei específica que exija outra opinião, como sobre a eficácia do controle interno).<br><br>
+      "O objetivo do auditor é assegurar que as demonstrações estão livres de fraudes": <b>ERRADO</b>.<br><b>O erro:</b> "assegurar" (absoluto) e "livres de fraudes" (foco errado).<br><b>O certo:</b> obter segurança <b>razoável</b> de que estão livres de <b>distorção relevante</b>, por fraude ou erro.
+    </div>
+  </div>
+
+  <h3>6. Definições do item 13 (as que mais caem)</h3>
+  <div class="card">
+    <ul>
+      <li><b>Estrutura de relatório financeiro aplicável</b>: a adotada pela administração, aceitável pela natureza da entidade e objetivo das demonstrações, ou exigida por lei. No Brasil: Lei 6.404/1976 e pronunciamentos do CPC.
+        <ul><li><b>Apresentação adequada</b>: admite divulgações <b>além</b> das exigidas ou, em casos extremamente raros, <b>desvio</b> de uma exigência para apresentar adequadamente. É a usada nas demonstrações para fins gerais.</li>
+        <li><b>Conformidade (compliance)</b>: exige cumprir a estrutura, sem admitir aquelas duas flexibilidades.</li></ul></li>
+      <li><b>Evidência de auditoria</b>: informações usadas pelo auditor para fundamentar as conclusões em que baseia a opinião. <b>Suficiência</b> = <b>quantidade</b>; <b>adequação</b> = <b>qualidade</b> (relevância e confiabilidade).</li>
+      <li><b>Informação contábil histórica</b>: em termos financeiros, de entidade específica, derivada do sistema contábil, sobre eventos <b>passados</b>.</li>
+      <li><b>Demonstrações contábeis</b>: representação estruturada de informações financeiras históricas, incluindo divulgações. Normalmente o conjunto completo (balanço, resultado, mutações do patrimônio líquido, fluxos de caixa e notas), mas pode ser um quadro isolado.</li>
+      <li><b>Administração</b>: quem tem a responsabilidade <b>executiva</b> (a diretoria). <b>Responsáveis pela governança</b>: <b>supervisionam</b> a direção estratégica (o conselho de administração). No Brasil, muitas vezes são as mesmas pessoas.</li>
+      <li><b>Premissa</b>: a auditoria parte do princípio de que a administração sabe que é responsável (i) pela <b>elaboração</b> das demonstrações, (ii) pelo <b>controle interno</b> necessário e (iii) por dar ao auditor <b>acesso</b> às informações, informações adicionais e acesso <b>irrestrito</b> às pessoas da entidade.</li>
+      <li><b>Julgamento profissional</b>: aplicação do <b>treinamento, conhecimento e experiência</b> na tomada de decisões informadas. <b>Ceticismo profissional</b>: <b>mente questionadora</b>, alerta a sinais de distorção e <b>avaliação crítica</b> das evidências.</li>
+    </ul>
+  </div>
+
+  <h3>7. Risco de auditoria: as palavras-chave</h3>
+  <div class="card">
+    <div class="tbl"><table>
+      <tr><th>Risco</th><th>Definição (palavras-chave)</th></tr>
+      <tr><td><b>Risco de auditoria</b></td><td>Auditor expressar opinião <b>inadequada</b> quando as demonstrações contêm distorção relevante. É <b>função</b> do risco de distorção relevante e do risco de detecção.</td></tr>
+      <tr><td><b>Risco de distorção relevante</b></td><td>Demonstrações conterem distorção relevante <b>antes da auditoria</b>. Componentes: inerente e de controle.</td></tr>
+      <tr><td>· Risco <b>inerente</b></td><td>Suscetibilidade de uma afirmação a distorção <b>antes da consideração de quaisquer controles</b>.</td></tr>
+      <tr><td>· Risco <b>de controle</b></td><td>Distorção <b>não ser prevenida, detectada e corrigida</b> tempestivamente pelo <b>controle interno da entidade</b>.</td></tr>
+      <tr><td><b>Risco de detecção</b></td><td>Os <b>procedimentos do auditor</b> não detectarem uma distorção existente que possa ser relevante.</td></tr>
+    </table></div>
+    <ul>
+      <li>O risco de distorção relevante existe em <b>dois níveis</b>: <b>geral da demonstração contábil</b> (disseminado, afeta muitas afirmações) e <b>da afirmação</b> para classes de transações, saldos e divulgações (orienta natureza, época e extensão dos procedimentos adicionais).</li>
+      <li>Inerente e de controle são da <b>entidade</b> (o auditor avalia, não controla). O de detecção é o único que o auditor <b>controla</b>, ajustando seus procedimentos.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"Risco de controle é o risco de os procedimentos do auditor não detectarem a distorção": <b>ERRADO</b>.<br><b>O erro:</b> descreveu o risco de detecção.<br><b>O certo:</b> risco de controle é a falha do <b>controle interno da entidade</b>; o de detecção é a falha dos <b>procedimentos do auditor</b>.</div>
+    <details><summary>Pergunte-se: se o risco de distorção relevante é alto, o que o auditor faz com o risco de detecção?</summary><div>Reduz o risco de detecção (mais procedimentos substantivos, mais evidência, mais perto da data-base), para manter o risco de auditoria aceitavelmente baixo.</div></details>
+  </div>
+
+  <h3>8. Requisitos éticos</h3>
+  <div class="card">
+    <p>O auditor cumpre as exigências éticas relevantes, <b>inclusive as de independência</b>. Os <b>cinco princípios fundamentais</b> (item A17), alinhados ao Código de Ética da IFAC:</p>
+    <div class="tbl"><table>
+      <tr><th>Princípio</th><th>Definição (NBC PG 100)</th></tr>
+      <tr><td><b>Integridade</b></td><td>Ser direto e honesto em todas as relações profissionais e comerciais.</td></tr>
+      <tr><td><b>Objetividade</b></td><td>Não comprometer julgamentos por tendenciosidade, conflito de interesse ou influência indevida.</td></tr>
+      <tr><td><b>Competência profissional e devido zelo</b></td><td>Manter conhecimento e habilidade no nível necessário e agir com diligência, conforme as normas.</td></tr>
+      <tr><td><b>Confidencialidade (sigilo)</b></td><td>Respeitar o sigilo das informações obtidas nas relações profissionais.</td></tr>
+      <tr><td><b>Comportamento profissional</b></td><td>Cumprir leis e regulamentos e evitar conduta que desacredite a profissão.</td></tr>
+    </table></div>
+    <p class="muted small">Mnemônico da aula: <b>IOC3</b> (Integridade, Objetividade, Competência, Confidencialidade, Comportamento).</p>
+    <div class="call bad"><b>Pegadinha</b>"Honestidade é princípio fundamental de ética do auditor na NBC TA 200": <b>ERRADO</b>.<br><b>O erro:</b> honestidade aparece dentro da definição de integridade, mas não é princípio autônomo da lista.<br><b>O certo:</b> integridade, objetividade, competência e zelo, confidencialidade e comportamento profissional. A banca troca um deles por honestidade, transparência, independência ou legalidade.</div>
+  </div>
+
+  <h3>9. Ceticismo × julgamento profissional</h3>
+  <div class="card">
+    <div class="grid2">
+      <div class="call"><b>Ceticismo (item 15, A20 a A24)</b>Planejar e executar com ceticismo, reconhecendo que pode haver distorção relevante. Inclui estar <b>alerta</b> a: evidências contraditórias; informações que ponham em dúvida a confiabilidade de documentos e respostas; condições que indiquem <b>fraude</b>; necessidade de procedimentos além dos exigidos. Reduz os riscos de <b>ignorar circunstâncias não usuais</b>, <b>generalizar em excesso</b> e <b>usar premissas inadequadas</b>.</div>
+      <div class="call"><b>Julgamento (item 16, A25 a A29)</b>Necessário em particular nas decisões sobre: <b>materialidade e risco de auditoria</b>; natureza, época e extensão dos procedimentos; se a evidência é suficiente e apropriada; avaliação das opiniões da administração na aplicação da estrutura; conclusões (como a razoabilidade das estimativas). Deve ser <b>documentado</b> de modo que um auditor experiente, sem ligação com o trabalho, o entenda.</div>
+    </div>
+    <ul>
+      <li>O auditor <b>pode aceitar</b> registros e documentos como genuínos, salvo razão para crer no contrário; havendo dúvida, investiga mais (A23).</li>
+      <li>A experiência passada de honestidade da administração <b>não livra</b> o auditor do ceticismo nem permite evidências menos que persuasivas (A24).</li>
+      <li>O julgamento <b>não justifica</b> decisões sem apoio nos fatos e em evidência apropriada e suficiente (A29).</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"A crença de que a administração é honesta dispensa o ceticismo profissional": <b>ERRADO</b>.<br><b>O erro:</b> a confiança anterior não substitui a postura questionadora.<br><b>O certo:</b> o auditor não ignora a experiência passada, mas mantém o ceticismo durante toda a auditoria.</div>
+  </div>
+
+  <h3>10. Evidência apropriada e suficiente</h3>
+  <div class="card">
+    <ul>
+      <li><b>Suficiência</b> (quantidade) é afetada pela <b>avaliação dos riscos de distorção</b> (risco maior, mais evidência) e pela <b>qualidade</b> da evidência (qualidade melhor, menos evidência).</li>
+      <li><b>Mais evidência pode não compensar a má qualidade.</b> O contrário vale: boa qualidade reduz a quantidade necessária.</li>
+      <li><b>Adequação</b> (qualidade) = <b>relevância e confiabilidade</b>. A confiabilidade depende da <b>fonte</b> e da <b>natureza</b> da evidência e das circunstâncias.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"Mais evidência de auditoria compensa sua má qualidade": <b>ERRADO</b>.<br><b>O erro:</b> inverteu a relação entre quantidade e qualidade.<br><b>O certo:</b> qualidade melhor permite menos evidência, mas quantidade maior <b>pode não compensar</b> qualidade ruim.</div>
+  </div>
+
+  <h3>11. Condução da auditoria em conformidade com as NBC TA</h3>
+  <div class="card">
+    <ul>
+      <li>O auditor deve observar <b>todas</b> as NBC TA <b>relevantes</b>: as que estão <b>em vigor</b> e cujas circunstâncias <b>existem</b> no caso concreto. (Aqui o "todas" está certo.)</li>
+      <li>Deve entender o <b>texto inteiro</b> de cada NBC TA, inclusive aplicação e material explicativo.</li>
+      <li><b>Não pode declarar conformidade</b> com as normas no relatório se não cumpriu a NBC TA 200 e todas as demais relevantes.</li>
+      <li>Em circunstâncias <b>excepcionais</b>, pode deixar de cumprir uma exigência relevante, desde que execute <b>procedimentos alternativos</b> que atinjam o mesmo objetivo. Isso só deve ocorrer quando a exigência for um procedimento específico que seria <b>ineficaz</b> naquele caso.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"Em circunstâncias excepcionais, o auditor pode deixar de cumprir uma exigência relevante sem nenhuma outra providência": <b>ERRADO</b>.<br><b>O erro:</b> faltou a contrapartida.<br><b>O certo:</b> deve executar procedimentos alternativos para cumprir o objetivo daquela exigência.</div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="tab" id="mapa">
+  <h2>Mapa mental: classificação da auditoria e NBC TA 200</h2>
+  <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
+  <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
+  <div class="card mm" id="mmBox"></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa para começar.</p></div>
+
+  <h3>Onde este tema se encaixa na disciplina</h3>
+  <div class="card">
+    <div class="grid3" style="font-size:14px">
+      <div><b class="k">Fundamentos</b><br>Classificação da auditoria<br>NBC TA 200 ← <i>você está aqui</i></div>
+      <div><b class="k">Planejamento</b><br>Materialidade<br>Identificação e avaliação de riscos<br>Controle interno</div>
+      <div><b class="k">Execução</b><br>Evidência de auditoria e procedimentos<br>Amostragem<br>Papéis de trabalho</div>
+      <div><b class="k">Situações específicas</b><br>Fraude e erro<br>Continuidade operacional<br>Eventos subsequentes<br>Partes relacionadas</div>
+      <div><b class="k">Conclusão</b><br>Relatório do auditor<br>Opinião modificada (ressalva, adversa, abstenção)<br>Principais assuntos de auditoria</div>
+      <div><b class="k">Ética e setor público</b><br>Independência (NBC PA)<br>Auditoria interna (NBC TI)<br>Auditoria governamental</div>
+    </div>
+    <p class="muted small" style="margin:10px 0 0">Blocos gerais da Auditoria, para orientar o estudo. A ordem exata das aulas está no cronograma do curso.</p>
+  </div>
+</section>
+
+<!-- ESQUEMAS -->
+<section class="tab" id="esquemas">
+<h2>Esquemas comparativos</h2>
+  <p class="lead">Tabelas para revisão rápida. Você deve conseguir reproduzi-las na véspera.</p>
+
+  <h3>Auditoria interna × externa (quadro da aula)</h3>
+  <div class="tbl"><table>
+    <tr><th>Elemento</th><th>Interna</th><th>Externa</th></tr>
+    <tr><td>Sujeito</td><td>Funcionário da empresa (em regra)</td><td>Profissional independente</td></tr>
+    <tr><td>Ação e objetivo</td><td>Exame dos controles operacionais</td><td>Exame das demonstrações financeiras</td></tr>
+    <tr><td>Finalidade</td><td>Promover melhorias nos controles</td><td>Opinar sobre as demonstrações</td></tr>
+    <tr><td>Relatório principal</td><td>Recomendações de controle interno e eficiência administrativa</td><td>Relatório (antigo parecer) com a opinião</td></tr>
+    <tr><td>Grau de independência</td><td>Menor (autonomia profissional)</td><td>Maior</td></tr>
+    <tr><td>Interessados</td><td>A própria empresa</td><td>Empresa e público em geral</td></tr>
+    <tr><td>Responsabilidade</td><td>Trabalhista</td><td>Profissional, civil e criminal</td></tr>
+    <tr><td>Continuidade</td><td>Contínuo</td><td>Periódico ou pontual</td></tr>
+    <tr><td>Tipo</td><td>Contábil e operacional</td><td>Contábil</td></tr>
+    <tr><td>Escopo definido por</td><td>Gerência</td><td>Normas de auditoria ou lei</td></tr>
+    <tr><td>Subordinação</td><td>Alta administração</td><td>Nenhuma (independente)</td></tr>
+    <tr><td>Quem exerce</td><td>Contador com registro no CRC</td><td>Contador com registro no CRC</td></tr>
+  </table></div>
+
+  <h3>Os cinco tipos de auditoria governamental</h3>
+  <div class="tbl"><table>
+    <tr><th>Tipo</th><th>Gatilho na questão</th><th>Momento</th></tr>
+    <tr><td>Avaliação da gestão</td><td>"certificar a regularidade das contas", "probidade"</td><td>Em regra depois</td></tr>
+    <tr><td>Acompanhamento da gestão</td><td>"tempo real", "prevenir gargalos"</td><td>Durante</td></tr>
+    <tr><td>Contábil</td><td>"registros contábeis", "princípios de contabilidade"</td><td>Depois</td></tr>
+    <tr><td>Operacional</td><td>"eficiência, eficácia e economicidade", "assessoramento"</td><td>Tempestiva</td></tr>
+    <tr><td>Especial</td><td>"incomum, extraordinária", "determinação de autoridade"</td><td>Quando determinada</td></tr>
+  </table></div>
+
+  <h3>Componentes do risco de auditoria</h3>
+  <div class="tbl"><table>
+    <tr><th>Risco</th><th>De quem é</th><th>Pergunta-chave</th></tr>
+    <tr><td>Inerente</td><td>Entidade</td><td>A conta é suscetível a erro <b>sem considerar controles</b>?</td></tr>
+    <tr><td>De controle</td><td>Entidade</td><td>O <b>controle interno</b> deixa a distorção passar?</td></tr>
+    <tr><td>De detecção</td><td>Auditor</td><td>Os <b>procedimentos do auditor</b> deixam a distorção passar?</td></tr>
+    <tr><td colspan="3">Risco de auditoria = função de (risco de distorção relevante = inerente + controle) e risco de detecção</td></tr>
+  </table></div>
+
+  <h3>Suficiência × adequação</h3>
+  <div class="tbl"><table>
+    <tr><th>Suficiência</th><th>Adequação</th></tr>
+    <tr><td><b>Quantidade</b></td><td><b>Qualidade</b></td></tr>
+    <tr><td>Afetada pelo risco avaliado e pela qualidade</td><td>Relevância e confiabilidade</td></tr>
+    <tr><td>Mais quantidade pode não compensar má qualidade</td><td>Confiabilidade depende da fonte, natureza e circunstâncias</td></tr>
+  </table></div>
+
+  <h3>Ceticismo × julgamento</h3>
+  <div class="tbl"><table>
+    <tr><th>Ceticismo profissional</th><th>Julgamento profissional</th></tr>
+    <tr><td><b>Postura</b>: mente questionadora e avaliação crítica</td><td><b>Bagagem</b>: treinamento, conhecimento e experiência</td></tr>
+    <tr><td>Alerta a contradições, documentos duvidosos, fraude</td><td>Decide materialidade, risco, procedimentos, suficiência da evidência, estimativas</td></tr>
+    <tr><td>Evita ignorar o incomum, generalizar e usar premissas inadequadas</td><td>Deve ser documentado e apoiado em fatos e evidências</td></tr>
+  </table></div>
+
+  <h3>Administração × responsáveis pela governança</h3>
+  <div class="tbl"><table>
+    <tr><th>Administração</th><th>Responsáveis pela governança</th></tr>
+    <tr><td>Responsabilidade <b>executiva</b> ("toca o barco")</td><td><b>Supervisão</b> da direção estratégica</td></tr>
+    <tr><td>Exemplo: diretoria</td><td>Exemplo: conselho de administração</td></tr>
+    <tr><td colspan="2">No Brasil, é comum que as mesmas pessoas estejam nos dois papéis.</td></tr>
+  </table></div>
+</section>
+
+<!-- REFORMA -->
+<section class="tab" id="reforma">
+<h2>NBC TA 200 (R1): os itens que a banca copia</h2>
+  <p class="lead">Itens literais são comuns. Leia estes trechos pelo menos duas vezes, prestando atenção às palavras em destaque.</p>
+  <div class="call"><b>Item 3 (objetivo da auditoria)</b>O objetivo da auditoria é <b>aumentar o grau de confiança nas demonstrações contábeis por parte dos usuários</b>. Isso é alcançado mediante a <b>expressão de uma opinião</b> pelo auditor sobre se as demonstrações contábeis foram elaboradas, <b>em todos os aspectos relevantes</b>, em conformidade com uma <b>estrutura de relatório financeiro aplicável</b>.</div>
+  <div class="call"><b>Item 4 (de quem são as demonstrações)</b>As demonstrações contábeis sujeitas à auditoria são <b>as da entidade, elaboradas pela sua administração, com supervisão geral dos responsáveis pela governança</b>. (...) A auditoria das demonstrações contábeis <b>não exime</b> dessas responsabilidades a administração ou os responsáveis pela governança.</div>
+  <div class="call"><b>Item 5 (asseguração razoável)</b>(...) Asseguração razoável é um <b>nível elevado de segurança</b>. Esse nível é conseguido quando o auditor obtém evidência de auditoria <b>apropriada e suficiente</b> para reduzir a um <b>nível aceitavelmente baixo</b> o risco de auditoria. Contudo, asseguração razoável <b>não é um nível absoluto</b> de segurança porque há limitações inerentes em uma auditoria, (...) a maioria das evidências (...) é <b>persuasiva e não conclusiva</b>.</div>
+  <div class="call"><b>Item 11 (objetivos gerais do auditor)</b>(a) obter <b>segurança razoável</b> de que as demonstrações contábeis <b>como um todo</b> estão livres de <b>distorção relevante</b>, independentemente se causadas por <b>fraude ou erro</b> (...); e (b) <b>apresentar relatório</b> sobre as demonstrações contábeis e <b>comunicar-se</b> como exigido pelas NBC TAs.</div>
+  <div class="call"><b>Item 12 (quando não dá para obter segurança razoável)</b>Em todos os casos em que não for possível obter segurança razoável e a <b>opinião com ressalva</b> for insuficiente (...), as NBC TAs requerem que o auditor se <b>abstenha de emitir sua opinião</b> ou <b>renuncie</b> ao trabalho, quando a renúncia for possível de acordo com lei ou regulamentação aplicável.</div>
+  <div class="call"><b>Item A17 (princípios éticos)</b>(a) <b>Integridade</b>; (b) <b>Objetividade</b>; (c) <b>Competência e zelo profissional</b>; (d) <b>Confidencialidade</b>; e (e) <b>Comportamento (ou conduta) profissional</b>.</div>
+  <div class="call"><b>Itens A31 e A32 (evidência)</b>A <b>suficiência</b> é a medida da <b>quantidade</b> (...) afetada pela avaliação dos riscos de distorção (quanto mais elevados, mais evidência) e pela qualidade (quanto melhor, menos evidência pode ser necessária). A obtenção de mais evidência, porém, <b>pode não compensar a sua má qualidade</b>. A <b>adequação</b> é a medida da <b>qualidade</b>, isto é, sua <b>relevância e confiabilidade</b>.</div>
+  <div class="call"><b>Item A36 (níveis do risco de distorção relevante)</b>No <b>nível geral da demonstração contábil</b>; e no <b>nível da afirmação</b> para classes de transações, saldos contábeis e divulgações.</div>
+  <div class="grid2">
+    <div class="card"><b>Lei 6.404/1976, artigo 177, parágrafo 3º</b><br>As demonstrações financeiras das companhias abertas observarão as normas da Comissão de Valores Mobiliários e serão <b>obrigatoriamente submetidas a auditoria por auditores independentes nela registrados</b>.</div>
+    <div class="card"><b>Resolução CFC 1.640/2021, artigo 3º</b><br>São atribuições privativas dos profissionais da contabilidade (...) XXI, <b>auditoria interna e operacional</b>; XXII, <b>auditoria externa independente</b>. O parágrafo 1º reserva essas atribuições aos <b>contadores</b>.</div>
+  </div>
+  <div class="call warn"><b>"Todas" nem sempre é pegadinha</b>"O auditor deve observar <b>todas</b> as NBC TA relevantes para a auditoria" está <b>certo</b>. Relevante = em vigor e com circunstâncias presentes no caso.</div>
+</section>
+
+<!-- QUESTÕES -->
+<section class="tab" id="questoes">
+  <h2>Exercícios da teoria</h2>
+  <p class="lead">São os 19 exercícios que aparecem no meio da teoria (T1 a T19 na barra). A trilha desta tarefa pede só a parte teórica; as Questões Comentadas do PDF ficam para a T17. O comentário aparece depois de cada resposta, e o rendimento quando terminar todas.</p>
+  <div class="row" style="margin-bottom:10px">
+    <label class="muted" for="fTema">Tema:</label>
+    <select id="fTema"></select>
+    <label class="muted" for="fStatus">Mostrar:</label>
+    <select id="fStatus"><option value="all">Todas</option><option value="pend">Não respondidas</option><option value="bad">Erradas</option><option value="ok">Certas</option></select>
+  </div>
+  <div class="progress"><div id="qProg"></div></div>
+  <div class="qnav" id="qNav"></div>
+  <div class="card" id="qCard"></div>
+  <div class="row" style="justify-content:space-between">
+    <button class="btn" id="qPrev">← Anterior</button>
+    <span class="muted" style="font-size:13px">Atalhos: <kbd>A</kbd>–<kbd>E</kbd> ou <kbd>C</kbd>/<kbd>E</kbd> escolhe · <kbd>Shift</kbd>+letra descarta · <kbd>Enter</kbd> responde · <kbd>←</kbd> <kbd>→</kbd> navega</span>
+    <button class="btn pri" id="qNext">Próxima →</button>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="tab" id="flash">
+  <h2>Flashcards com repetição espaçada</h2>
+  <p class="lead">Leia a pergunta, responda <b>em voz alta</b> e só então vire o cartão (clique ou <kbd>Espaço</kbd>). Marque com sinceridade: os cartões errados voltam primeiro (sistema Leitner, caixas 1 a 5).</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px">
+    <select id="fcDeck">
+      <option value="all">Todos os baralhos</option>
+      <option value="a00">Aula 00 · Classificação e NBC TA 200</option>
+      <option value="ref">Texto literal da NBC TA 200</option>
+      <option value="pan">Panorama da Auditoria</option>
+    </select>
+    <button class="btn" id="fcShuffle">Embaralhar</button>
+    <button class="btn" id="fcReset">Zerar caixas</button>
+  </div>
+  <div class="fc-meta"><span id="fcPos"></span><span id="fcBox"></span></div>
+  <div class="fc" id="fc"><div class="fc-inner"><div class="fc-face front"><div class="q" id="fcQ"></div><div class="muted" style="margin-top:14px;font-size:13px">clique para virar</div></div><div class="fc-face back"><div id="fcA"></div></div></div></div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn bad" id="fcBad">✘ Errei (<kbd>1</kbd>)</button>
+    <button class="btn" id="fcMid">~ Hesitei (<kbd>2</kbd>)</button>
+    <button class="btn ok" id="fcOk">✔ Acertei (<kbd>3</kbd>)</button>
+  </div>
+  <div class="boxes" id="fcBoxes"></div>
+</section>
+
+<!-- RENDIMENTO -->
+<section class="tab" id="rend">
+  <h2>Rendimento</h2>
+  <div id="rendBody"></div>
+  <h3>Gerenciar dados</h3>
+  <div class="row">
+    <button class="btn" id="expBtn">Exportar respostas (.json)</button>
+    <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
+    <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn" id="hlReset">Apagar marcações de texto</button>
+    <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
+  </div>
+</section>
+
+</main>
+
+<div id="tip" role="tooltip"></div>
+<div id="hlBar" role="toolbar" aria-label="Marca-texto"><span class="lbl">Marcar</span><button data-c="am" title="Amarelo" aria-label="Amarelo"></button><button data-c="ro" title="Rosa" aria-label="Rosa"></button><button data-c="ve" title="Verde" aria-label="Verde"></button><button data-c="" title="Apagar marcação" aria-label="Apagar marcação">✕</button></div>
+<script>
+const QUESTOES = [{"fonte": "SEFAZ-SP, 2009", "tema": "Auditoria interna × externa", "enun": "O trabalho da auditoria interna:", "alts": [["a", "tem maior independência que o de auditoria externa."], ["b", "é responsável pela implantação e pelo cumprimento dos controles internos."], ["c", "deve estar subordinado ao da Controladoria da empresa."], ["d", "deve emitir parecer, que será publicado com as demonstrações contábeis."], ["e", "deve efetuar a revisão e o aperfeiçoamento dos controles internos."]], "tipo": "mc", "resp": "e", "com": ["a) Errada. O auditor interno deve agir com autonomia profissional, mas seu grau de independência é menor que o do auditor externo.", "b) Errada. Quem implanta e tem a responsabilidade primária pelos controles internos é a administração da entidade. A auditoria interna avalia e recomenda melhorias.", "c) Errada. Em regra, o auditor interno se subordina diretamente à alta administração (presidência, conselho de administração), e não à controladoria. Pegadinha clássica.", "d) Errada. Quem emite relatório (antigo parecer) publicado com as demonstrações é o auditor independente. O relatório do auditor interno tem outro foco.", "e) Certa. Revisar e propor o aperfeiçoamento dos controles internos é papel típico da auditoria interna."], "n": 1, "rot": "Exercício da teoria 1", "nav": "T1"}, {"fonte": "CGM João Pessoa, 2018", "tema": "Auditoria interna × externa", "enun": "A respeito dos objetivos e dos procedimentos do auditor na realização do seu trabalho, julgue o item a seguir.\nA auditoria interna e a externa são atividades que presumem independência na execução de seus trabalhos, independentemente se o auditor é terceiro contratado ou servidor público.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. A independência é atributo do auditor externo (em maior grau) e do interno (em menor grau, o que as normas brasileiras chamam de autonomia profissional). É a base da imparcialidade e da objetividade das conclusões.", "O auditor externo não se subordina à entidade auditada; o interno, em regra, se subordina à alta administração, o que lhe garante autonomia diante das áreas avaliadas. A parte final do item (terceiro contratado ou servidor) não altera a correção."], "n": 2, "rot": "Exercício da teoria 2", "nav": "T2"}, {"fonte": "TJ-SP, 2015", "tema": "Auditoria interna × externa", "enun": "Quanto às diferenças entre auditoria externa e interna, é correto afirmar:", "alts": [["a", "a auditoria interna é feita, necessariamente, por um empregado da empresa."], ["b", "o auditor externo não pode ter vínculo empregatício com a empresa."], ["c", "enquanto a auditoria externa deve ser realizada por contador com registro no CRC, o Conselho Federal de Contabilidade não exige o mesmo na auditoria interna."], ["d", "a auditoria externa é desenvolvida continuamente ao longo do tempo."], ["e", "o objetivo da auditoria externa é assistir à administração no cumprimento dos seus objetivos."]], "tipo": "mc", "resp": "b", "com": ["a) Errada. Em regra a auditoria interna é feita por funcionário, mas as normas não trazem essa obrigatoriedade. O erro está no \"necessariamente\".", "b) Certa. A independência exigida do auditor externo impede que ele seja empregado da entidade auditada.", "c) Errada. O registro no CRC é exigido para os dois. A Resolução CFC 1.640/2021 torna a auditoria interna e a externa atribuições privativas de contador.", "d) Errada. Contínua é a auditoria interna; a externa é periódica ou pontual.", "e) Errada. Assistir a administração no cumprimento de seus objetivos é o objetivo da auditoria interna."], "n": 3, "rot": "Exercício da teoria 3", "nav": "T3"}, {"fonte": "Codevasf, 2021", "tema": "Auditoria interna × externa", "enun": "Acerca dos conceitos e das características referentes à auditoria contábil, julgue o item subsequente.\nUm dos aspectos que distingue a auditoria interna da auditoria externa é o escopo do trabalho: na primeira, ele é determinado pela gerência; na segunda, pelo conselho de administração.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. A primeira parte está correta: o escopo do auditor interno costuma ser definido pela gerência.", "O erro está no final: a extensão do exame do auditor externo é determinada pelas normas de auditoria reconhecidas no país ou por legislação específica, e não pelo conselho de administração."], "n": 4, "rot": "Exercício da teoria 4", "nav": "T4"}, {"fonte": "DPU, 2016", "tema": "Tipos de auditoria governamental", "enun": "Em relação aos papéis de trabalho, tipos de auditoria no setor público e eventos subsequentes, julgue o item que se segue.\nA auditoria de avaliação da gestão atua em tempo real sobre os atos efetivos e os efeitos potenciais positivos e negativos de uma unidade ou entidade federal, com vistas a certificar as contas prestadas pelo gestor.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. A auditoria de avaliação da gestão busca certificar a regularidade das contas, verificar a execução de contratos e convênios e a probidade na aplicação dos recursos. Em regra é feita a posteriori (depois da execução da despesa).", "Quem atua em tempo real sobre os atos efetivos e os efeitos potenciais da gestão é a auditoria de acompanhamento da gestão. O item misturou as duas definições."], "n": 5, "rot": "Exercício da teoria 5", "nav": "T5"}, {"fonte": "TRE-PR, 2012", "tema": "Tipos de auditoria governamental", "enun": "O tipo de auditoria governamental que tem por objetivo emitir opinião sobre a regularidade das contas e verificar a execução de contratos, acordos, convênios ou ajustes e a probidade na aplicação do dinheiro público ou na guarda ou administração de valores e bens da União é denominada, na Instrução Normativa da Secretaria Federal de Controle Interno nº 1/2001, auditoria", "alts": [["a", "operacional."], ["b", "especial."], ["c", "de avaliação da gestão."], ["d", "contábil."], ["e", "de acompanhamento da gestão."]], "tipo": "mc", "resp": "c", "com": ["Letra C. O enunciado reproduz quase literalmente a definição da auditoria de avaliação da gestão: certificar a regularidade das contas, verificar a execução de contratos e a probidade na aplicação dos recursos.", "Operacional: eficiência, eficácia e economicidade. Especial: fatos relevantes, incomuns ou extraordinários. Contábil: registros conforme a estrutura aplicável. Acompanhamento: atuação em tempo real."], "n": 6, "rot": "Exercício da teoria 6", "nav": "T6"}, {"fonte": "TRT 3ª Região, 2015", "tema": "Objetivo da auditoria e asseguração razoável", "enun": "A Companhia Municipal de Transporte Coletivo da Zona Sul contratou a firma de auditoria Luan & Luan auditores para auditar as demonstrações contábeis do exercício de 2014. De acordo com a NBC TA 200, o objetivo da auditoria das demonstrações contábeis é", "alts": [["a", "avaliar o grau de segurança na prevenção e detecção de fraudes e erros na entidade."], ["b", "aumentar o grau de credibilidade da entidade no mercado financeiro."], ["c", "avaliar os controles internos para obter segurança de que não há irregularidades nas demonstrações contábeis."], ["d", "aumentar o grau de confiança nas demonstrações contábeis por parte dos usuários."], ["e", "verificar a adequação dos lançamentos contábeis e outros ajustes efetuados na elaboração das demonstrações contábeis."]], "tipo": "mc", "resp": "d", "com": ["Letra D. Literalidade do item 3 da NBC TA 200 (R1): \"O objetivo da auditoria é aumentar o grau de confiança nas demonstrações contábeis por parte dos usuários. Isso é alcançado mediante a expressão de uma opinião (...)\".", "As demais alternativas não têm previsão na norma. Atenção à B: o que aumenta é a confiança nas demonstrações, e não a credibilidade da entidade no mercado."], "n": 7, "rot": "Exercício da teoria 7", "nav": "T7"}, {"fonte": "SEFAZ-SE, 2022", "tema": "Objetivo da auditoria e asseguração razoável", "enun": "Nos termos da NBC TA 200 (R1), as demonstrações contábeis sujeitas aos trabalhos de auditoria são:", "alts": [["a", "o balanço patrimonial, a demonstração de resultados do exercício, a demonstração dos fluxos de caixa e a demonstração das mutações do patrimônio líquido."], ["b", "as da entidade, elaboradas pela sua administração, com supervisão geral dos responsáveis pela governança."], ["c", "todas as oferecidas ao auditor pela administração da entidade, desde que assinadas por um contador."], ["d", "o balanço patrimonial, a demonstração de resultados do exercício e a demonstrações dos fluxos de caixa."], ["e", "todas as previstas para tal na Lei n.º 6.404/1976."]], "tipo": "mc", "resp": "b", "com": ["Letra B. Item 4 da NBC TA 200: as demonstrações sujeitas à auditoria são as da entidade, elaboradas pela sua administração, com supervisão geral dos responsáveis pela governança.", "A tentação é marcar a lista de demonstrações (A, D ou E), mas a questão cobra a literalidade da norma, que fixa de quem são as demonstrações, e não quais são."], "n": 8, "rot": "Exercício da teoria 8", "nav": "T8"}, {"fonte": "ISS Cuiabá, 2016", "tema": "Objetivos gerais do auditor e alcance", "enun": "De acordo com a NBC 200, Objetivos Gerais do Auditor Independente e a Condução da Auditoria em Conformidade com as Normas de Auditoria, assinale a opção que indica os objetivos gerais do auditor ao conduzir a auditoria das demonstrações contábeis.", "alts": [["a", "Obter segurança razoável de que as demonstrações contábeis estão livres de distorção relevante e apresentar relatório sobre elas."], ["b", "Identificar fraudes nas demonstrações contábeis e aprimorar o controle interno para que novas fraudes não aconteçam."], ["c", "Detectar erros nas demonstrações contábeis e instruir a administração e os responsáveis pela governança, de modo que novos erros sejam evitados."], ["d", "Apresentar um relatório com parecer que reflita sua opinião sobre as demonstrações contábeis apresentadas e assegurar que elas estão livres de fraudes."], ["e", "Dar uma opinião imparcial sobre as demonstrações contábeis e assegurar que estas estão livres de fraudes e de erros."]], "tipo": "mc", "resp": "a", "com": ["Letra A. Item 11 da NBC TA 200: (a) obter segurança razoável de que as demonstrações como um todo estão livres de distorção relevante, causada por fraude ou erro; e (b) apresentar relatório e comunicar-se como exigido pelas NBC TA.", "B e C: a responsabilidade primária por prevenir e detectar fraudes e erros é da administração, e não do auditor.", "D e E: o auditor não \"assegura que as demonstrações estão livres de fraudes\". Ele busca segurança razoável de que estão livres de distorção relevante, que é outra coisa."], "n": 9, "rot": "Exercício da teoria 9", "nav": "T9"}, {"fonte": "DPDF, 2022", "tema": "Objetivos gerais do auditor e alcance", "enun": "Julgue o item a seguir, relativo aos trabalhos de auditoria e perícia contábil.\nO trabalho da auditoria independente, além de aumentar a confiança dos usuários nas demonstrações contábeis, atesta a eficiência e a eficácia com a qual a administração conduziu os negócios da entidade.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. A primeira parte está certa: a auditoria aumenta a confiança dos usuários nas demonstrações.", "A parte final está errada: segundo a NBC TA 200, a opinião do auditor não assegura a viabilidade futura da entidade nem a eficiência ou eficácia com que a administração conduziu os negócios."], "n": 10, "rot": "Exercício da teoria 10", "nav": "T10"}, {"fonte": "Manausprev, 2021", "tema": "Definições da NBC TA 200", "enun": "As demonstrações contábeis destinam-se a fornecer informações relevantes aos usuários, tais como a posição patrimonial e financeira, o desempenho e os fluxos de caixa da entidade. Quando a estrutura de relatório financeiro é uma estrutura de conformidade, recebe a denominação de", "alts": [["a", "analítica."], ["b", "integralizada."], ["c", "aplicável."], ["d", "compliance."], ["e", "detalhada."]], "tipo": "mc", "resp": "d", "com": ["Letra D. A NBC TA 200 diz que a expressão \"estrutura de conformidade\" (compliance) se refere à estrutura que exige o cumprimento de suas exigências, sem admitir divulgações além das exigidas nem desvios para obter apresentação adequada."], "n": 11, "rot": "Exercício da teoria 11", "nav": "T11"}, {"fonte": "CGE-CE, 2019", "tema": "Definições da NBC TA 200", "enun": "A respeito de eventos econômicos ou de condições ou circunstâncias econômicas ocorridos em determinada data, o auditor independente utiliza, no exercício de sua atividade profissional, dados expressos em termos financeiros em relação a uma entidade específica. A definição desses dados refere-se ao conceito de", "alts": [["a", "risco de auditoria."], ["b", "informação contábil."], ["c", "distorção."], ["d", "premissa."], ["e", "asseguração razoável."]], "tipo": "mc", "resp": "b", "com": ["Letra B. O enunciado descreve a informação contábil histórica: informação expressa em termos financeiros, sobre uma entidade específica, derivada principalmente do sistema contábil, sobre eventos ocorridos em períodos passados ou condições em data passada."], "n": 12, "rot": "Exercício da teoria 12", "nav": "T12"}, {"fonte": "SEFAZ-AM, 2022", "tema": "Princípios éticos", "enun": "De acordo com a NBC TA 200 (R1) – Objetivos Gerais do Auditor Independente e a Condução da Auditoria em Conformidade com Normas de Auditoria, os princípios fundamentais de ética profissional relevantes para o auditor, quando da condução de auditoria de demonstrações contábeis, estão listados a seguir, à exceção de um. Assinale-o.", "alts": [["a", "Integridade."], ["b", "Honestidade."], ["c", "Objetividade."], ["d", "Confidencialidade."], ["e", "Competência e zelo profissional."]], "tipo": "mc", "resp": "b", "com": ["Letra B. O item A17 da NBC TA 200 lista cinco princípios: integridade, objetividade, competência e zelo profissional, confidencialidade e comportamento profissional.", "\"Honestidade\" aparece na definição de integridade (ser direto e honesto), mas não é um princípio autônomo da lista. É exatamente a troca que a banca costuma fazer."], "n": 13, "rot": "Exercício da teoria 13", "nav": "T13"}, {"fonte": "CM Uberlândia, 2021", "tema": "Ceticismo e julgamento profissional", "enun": "Com relação ao ceticismo e ao julgamento profissional do auditor segundo a NBC TA 200, assinale a alternativa incorreta.", "alts": [["a", "O ceticismo profissional do auditor inclui estar alerta, por exemplo, a informações que coloquem em dúvida a confiabilidade dos documentos e respostas a indagações a serem usadas como evidências de auditoria."], ["b", "A manutenção do ceticismo profissional ao longo de toda a auditoria é necessária, por exemplo, para que o auditor reduza os riscos de ignorar circunstâncias não usuais e generalização excessiva ao tirar conclusões das observações de auditoria."], ["c", "O auditor deve considerar a suficiência das evidências quando um documento individual suscetível à fraude for a única evidência que corrobore um valor relevante da demonstração contábil."], ["d", "A crença de que a administração e os responsáveis pela governança são honestos e têm integridade livra o profissional de auditoria da necessidade de manter o ceticismo profissional."]], "tipo": "mc", "resp": "d", "com": ["Letra D (a incorreta). Pelo item A24, a crença na honestidade e integridade da administração não livra o auditor de manter o ceticismo nem permite que ele se satisfaça com evidências menos que persuasivas.", "A, B e C reproduzem quase literalmente os itens A20, A21 e A22 da NBC TA 200."], "n": 14, "rot": "Exercício da teoria 14", "nav": "T14"}, {"fonte": "Auditor UFG, 2017", "tema": "Ceticismo e julgamento profissional", "enun": "O julgamento profissional é essencial para a condução apropriada da auditoria e o exercício desse julgamento em qualquer caso específico baseia-se nos fatos e nas circunstâncias que são conhecidos pelo auditor. O uso do julgamento profissional é necessário nas decisões que envolvem:", "alts": [["a", "indícios de possível fraude e erro."], ["b", "confiabilidade e legitimidade dos documentos."], ["c", "afirmação para classes de transações e saldos."], ["d", "materialidade e risco de auditoria."]], "tipo": "mc", "resp": "d", "com": ["Letra D. Pelo item A25, o julgamento profissional é necessário, em particular, nas decisões sobre: materialidade e risco de auditoria; natureza, época e extensão dos procedimentos; se a evidência obtida é suficiente e apropriada; avaliação das opiniões da administração na aplicação da estrutura; e extração de conclusões (como a razoabilidade das estimativas).", "Ficar alerta a indícios de fraude e à confiabilidade dos documentos (A e B) é exemplo de ceticismo, e não de julgamento."], "n": 15, "rot": "Exercício da teoria 15", "nav": "T15"}, {"fonte": "EMAP, 2018", "tema": "Evidência e risco de auditoria", "enun": "Determinado auditor defrontou-se com evidências circunstanciais acerca de uma não conformidade na área auditada. Ele, então, elaborou matriz de seus achados de auditoria. Com relação a essa situação hipotética e aos múltiplos aspectos a ela relacionados, julgue o item a seguir.\nA adequação da evidência da auditoria está relacionada à medida da quantidade da evidência, enquanto a suficiência da auditoria está associada à qualidade da evidência.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. O item inverteu os conceitos. Suficiência = quantidade; adequação = qualidade (relevância e confiabilidade)."], "n": 16, "rot": "Exercício da teoria 16", "nav": "T16"}, {"fonte": "ISS Teresina, 2016", "tema": "Evidência e risco de auditoria", "enun": "O risco de distorção relevante é o risco de que as demonstrações contábeis contenham distorção relevante antes da auditoria. Segundo a NBC TA 200, podem ocorrer no nível", "alts": [["a", "geral da demonstração contábil e no nível da afirmação para classes de transações, saldos contábeis e divulgações."], ["b", "de controle das normas e registros contábeis e no nível dos processos operacionais e administrativos."], ["c", "da implementação e manutenção do controle interno e no nível da afirmação para classes de transações, saldos contábeis e divulgações."], ["d", "de controle das normas e registros contábeis e no nível da afirmação para classes de transações, saldos contábeis e divulgações."], ["e", "geral da demonstração contábil e no nível dos processos operacionais e administrativos."]], "tipo": "mc", "resp": "a", "com": ["Letra A. Item A36: os riscos de distorção relevante existem em dois níveis: geral da demonstração contábil (disseminados, afetam muitas afirmações) e da afirmação para classes de transações, saldos contábeis e divulgações."], "n": 17, "rot": "Exercício da teoria 17", "nav": "T17"}, {"fonte": "TST, 2017", "tema": "Evidência e risco de auditoria", "enun": "Evidências de auditoria são as informações utilizadas pelo auditor para fundamentar suas conclusões em que se baseia sua opinião, devendo ser suficiente, que é a medida da quantidade dessas evidências. Nos termos da NBC TA 200, essa quantidade pode ser afetada", "alts": [["a", "pela avaliação do auditor dos riscos de distorção."], ["b", "pela complexidade dos riscos de auditoria."], ["c", "pelo percentual dos riscos de detecção."], ["d", "pela estrutura das demonstrações contábeis."], ["e", "pelo histórico da informação contábil."]], "tipo": "mc", "resp": "a", "com": ["Letra A. Pelo item 13 da NBC TA 200, a quantidade necessária de evidência é afetada pela avaliação do auditor dos riscos de distorção relevante e pela qualidade da evidência.", "Quanto maiores os riscos avaliados, mais evidência tende a ser necessária; quanto melhor a qualidade, menos evidência pode ser necessária."], "n": 18, "rot": "Exercício da teoria 18", "nav": "T18"}, {"fonte": "ISS Paulínia, 2021", "tema": "Condução conforme as NBC TA", "enun": "Com relação à condução da auditoria em conformidade com as normas Brasileiras de Contabilidade de Auditoria Independente de Informação Contábil (NBCs TA), analise as afirmativas a seguir e assinale (V) para a verdadeira e (F) para a falsa.\n( ) O auditor deve observar todas as NBCs TA relevantes para a auditoria, ou seja, todas as NBCs TA que estão em vigor e onde as circunstâncias tratadas existem na situação específica.\n( ) O auditor deve entender o texto inteiro de cada NBC TA, inclusive sua aplicação e outros materiais explicativos para entender os seus objetivos e aplicar as suas exigências adequadamente.\n( ) O auditor não deve declarar conformidade com as normas de auditoria em seu relatório, a menos que ele tenha cumprido com as exigências de todas as NBCS TA relevantes para a auditoria.\nAs afirmativas são, na ordem apresentada, respectivamente,", "alts": [["a", "V – V – V."], ["b", "V – V – F."], ["c", "V – F – V."], ["d", "F – V – V."], ["e", "V – F – F."]], "tipo": "mc", "resp": "a", "com": ["Letra A. As três afirmativas reproduzem a NBC TA 200.", "Repare no \"todas\": normalmente desconfiamos dessa palavra, mas aqui está certa. O auditor observa todas as NBC TA relevantes (em vigor e cujas circunstâncias existem no caso)."], "n": 19, "rot": "Exercício da teoria 19", "nav": "T19"}];
+
+const FLASH = [
+ // Aula 00
+ ["a00","Quem é responsável pela tradução e adequação das normas internacionais de auditoria no Brasil?","O <b>CFC</b> (Conselho Federal de Contabilidade) e o <b>IBRACON</b> (Instituto dos Auditores Independentes do Brasil).<br><b>Exemplo:</b> o CESPE já cobrou isso colocando a CVM como alternativa errada."],
+ ["a00","NBC TA, NBC PA e NBC TI: o que cada uma regula?","NBC TA: técnicas de auditoria <b>independente</b>. NBC PA: <b>profissionais</b> do auditor independente. NBC TI: técnica de auditoria <b>interna</b>.<br><b>Exemplo:</b> a NBC TA 200 é a norma-base da auditoria independente."],
+ ["a00","Quais empresas são obrigadas à auditoria independente?","Companhias abertas, sociedades de grande porte (ativo acima de R$ 240 milhões ou receita bruta acima de R$ 300 milhões no ano anterior), instituições financeiras, seguradoras, previdência complementar, fundações de interesse público e empresas sob agências reguladoras.<br><b>Exemplo:</b> uma limitada atacadista do DF com receita de R$ 320 milhões precisa de auditoria, mesmo não sendo sociedade anônima."],
+ ["a00","Objetivo da auditoria interna","Assistir a administração no cumprimento de seus objetivos, <b>agregando valor</b>: avalia processos, controles internos e gerenciamento de riscos e recomenda soluções.<br><b>Exemplo:</b> o auditor interno aponta que o setor de compras não cota preços e recomenda exigir três orçamentos."],
+ ["a00","A quem o auditor interno se subordina?","À <b>alta administração</b> (presidência, conselho de administração), e não à controladoria ou a outra área.<br><b>Exemplo:</b> numa estatal, a auditoria interna se reporta ao conselho, não à diretoria financeira que ela audita."],
+ ["a00","Independência do auditor interno × externo","Os dois têm independência, mas o interno em <b>menor grau</b> (autonomia profissional); o externo, em maior grau.<br><b>Exemplo:</b> o auditor interno recebe salário da empresa; o externo não pode ter vínculo empregatício com ela."],
+ ["a00","Quem define o escopo da auditoria interna e o da externa?","Interna: a <b>gerência</b>. Externa: as <b>normas de auditoria</b> ou legislação específica.<br><b>Exemplo:</b> o conselho não pode mandar o auditor independente pular a contagem do estoque."],
+ ["a00","Auditoria interna × externa: continuidade e responsabilidade","Interna: <b>contínua</b>, responsabilidade <b>trabalhista</b>. Externa: <b>periódica ou pontual</b>, responsabilidade <b>profissional, civil e criminal</b>.<br><b>Exemplo:</b> o auditor externo que assina relatório limpo sabendo de fraude responde civil e criminalmente."],
+ ["a00","Que formação a prova espera do auditor interno?","<b>Contador</b> registrado no CRC (Resolução CFC 1.640/2021), salvo se a questão citar expressamente a NBC TI 01, que não exige.<br><b>Exemplo:</b> item que diga \"o CFC não exige registro no CRC para a auditoria interna\" está errado."],
+ ["a00","Auditoria de avaliação da gestão","Certificar a <b>regularidade das contas</b>, verificar execução de contratos e convênios e a <b>probidade</b> na aplicação dos recursos. Em regra, <i>a posteriori</i>.<br><b>Exemplo:</b> exame da prestação de contas anual de uma secretaria do DF."],
+ ["a00","Auditoria de acompanhamento da gestão","Atua <b>em tempo real</b> sobre os atos de gestão, prevenindo gargalos.<br><b>Exemplo:</b> equipe que acompanha mês a mês a execução de uma obra de grande vulto."],
+ ["a00","Auditoria operacional × especial","Operacional: <b>eficiência, eficácia e economicidade</b>, assessorando o gestor. Especial: fatos <b>relevantes, incomuns ou extraordinários</b>, por determinação de autoridade.<br><b>Exemplo:</b> avaliar o custo-benefício do programa Nota Legal é operacional; apurar um sumiço de equipamentos por ordem do secretário é especial."],
+ ["a00","Objetivo da auditoria (NBC TA 200, item 3)","<b>Aumentar o grau de confiança nas demonstrações contábeis por parte dos usuários</b>, mediante a expressão de uma opinião.<br><b>Exemplo:</b> o banco confia mais no balanço do cliente porque ele vem auditado."],
+ ["a00","O que é asseguração razoável?","Nível <b>alto, mas não absoluto</b> de segurança, obtido com evidência apropriada e suficiente para reduzir o risco de auditoria a nível <b>aceitavelmente baixo</b>.<br><b>Exemplo:</b> o auditor testa uma amostra das notas fiscais, e não todas; por isso a segurança não é absoluta."],
+ ["a00","Quais são as limitações inerentes da auditoria?","Natureza das <b>informações contábeis</b>, natureza dos <b>procedimentos</b> e necessidade de concluir em <b>tempo e custo razoáveis</b>. Por isso a evidência é persuasiva, não conclusiva.<br><b>Exemplo:</b> um conluio com notas falsas bem feitas pode escapar mesmo de uma auditoria correta."],
+ ["a00","Objetivos gerais do auditor (item 11)","(a) Obter <b>segurança razoável</b> de que as demonstrações como um todo estão livres de <b>distorção relevante</b>, por fraude ou erro; (b) <b>apresentar relatório</b> e <b>comunicar-se</b> como exigem as NBC TA.<br><b>Exemplo:</b> alternativa que diga \"assegurar que as demonstrações estão livres de fraudes\" está errada."],
+ ["a00","Cite três coisas que NÃO são objetivo do auditor independente","Assegurar a viabilidade futura; atestar eficiência ou eficácia da gestão; elaborar demonstrações; prevenir e detectar fraudes (responsabilidade primária da administração); implantar controles; assistir a administração.<br><b>Exemplo:</b> uma empresa com relatório limpo pode quebrar no ano seguinte sem que o auditor tenha falhado."],
+ ["a00","Quando o auditor se abstém de opinar ou renuncia?","Quando não consegue segurança razoável e a <b>opinião com ressalva</b> é insuficiente; renúncia só se a lei permitir.<br><b>Exemplo:</b> a empresa impede a contagem do estoque, seu maior ativo: o auditor se abstém de opinião."],
+ ["a00","O que é distorção? Quando é relevante?","Diferença de <b>valor, classificação, apresentação ou divulgação</b> entre o relatado e o exigido pela estrutura. É relevante se puder <b>influenciar decisões econômicas</b> dos usuários.<br><b>Exemplo:</b> estoque de 40 mil que deveria ser 100 mil: distorção de 60 mil."],
+ ["a00","Fraude × erro","Fraude: ato <b>intencional</b>. Erro: ato <b>não intencional</b>. Ambos geram distorção.<br><b>Exemplo:</b> esquecer de lançar uma nota é erro; emitir nota fria para inflar despesa é fraude."],
+ ["a00","Estrutura de apresentação adequada × de conformidade","Adequada: admite divulgações <b>além</b> das exigidas ou, raramente, <b>desvio</b> da estrutura. Conformidade (<b>compliance</b>): só cumprir as exigências, sem essas flexibilidades.<br><b>Exemplo:</b> demonstrações para fins gerais segundo os CPC usam apresentação adequada."],
+ ["a00","Informação contábil histórica","Em termos financeiros, de entidade específica, derivada do sistema contábil, sobre eventos <b>passados</b>.<br><b>Exemplo:</b> o saldo de caixa em 31/12 do ano anterior; uma projeção de vendas não é histórica."],
+ ["a00","Administração × responsáveis pela governança","Administração: responsabilidade <b>executiva</b> (diretoria). Governança: <b>supervisão</b> estratégica (conselho de administração).<br><b>Exemplo:</b> o diretor financeiro é administração; o conselho que aprova as contas é governança."],
+ ["a00","O que é a premissa da auditoria?","A administração sabe que responde pela <b>elaboração</b> das demonstrações, pelo <b>controle interno</b> e por dar <b>acesso</b> às informações e acesso <b>irrestrito</b> às pessoas.<br><b>Exemplo:</b> negar ao auditor acesso ao contador viola a premissa."],
+ ["a00","Risco de auditoria","Risco de o auditor expressar <b>opinião inadequada</b> quando há distorção relevante. É função do risco de distorção relevante e do risco de detecção.<br><b>Exemplo:</b> emitir relatório limpo para um balanço com receita superavaliada em 20%."],
+ ["a00","Risco inerente × risco de controle","Inerente: suscetibilidade a distorção <b>antes</b> de considerar controles. Controle: o <b>controle interno da entidade</b> não prevenir, detectar e corrigir a distorção.<br><b>Exemplo:</b> estoque de joias tem risco inerente alto; não fazer inventário eleva o risco de controle."],
+ ["a00","Risco de detecção","Risco de os <b>procedimentos do auditor</b> não detectarem distorção relevante existente. É o único que o auditor controla.<br><b>Exemplo:</b> com risco de distorção alto, o auditor amplia a amostra para reduzir o risco de detecção."],
+ ["a00","Em que níveis existe o risco de distorção relevante?","<b>Geral da demonstração contábil</b> (disseminado) e <b>da afirmação</b> (classes de transações, saldos e divulgações).<br><b>Exemplo:</b> administração sem integridade afeta tudo (nível geral); uma estimativa complexa de provisão afeta uma afirmação."],
+ ["a00","Os cinco princípios éticos da NBC TA 200 (A17)","<b>Integridade, objetividade, competência e zelo profissional, confidencialidade e comportamento profissional</b> (IOC3).<br><b>Exemplo:</b> a banca troca um deles por \"honestidade\", \"independência\" ou \"transparência\"."],
+ ["a00","Defina integridade e objetividade","Integridade: ser <b>direto e honesto</b>. Objetividade: não comprometer julgamentos por <b>tendenciosidade, conflito de interesse ou influência indevida</b>.<br><b>Exemplo:</b> auditor que é sócio do cliente tem conflito de interesse e fere a objetividade."],
+ ["a00","Ceticismo profissional","Postura com <b>mente questionadora</b>, alerta a sinais de distorção, e <b>avaliação crítica</b> das evidências.<br><b>Exemplo:</b> duas notas com o mesmo número e valores diferentes: o auditor investiga em vez de aceitar a explicação verbal."],
+ ["a00","Que riscos o ceticismo ajuda a reduzir (A21)?","<b>Ignorar circunstâncias não usuais</b>, <b>generalizar em excesso</b> e <b>usar premissas inadequadas</b> ao definir e avaliar procedimentos.<br><b>Exemplo:</b> concluir que todas as vendas estão certas porque as cinco primeiras estavam é generalização excessiva."],
+ ["a00","A honestidade passada da administração dispensa o ceticismo?","<b>Não.</b> O auditor considera a experiência, mas mantém o ceticismo e não aceita evidência menos que persuasiva.<br><b>Exemplo:</b> cliente antigo e sem problemas ainda tem as confirmações de saldo testadas."],
+ ["a00","Julgamento profissional: onde é necessário (A25)?","Materialidade e <b>risco de auditoria</b>; natureza, época e extensão dos procedimentos; suficiência da evidência; opiniões da administração; conclusões (como estimativas).<br><b>Exemplo:</b> definir que diferenças acima de 1% do lucro são relevantes."],
+ ["a00","Suficiência × adequação da evidência","Suficiência = <b>quantidade</b>. Adequação = <b>qualidade</b> (relevância e confiabilidade).<br><b>Exemplo:</b> uma confirmação enviada direto pelo banco ao auditor tem mais qualidade que extratos impressos pelo cliente."],
+ ["a00","O que afeta a quantidade de evidência necessária?","A <b>avaliação dos riscos de distorção</b> (risco maior, mais evidência) e a <b>qualidade</b> da evidência (melhor qualidade, menos evidência). Mais quantidade pode não compensar má qualidade.<br><b>Exemplo:</b> cem recibos sem assinatura não substituem uma confirmação externa."],
+ ["a00","Quando uma NBC TA é relevante para a auditoria?","Quando está <b>em vigor</b> e as circunstâncias que ela trata <b>existem</b> no caso. O auditor deve observar <b>todas</b> as relevantes.<br><b>Exemplo:</b> a norma de auditoria de estimativas é relevante para uma empresa com provisões complexas."],
+ ["a00","Pode o auditor deixar de cumprir uma exigência relevante?","Só em circunstâncias <b>excepcionais</b>, quando o procedimento seria ineficaz, executando <b>procedimentos alternativos</b> para atingir o mesmo objetivo.<br><b>Exemplo:</b> o devedor não responde à confirmação; o auditor examina os recebimentos posteriores."],
+ // Texto literal
+ ["ref","NBC TA 200, item 4: de quem são as demonstrações auditadas?","São <b>as da entidade, elaboradas pela sua administração, com supervisão geral dos responsáveis pela governança</b>.<br><b>Exemplo:</b> a SEFAZ-SE cobrou isso em 2022 com a lista da Lei 6.404/1976 como distrator."],
+ ["ref","NBC TA 200, item 5: por que a asseguração não é absoluta?","Porque há <b>limitações inerentes</b>, e a maioria das evidências é <b>persuasiva e não conclusiva</b>.<br><b>Exemplo:</b> item com \"segurança absoluta\" ou \"certeza\" está errado."],
+ ["ref","NBC TA 200, item 12","Sem segurança razoável e com ressalva insuficiente, o auditor deve <b>abster-se de opinar</b> ou <b>renunciar</b>, quando a lei permitir.<br><b>Exemplo:</b> sem acesso aos livros fiscais da empresa, o auditor não consegue base para opinar."],
+ ["ref","NBC TA 200, A31: a frase sobre quantidade e qualidade","\"Quanto melhor a qualidade, menos evidência pode ser necessária. A obtenção de mais evidência de auditoria, porém, <b>pode não compensar a sua má qualidade</b>.\"<br><b>Exemplo:</b> item que diga que mais evidência sempre compensa qualidade ruim está errado."],
+ ["ref","NBC TA 200, A29: documentação do julgamento","A documentação deve permitir que <b>outro auditor experiente, sem ligação prévia</b> com o trabalho, entenda os julgamentos significativos.<br><b>Exemplo:</b> o papel de trabalho registra por que a materialidade foi fixada em 1% da receita."],
+ ["ref","NBC TA 200, A23: documentos genuínos","O auditor <b>pode aceitar</b> registros e documentos como genuínos, salvo razão para crer o contrário; havendo dúvida, investiga mais.<br><b>Exemplo:</b> uma nota fiscal com rasura no valor leva o auditor a confirmar com o fornecedor."],
+ // Panorama
+ ["pan","Materialidade (relevância)","Valor ou natureza a partir do qual uma distorção pode influenciar as decisões dos usuários. Definida por <b>julgamento</b>, no planejamento e revista ao longo do trabalho.<br><b>Exemplo:</b> fixar materialidade em 5% do lucro antes dos tributos."],
+ ["pan","Tipos de opinião do auditor","<b>Sem modificação</b> (limpa); modificadas: <b>com ressalva</b>, <b>adversa</b> e <b>abstenção</b> de opinião.<br><b>Exemplo:</b> distorção relevante e generalizada leva à opinião adversa."],
+ ["pan","Procedimentos de auditoria para obter evidência","Inspeção, observação, confirmação externa, recálculo, reexecução, procedimentos analíticos e indagação.<br><b>Exemplo:</b> pedir ao banco que confirme por escrito o saldo da conta é confirmação externa."],
+ ["pan","Testes de controle × procedimentos substantivos","Testes de controle avaliam a <b>eficácia dos controles</b>; procedimentos substantivos buscam <b>detectar distorções</b> nos saldos e transações (testes de detalhe e analíticos).<br><b>Exemplo:</b> verificar se as compras têm aprovação é teste de controle; conferir o valor de uma compra na nota é substantivo."],
+ ["pan","Papéis de trabalho","Documentação do planejamento, dos procedimentos, das evidências e das conclusões. Pertencem ao <b>auditor</b>.<br><b>Exemplo:</b> a planilha de contagem do estoque assinada pela equipe é papel de trabalho."],
+ ["pan","Eventos subsequentes","Fatos ocorridos entre a data das demonstrações e a do relatório (ou depois) que podem exigir ajuste ou divulgação.<br><b>Exemplo:</b> falência de um grande cliente em janeiro revela que o crédito de dezembro já era incobrável."]
+];
+
+/* ---------- mapa mental: cada item tem explicação, exemplo, base legal e pegadinha ---------- */
+const MM_ROOT = {k: "root", t: "AUDITORIA · NBC TA 200", s: "Aumentar a confiança dos usuários nas demonstrações<br><small>Opinião · segurança razoável · distorção relevante · ética, ceticismo e julgamento</small>",
+  e: "A auditoria das demonstrações contábeis existe para <b>aumentar o grau de confiança dos usuários</b> nessas demonstrações. O auditor faz isso expressando uma <b>opinião</b>, baseada em <b>segurança razoável</b>, sobre se elas estão de acordo com a estrutura de relatório financeiro aplicável. A NBC TA 200 é a norma-base que organiza tudo isso.",
+  x: "Um banco que vai emprestar a uma distribuidora do DF confia mais no balanço dela porque ele vem com o relatório de um auditor independente. Como auditor fiscal, você usará essas mesmas demonstrações auditadas como ponto de partida para cruzar receitas declaradas com o ICMS apurado.",
+  l: "NBC TA 200 (R1), itens 3 a 5 e 11.",
+  p: "\"O objetivo da auditoria é aumentar a credibilidade da entidade no mercado\": ERRADO.<br><b>O erro:</b> o foco não é a entidade.<br><b>O certo:</b> aumentar a confiança dos usuários nas <b>demonstrações contábeis</b>."};
+
+const MM = [
+ {k: "ctx", c: "#2f5bd3", t: "Contextualização", s: "Normas, tradução, obrigatoriedade",
+  e: "As normas de auditoria fazem parte das Normas Brasileiras de Contabilidade (técnicas e profissionais). Vêm sendo convergidas às da IFAC desde 2010.",
+  x: "Quando a IFAC publica uma nova norma internacional, o CFC e o IBRACON a traduzem e editam a NBC TA correspondente.",
+  l: "Contextualização da aula; Lei 6.404/1976, artigo 177.",
+  p: "\"A NBC TI trata da auditoria independente\": ERRADO.<br><b>O erro:</b> TI é técnica de auditoria <b>interna</b>.<br><b>O certo:</b> auditoria independente está nas NBC TA (técnicas) e NBC PA (profissionais).",
+  f: [
+   {k: "ctx1", t: "NBC TA, NBC PA e NBC TI",
+    e: "<b>NBC TA</b>: técnicas de auditoria independente de informação contábil histórica. <b>NBC PA</b>: profissionais do auditor independente. <b>NBC TI</b>: técnica de auditoria interna.",
+    x: "A NBC TA 200 (objetivos gerais) é técnica de auditoria independente; a norma de independência do auditor é uma NBC PA.",
+    l: "Contextualização da aula.",
+    p: "\"As NBC TA tratam da auditoria interna\": ERRADO.<br><b>O erro:</b> confundiu as siglas.<br><b>O certo:</b> interna é NBC TI."},
+   {k: "ctx2", t: "Tradução: CFC e IBRACON",
+    e: "A tradução e adequação das normas internacionais da IFAC é responsabilidade do <b>Conselho Federal de Contabilidade</b> e do <b>Instituto dos Auditores Independentes do Brasil</b>.",
+    x: "Uma questão do CESPE perguntou de quem é essa responsabilidade e colocou a CVM como distrator.",
+    l: "Contextualização da aula.",
+    p: "\"A adequação das normas internacionais cabe à CVM\": ERRADO.<br><b>O erro:</b> a CVM regula o mercado.<br><b>O certo:</b> CFC e IBRACON."},
+   {k: "ctx3", t: "Auditoria obrigatória",
+    e: "Companhias abertas (auditores registrados na CVM), sociedades de grande porte (ativo acima de R$ 240 milhões ou receita bruta acima de R$ 300 milhões no exercício anterior), instituições financeiras, seguradoras, previdência complementar, fundações de interesse público e empresas sob agências reguladoras.",
+    x: "Uma limitada com receita bruta de R$ 350 milhões no ano anterior é sociedade de grande porte e precisa de auditoria independente, mesmo sem ser sociedade anônima.",
+    l: "Lei 6.404/1976, artigo 177, parágrafo 3º; regras das sociedades de grande porte.",
+    p: "\"Só as companhias abertas são obrigadas à auditoria independente\": ERRADO.<br><b>O erro:</b> ignorou os demais casos.<br><b>O certo:</b> grande porte, instituições financeiras, seguradoras e outras também são."}
+  ]},
+ {k: "cls", c: "#1f8a4c", t: "Interna × externa", s: "Quem faz, para quê, a quem responde",
+  e: "A <b>interna</b> assiste a administração e agrega valor, avaliando processos, controles e riscos. A <b>externa</b> opina sobre as demonstrações para aumentar a confiança dos usuários.",
+  x: "Na SEFAZ-DF, a Controladoria-Geral do DF faz papel de controle interno; a auditoria da distribuidora fiscalizada pela SEFAZ, contratada para opinar sobre o balanço, é externa.",
+  l: "NBC TI 01; NBC TA 200; quadro de Crepaldi adaptado na aula.",
+  p: "\"A auditoria externa é contínua\": ERRADO.<br><b>O erro:</b> trocou as características.<br><b>O certo:</b> interna é contínua; externa é periódica ou pontual.",
+  f: [
+   {k: "cls1", t: "Subordinação do auditor interno",
+    e: "Em regra é funcionário e se subordina à <b>alta administração</b> (presidência, conselho). Tem autonomia profissional, mas independência menor que a do externo.",
+    x: "O auditor interno de uma estatal do DF responde ao conselho de administração, e não ao diretor financeiro cujas contas ele examina.",
+    l: "Aula, tópico Classificação; exercício da teoria 1.",
+    p: "\"A auditoria interna deve se subordinar à controladoria\": ERRADO.<br><b>O erro:</b> subordinação a área avaliada.<br><b>O certo:</b> alta administração."},
+   {k: "cls2", t: "Controles internos: quem implanta",
+    e: "A <b>administração</b> implanta e responde pelos controles internos. O auditor interno avalia e recomenda melhorias.",
+    x: "Se a empresa não tem conciliação bancária mensal, a culpa é da administração; o auditor interno aponta a falha e recomenda criar a rotina.",
+    l: "Exercício da teoria 1, alternativa B.",
+    p: "\"A auditoria interna é responsável pela implantação dos controles internos\": ERRADO.<br><b>O erro:</b> confundiu avaliar com implantar.<br><b>O certo:</b> implantar cabe à administração."},
+   {k: "cls3", t: "Escopo",
+    e: "O escopo do interno é definido pela <b>gerência</b>; a extensão do exame do externo, pelas <b>normas de auditoria</b> ou por legislação específica.",
+    x: "A diretoria pede ao auditor interno que examine só o setor de compras; já o auditor externo não pode deixar de aplicar uma NBC TA porque o cliente pediu.",
+    l: "Crepaldi; exercício da teoria 4.",
+    p: "\"O escopo do externo é definido pelo conselho de administração\": ERRADO.<br><b>O erro:</b> o conselho não limita o trabalho do independente.<br><b>O certo:</b> normas de auditoria ou lei."},
+   {k: "cls4", t: "Formação: contador",
+    e: "A NBC TI 01 não exige formação expressa, mas a <b>Resolução CFC 1.640/2021</b> torna auditoria interna e externa atribuições privativas de <b>contador</b>. Leve para a prova que ambos devem ser contadores.",
+    x: "Uma empresa não pode contratar um administrador sem registro no CRC como auditor independente das suas demonstrações.",
+    l: "Resolução CFC 1.640/2021, artigo 3º, XXI e XXII; exercício da teoria 3.",
+    p: "\"O CFC não exige registro no CRC para a auditoria interna\": ERRADO.<br><b>O erro:</b> ignorou a resolução.<br><b>O certo:</b> exige-se contador registrado nos dois casos."}
+  ]},
+ {k: "tip", c: "#b07400", t: "Tipos governamentais", s: "IN 01/2001 (revogada, mas cobrada)",
+  e: "Cinco tipos: avaliação da gestão, acompanhamento da gestão, contábil, operacional e especial. Grave a palavra-chave de cada um.",
+  x: "Uma auditoria determinada pelo secretário para apurar um desvio incomum de combustível da frota é <b>especial</b>.",
+  l: "IN 01/2001 da Secretaria Federal de Controle Interno; IN 03/2017 a revogou.",
+  p: "\"A IN 03/2017 manteve os cinco tipos de auditoria\": ERRADO.<br><b>O erro:</b> a norma nova não traz essa classificação.<br><b>O certo:</b> os tipos vêm da IN 01/2001, revogada.",
+  f: [
+   {k: "tip1", t: "Avaliação da gestão",
+    e: "Emitir opinião para <b>certificar a regularidade das contas</b>, verificar a execução de contratos e convênios e a <b>probidade</b> na aplicação dos recursos. Em regra, depois da execução.",
+    x: "Exame da prestação de contas anual de uma secretaria, para certificar se as contas estão regulares.",
+    l: "Exercícios da teoria 5 e 6.",
+    p: "\"A avaliação da gestão atua em tempo real\": ERRADO.<br><b>O erro:</b> característica do acompanhamento.<br><b>O certo:</b> avaliação certifica contas, em regra <i>a posteriori</i>."},
+   {k: "tip2", t: "Acompanhamento da gestão",
+    e: "Realizada <b>ao longo</b> dos processos de gestão, atuando <b>em tempo real</b> sobre atos efetivos e efeitos potenciais, para evidenciar melhorias e prevenir gargalos.",
+    x: "Auditores acompanham, mês a mês, a execução de uma obra de grande valor enquanto ela acontece.",
+    l: "Exercício da teoria 5.",
+    p: "\"O acompanhamento da gestão certifica as contas prestadas\": ERRADO.<br><b>O erro:</b> definição da avaliação.<br><b>O certo:</b> acompanhamento atua em tempo real."},
+   {k: "tip3", t: "Contábil, operacional e especial",
+    e: "<b>Contábil</b>: registros conforme a estrutura e demonstrações fidedignas. <b>Operacional</b>: <b>eficiência, eficácia e economicidade</b>, assessorando o gestor. <b>Especial</b>: fatos <b>relevantes, incomuns ou extraordinários</b>, por determinação de autoridade.",
+    x: "Avaliar se o programa de nota fiscal premiada do DF aumentou a arrecadação a custo razoável é auditoria operacional.",
+    l: "IN 01/2001; quadro de palavras-chave da aula.",
+    p: "\"A auditoria contábil avalia a economicidade dos programas\": ERRADO.<br><b>O erro:</b> economicidade é foco da operacional.<br><b>O certo:</b> contábil examina registros e demonstrações."}
+  ]},
+ {k: "obj", c: "#8a3ac2", t: "Objetivos e segurança razoável", s: "Itens 3, 4, 5, 11 e 12",
+  e: "O auditor busca <b>segurança razoável</b> (alta, não absoluta) de que as demonstrações como um todo estão livres de <b>distorção relevante</b>, por fraude ou erro; depois apresenta relatório e se comunica.",
+  x: "O auditor testa por amostragem as notas fiscais de venda; não confere todas, por isso a segurança é razoável e não absoluta.",
+  l: "NBC TA 200, itens 3, 5 e 11.",
+  p: "\"O auditor deve reduzir o risco de auditoria a zero\": ERRADO.<br><b>O erro:</b> ignora as limitações inerentes.<br><b>O certo:</b> a um nível aceitavelmente baixo.",
+  f: [
+   {k: "obj1", t: "Demonstrações são da entidade",
+    e: "Elaboradas pela <b>administração</b>, com supervisão geral dos <b>responsáveis pela governança</b>. A auditoria não exime essas pessoas de suas responsabilidades.",
+    x: "Se o balanço auditado de uma empresa omitir receita, a responsabilidade pela omissão continua sendo da administração; o relatório do auditor não a transfere.",
+    l: "NBC TA 200, item 4; exercício da teoria 8.",
+    p: "\"As demonstrações sujeitas à auditoria são as listadas na Lei 6.404/1976\": ERRADO.<br><b>O erro:</b> a norma não define pela lista.<br><b>O certo:</b> são as da entidade, elaboradas pela administração."},
+   {k: "obj2", t: "Limitações inerentes",
+    e: "Natureza das informações contábeis (estimativas, julgamentos), natureza dos procedimentos (conluio, documentos falsos) e necessidade de <b>tempo e custo razoáveis</b>. Por isso a evidência é <b>persuasiva, não conclusiva</b>.",
+    x: "Uma fraude com conluio entre o gerente e um fornecedor, com notas fiscais falsas bem feitas, pode passar mesmo em auditoria bem feita.",
+    l: "NBC TA 200, item 5 e A45 em diante.",
+    p: "\"A maioria das evidências de auditoria é conclusiva\": ERRADO.<br><b>O erro:</b> inverteu os termos.<br><b>O certo:</b> é persuasiva, e não conclusiva."},
+   {k: "obj3", t: "O que NÃO é objetivo",
+    e: "Assegurar viabilidade futura, atestar eficiência ou eficácia, elaborar demonstrações, prevenir e detectar fraudes (responsabilidade primária), implantar controles, assistir a administração (isso é da interna).",
+    x: "Uma empresa com relatório limpo pode falir no ano seguinte: o auditor não garantiu a viabilidade futura.",
+    l: "Quadro da aula; exercícios da teoria 9 e 10.",
+    p: "\"A auditoria atesta a eficiência com que a administração conduziu os negócios\": ERRADO.<br><b>O erro:</b> fora do escopo.<br><b>O certo:</b> opina só sobre a conformidade das demonstrações com a estrutura."},
+   {k: "obj4", t: "Abstenção ou renúncia",
+    e: "Se não der para obter segurança razoável e a <b>ressalva</b> for insuficiente, o auditor <b>se abstém</b> de opinar ou <b>renuncia</b> ao trabalho, quando a lei permitir.",
+    x: "A empresa não deixa o auditor contar o estoque, que é o maior ativo: uma ressalva não basta, e ele se abstém de opinião.",
+    l: "NBC TA 200, item 12.",
+    p: "\"Sem segurança razoável, o auditor emite sempre opinião adversa\": ERRADO.<br><b>O erro:</b> adversa é para distorção relevante e generalizada que ele identificou.<br><b>O certo:</b> falta de evidência leva a ressalva, abstenção ou renúncia."}
+  ]},
+ {k: "def", c: "#c23a3a", t: "Definições e risco", s: "Item 13",
+  e: "As definições do item 13 são quase certas na prova: estrutura de relatório, evidência, informação histórica, distorção, administração, premissa, julgamento, ceticismo, asseguração razoável e os riscos.",
+  x: "Na fiscalização, você também lida com distorção: a diferença entre o ICMS declarado e o devido é uma distorção, e decidir se ela é relevante exige julgamento.",
+  l: "NBC TA 200, item 13.",
+  p: "\"Distorção é sempre fruto de fraude\": ERRADO.<br><b>O erro:</b> excluiu o erro.<br><b>O certo:</b> distorção pode vir de erro (não intencional) ou fraude (intencional).",
+  f: [
+   {k: "def1", t: "Apresentação adequada × conformidade",
+    e: "<b>Apresentação adequada</b>: admite divulgações além das exigidas ou, raramente, desvio da estrutura. <b>Conformidade (compliance)</b>: só exige cumprir a estrutura, sem essas flexibilidades.",
+    x: "Uma demonstração para fins gerais segundo os CPC usa apresentação adequada; uma demonstração montada só para atender a um regulador, com modelo rígido, tende a ser de conformidade.",
+    l: "NBC TA 200, item 13; exercício da teoria 11.",
+    p: "\"A estrutura de conformidade admite desvios para apresentação adequada\": ERRADO.<br><b>O erro:</b> descreveu a outra estrutura.<br><b>O certo:</b> conformidade não reconhece esses desvios."},
+   {k: "def2", t: "Distorção e relevância",
+    e: "Distorção: diferença de <b>valor, classificação, apresentação ou divulgação</b> entre o relatado e o exigido. É relevante se puder <b>influenciar as decisões econômicas</b> dos usuários.",
+    x: "Estoque apresentado por 40 mil quando deveria ser 100 mil: distorção de 60 mil. Numa empresa com ativo de 500 mil, provavelmente relevante.",
+    l: "NBC TA 200, item 13; exemplo da aula.",
+    p: "\"Distorção só se refere a valores\": ERRADO.<br><b>O erro:</b> esqueceu classificação, apresentação e divulgação.<br><b>O certo:</b> qualquer dessas diferenças é distorção."},
+   {k: "def3", t: "Premissa",
+    e: "A auditoria parte do pressuposto de que a administração sabe que responde (i) pela elaboração das demonstrações, (ii) pelo controle interno e (iii) por dar acesso às informações e acesso <b>irrestrito</b> às pessoas.",
+    x: "Se o diretor proíbe o auditor de entrevistar o contador da empresa, a premissa foi violada.",
+    l: "NBC TA 200, item 13; exercício da teoria 12 (distrator).",
+    p: "\"A premissa é a de que o auditor elabora as demonstrações\": ERRADO.<br><b>O erro:</b> atribuiu ao auditor a responsabilidade da administração.<br><b>O certo:</b> a premissa é sobre as responsabilidades da administração."},
+   {k: "def4", t: "Risco de auditoria e componentes",
+    e: "Risco de auditoria = opinião inadequada com distorção relevante. É função do <b>risco de distorção relevante</b> (inerente + controle, da entidade, antes da auditoria) e do <b>risco de detecção</b> (procedimentos do auditor).",
+    x: "Estoque de joias tem risco inerente alto; se a empresa não faz inventário (risco de controle alto), o auditor reduz o risco de detecção ampliando a contagem.",
+    l: "NBC TA 200, item 13 e A36 a A38; exercício da teoria 17.",
+    p: "\"Risco inerente considera os controles da entidade\": ERRADO.<br><b>O erro:</b> o inerente é <b>antes</b> de considerar controles.<br><b>O certo:</b> controles entram no risco de controle."}
+  ]},
+ {k: "eti", c: "#0f7c8c", t: "Ética, ceticismo e evidência", s: "A17, 15, 16, A31, condução",
+  e: "O auditor cumpre os princípios éticos, mantém ceticismo e exerce julgamento em toda a auditoria, e obtém evidência suficiente (quantidade) e adequada (qualidade). Observa todas as NBC TA relevantes.",
+  x: "Diante de um contrato de venda sem assinatura que sustenta uma receita grande, o auditor desconfia (ceticismo), decide pedir confirmação ao cliente (julgamento) e busca evidência externa, mais confiável (adequação).",
+  l: "NBC TA 200, itens 14 a 24 e A17 a A38.",
+  p: "\"Mais evidência sempre compensa evidência de má qualidade\": ERRADO.<br><b>O erro:</b> quantidade não substitui qualidade.<br><b>O certo:</b> mais evidência pode não compensar a má qualidade.",
+  f: [
+   {k: "eti1", t: "Os cinco princípios éticos",
+    e: "<b>Integridade, objetividade, competência e zelo profissional, confidencialidade e comportamento profissional</b> (IOC3).",
+    x: "O auditor que comenta num bar o faturamento do cliente fere a <b>confidencialidade</b>; o que aceita viagem paga pelo cliente arrisca a <b>objetividade</b>.",
+    l: "NBC TA 200, A17; NBC PG 100; exercício da teoria 13.",
+    p: "\"Honestidade é princípio fundamental listado na NBC TA 200\": ERRADO.<br><b>O erro:</b> está dentro de integridade.<br><b>O certo:</b> os cinco da lista."},
+   {k: "eti2", t: "Ceticismo profissional",
+    e: "Mente <b>questionadora</b>, alerta a evidências contraditórias, documentos duvidosos e sinais de fraude; avaliação crítica. Evita ignorar o incomum, generalizar e usar premissas inadequadas.",
+    x: "Duas notas fiscais com o mesmo número e valores diferentes: o auditor cético não aceita a explicação verbal e investiga.",
+    l: "NBC TA 200, item 15 e A20 a A24; exercício da teoria 14.",
+    p: "\"A honestidade conhecida da administração dispensa o ceticismo\": ERRADO.<br><b>O erro:</b> confiança não substitui ceticismo.<br><b>O certo:</b> o ceticismo é mantido em toda a auditoria."},
+   {k: "eti3", t: "Julgamento profissional",
+    e: "Aplicação de treinamento, conhecimento e experiência. Necessário sobre <b>materialidade e risco</b>, procedimentos, suficiência da evidência, opiniões da administração e conclusões. Deve ser <b>documentado</b>.",
+    x: "Fixar que diferenças acima de 1% do lucro serão consideradas relevantes é decisão de materialidade, logo de julgamento.",
+    l: "NBC TA 200, item 16 e A25 a A29; exercício da teoria 15.",
+    p: "\"O julgamento profissional justifica decisões não sustentadas por evidência\": ERRADO.<br><b>O erro:</b> julgamento não supre falta de prova.<br><b>O certo:</b> deve se apoiar em fatos e evidência apropriada e suficiente."},
+   {k: "eti4", t: "Suficiência × adequação",
+    e: "<b>Suficiência = quantidade</b> (afetada pelo risco avaliado e pela qualidade). <b>Adequação = qualidade</b> (relevância e confiabilidade, conforme fonte e natureza).",
+    x: "Uma confirmação enviada diretamente pelo banco ao auditor (fonte externa) vale mais que dez extratos impressos pelo próprio cliente.",
+    l: "NBC TA 200, item 13, A31 e A32; exercícios da teoria 16 e 18.",
+    p: "\"Adequação é a medida da quantidade\": ERRADO.<br><b>O erro:</b> inverteu.<br><b>O certo:</b> adequação é qualidade; suficiência é quantidade."},
+   {k: "eti5", t: "Condução conforme as NBC TA",
+    e: "Observar <b>todas</b> as NBC TA relevantes (em vigor e aplicáveis ao caso), entender o texto inteiro, só declarar conformidade se cumpriu todas. Excepcionalmente, deixar de cumprir uma exigência com <b>procedimento alternativo</b>.",
+    x: "Se a confirmação externa de um saldo for ineficaz no caso (o devedor não responde), o auditor aplica procedimento alternativo, como examinar recebimentos posteriores.",
+    l: "NBC TA 200, itens 18 a 24; exercício da teoria 19.",
+    p: "\"O auditor pode declarar conformidade com as NBC TA mesmo sem cumprir todas as relevantes\": ERRADO.<br><b>O erro:</b> a declaração exige cumprimento integral.<br><b>O certo:</b> só declara se cumpriu a NBC TA 200 e todas as relevantes."}
+  ]}
+];
+
+function mmItens(){
+  const out = [MM_ROOT];
+  MM.forEach(b => { out.push(b); b.f.forEach(f => out.push(Object.assign({c: b.c, pai: b.t}, f))); });
+  return out;
+}
+function renderMapa(){
+  $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
+    <div class="mm-trunk"></div>
+    <div class="mm-branches" style="--n:${MM.length}">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+      <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
+      <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
+    el.onclick = () => abrirItem(el.dataset.k);
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirItem(el.dataset.k); } };
+  });
+  abbrify($("#mmBox"));
+}
+function abrirItem(k){
+  const itens = mmItens(), i = itens.findIndex(x => x.k === k), it = itens[i];
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", el.dataset.k === k));
+  const p = $("#mmPanel");
+  p.style.setProperty("--c", it.c || "var(--accent)");
+  p.innerHTML = `<div class="muted" style="font-size:13px">${it.pai ? "Mapa › " + it.pai : "Mapa"}</div>
+    <h4>${it.t}</h4>
+    <div class="mm-sec"><span class="lbl">Explicação</span>${it.e}</div>
+    <div class="mm-sec ex"><span class="lbl">Exemplo prático</span>${it.x}</div>
+    <div class="mm-sec"><span class="lbl">Base legal e jurisprudência</span>${it.l}</div>
+    <div class="mm-sec pg"><span class="lbl">Pegadinha da banca</span>${it.p}</div>
+    <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
+      <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
+  abbrify(p);
+  p.dataset.hl = "mm-" + k; hlAplicar(p);
+  $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
+  $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
+  const r = p.getBoundingClientRect();
+  if (r.top < 120 || r.top > innerHeight - 160) p.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+/* ---------- glossário: toda sigla ganha dica com o nome por extenso ---------- */
+const GLOSS = {
+ "CF/88": "Constituição Federal de 1988", "CF": "Constituição Federal de 1988",
+ "CTN": "Código Tributário Nacional (Lei 5.172/1966)", "STF": "Supremo Tribunal Federal", "STJ": "Superior Tribunal de Justiça",
+ "LC": "Lei Complementar", "MP": "Medida Provisória", "EC": "Emenda Constitucional", "DL": "Decreto-Lei",
+ "ADCT": "Ato das Disposições Constitucionais Transitórias", "CLT": "Consolidação das Leis do Trabalho",
+ "ADI": "Ação Direta de Inconstitucionalidade", "RE": "Recurso Extraordinário", "RREE": "Recursos Extraordinários",
+ "REsp": "Recurso Especial", "HC": "Habeas Corpus", "AgR": "Agravo Regimental",
+ "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "ISS": "Imposto sobre Serviços", "ISSQN": "Imposto sobre Serviços de Qualquer Natureza",
+ "IPTU": "Imposto sobre a Propriedade Predial e Territorial Urbana", "ITBI": "Imposto sobre a Transmissão de Bens Imóveis",
+ "ITCMD": "Imposto sobre Transmissão Causa Mortis e Doação", "IPVA": "Imposto sobre a Propriedade de Veículos Automotores",
+ "IE": "Imposto de Exportação", "IR": "Imposto de Renda", "IRPF": "Imposto de Renda da Pessoa Física", "IRPJ": "Imposto de Renda da Pessoa Jurídica",
+ "IPI": "Imposto sobre Produtos Industrializados", "IOF": "Imposto sobre Operações Financeiras", "ITR": "Imposto sobre a Propriedade Territorial Rural",
+ "IGF": "Imposto sobre Grandes Fortunas", "IS": "Imposto Seletivo", "IEG": "Imposto Extraordinário de Guerra",
+ "IBS": "Imposto sobre Bens e Serviços", "CBS": "Contribuição sobre Bens e Serviços", "IVA": "Imposto sobre Valor Agregado",
+ "CIDE": "Contribuição de Intervenção no Domínio Econômico", "COSIP": "Contribuição para o Custeio do Serviço de Iluminação Pública",
+ "COFINS": "Contribuição para o Financiamento da Seguridade Social", "CSLL": "Contribuição Social sobre o Lucro Líquido",
+ "PIS": "Programa de Integração Social", "PASEP": "Programa de Formação do Patrimônio do Servidor Público",
+ "RPPS": "Regime Próprio de Previdência Social", "RGPS": "Regime Geral de Previdência Social",
+ "CVM": "Comissão de Valores Mobiliários", "AFRMM": "Adicional ao Frete para a Renovação da Marinha Mercante",
+ "SEBRAE": "Serviço Brasileiro de Apoio às Micro e Pequenas Empresas", "INCRA": "Instituto Nacional de Colonização e Reforma Agrária",
+ "SESC": "Serviço Social do Comércio", "SENAC": "Serviço Nacional de Aprendizagem Comercial", "SENAI": "Serviço Nacional de Aprendizagem Industrial",
+ "OAB": "Ordem dos Advogados do Brasil", "CRC": "Conselho Regional de Contabilidade", "CREA": "Conselho Regional de Engenharia e Agronomia",
+ "CRM": "Conselho Regional de Medicina", "CRA": "Conselho Regional de Administração", "IBAMA": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis",
+ "TCFA": "Taxa de Controle e Fiscalização Ambiental", "TFA": "Taxa de Fiscalização de Anúncios", "TFLF": "Taxa de Fiscalização, Localização e Funcionamento",
+ "TLLF": "Taxa de Licença de Localização e Funcionamento", "ZFM": "Zona Franca de Manaus", "PAF": "Processo Administrativo Fiscal",
+ "DF": "Distrito Federal", "SEFAZ": "Secretaria de Estado de Fazenda", "SEEC": "Secretaria de Estado de Economia",
+ "CEBRASPE": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos (banca)", "CESPE": "Centro de Seleção e de Promoção de Eventos (atual CEBRASPE)",
+ "PGFN": "Procuradoria-Geral da Fazenda Nacional", "AGU": "Advocacia-Geral da União", "RFB": "Receita Federal do Brasil",
+ "CAGE": "Contadoria e Auditoria-Geral do Estado", "CGE": "Controladoria-Geral do Estado", "TCE": "Tribunal de Contas do Estado",
+ "PGE": "Procuradoria-Geral do Estado", "STM": "Superior Tribunal Militar", "PF": "Polícia Federal", "PC": "Polícia Civil",
+ "ANM": "Agência Nacional de Mineração", "CAU": "Conselho de Arquitetura e Urbanismo", "INPI": "Instituto Nacional da Propriedade Industrial",
+ "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos", "EMBRAPA": "Empresa Brasileira de Pesquisa Agropecuária",
+ "CAGEPA": "Companhia de Água e Esgotos da Paraíba", "SEPLAN": "Secretaria de Planejamento", "APO": "Analista de Planejamento e Orçamento",
+ "PPNT": "Processo seletivo público (Petrobras)", "ATT": "Auditor Técnico de Tributos", "AFRE": "Auditor Fiscal da Receita Estadual",
+ "AFE": "Auditor Fiscal Estadual",
+ "art.": "artigo", "arts.": "artigos", "Art.": "artigo", "§": "parágrafo", "c/c": "combinado com", "nº": "número", "n.º": "número",
+ "Proc": "Procurador", "Pref": "Prefeitura", "Rel.": "Relator", "Min.": "Ministro", "Súm.": "Súmula", "SV": "Súmula Vinculante",
+ "NBC": "Norma Brasileira de Contabilidade", "NBCs": "Normas Brasileiras de Contabilidade", "NBC TA": "Norma Brasileira de Contabilidade, Técnica de Auditoria Independente", "NBCs TA": "Normas Brasileiras de Contabilidade, Técnicas de Auditoria Independente", "NBC PA": "Norma Brasileira de Contabilidade, Profissional do Auditor Independente", "NBC TI": "Norma Brasileira de Contabilidade, Técnica de Auditoria Interna", "NBC PG": "Norma Brasileira de Contabilidade, Profissional Geral", "NBC T": "Norma Brasileira de Contabilidade, Técnica (numeração antiga)", "CFC": "Conselho Federal de Contabilidade", "IBRACON": "Instituto dos Auditores Independentes do Brasil", "IFAC": "International Federation of Accountants (Federação Internacional de Contadores)", "IIA": "Institute of Internal Auditors (Instituto dos Auditores Internos)", "CGU": "Controladoria-Geral da União", "CGM": "Controladoria-Geral do Município", "IN": "Instrução Normativa", "CPC": "Comitê de Pronunciamentos Contábeis", "R1": "primeira revisão da norma (alteração ou consolidação)", "DPU": "Defensoria Pública da União", "DPDF": "Defensoria Pública do Distrito Federal", "TRE": "Tribunal Regional Eleitoral", "TRT": "Tribunal Regional do Trabalho", "TJ": "Tribunal de Justiça", "TST": "Tribunal Superior do Trabalho", "EMAP": "Empresa Maranhense de Administração Portuária", "UFG": "Universidade Federal de Goiás", "CM": "Câmara Municipal", "AFRFB": "Auditor Fiscal da Receita Federal do Brasil", "CONAB": "Companhia Nacional de Abastecimento",
+ "FG": "fato gerador", "BC": "base de cálculo", "LO": "lei ordinária"
+};
+const GLOSS_RE = new RegExp("(?<![\\wÀ-ÿ])(" + Object.keys(GLOSS).sort((a, b) => b.length - a.length)
+  .map(s => s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")).join("|") + ")(?![\\wÀ-ÿ])", "g");
+function abbrify(root){
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+    n.parentElement.closest("abbr,script,style,select,option,kbd") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => {
+    const s = n.nodeValue; GLOSS_RE.lastIndex = 0;
+    if (!GLOSS_RE.test(s)) return;
+    const frag = document.createDocumentFragment(); let last = 0; GLOSS_RE.lastIndex = 0; let m;
+    while ((m = GLOSS_RE.exec(s))){
+      frag.append(s.slice(last, m.index));
+      const a = document.createElement("abbr"); a.textContent = m[1]; a.dataset.tip = GLOSS[m[1]]; a.setAttribute("aria-label", GLOSS[m[1]]);
+      frag.append(a); last = m.index + m[1].length;
+    }
+    frag.append(s.slice(last)); n.replaceWith(frag);
+  });
+}
+/* dica posicionada acima da sigla, sem cobrir o texto nem ficar sob o cursor */
+(() => {
+  const tip = () => document.getElementById("tip");
+  function show(el){
+    const t = tip(); t.textContent = el.dataset.tip; t.classList.add("on");
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 8) y = r.bottom + 8;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("mouseover", e => { const a = e.target.closest("abbr[data-tip]"); if (a) show(a); });
+  document.addEventListener("mouseout", e => { if (e.target.closest("abbr[data-tip]")) tip().classList.remove("on"); });
+  document.addEventListener("click", e => { const a = e.target.closest("abbr[data-tip]"); if (a){ show(a); setTimeout(() => tip().classList.remove("on"), 2500); } });
+  addEventListener("scroll", () => tip().classList.remove("on"), {passive: true});
+})();
+
+const KEY = "sefazdf_T7_auditoria_aula00_v1";
+/* respostas já resolvidas, embutidas na publicação (usadas só se este navegador ainda não tiver dados) */
+const RESPOSTAS_INICIAIS = null;
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || (RESPOSTAS_INICIAIS ? structuredClone(RESPOSTAS_INICIAIS) : null) || {answers:{}, cards:{}};
+S.answers ||= {}; S.cards ||= {}; S.draft ||= {};
+const save = () => { S._ts = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); syncAgendar(); };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* abas */
+function showTab(t){
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("on", s.id === t));
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  if (t === "rend") renderRend();
+  if (t === "flash") renderCard();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+const active = () => document.querySelector("section.tab.on").id;
+
+/* questões */
+const TEMAS = [...new Set(QUESTOES.map(q => q.tema))];
+$("#fTema").innerHTML = '<option value="all">Todos os temas</option>' + TEMAS.map(t => `<option>${esc(t)}</option>`).join("");
+let cur = 0;
+
+function visible(){
+  const t = $("#fTema").value, st = $("#fStatus").value;
+  return QUESTOES.map((q, i) => i).filter(i => {
+    const q = QUESTOES[i], a = S.answers[q.n];
+    if (t !== "all" && q.tema !== t) return false;
+    if (st === "pend") return !a;
+    if (st === "bad") return a && !a.ok;
+    if (st === "ok") return a && a.ok;
+    return true;
+  });
+}
+function fmtCom(p){
+  return esc(p).replace(/^(Letra [A-E]|Item [IVX]+|Alternativa [A-E]|Assertiva [IVX]+)(:?)/, "<b>$1$2</b>");
+}
+function renderQ(){
+  const vis = visible();
+  const done = Object.keys(S.answers).length;
+  $("#qProg").style.width = (100 * done / QUESTOES.length) + "%";
+  $("#navQ").textContent = `${done}/${QUESTOES.length}`;
+  $("#qNav").innerHTML = vis.map(i => {
+    const a = S.answers[QUESTOES[i].n];
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].nav || QUESTOES[i].n}</button>`;
+  }).join("");
+  $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
+  if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
+  if (!vis.includes(cur)) cur = vis[0];
+  const q = QUESTOES[cur], a = S.answers[q.n];
+  const d = draft(q.n);
+  const st = v => a ? "" : (d.desc.includes(v) ? "desc" : d.sel === v ? "sel" : "");
+  let opts;
+  if (q.tipo === "ce"){
+    opts = '<div class="ce">' + [["C","Certo"],["E","Errado"]].map(([v, l]) => {
+      let cls = "";
+      if (a){ if (v === q.resp) cls = "right"; else if (v === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(v)}" data-v="${v}" ${a ? "disabled" : ""}>${l}</button>`;
+    }).join("") + "</div>";
+  } else {
+    opts = q.alts.map(([l, t]) => {
+      let cls = "";
+      if (a){ if (l === q.resp) cls = "right"; else if (l === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(l)}" data-v="${l}" ${a ? "disabled" : ""}><span class="l">${l})</span><span>${esc(t)}</span></button>`;
+    }).join("");
+  }
+  const pos = vis.indexOf(cur) + 1;
+  let com = "";
+  if (a){
+    const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
+    com = `<div class="coment" data-hl="q${q.n}c"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+      ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
+  }
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    ${q.texto ? `<div class="trecho" data-hl="q${q.n}t"><span class="lbl">Trecho do texto</span>${esc(q.texto)}</div>` : ""}
+    <div class="enun" data-hl="q${q.n}">${esc(q.enun)}</div>
+    ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
+    ${opts}
+    ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
+    ${com}`;
+  abbrify($("#qCard"));
+  $("#qCard").querySelectorAll("[data-hl]").forEach(hlAplicar);
+  let clickTimer = null;
+  $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
+    b.ondblclick = e => { e.preventDefault(); clearTimeout(clickTimer); descartar(b.dataset.v); };
+  });
+  if ($("#qSubmit")) $("#qSubmit").onclick = submeter;
+  $("#qPrev").disabled = pos <= 1;
+  $("#qNext").textContent = pos >= vis.length ? "Ver rendimento →" : "Próxima →";
+}
+function draft(n){
+  S.draft ||= {};
+  return S.draft[n] ||= {sel: null, desc: []};
+}
+function opcoes(q){ return q.tipo === "ce" ? ["C", "E"] : q.alts.map(x => x[0]); }
+function escolher(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)){ msg("warn", "Essa opção está descartada. Clique duas vezes nela para recuperá-la antes de escolher."); return; }
+  d.sel = d.sel === v ? null : v; save(); renderQ();
+}
+function descartar(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)) d.desc = d.desc.filter(x => x !== v);
+  else { d.desc.push(v); if (d.sel === v) d.sel = null; }
+  save(); renderQ();
+  if (d.desc.length === opcoes(q).length) msg("warn", "Você descartou todas as opções. Clique duas vezes em uma delas para recuperá-la e poder responder.");
+}
+function msg(tipo, texto){
+  const m = $("#qMsg"); if (!m) return;
+  m.className = "qmsg on " + tipo; m.textContent = texto;
+}
+function submeter(){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n), todas = opcoes(q);
+  if (d.desc.length === todas.length) return msg("bad", "Você marcou todas as opções como descartadas. Recupere uma (clique duas vezes) e selecione-a antes de responder.");
+  if (!d.sel) return msg("bad", "Você não selecionou nenhuma resposta. Clique em uma opção e depois em Responder.");
+  answer(d.sel);
+}
+function answer(v){
+  const q = QUESTOES[cur];
+  if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  S.answers[q.n] = {sel: v, ok: v === q.resp, desc: d.desc.slice(), ts: Date.now()};
+  delete S.draft[q.n];
+  save(); renderQ();
+  $("#qCard .coment")?.scrollIntoView({behavior: "smooth", block: "nearest"});
+  if (Object.keys(S.answers).length === QUESTOES.length){
+    setTimeout(() => { if (confirmFinish()) showTab("rend"); }, 50);
+  }
+}
+let finishedShown = false;
+function confirmFinish(){ if (finishedShown) return false; finishedShown = true; return true; }
+function step(d){
+  const vis = visible(), p = vis.indexOf(cur);
+  if (d > 0 && p >= vis.length - 1){ showTab("rend"); return; }
+  const np = Math.min(Math.max(p + d, 0), vis.length - 1);
+  cur = vis[np]; renderQ(); $("#qCard").scrollIntoView({block: "nearest"});
+}
+$("#qPrev").onclick = () => step(-1);
+$("#qNext").onclick = () => step(1);
+$("#fTema").onchange = $("#fStatus").onchange = () => { cur = -1; renderQ(); };
+
+/* flashcards */
+let deck = [], fcI = 0;
+FLASH.forEach((c, i) => c.id = "f" + i);
+function buildDeck(shuffle){
+  const d = $("#fcDeck").value;
+  deck = FLASH.filter(c => d === "all" || c[0] === d);
+  const box = c => (S.cards[c.id] || {box: 1}).box;
+  deck = deck.map(c => [c, Math.random()]).sort((x, y) => shuffle ? x[1] - y[1] : (box(x[0]) - box(y[0])) || (x[1] - y[1])).map(x => x[0]);
+  fcI = 0; renderCard();
+}
+function renderCard(){
+  if (!deck.length) buildDeck();
+  const c = deck[fcI];
+  $("#fc").classList.remove("flip");
+  $("#fcQ").innerHTML = c[1];
+  $("#fcA").innerHTML = c[2];
+  const b = (S.cards[c.id] || {box: 1}).box;
+  $("#fcPos").textContent = `Cartão ${fcI + 1} de ${deck.length}`;
+  $("#fcBox").textContent = `Caixa ${b}`;
+  const cnt = [0, 0, 0, 0, 0];
+  deck.forEach(x => cnt[((S.cards[x.id] || {box: 1}).box) - 1]++);
+  abbrify($("#fcQ")); abbrify($("#fcA"));
+  $("#fcBoxes").innerHTML = cnt.map((n, i) => `<span>Caixa ${i + 1}: ${n}</span>`).join("");
+}
+function grade(g){
+  const c = deck[fcI], st = S.cards[c.id] || {box: 1};
+  st.box = g === 0 ? 1 : g === 1 ? Math.max(1, st.box) : Math.min(5, st.box + 1);
+  st.seen = (st.seen || 0) + 1; S.cards[c.id] = st; save();
+  fcI = (fcI + 1) % deck.length; renderCard();
+}
+$("#fc").onclick = () => $("#fc").classList.toggle("flip");
+$("#fcBad").onclick = () => grade(0);
+$("#fcMid").onclick = () => grade(1);
+$("#fcOk").onclick = () => grade(2);
+$("#fcDeck").onchange = () => buildDeck();
+$("#fcShuffle").onclick = () => buildDeck(true);
+$("#fcReset").onclick = () => { if (confirm("Zerar as caixas de todos os flashcards?")){ S.cards = {}; save(); buildDeck(); } };
+
+/* rendimento */
+function renderRend(){
+  const ans = S.answers, n = QUESTOES.length, done = QUESTOES.filter(q => ans[q.n]);
+  const ok = done.filter(q => ans[q.n].ok).length;
+  if (!done.length){ $("#rendBody").innerHTML = '<div class="card"><p class="muted">Você ainda não respondeu nenhuma questão. Vá para a aba <b>Questões</b>.</p></div>'; return; }
+  const pct = Math.round(100 * ok / done.length);
+  const ce = done.filter(q => q.tipo === "ce"), ceOk = ce.filter(q => ans[q.n].ok).length, ceBad = ce.length - ceOk;
+  const mc = done.filter(q => q.tipo === "mc"), mcOk = mc.filter(q => ans[q.n].ok).length;
+  const complete = done.length === n;
+  const msg = pct >= 85 ? ["ok", "Excelente! Acima da meta de 80% do seu plano."] : pct >= 70 ? ["warn", "Bom, mas abaixo da meta de 80%. Revise os temas em amarelo e vermelho."] : ["bad", "Abaixo de 70%. Releia o Resumo dos temas fracos antes de refazer as erradas."];
+  const byT = TEMAS.map(t => {
+    const qs = done.filter(q => q.tema === t), o = qs.filter(q => ans[q.n].ok).length;
+    return {t, tot: QUESTOES.filter(q => q.tema === t).length, d: qs.length, o, p: qs.length ? Math.round(100 * o / qs.length) : null};
+  }).sort((a, b) => (a.p ?? 101) - (b.p ?? 101));
+  const wrong = done.filter(q => !ans[q.n].ok);
+  $("#rendBody").innerHTML = `
+    ${complete ? "" : `<div class="call warn"><b>Resultado parcial</b>Você respondeu ${done.length} de ${n}. O rendimento final aparece quando terminar todas.</div>`}
+    <div class="grid3">
+      <div class="card"><div class="muted">Aproveitamento</div><div class="big" style="color:var(--${pct >= 80 ? "ok" : pct >= 70 ? "warn" : "bad"})">${pct}%</div><div class="muted">${ok} certas de ${done.length}</div></div>
+      <div class="card"><div class="muted">Certo/Errado (nota CEBRASPE)</div><div class="big">${ceOk - ceBad}</div><div class="muted">${ceOk} certas − ${ceBad} erradas, em ${ce.length} itens</div></div>
+      <div class="card"><div class="muted">Múltipla escolha</div><div class="big">${mc.length ? Math.round(100 * mcOk / mc.length) : 0}%</div><div class="muted">${mcOk} de ${mc.length}</div></div>
+    </div>
+    <div class="call ${msg[0]}"><b>Diagnóstico</b>${msg[1]}</div>
+    <h3>Desempenho por tema (do mais fraco ao mais forte)</h3>
+    <div class="card">${byT.map(r => `<div class="bar"><span>${esc(r.t)}</span><div class="t"><div class="${r.p === null ? "" : r.p < 70 ? "low" : r.p < 85 ? "mid" : ""}" style="width:${r.p ?? 0}%"></div></div><span>${r.p === null ? "—" : r.p + "%"} <small class="muted">${r.o}/${r.d}</small></span></div>`).join("")}</div>
+    <h3>Questões erradas (${wrong.length})</h3>
+    <div class="card">${wrong.length ? wrong.map(q => `<div style="margin:6px 0"><a href="#" data-n="${q.n}">Q${q.n}</a> · <span class="pill">${esc(q.tema)}</span> <span class="muted">${esc(q.enun.slice(-120).replace(/^\S*\s/, "…"))}</span></div>`).join("") : '<p class="muted">Nenhuma! 🎯</p>'}</div>`;
+  abbrify($("#rendBody"));
+  $("#rendBody").querySelectorAll("a[data-n]").forEach(a => a.onclick = e => {
+    e.preventDefault(); $("#fTema").value = "all"; $("#fStatus").value = "all";
+    cur = QUESTOES.findIndex(q => q.n === +a.dataset.n); showTab("questoes"); renderQ();
+  });
+}
+$("#expBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `${KEY}_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+};
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {}; save(); renderQ(); renderRend(); hlTudo(); });
+};
+$("#redoBad").onclick = () => {
+  const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
+  if (!bad.length) return;
+  bad.forEach(k => delete S.answers[k]); save(); finishedShown = false;
+  $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
+};
+$("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* ---------- marca-texto: selecione um trecho e escolha amarelo, rosa ou verde (salvo em S.marks) ---------- */
+S.marks ||= {};
+const hlBar = $("#hlBar");
+let hlAlvo = null;  /* {root, id} quando o clique foi numa marcação já existente */
+const hlId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const hlRaiz = n => (n.nodeType === 1 ? n : n.parentElement)?.closest("[data-hl]");
+function hlTextos(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), r = [];
+  while (w.nextNode()) r.push(w.currentNode);
+  return r;
+}
+function hlOff(root, node, off){ const r = document.createRange(); r.setStart(root, 0); r.setEnd(node, off); return r.toString().length; }
+/* posições contadas no texto puro do bloco; se o texto mudar, procura o trecho guardado */
+function hlAplicar(root){
+  if (!root) return;
+  root.querySelectorAll("mark.hl").forEach(m => m.replaceWith(...m.childNodes));
+  root.normalize();
+  const full = root.textContent;
+  (S.marks[root.dataset.hl] || []).forEach(m => {
+    if (full.slice(m.s, m.e) !== m.t){ const i = full.indexOf(m.t); if (i < 0) return; m.s = i; m.e = i + m.t.length; }
+    let pos = 0;
+    hlTextos(root).forEach(t => {
+      const a = pos, b = pos + t.length; pos = b;
+      if (b <= m.s || a >= m.e) return;
+      if (!t.nodeValue.trim() && /^(TABLE|TBODY|THEAD|TR|UL|OL|SECTION|DIV|DETAILS)$/.test(t.parentNode.nodeName)) return;
+      let n = t;
+      if (m.e - a < t.length) n.splitText(m.e - a);
+      if (m.s > a) n = n.splitText(m.s - a);
+      const mk = document.createElement("mark");
+      mk.className = "hl hl-" + m.c; mk.dataset.id = m.id;
+      n.replaceWith(mk); mk.append(n);
+    });
+  });
+}
+function hlTudo(){ document.querySelectorAll("[data-hl]").forEach(hlAplicar); }
+function hlSelecao(){
+  const sel = getSelection();
+  if (!sel.rangeCount || sel.isCollapsed) return null;
+  const r = sel.getRangeAt(0), root = hlRaiz(r.startContainer);
+  if (!root || root !== hlRaiz(r.endContainer)) return null;
+  const s = hlOff(root, r.startContainer, r.startOffset), e = hlOff(root, r.endContainer, r.endOffset);
+  return e > s ? {root, s, e, rect: r.getBoundingClientRect()} : null;
+}
+/* tira o trecho [s, e) das marcações existentes (nova cor por cima ou apagar) */
+function hlCortar(lista, s, e, full){
+  const out = [];
+  lista.forEach(m => {
+    if (m.e <= s || m.s >= e) return out.push(m);
+    if (m.s < s) out.push({...m, id: hlId(), e: s, t: full.slice(m.s, s)});
+    if (m.e > e) out.push({...m, id: hlId(), s: e, t: full.slice(e, m.e)});
+  });
+  return out;
+}
+function hlSalvar(root, lista){
+  const k = root.dataset.hl;
+  if (lista.length) S.marks[k] = lista.sort((a, b) => a.s - b.s); else delete S.marks[k];
+  save(); hlAplicar(root);
+}
+const hlToque = matchMedia("(pointer:coarse)").matches;
+let hlUltima = null;  /* última seleção válida: no celular, o toque no botão pode desfazer a seleção antes do clique */
+function hlMostrar(rect){
+  hlBar.classList.add("on");
+  const w = hlBar.offsetWidth, h = hlBar.offsetHeight;
+  /* no celular a barra vai abaixo do trecho, para não ficar sob o menu nativo de copiar */
+  let y = hlToque ? rect.bottom + 14 : rect.top - h - 8;
+  if (hlToque ? y > innerHeight - h - 8 : y < 8) y = hlToque ? rect.top - h - 14 : rect.bottom + 8;
+  y = Math.min(Math.max(8, y), innerHeight - h - 8);
+  hlBar.style.left = Math.min(Math.max(8, rect.left + rect.width / 2 - w / 2), innerWidth - w - 8) + "px";
+  hlBar.style.top = y + "px";
+}
+function hlEsconder(){ hlBar.classList.remove("on"); hlAlvo = null; hlUltima = null; }
+hlBar.addEventListener("mousedown", e => e.preventDefault());
+hlBar.querySelectorAll("button").forEach(b => b.onclick = () => {
+  const c = b.dataset.c;
+  if (hlAlvo){
+    const {root, id} = hlAlvo, lista = S.marks[root.dataset.hl] || [];
+    hlSalvar(root, c ? lista.map(m => m.id === id ? {...m, c} : m) : lista.filter(m => m.id !== id));
+  } else {
+    const x = hlSelecao() || hlUltima; if (!x) return hlEsconder();
+    const full = x.root.textContent, lista = hlCortar(S.marks[x.root.dataset.hl] || [], x.s, x.e, full);
+    if (c) lista.push({id: hlId(), s: x.s, e: x.e, c, t: full.slice(x.s, x.e)});
+    getSelection().removeAllRanges();
+    hlSalvar(x.root, lista);
+  }
+  hlEsconder();
+});
+function hlChecar(e){
+  if (hlBar.contains(e.target)) return;
+  setTimeout(() => {
+    const x = hlSelecao();
+    if (x){ hlAlvo = null; hlUltima = x; return hlMostrar(x.rect); }
+    const mk = e.target.closest?.("mark.hl");
+    if (mk && getSelection().isCollapsed){ hlMostrar(mk.getBoundingClientRect()); hlAlvo = {root: hlRaiz(mk), id: mk.dataset.id}; return; }
+    hlEsconder();
+  }, 10);
+}
+document.addEventListener("mouseup", hlChecar);
+document.addEventListener("touchend", hlChecar);
+document.addEventListener("keyup", e => { if (e.shiftKey) hlChecar(e); });
+/* celular: a seleção por toque longo (e o ajuste das alças) não gera mouseup confiável; acompanha selectionchange */
+let hlTimer = 0;
+const hlRever = () => { const x = hlSelecao(); if (x){ hlAlvo = null; hlUltima = x; hlMostrar(x.rect); } };
+document.addEventListener("selectionchange", () => {
+  if (!hlToque) return;
+  clearTimeout(hlTimer); hlTimer = setTimeout(hlRever, 350);
+});
+addEventListener("scroll", () => {
+  if (!hlBar.classList.contains("on")) return;
+  hlBar.classList.remove("on");
+  clearTimeout(hlTimer); hlTimer = setTimeout(hlRever, 250);
+}, {passive: true});
+$("#hlReset").onclick = () => { if (confirm("Apagar todas as marcações de texto desta página?")){ S.marks = {}; save(); hlTudo(); } };
+document.querySelectorAll("section.tab").forEach(s => { if (!["mapa", "questoes", "flash", "rend"].includes(s.id)) s.dataset.hl = s.id; });
+hlTudo();
+
+/* teclado */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase(), tab = active();
+  if (tab === "questoes"){
+    const q = QUESTOES[cur];
+    if (k === "arrowright") step(1);
+    else if (k === "arrowleft") step(-1);
+    else if (q && !S.answers[q.n]){
+      const v = q.tipo === "ce" ? k.toUpperCase() : k;
+      if (k === "enter"){ e.preventDefault(); submeter(); }
+      else if (opcoes(q).includes(v)){ e.shiftKey ? descartar(v) : escolher(v); }
+    }
+  } else if (tab === "flash"){
+    if (k === " "){ e.preventDefault(); $("#fc").classList.toggle("flip"); }
+    else if (k === "1") grade(0); else if (k === "2") grade(1); else if (k === "3") grade(2);
+  }
+});
+
+renderMapa();
+["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
+cur = 0; renderQ(); buildDeck();
+
+/* ---------- tamanho da fonte (70% a 200%, passo de 10%; salvo para todas as páginas) ---------- */
+function fonte(v){
+  v = Math.min(2, Math.max(0.7, Math.round(v * 10) / 10));
+  document.documentElement.style.setProperty("--fz", v);
+  localStorage.setItem("sefazdf_fonte", v);
+  $("#fzVal").textContent = Math.round(v * 100) + "%";
+  $("#fzMenos").disabled = v <= 0.7; $("#fzMais").disabled = v >= 2;
+}
+const fzAtual = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--fz")) || 1;
+$("#fzMenos").onclick = () => fonte(fzAtual() - 0.1);
+$("#fzMais").onclick = () => fonte(fzAtual() + 0.1);
+$("#fzVal").onclick = () => fonte(1);
+fonte(fzAtual());
+
+/* ---------- tela cheia: o mesmo botão entra e sai (Esc também sai) ---------- */
+$("#telaCheia").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+document.addEventListener("fullscreenchange", () => {
+  const on = !!document.fullscreenElement, b = $("#telaCheia");
+  b.textContent = on ? "✕ Sair da tela cheia" : "⛶ Tela cheia";
+  b.title = b.ariaLabel = on ? "Sair da tela cheia" : "Tela cheia";
+});
+
+/* ---------- menu retrátil no celular: mostra a aba atual e fecha ao escolher outra ---------- */
+function menuRotulo(){
+  const b = $("#nav button.on");
+  $("#menuBtn").textContent = "☰ " + (b ? b.firstChild.textContent.trim() : "Menu");
+}
+$("#menuBtn").onclick = () => {
+  const on = $("header").classList.toggle("menu-on");
+  $("#menuBtn").setAttribute("aria-expanded", on);
+};
+$("#nav").addEventListener("click", e => {
+  if (!e.target.closest("button")) return;
+  $("header").classList.remove("menu-on"); $("#menuBtn").setAttribute("aria-expanded", false); menuRotulo();
+});
+document.addEventListener("click", e => { if (!e.target.closest("header")) menuRotulo(); });
+menuRotulo();
+
+/* ---------- tema de cores (5 opções; salvo para todas as páginas do plano) ---------- */
+$("#tema").value = localStorage.getItem("sefazdf_tema") || (matchMedia("(prefers-color-scheme:dark)").matches ? "escuro" : "claro");
+$("#tema").onchange = e => { document.documentElement.dataset.theme = e.target.value; localStorage.setItem("sefazdf_tema", e.target.value); };
+/* SYNC-JS */
+/* ---------- sincronização entre aparelhos: o S de cada página vai para um Gist secreto do GitHub ---------- */
+const SYNC_TOK = "sefazdf_sync_token", SYNC_GIST = "sefazdf_sync_gist", SYNC_DESC = "sefazdf-sync (progresso do plano SEFAZ-DF)";
+const SYNC_ARQ = KEY + ".json";
+let syncTimer = null, syncOcupado = false;
+{ /* link de configuração vindo de outro aparelho: ...#sync=<token> */
+  const m = location.hash.match(/sync=([\w-]+)/);
+  if (m){ localStorage.setItem(SYNC_TOK, m[1]); localStorage.removeItem(SYNC_GIST); history.replaceState(null, "", location.pathname + location.search); }
+}
+const syncTok = () => localStorage.getItem(SYNC_TOK);
+async function gh(caminho, op = {}){
+  const r = await fetch("https://api.github.com" + caminho, {cache: "no-store", ...op, headers: {
+    Authorization: "Bearer " + syncTok(), Accept: "application/vnd.github+json", ...(op.body ? {"Content-Type": "application/json"} : {})}});
+  if (!r.ok) throw new Error(r.status === 401 ? "token inválido ou expirado" : r.status === 404 ? "Gist não encontrado" : "GitHub respondeu " + r.status);
+  return r.json();
+}
+/* acha o Gist do plano (pela descrição) ou cria um secreto */
+async function syncGist(){
+  let id = localStorage.getItem(SYNC_GIST);
+  if (id) return id;
+  for (let p = 1; p <= 10 && !id; p++){
+    const lista = await gh(`/gists?per_page=100&page=${p}`);
+    id = lista.find(g => g.description === SYNC_DESC)?.id;
+    if (lista.length < 100) break;
+  }
+  if (!id) id = (await gh("/gists", {method: "POST", body: JSON.stringify({description: SYNC_DESC, public: false,
+    files: {"LEIA-ME.md": {content: "Progresso das páginas do plano SEFAZ-DF (um arquivo por página). Gerado automaticamente."}}})})).id;
+  localStorage.setItem(SYNC_GIST, id);
+  return id;
+}
+function syncStatus(txt, tipo){
+  const b = $("#syncBtn"); if (!b) return;
+  b.textContent = txt; b.className = tipo || "";
+}
+/* último _ts que este aparelho sabe estar igual no Gist */
+const syncBase = () => +(localStorage.getItem(KEY + "_sinc") || 0);
+const syncMarcar = ts => localStorage.setItem(KEY + "_sinc", ts || 0);
+/* junta duas versões: fica a mais recente; respostas dadas na outra depois do último sincronismo entram também */
+function syncJuntar(loc, rem){
+  const novo = (rem._ts || 0) > (loc._ts || 0) ? rem : loc, velho = novo === loc ? rem : loc;
+  const r = structuredClone(novo), base = syncBase();
+  r.answers ||= {};
+  for (const [n, a] of Object.entries(velho.answers || {}))
+    if (!r.answers[n] && (a.ts || 0) > base) r.answers[n] = a;
+  return r;
+}
+function syncAplicar(novo){
+  S = novo; S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {};
+  localStorage.setItem(KEY, JSON.stringify(S));
+  renderQ(); hlTudo();
+  if (active() === "rend") renderRend();
+  if (active() === "flash") renderCard(); else buildDeck();
+}
+async function syncPuxar(){
+  if (!syncTok() || syncOcupado) return;
+  syncOcupado = true; syncStatus("☁ …");
+  try {
+    const g = await gh("/gists/" + await syncGist());
+    const f = g.files[SYNC_ARQ];
+    let rem = null;
+    if (f) rem = JSON.parse(f.truncated ? await (await fetch(f.raw_url, {cache: "no-store"})).text() : f.content);
+    const loc = JSON.parse(localStorage.getItem(KEY) || "null");
+    const rts = rem?._ts || 0, lts = loc?._ts || 0, base = syncBase();
+    if (rem && (!lts || (rts > lts && lts <= base))){ syncAplicar(rem); syncMarcar(rts); }  /* só o outro aparelho mudou */
+    else if (lts && (!rem || (lts > rts && rts <= base))) await syncEnviar(true);         /* só este aparelho mudou */
+    else if (rem && rts !== lts){ syncAplicar(syncJuntar(loc, rem)); S._ts = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); await syncEnviar(true); }
+    else syncMarcar(lts);
+    syncStatus("☁ Sincronizado", "on");
+  } catch (e){
+    syncStatus("☁ Erro", "err"); console.warn("sincronização:", e);
+    if (/Gist não encontrado/.test(e.message)) localStorage.removeItem(SYNC_GIST);
+  } finally { syncOcupado = false; }
+}
+async function syncEnviar(direto){
+  if (!syncTok()) return;
+  if (!direto) syncStatus("☁ …");
+  try {
+    const body = JSON.stringify({files: {[SYNC_ARQ]: {content: JSON.stringify(S)}}}), ts = S._ts;
+    await gh("/gists/" + await syncGist(), {method: "PATCH", keepalive: body.length < 60000, body});
+    syncMarcar(ts);
+    if (!direto) syncStatus("☁ Sincronizado", "on");
+  } catch (e){ syncStatus("☁ Erro", "err"); console.warn("sincronização:", e); if (direto) throw e; }
+}
+function syncAgendar(){
+  if (!syncTok()) return;
+  clearTimeout(syncTimer); syncStatus("☁ …");
+  syncTimer = setTimeout(() => { syncTimer = null; syncEnviar(); }, 1500);
+}
+/* ao sair ou esconder a página, envia o que estiver pendente; ao voltar, busca o que veio do outro aparelho */
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden"){ if (syncTimer){ clearTimeout(syncTimer); syncTimer = null; syncEnviar(); } }
+  else if (!syncTimer) syncPuxar();
+});
+
+/* janela de configuração */
+function syncJanela(){
+  let box = $("#syncBox");
+  if (!box){
+    box = document.createElement("div"); box.id = "syncBox";
+    box.addEventListener("click", e => { if (e.target === box) box.classList.remove("on"); });
+    document.body.append(box);
+  }
+  const tok = syncTok();
+  box.innerHTML = `<div class="in" role="dialog" aria-label="Sincronizar entre aparelhos">
+    <h3>☁ Sincronizar entre aparelhos</h3>
+    ${tok ? `<p>Este aparelho está <b>conectado</b>. Respostas, flashcards e marcações desta página são salvos no seu GitHub (num Gist secreto) e aparecem nos outros aparelhos conectados.</p>
+      <p><b>Para conectar o celular</b>, abra nele o link abaixo (por exemplo, mande para você mesmo por e-mail ou WhatsApp). Ele configura o aparelho de uma vez, para todas as páginas.</p>
+      <input id="syncLink" readonly value="${esc(location.origin + location.pathname + "#sync=" + tok)}">
+      <div class="acoes"><button class="pri" id="syncCopiar">Copiar link</button><button id="syncAgora">Sincronizar agora</button><button id="syncSair">Desconectar este aparelho</button><button id="syncFechar">Fechar</button></div>`
+    : `<p>Conecte este aparelho para que as questões resolvidas no notebook apareçam no celular (e vice-versa). É feito uma vez por aparelho e vale para todas as páginas.</p>
+      <ol><li>No GitHub, crie um token com a permissão <b>gist</b> (só ela): <a href="https://github.com/settings/tokens/new?scopes=gist&description=sefazdf-sync" target="_blank" rel="noopener">criar token</a>. Em "Expiration", escolha uma data depois da prova.</li>
+      <li>Copie o token gerado (começa com <code>ghp_</code>) e cole aqui:</li></ol>
+      <input id="syncTokIn" placeholder="ghp_…" autocomplete="off" spellcheck="false">
+      <p class="muted" style="font-size:13px">No outro aparelho, use o link que aparece aqui depois de conectar. O token fica só no navegador de cada aparelho.</p>
+      <div class="acoes"><button class="pri" id="syncConectar">Conectar</button><button id="syncFechar">Fechar</button></div>`}
+    <div id="syncMsg"></div></div>`;
+  box.classList.add("on");
+  const msgS = (t, cor) => { const m = $("#syncMsg"); m.textContent = t; m.style.color = `var(--${cor || "muted"})`; };
+  $("#syncFechar").onclick = () => box.classList.remove("on");
+  if (tok){
+    $("#syncCopiar").onclick = () => { const i = $("#syncLink"); i.select(); navigator.clipboard?.writeText(i.value).then(() => msgS("Link copiado.", "ok"), () => msgS("Selecione e copie o link.")); };
+    $("#syncAgora").onclick = async () => { msgS("Sincronizando…"); await syncPuxar(); msgS($("#syncBtn").className === "on" ? "Pronto: esta página está sincronizada." : "Não deu certo. Confira a internet e o token.", $("#syncBtn").className === "on" ? "ok" : "bad"); };
+    $("#syncSair").onclick = () => { localStorage.removeItem(SYNC_TOK); localStorage.removeItem(SYNC_GIST); syncStatus("☁ Sincronizar"); syncJanela(); msgS("Aparelho desconectado. O progresso continua salvo neste navegador."); };
+  } else {
+    $("#syncConectar").onclick = async () => {
+      const v = $("#syncTokIn").value.trim();
+      if (!/^[\w-]{20,}$/.test(v)) return msgS("Cole o token completo (começa com ghp_).", "bad");
+      localStorage.setItem(SYNC_TOK, v); localStorage.removeItem(SYNC_GIST); msgS("Conectando…");
+      await syncPuxar();
+      if ($("#syncBtn").className === "on") syncJanela();
+      else { localStorage.removeItem(SYNC_TOK); syncStatus("☁ Sincronizar"); msgS("Não foi possível conectar. Confira se o token tem a permissão gist.", "bad"); }
+    };
+  }
+}
+$("#syncBtn").onclick = syncJanela;
+if (syncTok()) syncPuxar();
+/* /SYNC-JS */
+</script>
+</body>
+</html>

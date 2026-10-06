@@ -14,5 +14,6 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T3 | Contabilidade Geral · Aula 00: aspectos introdutórios (conceito, objeto, objetivo, usuários) | [`contabilidade geral/T3_trilha00_contabilidade_geral_aula00.html`](contabilidade%20geral/T3_trilha00_contabilidade_geral_aula00.html) |
 | T5 | Direito Constitucional · Aula 00: aplicabilidade das normas, hierarquia e poder constituinte | [`direito constitucional/T5_trilha00_direito_constitucional_aula00.html`](direito%20constitucional/T5_trilha00_direito_constitucional_aula00.html) |
 | T6 | Direito Administrativo · Aula 00: regime jurídico administrativo e princípios | [`direito administrativo/T6_trilha00_direito_administrativo_aula00.html`](direito%20administrativo/T6_trilha00_direito_administrativo_aula00.html) |
+| T7 | Auditoria Fiscal · Aula 00: classificação da auditoria e NBC TA 200 (objetivos gerais do auditor) | [`auditoria/T7_trilha00_auditoria_aula00.html`](auditoria/T7_trilha00_auditoria_aula00.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
