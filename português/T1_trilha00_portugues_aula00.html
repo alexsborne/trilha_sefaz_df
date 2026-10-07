@@ -217,11 +217,43 @@ header,main{zoom:var(--fz)}
 #syncBox .acoes button.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 #syncMsg{margin-top:8px;font-size:14px}
 /* /SYNC-CSS */
+/* CAB-CSS */
+/* computador: cabeçalho numa linha com 5% da altura da tela; índice, fonte, tema, tela cheia e sincronização no painel "Opções" */
+@media(min-width:701px){
+  header{zoom:1;height:5vh;box-sizing:border-box}
+  header>.wrap{max-width:none;height:100%;display:flex;align-items:center;gap:12px;padding:0 16px;box-sizing:border-box}
+  .top{display:contents}
+  .top>.badge{order:0} .top>div:not(.fz){order:1;min-width:0;flex:0 1 auto}
+  .top h1{font-size:min(15px,2.2vh);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:30vw}
+  .top .sub{display:none}
+  .badge{font-size:min(13px,2vh);padding:1px 8px;flex-shrink:0}
+  nav{flex:1 1 auto;min-width:0;padding:0;height:100%;align-items:center;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav button{font-size:min(14px,2.1vh);padding:0 10px;height:min(30px,3.8vh);line-height:1}
+  #menuBtn{display:inline-block;order:3;flex-shrink:0;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);font:inherit;font-size:min(13px,2vh);font-weight:600;padding:0 10px;height:min(30px,3.8vh);border-radius:8px;cursor:pointer;white-space:nowrap}
+  header>.wrap>nav{order:2}
+  .top>a,.top .fz{display:none}
+  header.menu-on .top>a,header.menu-on .top .fz{display:flex;position:absolute;right:16px;background:var(--surface);border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:11}
+  header.menu-on .top>a{top:calc(100% + 6px);margin:0 !important;padding:8px 12px;border-radius:10px 10px 0 0;width:380px;box-sizing:border-box}
+  header.menu-on .top .fz{top:calc(100% + 6px + 40px);flex-wrap:wrap;gap:6px;padding:10px 12px;border-radius:0 0 10px 10px;border-top:0;width:380px;box-sizing:border-box}
+}
+/* /CAB-CSS */
+/* RET-CSS */
+/* menu retrátil: "▴" recolhe o cabeçalho e a tela inteira fica para o conteúdo; "▾ Menu" (canto superior direito) traz de volta */
+#recolher{flex-shrink:0;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:13px;line-height:1;width:30px;height:30px;padding:0;border-radius:8px;cursor:pointer}
+#recolher:hover{color:var(--accent);border-color:var(--accent)}
+#mostrarCab{display:none;position:fixed;top:6px;right:8px;z-index:12;border:1px solid var(--line);background:var(--surface);color:var(--accent);font:inherit;font-size:13px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;opacity:.55;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+#mostrarCab:hover,#mostrarCab:focus-visible{opacity:1}
+.cab-oculto header{display:none}
+.cab-oculto #mostrarCab{display:block}
+@media(min-width:701px){#recolher{order:4;width:min(30px,3.8vh);height:min(30px,3.8vh);font-size:min(13px,2vh)}}
+/* /RET-CSS */
 </style>
 <script>
 /* aplica o tamanho salvo antes de desenhar a página; vale para todas as páginas do plano */
 document.documentElement.style.setProperty("--fz", localStorage.getItem("sefazdf_fonte") || "1");
 if (localStorage.getItem("sefazdf_tema")) document.documentElement.dataset.theme = localStorage.getItem("sefazdf_tema");
+if (localStorage.getItem("sefazdf_cab_oculto") === "1") document.documentElement.classList.add("cab-oculto"); /* RET-HEAD */
 </script>
 </head>
 <body>
@@ -235,6 +267,7 @@ if (localStorage.getItem("sefazdf_tema")) document.documentElement.dataset.theme
       </div>
 
       <button id="menuBtn" aria-expanded="false" aria-controls="nav" title="Abrir menu">☰ Menu</button>
+      <button id="recolher" title="Recolher o menu (a tela inteira fica para o conteúdo)" aria-label="Recolher o menu">▴</button><!-- RET-HTML -->
       <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
       <div class="fz" role="group" aria-label="Tamanho da fonte">
         <button id="fzMenos" title="Diminuir fonte" aria-label="Diminuir fonte">A−</button>
@@ -257,6 +290,7 @@ if (localStorage.getItem("sefazdf_tema")) document.documentElement.dataset.theme
     </nav>
   </div>
 </header>
+<button id="mostrarCab" title="Mostrar o menu" aria-label="Mostrar o menu">▾ Menu</button><!-- RET-HTML -->
 
 <main class="wrap">
 
@@ -1415,7 +1449,7 @@ document.addEventListener("fullscreenchange", () => {
 /* ---------- menu retrátil no celular: mostra a aba atual e fecha ao escolher outra ---------- */
 function menuRotulo(){
   const b = $("#nav button.on");
-  $("#menuBtn").textContent = "☰ " + (b ? b.firstChild.textContent.trim() : "Menu");
+  $("#menuBtn").textContent = matchMedia("(min-width:701px)").matches ? "☰ Opções" : "☰ " + (b ? b.firstChild.textContent.trim() : "Menu");
 }
 $("#menuBtn").onclick = () => {
   const on = $("header").classList.toggle("menu-on");
@@ -1427,6 +1461,18 @@ $("#nav").addEventListener("click", e => {
 });
 document.addEventListener("click", e => { if (!e.target.closest("header")) menuRotulo(); });
 menuRotulo();
+addEventListener("resize", menuRotulo); /* CAB-JS */
+document.addEventListener("click", e => { if (matchMedia("(min-width:701px)").matches && !e.target.closest("header")){ $("header").classList.remove("menu-on"); $("#menuBtn").setAttribute("aria-expanded", false); } }); /* CAB-JS fecha */
+/* RET-JS */
+/* ---------- menu retrátil: recolhe o cabeçalho inteiro; vale para todas as páginas do plano ---------- */
+function cabOculto(on){
+  document.documentElement.classList.toggle("cab-oculto", on);
+  localStorage.setItem("sefazdf_cab_oculto", on ? "1" : "0");
+  $("header").classList.remove("menu-on"); $("#menuBtn").setAttribute("aria-expanded", false);
+}
+$("#recolher").onclick = () => cabOculto(true);
+$("#mostrarCab").onclick = () => cabOculto(false);
+/* /RET-JS */
 
 /* ---------- tema de cores (5 opções; salvo para todas as páginas do plano) ---------- */
 $("#tema").value = localStorage.getItem("sefazdf_tema") || (matchMedia("(prefers-color-scheme:dark)").matches ? "escuro" : "claro");
