@@ -356,9 +356,9 @@ if (localStorage.getItem("sefazdf_cab_oculto") === "1") document.documentElement
       <div><b>⑤ Atividade plenamente vinculada</b><br>O fiscal não tem discricionariedade e <b>deve</b> cobrar. Todo tributo tem cobrança vinculada.</div>
     </div>
     <div class="call bad"><b>Pegadinhas CEBRASPE</b>
-      • "Multa pecuniária, instituída em lei e cobrada por atividade vinculada é tributo": <b>ERRADO</b>, porque é sanção de ato ilícito.<br>
-      • "Multas não compõem a carga tributária": <b>CERTO</b>.<br>
-      • "O contribuinte pode pagar o tributo com bens móveis porque o CTN admite": <b>ERRADO</b>, o CTN só prevê a dação de imóveis.
+      "Multa pecuniária, instituída em lei e cobrada por atividade vinculada é tributo": <b>ERRADO</b>.<br><b>O erro:</b> esqueceu que a multa é sanção de ato ilícito.<br><b>O certo:</b> tributo não pode ser sanção (artigo 3º do CTN); a multa é cobrada junto, mas não é tributo.<br><br>
+      "Multas não compõem a carga tributária": <b>CERTO</b>.<br><b>O erro:</b> marcar errado por achar que tudo o que o Fisco cobra entra na carga.<br><b>O certo:</b> a carga tributária mede só tributos; multa é penalidade.<br><br>
+      "O contribuinte pode pagar o tributo com bens móveis porque o CTN admite": <b>ERRADO</b>.<br><b>O erro:</b> estendeu a dação em pagamento aos bens móveis.<br><b>O certo:</b> o CTN (artigo 156, inciso XI) só prevê a dação de <b>imóveis</b>, na forma e condições da lei.
     </div>
     <details><summary>Pergunte-se: qual elemento é requisito de existência e qual é de validade?</summary><div>A compulsoriedade é requisito de <b>existência</b>: sem ela, não há tributo. A legalidade é requisito de <b>validade</b>: um "tributo" criado por decreto existe, mas é inválido.</div></details>
   </div>
@@ -397,7 +397,7 @@ if (localStorage.getItem("sefazdf_cab_oculto") === "1") document.documentElement
       <tr><td><b>Municípios + DF</b></td><td>ISS, IPTU, ITBI</td></tr>
       <tr><td><b>Compartilhado</b> (Estados, DF e Municípios)</td><td><b>IBS</b>, Imposto sobre Bens e Serviços (artigo 156-A, EC 132/2023)</td></tr>
     </table></div>
-    <div class="call bad"><b>Pegadinha</b>"O sistema não prevê imposto de competência compartilhada": <b>ERRADO</b>, existe o IBS.</div>
+    <div class="call bad"><b>Pegadinha</b>"O sistema não prevê imposto de competência compartilhada": <b>ERRADO</b>.<br><b>O erro:</b> ignorou a Reforma Tributária.<br><b>O certo:</b> o IBS (artigo 156-A, EC 132/2023) é de competência compartilhada entre Estados, DF e Municípios.</div>
   </div>
 
   <h3>5. Taxas</h3>
@@ -453,7 +453,8 @@ if (localStorage.getItem("sefazdf_cab_oculto") === "1") document.documentElement
       <li>O contribuinte deve ser notificado do montante, da forma e dos prazos de pagamento e dos elementos do cálculo (artigo 82, parágrafo 2º).</li>
       <li>Exige <b>lei específica para cada obra</b> (CEBRASPE: CERTO).</li>
     </ul>
-    <div class="call bad"><b>Pegadinhas</b>Trocar "memorial <b>descritivo</b>" por "executivo" ou "<b>determinação</b>" por "estimativa"; "convênio com o ente onde a obra ocorre" não é requisito.</div>
+    <div class="call bad"><b>Pegadinhas</b>"A lei deve publicar o memorial executivo do projeto e a estimativa da parcela do custo a ser financiada": <b>ERRADO</b>.<br><b>O erro:</b> a banca troca "memorial <b>descritivo</b>" por "executivo" e "<b>determinação</b>" por "estimativa".<br><b>O certo:</b> memorial descritivo, orçamento, determinação da parcela financiada, zona beneficiada e fator de absorção (artigo 82 do CTN).<br><br>
+      "É requisito um convênio com o ente onde a obra ocorre": <b>ERRADO</b>.<br><b>O erro:</b> inventou requisito.<br><b>O certo:</b> o convênio não está entre os requisitos do artigo 82.</div>
   </div>
 
   <h3>8. Empréstimos compulsórios (CF, artigo 148)</h3>
@@ -789,143 +790,143 @@ const MM_ROOT = {k: "root", t: "TRIBUTO", s: "Artigo 3º do CTN: pecuniário · 
   e: "Tributo é toda prestação em dinheiro, obrigatória, que não é punição por ato ilícito, criada por lei e cobrada por atividade administrativa sem margem de escolha. Os cinco elementos precisam estar presentes ao mesmo tempo; faltando a compulsoriedade, nem existe tributo. Para saber <b>qual</b> espécie é, olha-se o fato gerador (artigo 4º do CTN), e não o nome dado pela lei. Desde a CF/88, o STF reconhece cinco espécies: impostos, taxas, contribuições de melhoria, empréstimos compulsórios e contribuições especiais.",
   x: "O IPVA que o DF cobra do seu carro: é pago em dinheiro, você não pode recusar, não é castigo por nada, está previsto em lei distrital e o auditor não pode dispensá-lo por simpatia. Já a <b>multa</b> por pagar o IPVA atrasado <b>não</b> é tributo, porque é sanção por ato ilícito, embora seja cobrada junto.",
   l: "CTN, artigos 3º, 4º e 5º; CF/88, artigos 145, 148 e 149.",
-  p: "\"Multa pecuniária, prevista em lei e cobrada por atividade vinculada é tributo\": ERRADO. Pagar com imóvel (dação em pagamento) é permitido, pois o imóvel pode ser expresso em moeda."};
+  p: "\"Multa pecuniária, prevista em lei e cobrada por atividade vinculada é tributo\": ERRADO.<br><b>O erro:</b> esqueceu que a multa é sanção de ato ilícito.<br><b>O certo:</b> tributo não é sanção; a multa não é tributo, embora seja cobrada junto. Outra que cai: \"não se pode pagar tributo com imóvel\" está ERRADO, pois a dação de imóvel em pagamento é permitida (artigo 156, inciso XI, do CTN)."};
 
 const MM = [
  {k: "imp", c: "#2f5bd3", t: "Impostos", s: "Artigo 16 do CTN · não vinculado",
   e: "O fato gerador do imposto é uma situação do próprio contribuinte (ganhar renda, ser dono de algo, consumir), sem qualquer atuação estatal específica em favor dele. Por isso é o tributo <b>não vinculado</b> por excelência. A receita, em regra, não pode ser carimbada para um destino (artigo 167, inciso IV, da CF/88) e financia os serviços gerais, como a segurança pública.",
   x: "Você compra uma casa no Lago Sul e passa a pagar IPTU todos os anos, mesmo que a sua rua não receba nenhum serviço novo. O imposto nasce do fato de você ser proprietário, e não de algo que o Estado fez por você.",
   l: "CTN, artigo 16; CF/88, artigos 145 (inciso I), 153, 155, 156, 156-A e 167 (inciso IV).",
-  p: "\"Um imposto pode ter como fato gerador a valorização imobiliária\": ERRADO, isso é contribuição de melhoria. \"Imposto é cobrado pela utilização de serviço público\": ERRADO, isso é taxa.",
+  p: "\"Um imposto pode ter como fato gerador a valorização imobiliária\" e \"imposto é cobrado pela utilização de serviço público\": ERRADO.<br><b>O erro:</b> deu ao imposto fato gerador ligado a uma atuação do Estado.<br><b>O certo:</b> imposto é não vinculado; valorização por obra é contribuição de melhoria e serviço público específico e divisível é taxa.",
   f: [
    {k: "imp1", t: "Fato gerador = fato do contribuinte (renda, patrimônio, consumo)",
     e: "Os impostos tributam manifestações de riqueza. Uma forma prática de classificá-los é pela base econômica: <b>renda</b> (Imposto de Renda), <b>patrimônio</b> (IPTU, IPVA, ITR) e <b>consumo</b> (ICMS, ISS, IPI e, no futuro, IBS).",
     x: "Num mesmo dia, um morador do DF pode gerar os três: recebe o salário (renda, IR), é dono do carro (patrimônio, IPVA) e compra um celular na loja (consumo, ICMS embutido no preço).",
     l: "CTN, artigo 16; CF/88, artigos 153, 155 e 156.",
-    p: "Questão 2 da lista: o imposto sobre <b>patrimônio</b> era o IPVA; IOF, ICMS e ISS não incidem sobre patrimônio."},
+    p: "\"O IOF, o ICMS e o ISS são impostos sobre o patrimônio\": ERRADO (questão 2 da lista).<br><b>O erro:</b> classificou como patrimônio impostos que incidem sobre operações e consumo.<br><b>O certo:</b> sobre patrimônio são IPTU, IPVA e ITR; na questão, a resposta era o <b>IPVA</b>."},
    {k: "imp2", t: "Lei complementar define fato gerador, base de cálculo e contribuintes",
     e: "Para os impostos discriminados na Constituição, uma lei complementar nacional precisa definir <b>fato gerador, base de cálculo e contribuintes</b>. A alíquota <b>não</b> está nessa lista e pode ser fixada pela lei de cada ente. A exigência vale apenas para impostos, e não para contribuições.",
     x: "A Lei Complementar 87/1996 (Lei Kandir) define o fato gerador, a base e os contribuintes do ICMS para o país todo; a alíquota interna aplicada no DF vem da lei distrital.",
     l: "CF/88, artigo 146, inciso III, alínea \"a\"; STF, RE 148.754.",
-    p: "\"A lei complementar deve definir as alíquotas dos impostos\": ERRADO. \"Contribuições precisam de lei complementar definindo fato gerador e base\": ERRADO."},
+    p: "\"A lei complementar deve definir as alíquotas dos impostos\": ERRADO.<br><b>O erro:</b> a alíquota não está na lista do artigo 146, inciso III, alínea \"a\".<br><b>O certo:</b> a lei complementar define fato gerador, base de cálculo e contribuintes; a alíquota fica com a lei de cada ente. E a exigência vale para os impostos: \"contribuições precisam de lei complementar definindo fato gerador e base\" também está ERRADO."},
    {k: "imp3", t: "Competência residual: só da União, por lei complementar",
     e: "Além dos impostos listados, só a União pode criar outros (impostos residuais ou inominados), e com três requisitos: <b>lei complementar</b>, <b>não cumulatividade</b> e fato gerador ou base de cálculo <b>diferentes</b> dos impostos já previstos na Constituição.",
     x: "Imagine que a União queira tributar a propriedade de embarcações de luxo, fato que não está entre os impostos já discriminados. Teria de fazê-lo por lei complementar (nunca por medida provisória), com um imposto não cumulativo e que não repita a base de outro imposto existente.",
     l: "CF/88, artigo 154, inciso I.",
-    p: "O imposto residual não pode repetir fato gerador ou base de outro <b>imposto</b>, mas pode coincidir com o de uma contribuição. Estados e municípios não têm competência residual."},
+    p: "\"O imposto residual não pode ter o mesmo fato gerador ou base de cálculo de uma contribuição\": ERRADO.<br><b>O erro:</b> a vedação é em relação aos <b>impostos</b> já previstos na Constituição.<br><b>O certo:</b> pode coincidir com o de uma contribuição. E só a União tem competência residual, por lei complementar; Estados e Municípios não têm."},
    {k: "imp4", t: "Imposto extraordinário de guerra · IBS compartilhado · DF cumulativo",
     e: "Três situações especiais: (1) na iminência ou em caso de guerra externa, a União pode criar impostos extraordinários, inclusive sobre fatos que seriam de outros entes; (2) o IBS, criado pela Reforma, é de competência <b>compartilhada</b> entre Estados, DF e Municípios; (3) o DF tem competência <b>cumulativa</b>, ou seja, institui impostos estaduais e municipais.",
     x: "O DF cobra, ao mesmo tempo, ICMS (imposto estadual) e ISS (imposto municipal). Com o IBS, receberá tanto a parcela que caberia a um Estado quanto a que caberia a um Município.",
     l: "CF/88, artigos 147, 154 (inciso II) e 156-A.",
-    p: "\"O Sistema Tributário Nacional não prevê imposto de competência compartilhada\": ERRADO, existe o IBS."}
+    p: "\"O Sistema Tributário Nacional não prevê imposto de competência compartilhada\": ERRADO.<br><b>O erro:</b> ignorou a Reforma Tributária.<br><b>O certo:</b> o IBS (artigo 156-A) é compartilhado entre Estados, DF e Municípios."}
   ]},
  {k: "tax", c: "#1f8a4c", t: "Taxas", s: "Artigo 77 do CTN · vinculada · competência comum",
   e: "A taxa remunera uma atuação do Estado dirigida ao contribuinte: o <b>exercício regular do poder de polícia</b> ou um <b>serviço público específico e divisível</b>, usado ou posto à disposição. O fato gerador é um fato do Estado, por isso a taxa é tributo <b>vinculado</b> e contraprestacional. Todos os entes podem criá-las, cada um no âmbito das suas atribuições.",
   x: "Para abrir uma loja em Taguatinga, o comerciante paga a taxa de licença de funcionamento ao DF, porque o governo fiscaliza o estabelecimento (poder de polícia). Ao tirar passaporte, paga uma taxa à União pelo serviço de emissão.",
   l: "CF/88, artigo 145, inciso II e parágrafo 2º; CTN, artigos 77 a 80.",
-  p: "A espécie \"taxa\" é de competência comum, mas cada taxa concreta só pode ser criada pelo ente que presta aquele serviço ou exerce aquela fiscalização.",
+  p: "\"Como a taxa é de competência comum, qualquer ente pode cobrar taxa por qualquer serviço público\": ERRADO.<br><b>O erro:</b> confundiu a espécie com a taxa concreta.<br><b>O certo:</b> todos os entes podem criar taxas, mas cada uma só pelo ente que presta aquele serviço ou exerce aquela fiscalização.",
   f: [
    {k: "tax1", t: "Poder de polícia regular (não exige fiscalização porta a porta)",
     e: "Poder de polícia é a atividade que limita direitos em nome do interesse público (segurança, higiene, ordem, mercado). Para cobrar taxa, o exercício precisa ser <b>regular</b>: órgão competente, dentro da lei, com devido processo. O STF entende que basta existir um <b>órgão estruturado</b> para fiscalizar; não é preciso provar a visita ao estabelecimento.",
     x: "Um município cobra todo ano a taxa de renovação do alvará de funcionamento. Uma padaria nunca recebeu visita do fiscal, mas o município mantém secretaria e equipe de fiscalização: a cobrança é válida.",
     l: "CTN, artigo 78 e parágrafo único; STF, RE 588.322 e ADI 7.400.",
-    p: "\"A taxa de polícia só pode ser cobrada se houver fiscalização presencial em cada estabelecimento\": ERRADO. Mas a taxa cujo valor excede de forma desproporcional o custo da fiscalização é inconstitucional."},
+    p: "\"A taxa de polícia só pode ser cobrada se houver fiscalização presencial em cada estabelecimento\": ERRADO.<br><b>O erro:</b> exigiu prova da visita do fiscal.<br><b>O certo:</b> basta um órgão estruturado e em funcionamento para fiscalizar (STF). Mas a taxa cujo valor excede de forma desproporcional o custo da fiscalização é inconstitucional."},
    {k: "tax2", t: "Serviço específico e divisível, de uso efetivo ou potencial",
     e: "<b>Específico</b>: o serviço pode ser destacado em unidade autônoma, e o usuário sabe qual serviço recebe. <b>Divisível</b>: cada usuário pode utilizá-lo separadamente. O uso pode ser <b>efetivo</b> (usou de fato) ou <b>potencial</b> (o serviço, de utilização compulsória, está disponível e em efetivo funcionamento). O que pode ser potencial é a utilização, nunca a existência do serviço.",
     x: "Você viaja de férias por um mês. O caminhão de lixo continua passando na sua porta: você paga a taxa de coleta mesmo sem ter produzido lixo, porque o serviço foi posto à sua disposição (uso potencial).",
     l: "CTN, artigo 79; CF/88, artigo 145, inciso II.",
-    p: "Questão 53 da lista: \"O conceito de taxa pressupõe a utilização <b>efetiva</b>\": ERRADO, a utilização pode ser potencial."},
+    p: "\"O conceito de taxa pressupõe a utilização <b>efetiva</b> do serviço\": ERRADO (questão 53 da lista).<br><b>O erro:</b> ignorou a utilização potencial.<br><b>O certo:</b> a utilização pode ser efetiva ou potencial (serviço compulsório, à disposição e em funcionamento); o que não pode ser potencial é a existência do serviço."},
    {k: "tax3", t: "Base de cálculo diferente da de imposto (Súmula Vinculante 29)",
     e: "A taxa não pode ter base de cálculo própria de imposto nem ser calculada sobre o capital das empresas, senão vira um \"imposto disfarçado\". Mas a Súmula Vinculante 29 permite usar <b>um ou mais elementos</b> da base de um imposto, desde que não haja identidade integral. O valor deve guardar razoável equivalência com o custo da atividade.",
     x: "Taxa de lixo calculada pela <b>área construída</b> do imóvel (um dos elementos da base do IPTU): válida. Taxa de lixo igual a 1% do <b>valor venal</b> do imóvel (a própria base do IPTU): inválida.",
     l: "CF/88, artigo 145, parágrafo 2º; CTN, artigo 77, parágrafo único; Súmula Vinculante 29; Súmulas 595, 665 e 667 do STF.",
-    p: "O capital social não pode ser a base de cálculo, mas pode servir de <b>faixa de referência</b> para um valor fixo (taxa da CVM, Súmula 665). Taxa calculada pelo número de empregados é inconstitucional."},
+    p: "\"A taxa pode ter como base de cálculo o capital social da empresa\": ERRADO.<br><b>O erro:</b> o capital é base própria de imposto (artigo 77, parágrafo único, do CTN).<br><b>O certo:</b> o capital só pode servir de <b>faixa de referência</b> para um valor fixo (taxa da CVM, Súmula 665). Taxa calculada pelo número de empregados também é inconstitucional."},
    {k: "tax4", t: "Lixo domiciliar pode (SV 19) · iluminação pública não pode (SV 41)",
     e: "Só serviços <i>uti singuli</i> (específicos e divisíveis) admitem taxa. Serviços <i>uti universi</i>, prestados à coletividade sem identificar quem usa, são custeados por impostos. Por isso não cabe taxa de iluminação pública, de segurança pública nem de limpeza de logradouros (varrição, capina), mas cabe taxa de coleta de lixo domiciliar.",
     x: "O lixo recolhido na porta de cada casa permite identificar cada imóvel atendido. Já o poste da avenida ilumina qualquer pessoa que passe por ali, e por isso a iluminação é custeada pela COSIP, uma contribuição, e não por taxa.",
     l: "Súmula Vinculante 19; Súmula Vinculante 41; STF, ADI 1.942 e RE 576.321.",
-    p: "Taxa de incêndio: em 2020 o STF a julgou inconstitucional (ADI 2.908), mas em 2025, no Tema 1.282, admitiu as taxas <b>estaduais</b> de prevenção e combate a incêndio, busca, salvamento e resgate."}
+    p: "\"As taxas estaduais de prevenção e combate a incêndio são inconstitucionais\": ERRADO.<br><b>O erro:</b> usou o entendimento de 2020 (ADI 2.908).<br><b>O certo:</b> em 2025, no Tema 1.282, o STF admitiu as taxas <b>estaduais</b> de prevenção e combate a incêndio, busca, salvamento e resgate."}
   ]},
  {k: "mel", c: "#b07400", t: "Contribuição de melhoria", s: "Artigos 81 e 82 do CTN · vinculada · competência comum",
   e: "É cobrada quando uma <b>obra pública</b> gera <b>valorização imobiliária</b>. O objetivo é evitar que alguns proprietários enriqueçam à custa de dinheiro de toda a sociedade. Todos os entes podem instituí-la, e ela é tributo vinculado, pois depende de uma atuação estatal (a obra).",
   x: "O DF constrói uma nova estação de metrô e os imóveis do entorno valorizam. O governo pode cobrar contribuição de melhoria dos proprietários beneficiados, como na questão da SEFAZ-AM.",
   l: "CF/88, artigo 145, inciso III; CTN, artigos 81 e 82; Decreto-Lei 195/1967.",
-  p: "O fato gerador é a <b>valorização</b>, e não a obra. É preciso uma lei específica para cada obra.",
+  p: "\"O fato gerador da contribuição de melhoria é a realização da obra pública\": ERRADO.<br><b>O erro:</b> obra sem valorização não gera o tributo.<br><b>O certo:</b> o fato gerador é a <b>valorização</b> do imóvel decorrente da obra, e é preciso uma lei específica para cada obra.",
   f: [
    {k: "mel1", t: "Fato gerador = valorização imobiliária",
     e: "Sem valorização não há fato gerador, por mais cara que tenha sido a obra. O Decreto-Lei 195/1967 é explícito: o fato gerador é o acréscimo do valor do imóvel situado na área beneficiada, direta ou indiretamente, pela obra pública.",
     x: "Um viaduto construído em frente a um condomínio traz barulho e desvaloriza os apartamentos. Não cabe contribuição de melhoria, porque não houve valorização.",
     l: "Decreto-Lei 195/1967, artigo 1º; CTN, artigo 81.",
-    p: "\"O fato gerador da contribuição de melhoria é o aumento da capacidade contributiva do proprietário\": ERRADO. \"Pode ser cobrada independentemente da valorização\": ERRADO."},
+    p: "\"O fato gerador da contribuição de melhoria é o aumento da capacidade contributiva do proprietário\" ou \"pode ser cobrada independentemente da valorização\": ERRADO.<br><b>O erro:</b> afastou o fato gerador da valorização do imóvel.<br><b>O certo:</b> o fato gerador é o acréscimo de valor do imóvel situado na área beneficiada pela obra; sem valorização, não há cobrança."},
    {k: "mel2", t: "Limite total = despesa realizada",
     e: "A soma de tudo o que o poder público arrecadar com a contribuição não pode passar do custo da obra. O tributo serve para recuperar o gasto, e não para gerar lucro ao Estado.",
     x: "A obra custou R$ 10 milhões e os imóveis da região valorizaram R$ 30 milhões no total. O máximo arrecadável é R$ 10 milhões.",
     l: "CTN, artigo 81.",
-    p: "A Constituição é <b>omissa</b> quanto aos limites; eles estão apenas no CTN."},
+    p: "\"A Constituição fixa como limite total da contribuição de melhoria a despesa realizada\": ERRADO.<br><b>O erro:</b> atribuiu à Constituição um limite que ela não traz.<br><b>O certo:</b> a CF/88 é <b>omissa</b> quanto aos limites; o total (custo da obra) e o individual (valorização do imóvel) estão no artigo 81 do CTN."},
    {k: "mel3", t: "Limite individual = acréscimo de valor do imóvel",
     e: "De cada proprietário só se pode cobrar até o quanto o <b>seu</b> imóvel valorizou por causa da obra, respeitado também o limite total. A distribuição é feita por rateio da parcela do custo, segundo fatores individuais de valorização.",
     x: "Exemplo da aula: a casa do Sr. João valia R$ 50 mil e passou a valer R$ 200 mil depois das obras no bairro. A contribuição dele pode chegar a R$ 150 mil, desde que a soma de todos não ultrapasse o custo da obra.",
     l: "CTN, artigos 81 e 82, parágrafo 1º.",
-    p: "Os dois limites valem ao mesmo tempo; não basta respeitar só um deles."},
+    p: "\"Respeitado o limite individual, a soma arrecadada pode passar do custo da obra\": ERRADO.<br><b>O erro:</b> aplicou só um dos limites.<br><b>O certo:</b> os dois limites valem ao mesmo tempo: ninguém paga mais do que o seu imóvel valorizou, e o total não passa da despesa realizada."},
    {k: "mel4", t: "Cobrança só depois da obra · impugnação em no mínimo 30 dias",
     e: "Antes de cobrar, a lei deve publicar: memorial <b>descritivo</b> do projeto, orçamento, <b>determinação</b> da parcela do custo a ser financiada, delimitação da zona beneficiada e fator de absorção do benefício. Os interessados têm prazo de <b>no mínimo 30 dias</b> para impugnar. A cobrança só ocorre depois da obra, concluída ou em parte suficiente para beneficiar os imóveis.",
     x: "O DF publica o edital da obra de pavimentação com memorial, orçamento e mapa da zona beneficiada. Um proprietário discorda do fator de valorização do seu lote e apresenta impugnação dentro do prazo, que é decidida em processo administrativo.",
     l: "CTN, artigo 82; Decreto-Lei 195/1967, artigo 9º.",
-    p: "A banca troca \"memorial <b>descritivo</b>\" por \"executivo\" e \"<b>determinação</b>\" por \"estimativa\". \"Convênio com o ente onde a obra ocorre\" não é requisito."}
+    p: "\"A lei deve publicar o memorial executivo e a estimativa da parcela do custo a ser financiada\" ou \"exige convênio com o ente onde a obra ocorre\": ERRADO.<br><b>O erro:</b> a banca troca \"memorial <b>descritivo</b>\" por \"executivo\" e \"<b>determinação</b>\" por \"estimativa\", e inventa o convênio.<br><b>O certo:</b> memorial descritivo, orçamento, determinação da parcela financiada, zona beneficiada e fator de absorção; o convênio não é requisito."}
   ]},
  {k: "emp", c: "#8a3ac2", t: "Empréstimo compulsório", s: "Artigo 148 da CF/88 · tributo finalístico",
   e: "É um tributo que a União cobra com a promessa de <b>devolver</b>. O STF já o tratou como contrato (Súmula 418), mas esse entendimento está superado: a restituição não descaracteriza o tributo, porque o artigo 3º do CTN não exige que a receita seja definitiva. É uma espécie tributária autônoma.",
   x: "Situação hipotética: uma enchente de grandes proporções atinge vários Estados. A União edita lei complementar criando empréstimo compulsório e, anos depois, devolve os valores em dinheiro aos contribuintes.",
   l: "CF/88, artigo 148; CTN, artigo 15; STF, RE 146.733 e RE 111.954.",
-  p: "\"Empréstimo compulsório tem natureza de contrato coativo\": ERRADO, é tributo.",
+  p: "\"Empréstimo compulsório tem natureza de contrato coativo\": ERRADO.<br><b>O erro:</b> usou o entendimento superado da Súmula 418.<br><b>O certo:</b> é tributo, espécie autônoma; a promessa de devolução não o descaracteriza.",
   f: [
    {k: "emp1", t: "Só a União, e só por lei complementar",
     e: "A competência é <b>exclusiva da União</b>, e o veículo é obrigatoriamente a <b>lei complementar</b>. Medida provisória não pode tratar de matéria reservada a lei complementar, e lei ordinária também não serve.",
     x: "Se o Presidente da República editasse uma medida provisória criando empréstimo compulsório para socorrer uma região atingida por desastre, ela seria inconstitucional, mesmo diante da urgência.",
     l: "CF/88, artigos 148 (caput) e 62, parágrafo 1º, inciso III.",
-    p: "\"Empréstimos compulsórios podem ser instituídos pela União, Estados, DF e Municípios\": ERRADO."},
+    p: "\"Empréstimos compulsórios podem ser instituídos pela União, Estados, DF e Municípios\": ERRADO.<br><b>O erro:</b> estendeu a competência aos outros entes.<br><b>O certo:</b> só a União, e só por lei complementar (nem medida provisória nem lei ordinária)."},
    {k: "emp2", t: "Calamidade pública ou guerra externa",
     e: "Primeira hipótese: atender a <b>despesas extraordinárias</b> decorrentes de calamidade pública ou de guerra externa, ou da sua iminência. Pela urgência, essa hipótese não precisa esperar as regras de anterioridade para ser cobrada.",
     x: "Um terremoto destrói parte da infraestrutura de uma região: a União pode instituir o empréstimo e cobrá-lo de imediato para financiar a reconstrução.",
     l: "CF/88, artigos 148 (inciso I) e 150, parágrafo 1º.",
-    p: "\"Conjuntura que exija absorção temporária de poder aquisitivo\" (CTN, artigo 15, inciso III) <b>não</b> foi recepcionada pela CF/88. Questões que a citam como hipótese válida estão erradas."},
+    p: "\"A União pode instituir empréstimo compulsório em conjuntura que exija absorção temporária de poder aquisitivo\": ERRADO.<br><b>O erro:</b> usou a hipótese do artigo 15, inciso III, do CTN, que não foi recepcionada.<br><b>O certo:</b> a CF/88 só admite calamidade pública ou guerra externa (ou sua iminência) e investimento público urgente e de relevante interesse nacional."},
    {k: "emp3", t: "Investimento público urgente (respeita a anterioridade)",
     e: "Segunda hipótese: <b>investimento público de caráter urgente e de relevante interesse nacional</b>. Aqui a Constituição manda observar a anterioridade anual (artigo 150, inciso III, alínea \"b\"), ou seja, só se cobra no exercício seguinte ao da publicação da lei.",
     x: "Lei complementar publicada em agosto cria empréstimo compulsório para um investimento urgente no sistema elétrico nacional. A cobrança só pode começar no ano seguinte.",
     l: "CF/88, artigo 148, inciso II.",
-    p: "Algumas questões juntam calamidade e guerra num único item e falam em \"duas hipóteses\". Isso não torna a questão errada."},
+    p: "\"A Constituição prevê duas hipóteses de empréstimo compulsório: calamidade ou guerra, e investimento urgente\": CERTO.<br><b>O erro:</b> marcar errado por achar que calamidade e guerra são hipóteses separadas.<br><b>O certo:</b> estão juntas no inciso I do artigo 148; a segunda hipótese (investimento urgente) respeita a anterioridade e só é cobrada no exercício seguinte."},
    {k: "emp4", t: "Arrecadação vinculada · devolução em dinheiro",
     e: "Tudo o que for arrecadado deve ser aplicado na despesa que justificou a criação do tributo (<b>arrecadação vinculada</b>). Isso não o torna um tributo vinculado, porque o fato gerador é livremente escolhido pelo legislador. A lei deve fixar prazo e condições de resgate, e a devolução é na <b>mesma espécie</b> do que foi pago: dinheiro.",
     x: "O dinheiro arrecadado para socorrer vítimas de uma enchente não pode ser usado para reformar um estádio. E a União não pode \"devolver\" em títulos ou cotas de empresa: tem de pagar em moeda.",
     l: "CF/88, artigo 148, parágrafo único; CTN, artigo 15, parágrafo único; STF, RE 175.385.",
-    p: "Arrecadação vinculada ≠ tributo vinculado. A banca adora trocar os dois conceitos."}
+    p: "\"Por ter arrecadação vinculada, o empréstimo compulsório é tributo vinculado\": ERRADO.<br><b>O erro:</b> confundiu o destino do dinheiro com o fato gerador.<br><b>O certo:</b> a <b>arrecadação</b> é vinculada à despesa que o justificou, mas o fato gerador é livre, então ele não é tributo vinculado. A devolução é em dinheiro."}
   ]},
  {k: "esp", c: "#c23a3a", t: "Contribuições especiais", s: "Artigo 149 da CF/88 · tributo finalístico",
   e: "São tributos definidos pela <b>finalidade</b>: o destino do dinheiro é o que os identifica. Abrangem as contribuições sociais, as de intervenção no domínio econômico (CIDE), as de interesse de categorias profissionais ou econômicas (corporativas) e a de iluminação pública (COSIP). Não confunda com a contribuição <i>de melhoria</i>.",
   x: "A CSLL paga por uma empresa sobre o seu lucro vai para a seguridade social (saúde, previdência e assistência). Se a lei desviasse esse dinheiro para outra finalidade, a própria contribuição perderia o seu fundamento.",
   l: "CF/88, artigos 149, 149-A, 177 (parágrafo 4º) e 195.",
-  p: "Para as contribuições especiais o artigo 4º do CTN não basta: a destinação é relevante para identificar a espécie.",
+  p: "\"Para identificar uma contribuição especial, basta o fato gerador (artigo 4º do CTN)\": ERRADO.<br><b>O erro:</b> aplicou a regra de que a destinação é irrelevante.<br><b>O certo:</b> nas contribuições especiais a <b>finalidade</b> (o destino do dinheiro) é o que identifica a espécie.",
   f: [
    {k: "esp1", t: "Sociais: seguridade, gerais e residuais",
     e: "<b>Seguridade social</b>: fontes listadas no artigo 195 (folha, faturamento, lucro, trabalhador, prognósticos, importação, bens e serviços). Quando a fonte está na Constituição, basta lei ordinária. <b>Gerais</b>: financiam a área social fora da seguridade (salário-educação, Sistema S). <b>Residuais</b>: novas fontes, exigem lei complementar, não cumulatividade e base diferente das contribuições existentes.",
     x: "Um supermercado do DF paga COFINS sobre o faturamento e CSLL sobre o lucro (seguridade); também recolhe para o SESC e o SENAC (contribuições gerais, destinadas a entidades privadas, por isso parafiscais).",
     l: "CF/88, artigos 195 (incisos I a V e parágrafo 4º), 212 (parágrafo 5º) e 240; STF, RE 148.754.",
-    p: "COFINS e PIS foram criados por lei complementar, mas são materialmente ordinários e <b>não</b> são residuais."},
+    p: "\"COFINS e PIS são contribuições residuais, porque foram criados por lei complementar\": ERRADO.<br><b>O erro:</b> deduziu a natureza pela forma da lei.<br><b>O certo:</b> têm fonte prevista na Constituição, então são materialmente ordinárias e <b>não</b> residuais; residual é a contribuição sobre fonte nova (artigo 195, parágrafo 4º)."},
    {k: "esp2", t: "Previdência dos servidores (RPPS): todos os entes",
     e: "União, Estados, DF e Municípios cobram contribuição dos seus servidores ativos, aposentados e pensionistas para o regime próprio, com alíquotas que podem ser progressivas. Para aposentados, a regra é incidir sobre o que exceder o teto do RGPS; havendo <b>déficit atuarial</b>, sobre o que exceder o <b>salário-mínimo</b>.",
     x: "Quando você for aprovado, o DF descontará do seu subsídio a contribuição para o regime próprio de previdência do DF, uma contribuição distrital, e não federal.",
     l: "CF/88, artigo 149, parágrafos 1º, 1º-A e 1º-B; Emenda Constitucional 103/2019.",
-    p: "A contribuição <b>extraordinária</b> só é prevista no âmbito da União. Estados, DF e Municípios não podem ter alíquota menor que a da União, salvo se não houver déficit."},
+    p: "\"Estados, DF e Municípios podem instituir contribuição extraordinária para cobrir o déficit do regime próprio\": ERRADO.<br><b>O erro:</b> estendeu aos outros entes uma previsão só da União.<br><b>O certo:</b> a contribuição <b>extraordinária</b> é prevista só no âmbito da União. Estados, DF e Municípios não podem ter alíquota menor que a da União, salvo se não houver déficit."},
    {k: "esp3", t: "CIDE e corporativas: só a União",
     e: "A <b>CIDE</b> é extrafiscal: intervém em um setor da economia e direciona recursos para ele. As <b>corporativas</b> financiam conselhos profissionais (autarquias). Ambas são de competência exclusiva da União. Contribuições sociais e CIDE não incidem sobre exportação, incidem sobre importação e podem ter alíquota ad valorem ou específica.",
     x: "Parte do preço da gasolina que você paga no posto é CIDE-Combustíveis, cuja receita financia, por exemplo, infraestrutura de transportes. Já o contador paga anuidade ao CRC, que é tributo; a anuidade do advogado à OAB não é.",
     l: "CF/88, artigos 149 (parágrafo 2º) e 177 (parágrafo 4º); STF, Tema 1.054 (OAB).",
-    p: "\"Estados podem instituir CIDE atrelada à exploração de petróleo no seu território\": ERRADO (questão 24 da lista). A alíquota da CIDE-Combustíveis pode ser reduzida e restabelecida por ato do Poder Executivo."},
+    p: "\"Estados podem instituir CIDE atrelada à exploração de petróleo no seu território\": ERRADO (questão 24 da lista).<br><b>O erro:</b> deu aos Estados uma competência da União.<br><b>O certo:</b> a CIDE é exclusiva da União. A alíquota da CIDE-Combustíveis pode ser reduzida e restabelecida por ato do Poder Executivo."},
    {k: "esp4", t: "COSIP: Municípios e DF",
     e: "Criada pela Emenda Constitucional 39/2002 como solução para a proibição da taxa de iluminação pública. Só Municípios e DF a instituem. Desde a Reforma Tributária, custeia o custeio, a expansão e a melhoria da iluminação pública <b>e</b> dos sistemas de monitoramento de logradouros, e deve observar legalidade, irretroatividade e anterioridades.",
     x: "Na conta de luz de quem mora em Brasília vem a contribuição de iluminação pública. Com a Emenda Constitucional 132/2023, esse dinheiro também pode pagar câmeras de monitoramento de praças e parques.",
     l: "CF/88, artigo 149-A e parágrafo único; CTN, artigo 82-A (Lei Complementar 227/2026).",
-    p: "A cobrança na fatura de energia é <b>facultativa</b>, e não obrigatória. A COSIP não financia a seguridade social (questão SEFAZ-AM)."}
+    p: "\"A COSIP deve ser cobrada obrigatoriamente na fatura de energia elétrica\": ERRADO.<br><b>O erro:</b> transformou uma faculdade em obrigação.<br><b>O certo:</b> a cobrança na fatura é <b>facultativa</b> (artigo 149-A, parágrafo único). E a COSIP custeia a iluminação pública, e não a seguridade social (questão SEFAZ-AM)."}
   ]}
 ];
 
