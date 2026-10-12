@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T10 · Trilha 00 · Contabilidade Geral — SEFAZ-DF</title>
+<style>
+:root{
+  --bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;
+  --accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;
+  --warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;
+  --accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;
+  --warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:16px;padding:12px 0 6px;flex-wrap:wrap}
+.badge{background:var(--accent);color:#fff;font-weight:700;border-radius:8px;padding:4px 10px;font-size:14px;letter-spacing:.5px}
+.top h1{font-size:18px;margin:0;font-weight:650}
+.top .sub{color:var(--muted);font-size:13px}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:8px}
+nav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--surface2);color:var(--text)}
+nav button.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+main{padding:24px 0 80px}
+section.tab{display:none}section.tab.on{display:block}
+h2{font-size:22px;margin:0 0 4px}
+h3{font-size:17px;margin:28px 0 10px}
+.lead{color:var(--muted);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:12px 0}
+.call.warn{border-color:var(--warn);background:var(--warn-soft)}
+.call.bad{border-color:var(--bad);background:var(--bad-soft)}
+.call.ok{border-color:var(--ok);background:var(--ok-soft)}
+.call b:first-child{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.tbl table th:first-child,.tbl table td:first-child{padding-left:14px}
+.k{font-weight:650;color:var(--accent)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.pill.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--surface)}
+details summary{cursor:pointer;padding:10px 14px;font-weight:600}
+details>div{padding:0 14px 12px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select{font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text)}
+
+/* roteiro */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 46px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center}
+
+/* mapa mental */
+.mm{padding:22px 16px}
+.mm-root{display:block;max-width:520px;margin:0 auto;text-align:center;background:var(--accent);color:#fff;border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.45}
+.mm-root b{display:block;font-size:17px;letter-spacing:.5px}
+.mm-trunk{width:2px;height:22px;background:var(--line);margin:0 auto}
+.mm-branches{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:12px;border-top:2px solid var(--line);padding-top:0}
+.mm-br{display:flex;flex-direction:column;align-items:stretch}
+.mm-br::before{content:"";width:2px;height:18px;background:var(--line);margin:0 auto}
+.mm-h{border:2px solid var(--c);border-radius:10px;padding:8px 10px;text-align:center;font-size:13px;background:var(--surface)}
+.mm-h b{display:block;font-size:14.5px;color:var(--c)}
+.mm-br ul{list-style:none;margin:8px 0 0;padding:0 0 0 12px;border-left:2px solid var(--c)}
+.mm-br li{font-size:13px;line-height:1.4;background:var(--surface2);border-radius:8px;padding:6px 9px;margin:6px 0;position:relative}
+.mm-br li::before{content:"";position:absolute;left:-12px;top:50%;width:10px;border-top:2px solid var(--c)}
+@media(max-width:860px){.mm-branches{grid-template-columns:1fr 1fr;border-top:0}}
+@media(max-width:520px){.mm-branches{grid-template-columns:1fr}}
+
+
+/* abreviações com dica */
+abbr[data-tip]{text-decoration:underline dotted;text-underline-offset:3px;cursor:help}
+#tip{position:fixed;z-index:100;max-width:300px;background:#1d2330;color:#fff;font-size:13px;line-height:1.35;padding:6px 10px;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+@media (prefers-color-scheme:dark){#tip{background:#e6e9ef;color:#12151b}}
+
+/* mapa clicável */
+.mm [data-k]{cursor:pointer;transition:transform .12s,box-shadow .12s}
+.mm [data-k]:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.mm [data-k].sel{outline:3px solid var(--c,var(--accent));outline-offset:2px}
+.mm-root[data-k].sel{outline-color:var(--text)}
+.mm-hint{text-align:center;color:var(--muted);font-size:13px;margin:-4px 0 12px}
+#mmPanel{border-left:6px solid var(--c,var(--accent));scroll-margin-top:140px}
+#mmPanel h4{margin:0 0 4px;font-size:18px;color:var(--c,var(--accent))}
+#mmPanel .mm-sec{margin:12px 0 0}
+#mmPanel .lbl{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+#mmPanel .ex{background:var(--ok-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .pg{background:var(--bad-soft);border-radius:8px;padding:10px 12px}
+#mmPanel .nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+
+/* questões */
+.qnav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 16px}
+.qnav button{width:34px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:12.5px;cursor:pointer}
+.qnav button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.qnav button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.qnav button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.progress{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:width .3s}
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13.5px;margin-bottom:8px}
+.enun{white-space:pre-line;margin-bottom:14px}
+.trecho{white-space:pre-line;margin:0 0 12px;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface2);border-radius:0 8px 8px 0;font-style:italic}
+.trecho .lbl{display:block;font-style:normal;font-size:12px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:2px}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:15px;padding:10px 12px;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .l{font-weight:700;min-width:22px;text-transform:uppercase}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ce{display:flex;gap:10px}.ce .opt{justify-content:center;font-weight:650}
+.opt{user-select:none;-webkit-user-select:none;position:relative}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.opt.sel .l::before{content:"● ";color:var(--accent)}
+.opt.desc{opacity:.55;padding-right:92px}
+.opt.desc span{text-decoration:line-through;text-decoration-thickness:2px}
+.ce .opt.desc{text-decoration:line-through;text-decoration-thickness:2px}
+.opt.desc::after{content:"descartada";position:absolute;right:10px;top:8px;font-size:11px;color:var(--muted);text-decoration:none}
+.qact{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}
+.qmsg{font-size:14.5px;padding:8px 12px;border-radius:8px;display:none}
+.qmsg.on{display:block}
+.qmsg.warn{background:var(--warn-soft);color:var(--warn)}
+.qmsg.bad{background:var(--bad-soft);color:var(--bad)}
+.qhint{font-size:12.5px;color:var(--muted);margin:2px 0 6px}
+.coment{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.coment p{margin:6px 0}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)}.verdict.bad{color:var(--bad)}
+
+/* flashcards */
+.fc{perspective:1200px;max-width:640px;margin:0 auto}
+.fc-inner{position:relative;min-height:240px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:26px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.fc-face.back{transform:rotateY(180deg);background:var(--accent-soft);text-align:left;align-items:flex-start;font-size:15px}
+.fc-face .q{font-size:19px;font-weight:600}
+.fc-meta{display:flex;justify-content:space-between;max-width:640px;margin:0 auto 8px;color:var(--muted);font-size:13px}
+.boxes{display:flex;gap:6px;justify-content:center;margin:14px 0}
+.boxes span{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--surface2);border:1px solid var(--line)}
+
+/* rendimento */
+.big{font-size:44px;font-weight:750;line-height:1}
+.bar{display:grid;grid-template-columns:200px 1fr 70px;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.bar .t{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar .t>div{height:100%;background:var(--ok)}
+.bar .t>div.mid{background:var(--warn)}.bar .t>div.low{background:var(--bad)}
+@media(max-width:600px){.bar{grid-template-columns:120px 1fr 56px}}
+kbd{font:12px ui-monospace,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface2)}
+.btn kbd{background:rgba(255,255,255,.18);color:inherit;border-color:currentColor}
+/* marca-texto */
+mark.hl{color:#1d2330;border-radius:3px;padding:0 1px;cursor:pointer;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+mark.hl-am{background:#fff176}mark.hl-ro{background:#f9c2dc}mark.hl-ve{background:#b6efc4}
+#hlBar{position:fixed;z-index:120;display:none;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 8px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+#hlBar.on{display:flex}
+#hlBar .lbl{font-size:12px;color:var(--muted);margin-right:2px}
+#hlBar button{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);cursor:pointer;font-size:14px;line-height:1;color:var(--text);background:var(--surface2);padding:0}
+#hlBar button:hover{transform:scale(1.12);border-color:var(--text)}
+#hlBar button[data-c=am]{background:#fff176}#hlBar button[data-c=ro]{background:#f9c2dc}#hlBar button[data-c=ve]{background:#b6efc4}
+@media(pointer:coarse){#hlBar{gap:10px;padding:8px 10px}#hlBar button{width:38px;height:38px;font-size:16px}#hlBar .lbl{font-size:13px}}
+/* tamanho da fonte: A− / A+ escalam a página inteira (zoom em header e main; #tip só a fonte, para não deslocar) */
+:root{--fz:1}
+header,main{zoom:var(--fz)}
+#tip{font-size:calc(13px * var(--fz))}
+.fz{display:flex;align-items:center;gap:4px}
+.fz button{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:14px;font-weight:650;min-width:34px;height:30px;padding:0 8px;border-radius:8px;cursor:pointer}
+.fz button:hover{background:var(--surface2)}
+.fz #fzVal{min-width:52px;font-weight:400;color:var(--muted);font-size:13px}
+/* celular: cabeçalho compacto numa linha e menu retrátil (abas, fonte, tela cheia e índice dentro dele) */
+#menuBtn{display:none}
+@media(max-width:700px){
+  .wrap{padding:0 12px}
+  .top{flex-wrap:nowrap;gap:8px;padding:6px 0}
+  .top>div:not(.fz){min-width:0;flex:1}
+  .top h1{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top .sub{display:none}
+  .badge{font-size:12px;padding:2px 7px}
+  #menuBtn{display:inline-block;flex-shrink:0;max-width:46vw;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);font:inherit;font-size:13px;font-weight:600;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .top>a,.top .fz,nav{display:none}
+  header.menu-on .top{flex-wrap:wrap}
+  header.menu-on .top>a{display:block;order:3;width:100%;margin:2px 0 0 !important}
+  header.menu-on .top .fz{display:flex;order:4;width:100%;flex-wrap:wrap}
+  header.menu-on nav{display:flex;flex-direction:column;gap:2px;max-height:60vh;overflow-y:auto}
+  header.menu-on nav button{text-align:left;padding:9px 12px}
+}
+/* temas: escolhidos no seletor do cabeçalho; sem escolha salva, segue o claro/escuro do sistema */
+:root[data-theme=claro]{--bg:#f6f7f9;--surface:#fff;--surface2:#f0f2f5;--text:#1d2330;--muted:#5d6676;--line:#dde1e7;--accent:#2f5bd3;--accent-soft:#e7edfc;--ok:#1f8a4c;--ok-soft:#e3f4ea;--bad:#c23a3a;--bad-soft:#fbe7e7;--warn:#a86a00;--warn-soft:#fdf1dc;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);color-scheme:light}
+:root[data-theme=escuro]{--bg:#12151b;--surface:#1a1e26;--surface2:#222733;--text:#e6e9ef;--muted:#9aa3b2;--line:#2e3442;--accent:#7b9cff;--accent-soft:#232c45;--ok:#4cc27f;--ok-soft:#1b3326;--bad:#ef7676;--bad-soft:#3a2023;--warn:#f0b54a;--warn-soft:#3a2f1a;--shadow:none;color-scheme:dark}
+:root[data-theme=sepia]{--bg:#f4ecd8;--surface:#fbf6e9;--surface2:#efe4cc;--text:#3b2f22;--muted:#75644e;--line:#e0d3b8;--accent:#8a4b14;--accent-soft:#f1e0c6;--ok:#3d7a2a;--ok-soft:#e3eccf;--bad:#a8322a;--bad-soft:#f5d9cf;--warn:#94600a;--warn-soft:#f6e6c4;--shadow:none;color-scheme:light}
+:root[data-theme=verde]{--bg:#eef4ee;--surface:#f8fbf7;--surface2:#e3ece2;--text:#1f2d22;--muted:#536657;--line:#cfddcf;--accent:#2e7d4f;--accent-soft:#d9eddf;--ok:#1f7a45;--ok-soft:#d6efdf;--bad:#b8362f;--bad-soft:#f6dcd9;--warn:#8a5c00;--warn-soft:#f6ebcd;--shadow:none;color-scheme:light}
+:root[data-theme=noite]{--bg:#0f1a2b;--surface:#16243a;--surface2:#1e2f4a;--text:#e3ebf7;--muted:#9fb0c9;--line:#2a3d5c;--accent:#6fa8ff;--accent-soft:#1d3355;--ok:#5cc98a;--ok-soft:#173a2a;--bad:#f07a7a;--bad-soft:#3d2026;--warn:#f0b54a;--warn-soft:#3a3020;--shadow:none;color-scheme:dark}
+#tema{font:inherit;font-size:13px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer}
+/* SYNC-CSS */
+#syncBtn.on{color:var(--ok)} #syncBtn.err{color:var(--bad)}
+#syncBox{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:12px}
+#syncBox.on{display:flex}
+#syncBox .in{background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:12px;max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:16px 18px;font-size:15px;line-height:1.5}
+#syncBox h3{margin:0 0 8px} #syncBox ol{padding-left:20px;margin:6px 0}
+#syncBox input{width:100%;box-sizing:border-box;font:inherit;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--text);margin:6px 0}
+#syncBox .acoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+#syncBox .acoes button{border:1px solid var(--line);background:var(--surface2);color:var(--text);font:inherit;font-size:14px;padding:6px 12px;border-radius:8px;cursor:pointer}
+#syncBox .acoes button.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+#syncMsg{margin-top:8px;font-size:14px}
+/* /SYNC-CSS */
+/* CAB-CSS */
+/* computador: cabeçalho numa linha com 5% da altura da tela; índice, fonte, tema, tela cheia e sincronização no painel "Opções" */
+@media(min-width:701px){
+  header{zoom:1;height:5vh;box-sizing:border-box}
+  header>.wrap{max-width:none;height:100%;display:flex;align-items:center;gap:12px;padding:0 16px;box-sizing:border-box}
+  .top{display:contents}
+  .top>.badge{order:0} .top>div:not(.fz){order:1;min-width:0;flex:0 1 auto}
+  .top h1{font-size:min(15px,2.2vh);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:30vw}
+  .top .sub{display:none}
+  .badge{font-size:min(13px,2vh);padding:1px 8px;flex-shrink:0}
+  nav{flex:1 1 auto;min-width:0;padding:0;height:100%;align-items:center;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav button{font-size:min(14px,2.1vh);padding:0 10px;height:min(30px,3.8vh);line-height:1}
+  #menuBtn{display:inline-block;order:3;flex-shrink:0;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);font:inherit;font-size:min(13px,2vh);font-weight:600;padding:0 10px;height:min(30px,3.8vh);border-radius:8px;cursor:pointer;white-space:nowrap}
+  header>.wrap>nav{order:2}
+  .top>a,.top .fz{display:none}
+  header.menu-on .top>a,header.menu-on .top .fz{display:flex;position:absolute;right:16px;background:var(--surface);border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:11}
+  header.menu-on .top>a{top:calc(100% + 6px);margin:0 !important;padding:8px 12px;border-radius:10px 10px 0 0;width:380px;box-sizing:border-box}
+  header.menu-on .top .fz{top:calc(100% + 6px + 40px);flex-wrap:wrap;gap:6px;padding:10px 12px;border-radius:0 0 10px 10px;border-top:0;width:380px;box-sizing:border-box}
+}
+/* /CAB-CSS */
+/* RET-CSS */
+/* menu retrátil: "▴" recolhe o cabeçalho e a tela inteira fica para o conteúdo; "▾ Menu" (canto superior direito) traz de volta */
+#recolher{flex-shrink:0;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:13px;line-height:1;width:30px;height:30px;padding:0;border-radius:8px;cursor:pointer}
+#recolher:hover{color:var(--accent);border-color:var(--accent)}
+#mostrarCab{display:none;position:fixed;top:6px;right:8px;z-index:12;border:1px solid var(--line);background:var(--surface);color:var(--accent);font:inherit;font-size:13px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;opacity:.55;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+#mostrarCab:hover,#mostrarCab:focus-visible{opacity:1}
+.cab-oculto header{display:none}
+.cab-oculto #mostrarCab{display:block}
+@media(min-width:701px){#recolher{order:4;width:min(30px,3.8vh);height:min(30px,3.8vh);font-size:min(13px,2vh)}}
+/* /RET-CSS */
+</style>
+<script>
+/* aplica o tamanho salvo antes de desenhar a página; vale para todas as páginas do plano */
+document.documentElement.style.setProperty("--fz", localStorage.getItem("sefazdf_fonte") || "1");
+if (localStorage.getItem("sefazdf_tema")) document.documentElement.dataset.theme = localStorage.getItem("sefazdf_tema");
+if (localStorage.getItem("sefazdf_cab_oculto") === "1") document.documentElement.classList.add("cab-oculto"); /* RET-HEAD */
+</script>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top">
+      <span class="badge">T10</span>
+      <div>
+        <h1>Trilha 00 · Tarefa 10 · Contabilidade Geral (revisão)</h1>
+        <div class="sub">SEFAZ-DF Auditor Fiscal · Aula 00: Aspectos introdutórios (revisão e Questões Comentadas 11 a 40)</div>
+      </div>
+
+      <button id="menuBtn" aria-expanded="false" aria-controls="nav" title="Abrir menu">☰ Menu</button>
+      <button id="recolher" title="Recolher o menu (a tela inteira fica para o conteúdo)" aria-label="Recolher o menu">▴</button><!-- RET-HTML -->
+      <a href="../index.html" style="margin-left:auto;font-size:14px;color:var(--accent);text-decoration:none">← Índice das tarefas</a>
+      <div class="fz" role="group" aria-label="Tamanho da fonte">
+        <button id="fzMenos" title="Diminuir fonte" aria-label="Diminuir fonte">A−</button>
+        <button id="fzVal" title="Voltar ao tamanho normal" aria-label="Tamanho normal">100%</button>
+        <button id="fzMais" title="Aumentar fonte" aria-label="Aumentar fonte">A+</button>
+        <select id="tema" title="Tema de cores" aria-label="Tema de cores"><option value="claro">☀ Claro</option><option value="escuro">☾ Escuro</option><option value="sepia">📜 Sépia</option><option value="verde">🌿 Verde</option><option value="noite">🌌 Azul-noite</option></select>
+        <button id="telaCheia" title="Tela cheia" aria-label="Tela cheia">⛶ Tela cheia</button>
+<button id="syncBtn" title="Sincronizar entre aparelhos" aria-label="Sincronizar entre aparelhos">☁ Sincronizar</button>
+      </div>
+    </div>
+    <nav id="nav">
+      <button data-t="inicio" class="on">Roteiro</button>
+      <button data-t="resumo">Resumo</button>
+      <button data-t="mapa">Mapa mental</button>
+      <button data-t="esquemas">Esquemas</button>
+      <button data-t="reforma">Objetivo × finalidade</button>
+      <button data-t="questoes">Questões <span class="pill" id="navQ">0/0</span></button>
+      <button data-t="flash">Flashcards</button>
+      <button data-t="rend">Rendimento</button>
+    </nav>
+  </div>
+</header>
+<button id="mostrarCab" title="Mostrar o menu" aria-label="Mostrar o menu">▾ Menu</button><!-- RET-HTML -->
+
+<main class="wrap">
+
+<!-- ROTEIRO -->
+<section class="tab on" id="inicio">
+<h2>Roteiro da sessão T10</h2>
+  <p class="lead">Tarefa da trilha: <i>"Revisão da aula 00, resolução de questões do PDF"</i>, com <b>Questões Comentadas 11 a 40</b> de Aspectos Introdutórios. A trilha estima cerca de 1h30 por tarefa.</p>
+
+  <div class="call warn"><b>Material</b>
+    PDF <b>completo</b> da Aula 00 de Contabilidade Geral (curso 227884), em <code>estrategia/contabilidade geral/</code>. A teoria foi estudada na <b>T3</b>, cuja página traz o resumo completo e as questões 1 a 17 da teoria. Aqui o foco é <b>revisar e resolver as Questões Comentadas 11 a 40</b>.<br>
+    <b>Questão 32:</b> o gabarito oficial é <b>D (personalismo)</b>, como no gabarito do PDF, mas o comentário do PDF defende o patrimonialismo. Na página ficou o gabarito oficial, com a explicação.
+  </div>
+
+  <div class="call"><b>O que o coach pede</b>
+    • Leia suas anotações ou o resumo da aula, priorizando o que foi mais difícil (se tiver o rendimento da T3, comece pelos temas fracos).<br>
+    • Resolva as questões <b>pela lista com comentários</b>: antes de passar para a próxima, leia o comentário e grife o que for importante.<br>
+    • Anote as questões em que sentir dificuldade para priorizá-las nas próximas revisões (a aba Rendimento lista as erradas).
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><b>Revisão rápida (20 min).</b> Aba <b>Resumo de revisão</b> e aba <b>Objetivo × finalidade</b>, que é o ponto mais traiçoeiro da CEBRASPE nesta aula.</li>
+      <li><b>Mapa mental (5 min).</b> Reconstrua de memória, depois confira.</li>
+      <li><b>Questões 11 a 40 (50 min).</b> 30 itens. Leia sempre o comentário.</li>
+      <li><b>Rendimento (10 min).</b> Anote as erradas e os temas fracos.</li>
+      <li><b>Flashcards (5 min).</b> Baralho "Pegadinhas da CEBRASPE".</li>
+    </ol>
+  </div>
+
+  <div class="grid3">
+    <div class="card"><b>Banca</b><br><span class="muted">Todas as 30 questões são da CEBRASPE: 25 de Certo ou Errado e 5 de múltipla escolha. A nota líquida (certas menos erradas) aparece no Rendimento.</span></div>
+    <div class="card"><b>No cargo</b><br><span class="muted">O auditor fiscal lê demonstrações contábeis como usuário externo (o governo e suas agências). Saber o que a contabilidade promete, e o que não promete, orienta a fiscalização.</span></div>
+    <div class="card"><b>Salvamento</b><br><span class="muted">Respostas e flashcards ficam no navegador. Use <i>Exportar</i> na aba Rendimento ou o botão Sincronizar.</span></div>
+  </div>
+</section>
+
+<!-- RESUMO -->
+<section class="tab" id="resumo">
+<h2>Resumo de revisão: aspectos introdutórios</h2>
+  <p class="lead">Versão enxuta da aula, voltada às questões 11 a 40. O resumo completo está na página da T3.</p>
+
+  <h3>1. Natureza: ciência social aplicada</h3>
+  <div class="card">
+    <ul>
+      <li>A contabilidade é <span class="k">ciência social</span>, da área das <b>ciências sociais aplicadas</b>. Não é ciência exata, nem técnica, nem arte.</li>
+      <li>Conceito: ciência que <b>estuda, registra, controla e interpreta</b> os fatos ocorridos no patrimônio das entidades, com ou sem fins lucrativos.</li>
+      <li>Estudar e sistematizar os <b>princípios de tomada de decisão</b> é campo da <b>administração</b>, e não da contabilidade.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      "A contabilidade integra as ciências exatas por mensurar a riqueza": <b>ERRADO</b>.<br><b>O erro:</b> trabalhar com números não a torna exata.<br><b>O certo:</b> é ciência social (aplicada).<br><br>
+      "As ciências contábeis pertencem à área das ciências humanas": <b>ERRADO</b>.<br><b>O erro:</b> trocou a área.<br><b>O certo:</b> ciências sociais aplicadas.
+    </div>
+  </div>
+
+  <h3>2. Objeto × campo de aplicação</h3>
+  <div class="card">
+    <ul>
+      <li><span class="k">Objeto</span>: o <b>patrimônio</b> (bens, direitos e obrigações) das entidades. Sem patrimônio, não há entidade contábil.</li>
+      <li><span class="k">Campo de aplicação</span>: as <b>entidades econômico-administrativas</b> (aziendas), com ou sem fins lucrativos: sociais, econômicas e econômico-sociais.</li>
+      <li>Vincenzo Masi (patrimonialismo) identificou o <b>patrimônio</b> como objeto.</li>
+      <li>O patrimônio interessa também à administração e à economia, mas é a contabilidade que o tem como objeto de estudo e por isso se distingue delas.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"O objeto de estudo da contabilidade são as entidades econômico-administrativas": <b>ERRADO</b>.<br><b>O erro:</b> trocou objeto por campo de aplicação.<br><b>O certo:</b> objeto = patrimônio; campo de aplicação = entidades (aziendas).</div>
+    <details><summary>Pergunte-se: na PC-PB 2022, as alternativas eram registro dos eventos, sistema de contas, divulgação de informações, entidades em geral e patrimônio. Qual é o objeto, e o que são as outras?</summary><div>Objeto = patrimônio. Registro é técnica (escrituração); divulgação de informações úteis é o objetivo; entidades são o campo de aplicação.</div></details>
+  </div>
+
+  <h3>3. Objetivo, finalidade e funções</h3>
+  <div class="card">
+    <ul>
+      <li><span class="k">Objetivo</span>: fornecer <b>informações úteis</b> aos usuários para a <b>tomada de decisões</b> econômicas (Estrutura Conceitual: comprar, vender ou manter instrumentos de patrimônio e de dívida; conceder ou liquidar empréstimos; exercer direito de voto).</li>
+      <li><span class="k">Finalidade</span>: <b>controlar o patrimônio</b> administrado e, por meio do controle, informar sobre sua composição, variações e resultado.</li>
+      <li>A doutrina majoritária trata objetivo e finalidade como <b>sinônimos</b>. A <b>CEBRASPE</b> já separou os dois (Petrobras 2023): veja a aba <i>Objetivo × finalidade</i>.</li>
+      <li><b>Funções</b>: <b>administrativa</b> (controle do patrimônio, por meio da escrituração) e <b>econômica</b> (apuração do resultado, o rédito: lucro ou prejuízo).</li>
+      <li>O objetivo <b>não</b> é controlar custos nem apurar tributos: são atividades importantes, mas não o objetivo principal.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinhas</b>
+      "O objetivo principal da contabilidade é controlar custos": <b>ERRADO</b>.<br><b>O erro:</b> tomou uma aplicação (contabilidade de custos) pelo objetivo.<br><b>O certo:</b> fornecer informações úteis para decisão.<br><br>
+      "A principal função da contabilidade é apurar os tributos federais, estaduais e municipais": <b>ERRADO</b>.<br><b>O erro:</b> apurar tributo é uma das atividades, não a principal.<br><b>O certo:</b> funções administrativa (controle) e econômica (resultado); objetivo: informação útil.<br><br>
+      "A contabilidade fornece informação para decisões de natureza econômica, financeira e social": <b>ERRADO</b>.<br><b>O erro:</b> o acréscimo "social".<br><b>O certo:</b> decisões de natureza econômica e financeira.
+    </div>
+  </div>
+
+  <h3>4. Técnicas contábeis</h3>
+  <div class="card">
+    <ul>
+      <li><b>Escrituração</b> (registro dos fatos), <b>demonstrações contábeis</b> (evidenciação), <b>análise das demonstrações</b> (análise de balanços) e <b>auditoria</b> (exame da escrituração e das demonstrações).</li>
+      <li>As técnicas evoluem (sistemas, análise de dados, estimativas): o objetivo exige técnicas cada vez mais sofisticadas de registro, estimação, organização e síntese.</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"A análise de balanços não é técnica contábil, pois nasceu na administração financeira": <b>ERRADO</b>.<br><b>O erro:</b> excluiu uma das quatro técnicas.<br><b>O certo:</b> escrituração, demonstrações, análise de balanços e auditoria são técnicas contábeis.</div>
+  </div>
+
+  <h3>5. Ramos e escolas</h3>
+  <div class="card">
+    <ul>
+      <li><b>Contabilidade geral</b> (ou societária, mais restrita às sociedades empresárias) é um <b>ramo</b> da ciência contábil, não apelido dela.</li>
+      <li><b>Contabilidade aplicada</b> adapta a geral a um ramo (pública, de custos, gerencial): não é sinônimo de geral. Exemplo: "Contabilidade Aplicada ao Setor Público".</li>
+      <li>Escolas: <b>contismo</b> (foco nas contas), <b>personalismo</b> (personificação das contas; para a CEBRASPE, a contabilidade como ciência da <b>gestão</b> patrimonial), <b>controlismo</b> (ciência do controle econômico) e <b>patrimonialismo</b> (Masi: o patrimônio como objeto).</li>
+    </ul>
+    <div class="call bad"><b>Pegadinha</b>"Contabilidade aplicada é sinônimo de contabilidade geral": <b>ERRADO</b>.<br><b>O erro:</b> confundiu a base com sua adaptação.<br><b>O certo:</b> a aplicada adapta a geral a um ramo específico.</div>
+  </div>
+
+  <h3>6. Usuários (lembrete)</h3>
+  <div class="card">
+    <ul>
+      <li>Internos (administradores, controladores) × externos (investidores, bancos, fornecedores, governo, empregados, clientes, público).</li>
+      <li>Estrutura Conceitual: <b>principais usuários</b> = investidores, credores por empréstimos e outros credores, existentes e potenciais. Os relatórios <b>não</b> fornecem todas as informações, <b>não</b> mostram o valor da entidade e <b>não</b> são dirigidos aos demais grupos (reguladores, público, administração).</li>
+    </ul>
+    <details><summary>Pergunte-se: a SEFAZ-DF é usuária principal das demonstrações para fins gerais?</summary><div>Não. Governo e reguladores são "outras partes": podem achar os relatórios úteis, mas eles não são dirigidos essencialmente a esses grupos.</div></details>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="tab" id="mapa">
+  <h2>Mapa mental de revisão: aspectos introdutórios da Contabilidade</h2>
+  <p class="lead">Leia de cima para baixo e explore cada item. Depois feche a página e tente redesenhar o mapa de memória.</p>
+  <p class="mm-hint">👆 Clique em qualquer item do mapa para ver a explicação detalhada, com exemplo, no painel logo abaixo.</p>
+  <div class="card mm" id="mmBox"></div>
+  <div class="card" id="mmPanel"><p class="muted" style="margin:0">Nenhum item selecionado. Clique no centro do mapa para começar.</p></div>
+
+  <h3>Onde este tema se encaixa na disciplina</h3>
+  <div class="card">
+    <div class="grid3" style="font-size:14px">
+      <div><b class="k">Fundamentos</b><br>Aspectos introdutórios ← <i>revisão</i><br>Estrutura Conceitual</div>
+      <div><b class="k">Patrimônio</b><br>Ativo, passivo e patrimônio líquido<br>Situações patrimoniais</div>
+      <div><b class="k">Registro</b><br>Contas e plano de contas<br>Débito e crédito, fatos contábeis</div>
+      <div><b class="k">Operações</b><br>Estoques, tributos sobre vendas<br>Ativo imobilizado e intangível</div>
+      <div><b class="k">Demonstrações</b><br>Balanço, DRE, DFC<br>Notas explicativas</div>
+      <div><b class="k">Análise</b><br>Índices de liquidez, endividamento e rentabilidade</div>
+    </div>
+    <p class="muted small" style="margin:10px 0 0">Blocos gerais da Contabilidade Geral, para orientar o estudo.</p>
+  </div>
+</section>
+
+<!-- ESQUEMAS -->
+<section class="tab" id="esquemas">
+<h2>Esquemas para a revisão</h2>
+
+  <h3>Os conceitos que a banca troca</h3>
+  <div class="tbl"><table>
+    <tr><th>Conceito</th><th>Resposta certa</th><th>Distrator comum</th></tr>
+    <tr><td>Natureza</td><td>Ciência social (aplicada)</td><td>Ciência exata; ciência humana; técnica; arte</td></tr>
+    <tr><td>Objeto</td><td>Patrimônio</td><td>Entidades; contas; registro dos eventos; lucro</td></tr>
+    <tr><td>Campo de aplicação</td><td>Entidades econômico-administrativas (aziendas)</td><td>Patrimônio</td></tr>
+    <tr><td>Objetivo</td><td>Fornecer informações úteis para decisão</td><td>Controlar custos; apurar tributos</td></tr>
+    <tr><td>Finalidade (CEBRASPE)</td><td>Controlar o patrimônio</td><td>Fornecer informações (seria o objetivo)</td></tr>
+    <tr><td>Natureza das decisões</td><td>Econômica e financeira</td><td>"e social"</td></tr>
+    <tr><td>Técnicas</td><td>Escrituração, demonstrações, análise, auditoria</td><td>"Análise de balanços não é técnica"</td></tr>
+  </table></div>
+
+  <h3>Funções da contabilidade</h3>
+  <div class="tbl"><table>
+    <tr><th>Função</th><th>O que faz</th><th>Exemplo</th></tr>
+    <tr><td>Administrativa</td><td>Controla o patrimônio pela escrituração</td><td>Lançar a compra de mercadorias no livro Diário</td></tr>
+    <tr><td>Econômica</td><td>Apura o resultado (rédito): lucro ou prejuízo</td><td>Fechar a DRE do exercício</td></tr>
+  </table></div>
+
+  <h3>Escolas do pensamento contábil</h3>
+  <div class="tbl"><table>
+    <tr><th>Escola</th><th>Ideia-chave</th><th>Como cai</th></tr>
+    <tr><td>Contismo</td><td>Foco nas contas e no registro</td><td>"objeto: as contas"</td></tr>
+    <tr><td>Personalismo</td><td>Personificação das contas, relações entre pessoas</td><td>CEBRASPE 2022: "ciência da gestão patrimonial"</td></tr>
+    <tr><td>Controlismo</td><td>Ciência do controle econômico</td><td>"controle da riqueza"</td></tr>
+    <tr><td>Patrimonialismo</td><td>Masi: o patrimônio é o objeto</td><td>"ciência do patrimônio"; PC-MA 2018</td></tr>
+  </table></div>
+
+  <h3>Ramos</h3>
+  <div class="tbl"><table>
+    <tr><th>Ramo</th><th>Alcance</th></tr>
+    <tr><td>Contabilidade geral</td><td>Base ampla e genérica, para qualquer entidade</td></tr>
+    <tr><td>Contabilidade societária</td><td>Parte da geral voltada às sociedades empresárias</td></tr>
+    <tr><td>Contabilidade aplicada</td><td>Adapta a geral a um ramo: pública, de custos, gerencial etc.</td></tr>
+  </table></div>
+</section>
+
+<!-- REFORMA -->
+<section class="tab" id="reforma">
+<h2>Objetivo × finalidade: o entendimento da CEBRASPE</h2>
+  <p class="lead">A doutrina majoritária trata os dois termos como sinônimos. A CEBRASPE, em 2023, passou a separar. Para a prova, guarde a separação.</p>
+  <div class="grid2">
+    <div class="card"><b class="k">Objetivo</b><br>Fornecer <b>informações úteis</b> aos usuários para a tomada de decisões econômicas.<br><span class="muted">Base: Estrutura Conceitual (CPC 00).</span></div>
+    <div class="card"><b class="k">Finalidade</b><br><b>Controlar o patrimônio</b> administrado (e, pelo controle, informar composição, variações e resultado).<br><span class="muted">Base: doutrina; questões FUB 2011 e DPE-RO 2022.</span></div>
+  </div>
+  <h3>Como a banca julgou</h3>
+  <div class="tbl"><table>
+    <tr><th>Questão</th><th>Afirmação (resumida)</th><th>Gabarito</th><th>Por quê</th></tr>
+    <tr><td>Q23 · Petrobras 2023</td><td>Fornecer informações úteis é uma das <b>finalidades</b></td><td><b>Errado</b></td><td>Informação útil é objetivo; finalidade é controlar o patrimônio</td></tr>
+    <tr><td>Q24 · FUB 2022</td><td>Tem por <b>finalidade</b> prover informações para decisões econômicas, financeiras e <b>sociais</b></td><td><b>Errado</b></td><td>O "social" (e, hoje, também a troca objetivo × finalidade)</td></tr>
+    <tr><td>Q31 · ANP 2022</td><td>Fornecer informações úteis é um dos principais <b>objetivos</b></td><td><b>Certo</b></td><td>Termo correto</td></tr>
+    <tr><td>Q34 · EBSERH 2018</td><td>Principal <b>objetivo</b>: informações úteis para planejamento, controle e decisão</td><td><b>Certo</b></td><td>Termo correto</td></tr>
+    <tr><td>Q40 · FUB 2011</td><td>A <b>finalidade</b> é assegurar o controle do patrimônio</td><td><b>Certo</b></td><td>Termo correto</td></tr>
+    <tr><td>Q20 · TCE-AC 2024</td><td>Contribuir para comprar, vender ou manter instrumentos é um dos <b>fins</b></td><td><b>Certo</b></td><td>Decisão listada na Estrutura Conceitual; "fins" aqui = para que serve a informação</td></tr>
+    <tr><td>Q12 · ANTT 2024</td><td>A <b>razão de ser</b> é oferecer informações úteis</td><td><b>Certo</b></td><td>"Razão de ser" lida como objetivo</td></tr>
+  </table></div>
+  <div class="call bad"><b>Pegadinha-mãe</b>"Fornecer informações úteis para a tomada de decisão é finalidade da contabilidade": <b>ERRADO</b> (para a CEBRASPE).<br><b>O erro:</b> usou "finalidade" para o que é objetivo.<br><b>O certo:</b> objetivo = informação útil; finalidade = controle do patrimônio.</div>
+  <div class="call warn"><b>Dica de prova</b>Se o item usa "objetivo" ou "razão de ser" com informação útil, marque certo. Se usa "finalidade" com informação útil, desconfie: a CEBRASPE já deu errado. Finalidade com controle do patrimônio está certo.</div>
+</section>
+
+<!-- QUESTÕES -->
+<section class="tab" id="questoes">
+  <h2>Questões comentadas 11 a 40 (CEBRASPE)</h2>
+  <p class="lead">São as Questões Comentadas 11 a 40 da Aula 00 (CEBRASPE), exatamente como a trilha pede (Q11 a Q40 na barra). Leia o comentário antes de passar para a próxima e anote as que errar. O rendimento aparece quando terminar todas.</p>
+  <div class="row" style="margin-bottom:10px">
+    <label class="muted" for="fTema">Tema:</label>
+    <select id="fTema"></select>
+    <label class="muted" for="fStatus">Mostrar:</label>
+    <select id="fStatus"><option value="all">Todas</option><option value="pend">Não respondidas</option><option value="bad">Erradas</option><option value="ok">Certas</option></select>
+  </div>
+  <div class="progress"><div id="qProg"></div></div>
+  <div class="qnav" id="qNav"></div>
+  <div class="card" id="qCard"></div>
+  <div class="row" style="justify-content:space-between">
+    <button class="btn" id="qPrev">← Anterior</button>
+    <span class="muted" style="font-size:13px">Atalhos: <kbd>A</kbd>–<kbd>E</kbd> ou <kbd>C</kbd>/<kbd>E</kbd> escolhe · <kbd>Shift</kbd>+letra descarta · <kbd>Enter</kbd> responde · <kbd>←</kbd> <kbd>→</kbd> navega</span>
+    <button class="btn pri" id="qNext">Próxima →</button>
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<section class="tab" id="flash">
+  <h2>Flashcards com repetição espaçada</h2>
+  <p class="lead">Leia a pergunta, responda <b>em voz alta</b> e só então vire o cartão (clique ou <kbd>Espaço</kbd>). Marque com sinceridade: os cartões errados voltam primeiro (sistema Leitner, caixas 1 a 5).</p>
+  <div class="row" style="justify-content:center;margin-bottom:12px">
+    <select id="fcDeck">
+      <option value="all">Todos os baralhos</option>
+      <option value="a00">Aula 00 · Revisão</option>
+      <option value="ref">Pegadinhas da CEBRASPE</option>
+      <option value="pan">Panorama da Contabilidade</option>
+    </select>
+    <button class="btn" id="fcShuffle">Embaralhar</button>
+    <button class="btn" id="fcReset">Zerar caixas</button>
+  </div>
+  <div class="fc-meta"><span id="fcPos"></span><span id="fcBox"></span></div>
+  <div class="fc" id="fc"><div class="fc-inner"><div class="fc-face front"><div class="q" id="fcQ"></div><div class="muted" style="margin-top:14px;font-size:13px">clique para virar</div></div><div class="fc-face back"><div id="fcA"></div></div></div></div>
+  <div class="row" style="justify-content:center;margin-top:16px">
+    <button class="btn bad" id="fcBad">✘ Errei (<kbd>1</kbd>)</button>
+    <button class="btn" id="fcMid">~ Hesitei (<kbd>2</kbd>)</button>
+    <button class="btn ok" id="fcOk">✔ Acertei (<kbd>3</kbd>)</button>
+  </div>
+  <div class="boxes" id="fcBoxes"></div>
+</section>
+
+<!-- RENDIMENTO -->
+<section class="tab" id="rend">
+  <h2>Rendimento</h2>
+  <div id="rendBody"></div>
+  <h3>Gerenciar dados</h3>
+  <div class="row">
+    <button class="btn" id="expBtn">Exportar respostas (.json)</button>
+    <label class="btn" for="impFile">Importar respostas</label><input type="file" id="impFile" accept=".json" hidden>
+    <button class="btn" id="redoBad">Refazer erradas</button>
+    <button class="btn" id="hlReset">Apagar marcações de texto</button>
+    <button class="btn bad" id="resetAll">Apagar todas as respostas</button>
+  </div>
+</section>
+
+</main>
+
+<div id="tip" role="tooltip"></div>
+<div id="hlBar" role="toolbar" aria-label="Marca-texto"><span class="lbl">Marcar</span><button data-c="am" title="Amarelo" aria-label="Amarelo"></button><button data-c="ro" title="Rosa" aria-label="Rosa"></button><button data-c="ve" title="Verde" aria-label="Verde"></button><button data-c="" title="Apagar marcação" aria-label="Apagar marcação">✕</button></div>
+<script>
+const QUESTOES = [{"fonte": "CEBRASPE, MPE-TO, 2024", "tema": "Natureza: ciência social", "enun": "A contabilidade é a ciência social que estuda e controla o patrimônio das entidades com o objetivo de fornecer informações sobre sua composição e variação que sejam úteis ao tomador de decisão.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Ciência social, que estuda e controla o patrimônio para fornecer informações úteis sobre sua composição e variação."], "n": 11, "rot": "Questão 11", "nav": "Q11"}, {"fonte": "CEBRASPE, ANTT, 2024", "tema": "Objetivo da contabilidade", "enun": "A razão de ser da contabilidade é oferecer aos agentes econômicos informações úteis para que possam tomar suas decisões.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. A banca tratou \"razão de ser\" como sinônimo de objetivo: fornecer informações úteis para a tomada de decisão."], "n": 12, "rot": "Questão 12", "nav": "Q12"}, {"fonte": "CEBRASPE, TBG, 2023", "tema": "Objetivo da contabilidade", "enun": "O objetivo das demonstrações contábeis é fornecer informações úteis para a tomada de decisão econômica pelos usuários dessas informações.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. É o objetivo previsto na Estrutura Conceitual (CPC 00)."], "n": 13, "rot": "Questão 13", "nav": "Q13"}, {"fonte": "CEBRASPE, ANTT, 2024", "tema": "Ramos da contabilidade", "enun": "Contabilidade geral e contabilidade societária são expressões usadas para popularizar o termo ciência contábil.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. Contabilidade geral (ou societária) é um dos ramos da ciência contábil, ao lado da pública, gerencial, de custos etc.", "A societária tem escopo menor: aplica-se só às sociedades empresárias."], "n": 14, "rot": "Questão 14", "nav": "Q14"}, {"fonte": "CEBRASPE, ANTT, 2024", "tema": "Objetivo da contabilidade", "enun": "Se um trabalhador controla rigorosamente, em um caderno, todos os seus gastos e as suas rendas, e, com base nesse controle, decide o que lhe convém e o que não lhe convém fazer com seus recursos, então, agindo assim, ele reafirma o objetivo fundamental da contabilidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Ele registra e controla para obter informação útil e decidir. Isso é o objetivo da contabilidade, mesmo em contexto pessoal."], "n": 15, "rot": "Questão 15", "nav": "Q15"}, {"fonte": "CEBRASPE, Petrobras, 2024", "tema": "Objetivo da contabilidade", "enun": "Considere que um lote de mesas e cadeiras tenha sido adquirido para uso em uma entidade industrial por meio de um investimento significativo e que essas peças provavelmente serão empregadas nos setores administrativos por cinco ou mais anos. Nessa situação, do ponto de vista contábil, esse gasto não é relevante, pois extrapola o objetivo principal da contabilidade, que é controlar custos.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. O objetivo da contabilidade não é controlar custos, mas fornecer informações úteis aos usuários. O mobiliário é relevante e vai para o ativo."], "n": 16, "rot": "Questão 16", "nav": "Q16"}, {"fonte": "CEBRASPE, Petrobras, 2024", "tema": "Técnicas contábeis", "enun": "O cumprimento do objetivo da ciência contábil exige o emprego de técnicas cada vez mais sofisticadas para a realização de registro, estimação, organização e sintetização dos dados econômico-financeiros relativos às entidades.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Sistemas informatizados, análise de dados, estimativas contábeis e auditoria são técnicas que evoluem para manter a informação útil e confiável."], "n": 17, "rot": "Questão 17", "nav": "Q17"}, {"fonte": "CEBRASPE, Petrobras, 2024", "tema": "Finalidade × objetivo (entendimento CEBRASPE)", "enun": "O suprimento de bens para a empresa inicia o principal processo da contabilidade, que é o controle dos itens patrimoniais.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. O processo principal da contabilidade não é o controle dos itens patrimoniais, mas o fornecimento de informações úteis. O controle é parte do processo."], "n": 18, "rot": "Questão 18", "nav": "Q18"}, {"fonte": "CEBRASPE, TCE-AC, 2024", "tema": "Natureza: ciência social", "enun": "Contabilidade é a ciência social que estuda e sistematiza os princípios de tomada de decisão sobre recursos disponíveis ao gerenciamento organizacional.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. É ciência social, mas estudar e sistematizar os princípios de tomada de decisão é campo da administração. A contabilidade estuda o patrimônio e fornece informação para decidir."], "n": 19, "rot": "Questão 19", "nav": "Q19"}, {"fonte": "CEBRASPE, TCE-AC, 2024", "tema": "Objetivo da contabilidade", "enun": "Contribuir para a tomada de decisão sobre comprar, vender ou manter instrumento de patrimônio e de dívida das entidades é um dos fins da contabilidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. É uma das decisões listadas na Estrutura Conceitual (CPC 00): comprar, vender ou manter instrumento de patrimônio e de dívida."], "n": 20, "rot": "Questão 20", "nav": "Q20"}, {"fonte": "CEBRASPE, CODEVASF, 2024", "tema": "Objeto: o patrimônio", "enun": "A ciência contábil diferencia-se de outras ciências ligadas direta ou indiretamente à gestão das entidades por ter o patrimônio da entidade como objeto de estudo.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Administração, economia e finanças olham a gestão de forma ampla; a contabilidade tem o patrimônio como objeto."], "n": 21, "rot": "Questão 21", "nav": "Q21"}, {"fonte": "CEBRASPE, Petrobras, 2023", "tema": "Natureza: ciência social", "enun": "Contabilidade é uma ciência social.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Ciência social aplicada, e não ciência exata."], "n": 22, "rot": "Questão 22", "nav": "Q22"}, {"fonte": "CEBRASPE, Petrobras, 2023", "tema": "Finalidade × objetivo (entendimento CEBRASPE)", "enun": "O fornecimento de informações úteis para a tomada de decisão pelos agentes econômicos é uma das finalidades da ciência contábil.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado para a CEBRASPE. A banca separou: finalidade = controlar o patrimônio; objetivo = fornecer informações úteis. Os recursos não foram aceitos.", "A doutrina majoritária trata os termos como sinônimos, mas na prova da CEBRASPE leve essa distinção."], "n": 23, "rot": "Questão 23", "nav": "Q23"}, {"fonte": "CEBRASPE, FUB, 2022", "tema": "Finalidade × objetivo (entendimento CEBRASPE)", "enun": "A contabilidade tem por finalidade prover seus usuários com informações úteis para as tomadas de decisões de natureza econômica, financeira e social.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. O erro original está no \"social\": as decisões são de natureza econômica e financeira.", "Pelo entendimento atual da CEBRASPE, há um segundo erro: prover informação é objetivo, e não finalidade."], "n": 24, "rot": "Questão 24", "nav": "Q24"}, {"fonte": "CEBRASPE, Petrobras, 2023", "tema": "Ramos da contabilidade", "enun": "Contabilidade aplicada é sinônima de contabilidade geral visto que ambas se ocupam da aplicação dos métodos, conceitos e princípios contábeis a um ramo da economia.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. Contabilidade geral é a base, ampla e genérica. A aplicada adapta a geral a um ramo específico (pública, de custos, gerencial). Daí o nome \"Contabilidade Aplicada ao Setor Público\"."], "n": 25, "rot": "Questão 25", "nav": "Q25"}, {"fonte": "CEBRASPE, DPE-RO, 2022", "tema": "Finalidade × objetivo (entendimento CEBRASPE)", "enun": "Julgue os itens. I. O principal objetivo da contabilidade inclui fornecer informação útil ao usuário, para a tomada de decisão. II. Não é finalidade da contabilidade controlar o patrimônio da instituição, pois isso cabe aos sistemas de inventário. III. A contabilidade tem a responsabilidade de criar o sistema gerencial para apuração de custos. IV. A principal função da contabilidade é apurar os tributos federais, estaduais e municipais. Assinale a opção correta.", "alts": [["a", "Nenhum item está certo."], ["b", "Apenas o item I está certo."], ["c", "Apenas os itens II e III estão certos."], ["d", "Apenas os itens II e IV estão certos."], ["e", "Apenas os itens I, III e IV estão certos."]], "tipo": "mc", "resp": "b", "com": ["Letra B. I certo. II errado: controlar o patrimônio é finalidade da contabilidade. III errado: o sistema de custos é responsabilidade compartilhada. IV errado: apurar tributos é uma das funções, não a principal.", "Para o auditor fiscal: a apuração de tributos parte da contabilidade, mas a função principal dela continua sendo a informação útil."], "n": 26, "rot": "Questão 26", "nav": "Q26"}, {"fonte": "CEBRASPE, DPE-RO, 2022", "tema": "Natureza: ciência social", "enun": "Segundo a teoria contábil contemporânea, a contabilidade é mais adequadamente classificada como uma", "alts": [["a", "metodologia."], ["b", "técnica."], ["c", "arte."], ["d", "prática."], ["e", "ciência."]], "tipo": "mc", "resp": "e", "com": ["Letra E. Ciência (social aplicada), com método sistemático para estudar os fenômenos que afetam o patrimônio."], "n": 27, "rot": "Questão 27", "nav": "Q27"}, {"fonte": "CEBRASPE, PC-PB, 2022", "tema": "Objeto: o patrimônio", "enun": "A contabilidade tem por objeto", "alts": [["a", "o registro dos eventos que afetam o patrimônio."], ["b", "o sistema de contas."], ["c", "a divulgação de informações úteis ao usuário."], ["d", "as entidades contábeis em geral."], ["e", "o patrimônio das entidades."]], "tipo": "mc", "resp": "e", "com": ["Letra E. Objeto = patrimônio (bens, direitos e obrigações).", "C é o objetivo; D é o campo de aplicação; A é a técnica de escrituração."], "n": 28, "rot": "Questão 28", "nav": "Q28"}, {"fonte": "CEBRASPE, ANP, 2022", "tema": "Natureza: ciência social", "enun": "As ciências contábeis são uma ciência social pertencente à área de conhecimento das ciências humanas.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. Pertencem à área das ciências sociais aplicadas, e não das ciências humanas."], "n": 29, "rot": "Questão 29", "nav": "Q29"}, {"fonte": "CEBRASPE, ANP, 2022", "tema": "Objeto: o patrimônio", "enun": "Sob a ótica da ciência contábil, sem patrimônio não existe entidade contábil.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. O patrimônio é o objeto; sem ele não há o que registrar, controlar ou analisar."], "n": 30, "rot": "Questão 30", "nav": "Q30"}, {"fonte": "CEBRASPE, ANP, 2022", "tema": "Objetivo da contabilidade", "enun": "Fornecer informações úteis que subsidiem o processo de tomada de decisões econômicas é um dos principais objetivos da contabilidade.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Note a palavra \"objetivo\": aqui a CEBRASPE aceita. Compare com a questão da Petrobras 2023, que usou \"finalidade\" e foi dada como errada."], "n": 31, "rot": "Questão 31", "nav": "Q31"}, {"fonte": "CEBRASPE, ANP, 2022", "tema": "Escolas do pensamento contábil", "enun": "A ciência contábil enquanto ciência da gestão patrimonial é concepção atribuída à escola de doutrinadores contábeis denominada", "alts": [["a", "contismo."], ["b", "controlismo."], ["c", "patrimonialismo."], ["d", "personalismo."]], "tipo": "mc", "resp": "d", "com": ["Letra D (personalismo), gabarito oficial. O comentário do PDF defende o patrimonialismo, mas contradiz o próprio gabarito da aula.", "Para a banca, a ênfase na gestão do patrimônio leva ao personalismo (personificação das contas para gerir o patrimônio). Quando a CEBRASPE fala só em \"ciência do patrimônio\", a resposta é o patrimonialismo (Vincenzo Masi). Bancos de questões registram este item como da prova APEX Brasil 2022."], "n": 32, "rot": "Questão 32", "nav": "Q32"}, {"fonte": "CEBRASPE, PC-MA, 2018", "tema": "Escolas do pensamento contábil", "enun": "De acordo com Max Weber, a moderna organização racional da empresa capitalista foi viabilizada pela contabilidade racional. Esse pensamento foi corroborado, na ciência contábil, por Vicenzo Masi, que identificou como objeto da contabilidade", "alts": [["a", "as contas."], ["b", "a azienda."], ["c", "os réditos."], ["d", "o patrimônio."], ["e", "o lucro."]], "tipo": "mc", "resp": "d", "com": ["Letra D. Masi é o pai do patrimonialismo: o objeto da contabilidade é o patrimônio."], "n": 33, "rot": "Questão 33", "nav": "Q33"}, {"fonte": "CEBRASPE, EBSERH, 2018", "tema": "Objetivo da contabilidade", "enun": "O principal objetivo da contabilidade é fornecer informações úteis sobre o patrimônio da entidade para finalidades diversas, entre as quais, planejamento, controle e auxílio no processo decisório.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Cada usuário usa a informação conforme seus fins: gestores planejam, controlam e decidem."], "n": 34, "rot": "Questão 34", "nav": "Q34"}, {"fonte": "CEBRASPE, EBSERH, 2018", "tema": "Campo de aplicação", "enun": "O objeto de estudo da contabilidade são as entidades econômico-administrativas, o que inclui as instituições com fins sociais.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. As entidades econômico-administrativas (aziendas), com ou sem fins lucrativos, são o campo de aplicação. O objeto é o patrimônio."], "n": 35, "rot": "Questão 35", "nav": "Q35"}, {"fonte": "CEBRASPE, EBSERH, 2018", "tema": "Técnicas contábeis", "enun": "A análise de balanços não é considerada uma técnica contábil, tendo em vista que foi formulada e desenvolvida no âmbito da administração financeira.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. As técnicas contábeis são: escrituração, demonstrações contábeis, análise das demonstrações (análise de balanços) e auditoria."], "n": 36, "rot": "Questão 36", "nav": "Q36"}, {"fonte": "CEBRASPE, Polícia Federal, 2018", "tema": "Objeto: o patrimônio", "enun": "Considerando que a contabilidade é a ciência que estuda os fenômenos patrimoniais sob o aspecto da finalidade organizacional: sob a ótica citada, o objeto da contabilidade é o patrimônio do ente contábil específico.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. O objeto da contabilidade é o patrimônio das entidades."], "n": 37, "rot": "Questão 37", "nav": "Q37"}, {"fonte": "CEBRASPE, Polícia Federal, 2018", "tema": "Natureza: ciência social", "enun": "A contabilidade integra o rol das ciências exatas por estar dedicada à mensuração da riqueza do ente contábil.", "alts": [], "tipo": "ce", "resp": "E", "com": ["Errado. Contabilidade é ciência social (aplicada), e não exata, mesmo trabalhando com números."], "n": 38, "rot": "Questão 38", "nav": "Q38"}, {"fonte": "CEBRASPE, STM, 2011", "tema": "Objeto: o patrimônio", "enun": "O objeto da contabilidade é o patrimônio, constituído pelo conjunto de bens, direitos e obrigações próprios de determinado ente.", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Patrimônio = bens + direitos (parte positiva) e obrigações (parte negativa)."], "n": 39, "rot": "Questão 39", "nav": "Q39"}, {"fonte": "CEBRASPE, FUB, 2011", "tema": "Finalidade × objetivo (entendimento CEBRASPE)", "enun": "A finalidade da contabilidade é assegurar o controle do patrimônio administrativo, devendo o administrador apoiar-se nos dados por meio dela obtidos para tomar decisões que envolvam bens, direitos e obrigações da empresa, bem como para apurar os resultados positivos (lucros) ou negativos (prejuízos).", "alts": [], "tipo": "ce", "resp": "C", "com": ["Certo. Finalidade = controlar o patrimônio; a partir do controle, a contabilidade gera informações para decidir e apurar o resultado (lucro ou prejuízo)."], "n": 40, "rot": "Questão 40", "nav": "Q40"}];
+
+const FLASH = [
+ // Revisão
+
+ ["a00","Natureza da contabilidade","<b>Ciência social</b>, da área das ciências sociais aplicadas.<br><b>Exemplo:</b> \"ciência exata\" ou \"ciência humana\" tornam o item errado."],
+
+ ["a00","Conceito de contabilidade","Ciência que estuda, registra, controla e interpreta os fatos ocorridos no patrimônio das entidades, com ou sem fins lucrativos.<br><b>Exemplo:</b> vale para uma indústria e para uma associação de moradores."],
+
+ ["a00","Objeto da contabilidade","O <b>patrimônio</b> (bens, direitos e obrigações) das entidades.<br><b>Exemplo:</b> o estoque e as dívidas com fornecedores de um atacadista."],
+
+ ["a00","Campo de aplicação","As <b>entidades econômico-administrativas</b> (aziendas), com ou sem fins lucrativos.<br><b>Exemplo:</b> sindicato, empresa e instituto de previdência."],
+
+ ["a00","Classificação das aziendas quanto aos fins","Sociais (sem lucro), econômicas (lucro) e econômico-sociais (finalidade social com lucro, como previdência e pecúlio).<br><b>Exemplo:</b> clube recreativo = social; loja = econômica."],
+
+ ["a00","Objetivo da contabilidade","Fornecer <b>informações úteis</b> aos usuários para a tomada de decisões econômicas.<br><b>Exemplo:</b> o investidor decide comprar ações com base nas demonstrações."],
+
+ ["a00","Finalidade da contabilidade (CEBRASPE)","<b>Controlar o patrimônio</b>; prover informação útil é o objetivo.<br><b>Exemplo:</b> Petrobras 2023 deu errado \"informações úteis é finalidade\"."],
+
+ ["a00","Funções da contabilidade","<b>Administrativa</b>: controle do patrimônio pela escrituração. <b>Econômica</b>: apuração do resultado (rédito).<br><b>Exemplo:</b> fechar a DRE e apurar o lucro é função econômica."],
+
+ ["a00","Técnicas contábeis","Escrituração, demonstrações contábeis, análise das demonstrações e auditoria.<br><b>Exemplo:</b> a análise de balanços é técnica contábil, ao contrário do que diz um distrator."],
+
+ ["a00","Decisões que a Estrutura Conceitual cita","Comprar, vender ou manter instrumentos de patrimônio e de dívida; conceder ou liquidar empréstimos; exercer direito de voto.<br><b>Exemplo:</b> TCE-AC 2024 deu certo para \"comprar, vender ou manter\"."],
+
+ ["a00","Principais usuários (Estrutura Conceitual)","Investidores, credores por empréstimos e outros credores, existentes e potenciais.<br><b>Exemplo:</b> a SEFAZ e o público são \"outras partes\"."],
+
+ ["a00","O que os relatórios para fins gerais NÃO fazem","Não fornecem todas as informações, não mostram o valor da entidade e não são dirigidos aos demais grupos.<br><b>Exemplo:</b> o credor também precisa olhar a conjuntura econômica."],
+
+ ["a00","Contabilidade geral × societária × aplicada","Geral: base ampla. Societária: voltada às sociedades empresárias. Aplicada: adapta a geral a um ramo.<br><b>Exemplo:</b> Contabilidade Aplicada ao Setor Público."],
+
+ ["a00","Patrimonialismo","Escola de Vincenzo Masi: o patrimônio é o objeto da contabilidade.<br><b>Exemplo:</b> PC-MA 2018 citou Masi para perguntar o objeto."],
+
+ ["a00","Personalismo (para a CEBRASPE)","Personificação das contas; a banca o associou à contabilidade como ciência da <b>gestão</b> patrimonial (gabarito oficial D).<br><b>Exemplo:</b> questão 32 desta página."],
+
+ // Pegadinhas
+
+ ["ref","\"O objetivo da contabilidade é controlar custos\"","<b>Errado.</b> O objetivo é fornecer informações úteis; controlar custos é aplicação da contabilidade de custos.<br><b>Exemplo:</b> Petrobras 2024, mesas e cadeiras do setor administrativo."],
+
+ ["ref","\"A principal função da contabilidade é apurar tributos\"","<b>Errado.</b> Apurar tributos é uma das atividades, não a principal.<br><b>Exemplo:</b> DPE-RO 2022, item IV."],
+
+ ["ref","\"Decisões de natureza econômica, financeira e social\"","<b>Errado.</b> O \"social\" invalida o item: são decisões econômicas e financeiras.<br><b>Exemplo:</b> FUB 2022."],
+
+ ["ref","\"O objeto da contabilidade são as entidades econômico-administrativas\"","<b>Errado.</b> Entidades são o campo de aplicação; o objeto é o patrimônio.<br><b>Exemplo:</b> EBSERH 2018."],
+
+ ["ref","\"A razão de ser da contabilidade é oferecer informações úteis\"","<b>Certo.</b> A banca leu \"razão de ser\" como objetivo.<br><b>Exemplo:</b> ANTT 2024."],
+
+ ["ref","\"Controlar os gastos num caderno e decidir com base nisso reafirma o objetivo da contabilidade\"","<b>Certo.</b> Registrar, controlar e decidir com informação útil, mesmo em contexto pessoal.<br><b>Exemplo:</b> ANTT 2024."],
+
+ // Panorama
+
+ ["pan","Equação patrimonial","Ativo = Passivo + Patrimônio Líquido.<br><b>Exemplo:</b> ativo de R$ 500 mil e dívidas de R$ 300 mil dão PL de R$ 200 mil."],
+
+ ["pan","Fatos contábeis","Permutativos (não alteram o PL), modificativos (alteram o PL) e mistos.<br><b>Exemplo:</b> comprar mercadoria à vista é permutativo; pagar aluguel é modificativo diminutivo."],
+
+ ["pan","Regime de competência","Receitas e despesas são reconhecidas quando ocorrem, independentemente de recebimento ou pagamento.<br><b>Exemplo:</b> venda a prazo em dezembro é receita de dezembro."],
+
+ ["pan","Principais demonstrações","Balanço patrimonial, DRE, DFC, demonstração das mutações do PL e notas explicativas.<br><b>Exemplo:</b> o auditor compara a receita da DRE com as notas fiscais emitidas."],
+
+ ["pan","Débito e crédito","Ativo e despesa aumentam a débito; passivo, PL e receita aumentam a crédito.<br><b>Exemplo:</b> compra de estoque a prazo: débito em Estoques, crédito em Fornecedores."]
+
+];
+
+/* ---------- mapa mental: cada item tem explicação, exemplo, base legal e pegadinha ---------- */
+const MM_ROOT = {k: "root", t: "CONTABILIDADE · ASPECTOS INTRODUTÓRIOS", s: "Ciência social que estuda o patrimônio<br><small>Objeto · campo · objetivo × finalidade · funções · técnicas · escolas</small>",
+  e: "A contabilidade é uma <b>ciência social aplicada</b> que tem o <b>patrimônio</b> como objeto, atua nas <b>entidades econômico-administrativas</b>, tem por <b>objetivo</b> fornecer informações úteis e por <b>finalidade</b> controlar o patrimônio (na leitura da CEBRASPE).",
+  x: "Uma distribuidora do Distrito Federal registra suas operações (escrituração), publica o balanço (demonstrações) e o auditor fiscal usa essas informações para orientar a fiscalização.",
+  l: "Aula 00; Estrutura Conceitual (CPC 00).",
+  p: "\"A contabilidade é ciência exata\": ERRADO.<br><b>O erro:</b> confundiu usar números com ser exata.<br><b>O certo:</b> é ciência social aplicada."};
+
+const MM = [
+ {k: "nat", c: "#2f5bd3", t: "Natureza", s: "Ciência social aplicada",
+  e: "Ciência social, da área das ciências sociais aplicadas. Estuda, registra, controla e interpreta os fatos do patrimônio.",
+  x: "A DPE-RO 2022 perguntou como a teoria contemporânea classifica a contabilidade: ciência.",
+  l: "Questões 11, 22, 27, 29 e 38.",
+  p: "\"Pertence às ciências humanas\": ERRADO.<br><b>O erro:</b> trocou a área.<br><b>O certo:</b> ciências sociais aplicadas.",
+  f: [
+   {k: "nat1", t: "Não é exata", e: "Lida com números, mas analisa comportamentos e decisões econômicas.", x: "Polícia Federal 2018: \"integra as ciências exatas\" foi dado como errado.", l: "Questão 38.", p: "\"É exata por mensurar a riqueza\": ERRADO.<br><b>O erro:</b> mensurar não a torna exata.<br><b>O certo:</b> ciência social."},
+   {k: "nat2", t: "Não é administração", e: "Sistematizar princípios de tomada de decisão é campo da administração; a contabilidade fornece informação para decidir.", x: "TCE-AC 2024 misturou os conceitos e o item foi dado como errado.", l: "Questão 19.", p: "\"A contabilidade sistematiza os princípios de decisão sobre recursos\": ERRADO.<br><b>O erro:</b> descreveu a administração.<br><b>O certo:</b> a contabilidade estuda o patrimônio e informa."}
+  ]},
+ {k: "obj", c: "#1f8a4c", t: "Objeto e campo", s: "Patrimônio × aziendas",
+  e: "Objeto: patrimônio (bens, direitos e obrigações). Campo de aplicação: entidades econômico-administrativas, com ou sem fins lucrativos.",
+  x: "O patrimônio de uma associação beneficente (azienda social) também é objeto da contabilidade.",
+  l: "Questões 21, 28, 30, 35, 37 e 39.",
+  p: "\"O objeto são as entidades econômico-administrativas\": ERRADO.<br><b>O erro:</b> trocou objeto por campo.<br><b>O certo:</b> objeto = patrimônio.",
+  f: [
+   {k: "obj1", t: "Patrimônio", e: "Conjunto de bens, direitos e obrigações de um ente. Sem patrimônio não há entidade contábil.", x: "Estoques, contas a receber e fornecedores a pagar de uma loja.", l: "Questões 30 e 39.", p: "\"O objeto é o registro dos eventos\": ERRADO.<br><b>O erro:</b> registro é técnica.<br><b>O certo:</b> o objeto é o patrimônio."},
+   {k: "obj2", t: "Aziendas", e: "Sociais (sem lucro), econômicas (lucro) e econômico-sociais (previdência, pecúlio).", x: "Um instituto de previdência é azienda econômico-social.", l: "Questão 35.", p: "\"Só entidades com fins lucrativos são campo da contabilidade\": ERRADO.<br><b>O erro:</b> excluiu as sem lucro.<br><b>O certo:</b> com ou sem fins lucrativos."}
+  ]},
+ {k: "of", c: "#c0392b", t: "Objetivo × finalidade", s: "Ponto mais traiçoeiro",
+  e: "Objetivo: informação útil para decisão. Finalidade: controlar o patrimônio. A doutrina trata como sinônimos; a CEBRASPE separou em 2023.",
+  x: "Petrobras 2023: \"fornecer informações úteis é uma das finalidades\" foi dado como errado.",
+  l: "Questões 12, 13, 15, 16, 20, 23, 24, 26, 31, 34 e 40.",
+  p: "\"Fornecer informações úteis é finalidade\": ERRADO para a CEBRASPE.<br><b>O erro:</b> usou finalidade.<br><b>O certo:</b> é objetivo; finalidade é controlar o patrimônio.",
+  f: [
+   {k: "of1", t: "Objetivo", e: "Informação útil para decisões econômicas e financeiras (comprar, vender ou manter; conceder crédito; votar).", x: "Um banco decide se empresta à empresa com base no balanço.", l: "Estrutura Conceitual; questões 13, 20 e 31.", p: "\"O objetivo é controlar custos\": ERRADO.<br><b>O erro:</b> confundiu uma aplicação com o objetivo.<br><b>O certo:</b> informação útil."},
+   {k: "of2", t: "Finalidade", e: "Controlar o patrimônio administrado e, pelo controle, informar composição, variações e resultado.", x: "Inventariar estoques e conciliar contas é controle patrimonial.", l: "Questões 26 (item II) e 40.", p: "\"Controlar o patrimônio não é finalidade, cabe aos sistemas de inventário\": ERRADO.<br><b>O erro:</b> negou a finalidade.<br><b>O certo:</b> controlar o patrimônio é finalidade da contabilidade."},
+   {k: "of3", t: "Decisões econômicas e financeiras", e: "Não inclui \"social\" na lista.", x: "FUB 2022 acrescentou \"e social\" e o item foi dado como errado.", l: "Questão 24.", p: "\"Decisões de natureza econômica, financeira e social\": ERRADO.<br><b>O erro:</b> o acréscimo \"social\".<br><b>O certo:</b> econômica e financeira."}
+  ]},
+ {k: "fun", c: "#d07a1f", t: "Funções e técnicas", s: "Administrativa, econômica; quatro técnicas",
+  e: "Funções: administrativa (controle pela escrituração) e econômica (apuração do resultado). Técnicas: escrituração, demonstrações, análise e auditoria.",
+  x: "Escriturar as notas de entrada é técnica; apurar o lucro do ano é função econômica.",
+  l: "Questões 17, 18, 26 e 36.",
+  p: "\"A principal função é apurar tributos\": ERRADO.<br><b>O erro:</b> tomou uma atividade pela função principal.<br><b>O certo:</b> funções administrativa e econômica.",
+  f: [
+   {k: "fun1", t: "Quatro técnicas", e: "Escrituração, demonstrações contábeis, análise das demonstrações (análise de balanços) e auditoria.", x: "O auditor fiscal usa análise de balanços para encontrar margens incompatíveis com o ICMS declarado.", l: "Questão 36.", p: "\"Análise de balanços não é técnica contábil\": ERRADO.<br><b>O erro:</b> excluiu uma técnica.<br><b>O certo:</b> é uma das quatro."},
+   {k: "fun2", t: "Técnicas sofisticadas", e: "O objetivo exige técnicas cada vez mais sofisticadas de registro, estimação, organização e síntese.", x: "Sistemas de escrituração digital e estimativas de valor justo.", l: "Questão 17.", p: "\"O principal processo da contabilidade é o controle dos itens patrimoniais\": ERRADO.<br><b>O erro:</b> elevou o controle a processo principal.<br><b>O certo:</b> o central é fornecer informação útil."}
+  ]},
+ {k: "esc", c: "#7a4fd0", t: "Ramos e escolas", s: "Geral, aplicada; contismo a patrimonialismo",
+  e: "Contabilidade geral é ramo (e a aplicada a adapta). Escolas: contismo, personalismo, controlismo e patrimonialismo.",
+  x: "Contabilidade Aplicada ao Setor Público é a geral adaptada ao setor público.",
+  l: "Questões 14, 25, 32 e 33.",
+  p: "\"Contabilidade geral é apelido de ciência contábil\": ERRADO.<br><b>O erro:</b> confundiu ramo com a ciência.<br><b>O certo:</b> é um dos ramos.",
+  f: [
+   {k: "esc1", t: "Geral × aplicada", e: "A geral é a base ampla; a aplicada adapta a um ramo (pública, custos, gerencial).", x: "Custos aplica a contabilidade geral à indústria.", l: "Questão 25.", p: "\"Aplicada é sinônimo de geral\": ERRADO.<br><b>O erro:</b> igualou base e adaptação.<br><b>O certo:</b> a aplicada deriva da geral."},
+   {k: "esc2", t: "Personalismo", e: "Personificação das contas. Para a CEBRASPE (2022), é a escola da contabilidade como ciência da gestão patrimonial.", x: "Gabarito oficial D na questão 32, apesar do comentário do PDF.", l: "Questão 32.", p: "\"Ciência da gestão patrimonial = patrimonialismo\": ERRADO para o gabarito oficial.<br><b>O erro:</b> ignorou a ênfase na gestão.<br><b>O certo:</b> a banca deu personalismo."},
+   {k: "esc3", t: "Patrimonialismo (Masi)", e: "Vincenzo Masi: o patrimônio é o objeto da contabilidade.", x: "PC-MA 2018 citou Weber e Masi para perguntar o objeto: patrimônio.", l: "Questão 33.", p: "\"Masi identificou as contas como objeto\": ERRADO.<br><b>O erro:</b> isso é contismo.<br><b>O certo:</b> o patrimônio."}
+  ]}
+];
+
+function mmItens(){
+  const out = [MM_ROOT];
+  MM.forEach(b => { out.push(b); b.f.forEach(f => out.push(Object.assign({c: b.c, pai: b.t}, f))); });
+  return out;
+}
+function renderMapa(){
+  $("#mmBox").innerHTML = `<div class="mm-root" data-k="root" tabindex="0"><b>${MM_ROOT.t}</b>${MM_ROOT.s}</div>
+    <div class="mm-trunk"></div>
+    <div class="mm-branches" style="--n:${MM.length}">${MM.map(b => `<div class="mm-br" style="--c:${b.c}">
+      <div class="mm-h" data-k="${b.k}" tabindex="0"><b>${b.t}</b>${b.s}</div>
+      <ul>${b.f.map(f => `<li data-k="${f.k}" tabindex="0">${f.t}</li>`).join("")}</ul></div>`).join("")}</div>`;
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => {
+    el.onclick = () => abrirItem(el.dataset.k);
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); abrirItem(el.dataset.k); } };
+  });
+  abbrify($("#mmBox"));
+}
+function abrirItem(k){
+  const itens = mmItens(), i = itens.findIndex(x => x.k === k), it = itens[i];
+  $("#mmBox").querySelectorAll("[data-k]").forEach(el => el.classList.toggle("sel", el.dataset.k === k));
+  const p = $("#mmPanel");
+  p.style.setProperty("--c", it.c || "var(--accent)");
+  p.innerHTML = `<div class="muted" style="font-size:13px">${it.pai ? "Mapa › " + it.pai : "Mapa"}</div>
+    <h4>${it.t}</h4>
+    <div class="mm-sec"><span class="lbl">Explicação</span>${it.e}</div>
+    <div class="mm-sec ex"><span class="lbl">Exemplo prático</span>${it.x}</div>
+    <div class="mm-sec"><span class="lbl">Base legal e jurisprudência</span>${it.l}</div>
+    <div class="mm-sec pg"><span class="lbl">Pegadinha da banca</span>${it.p}</div>
+    <div class="nav"><button class="btn" id="mmPrev" ${i === 0 ? "disabled" : ""}>← Item anterior</button>
+      <button class="btn pri" id="mmNext" ${i === itens.length - 1 ? "disabled" : ""}>Próximo item →</button></div>`;
+  abbrify(p);
+  p.dataset.hl = "mm-" + k; hlAplicar(p);
+  $("#mmPrev").onclick = () => abrirItem(itens[i - 1].k);
+  $("#mmNext").onclick = () => abrirItem(itens[i + 1].k);
+  const r = p.getBoundingClientRect();
+  if (r.top < 120 || r.top > innerHeight - 160) p.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+/* ---------- glossário: toda sigla ganha dica com o nome por extenso ---------- */
+const GLOSS = {
+ "CF/88": "Constituição Federal de 1988", "CF": "Constituição Federal de 1988",
+ "CTN": "Código Tributário Nacional (Lei 5.172/1966)", "STF": "Supremo Tribunal Federal", "STJ": "Superior Tribunal de Justiça",
+ "LC": "Lei Complementar", "MP": "Medida Provisória", "EC": "Emenda Constitucional", "DL": "Decreto-Lei",
+ "ADCT": "Ato das Disposições Constitucionais Transitórias", "CLT": "Consolidação das Leis do Trabalho",
+ "ADI": "Ação Direta de Inconstitucionalidade", "RE": "Recurso Extraordinário", "RREE": "Recursos Extraordinários",
+ "REsp": "Recurso Especial", "HC": "Habeas Corpus", "AgR": "Agravo Regimental",
+ "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "ISS": "Imposto sobre Serviços", "ISSQN": "Imposto sobre Serviços de Qualquer Natureza",
+ "IPTU": "Imposto sobre a Propriedade Predial e Territorial Urbana", "ITBI": "Imposto sobre a Transmissão de Bens Imóveis",
+ "ITCMD": "Imposto sobre Transmissão Causa Mortis e Doação", "IPVA": "Imposto sobre a Propriedade de Veículos Automotores",
+ "IE": "Imposto de Exportação", "IR": "Imposto de Renda", "IRPF": "Imposto de Renda da Pessoa Física", "IRPJ": "Imposto de Renda da Pessoa Jurídica",
+ "IPI": "Imposto sobre Produtos Industrializados", "IOF": "Imposto sobre Operações Financeiras", "ITR": "Imposto sobre a Propriedade Territorial Rural",
+ "IGF": "Imposto sobre Grandes Fortunas", "IS": "Imposto Seletivo", "IEG": "Imposto Extraordinário de Guerra",
+ "IBS": "Imposto sobre Bens e Serviços", "CBS": "Contribuição sobre Bens e Serviços", "IVA": "Imposto sobre Valor Agregado",
+ "CIDE": "Contribuição de Intervenção no Domínio Econômico", "COSIP": "Contribuição para o Custeio do Serviço de Iluminação Pública",
+ "COFINS": "Contribuição para o Financiamento da Seguridade Social", "CSLL": "Contribuição Social sobre o Lucro Líquido",
+ "PIS": "Programa de Integração Social", "PASEP": "Programa de Formação do Patrimônio do Servidor Público",
+ "RPPS": "Regime Próprio de Previdência Social", "RGPS": "Regime Geral de Previdência Social",
+ "CVM": "Comissão de Valores Mobiliários", "AFRMM": "Adicional ao Frete para a Renovação da Marinha Mercante",
+ "SEBRAE": "Serviço Brasileiro de Apoio às Micro e Pequenas Empresas", "INCRA": "Instituto Nacional de Colonização e Reforma Agrária",
+ "SESC": "Serviço Social do Comércio", "SENAC": "Serviço Nacional de Aprendizagem Comercial", "SENAI": "Serviço Nacional de Aprendizagem Industrial",
+ "OAB": "Ordem dos Advogados do Brasil", "CRC": "Conselho Regional de Contabilidade", "CREA": "Conselho Regional de Engenharia e Agronomia",
+ "CRM": "Conselho Regional de Medicina", "CRA": "Conselho Regional de Administração", "IBAMA": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis",
+ "TCFA": "Taxa de Controle e Fiscalização Ambiental", "TFA": "Taxa de Fiscalização de Anúncios", "TFLF": "Taxa de Fiscalização, Localização e Funcionamento",
+ "TLLF": "Taxa de Licença de Localização e Funcionamento", "ZFM": "Zona Franca de Manaus", "PAF": "Processo Administrativo Fiscal",
+ "DF": "Distrito Federal", "SEFAZ": "Secretaria de Estado de Fazenda", "SEEC": "Secretaria de Estado de Economia",
+ "CEBRASPE": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos (banca)", "CESPE": "Centro de Seleção e de Promoção de Eventos (atual CEBRASPE)",
+ "PGFN": "Procuradoria-Geral da Fazenda Nacional", "AGU": "Advocacia-Geral da União", "RFB": "Receita Federal do Brasil",
+ "CAGE": "Contadoria e Auditoria-Geral do Estado", "CGE": "Controladoria-Geral do Estado", "TCE": "Tribunal de Contas do Estado",
+ "PGE": "Procuradoria-Geral do Estado", "STM": "Superior Tribunal Militar", "PF": "Polícia Federal", "PC": "Polícia Civil",
+ "ANM": "Agência Nacional de Mineração", "CAU": "Conselho de Arquitetura e Urbanismo", "INPI": "Instituto Nacional da Propriedade Industrial",
+ "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos", "EMBRAPA": "Empresa Brasileira de Pesquisa Agropecuária",
+ "CAGEPA": "Companhia de Água e Esgotos da Paraíba", "SEPLAN": "Secretaria de Planejamento", "APO": "Analista de Planejamento e Orçamento",
+ "PPNT": "Processo seletivo público (Petrobras)", "ATT": "Auditor Técnico de Tributos", "AFRE": "Auditor Fiscal da Receita Estadual",
+ "AFE": "Auditor Fiscal Estadual",
+ "art.": "artigo", "arts.": "artigos", "Art.": "artigo", "§": "parágrafo", "c/c": "combinado com", "nº": "número", "n.º": "número",
+ "Proc": "Procurador", "Pref": "Prefeitura", "Rel.": "Relator", "Min.": "Ministro", "Súm.": "Súmula", "SV": "Súmula Vinculante",
+ "CPC": "Comitê de Pronunciamentos Contábeis", "CPC 00": "Estrutura Conceitual para Relatório Financeiro", "EC": "Estrutura Conceitual (CPC 00)", "PL": "Patrimônio Líquido", "DRE": "Demonstração do Resultado do Exercício", "DFC": "Demonstração dos Fluxos de Caixa", "ICMS": "Imposto sobre Circulação de Mercadorias e Serviços", "MPE": "Ministério Público Estadual", "ANTT": "Agência Nacional de Transportes Terrestres", "TBG": "Transportadora Brasileira Gasoduto Bolívia-Brasil", "TCE": "Tribunal de Contas do Estado", "CODEVASF": "Companhia de Desenvolvimento dos Vales do São Francisco e do Parnaíba", "FUB": "Fundação Universidade de Brasília", "DPE": "Defensoria Pública do Estado", "PC": "Polícia Civil", "ANP": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis", "EBSERH": "Empresa Brasileira de Serviços Hospitalares", "STM": "Superior Tribunal Militar", "APEX": "Agência Brasileira de Promoção de Exportações e Investimentos",
+ "FG": "fato gerador", "BC": "base de cálculo", "LO": "lei ordinária"
+};
+const GLOSS_RE = new RegExp("(?<![\\wÀ-ÿ])(" + Object.keys(GLOSS).sort((a, b) => b.length - a.length)
+  .map(s => s.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&")).join("|") + ")(?![\\wÀ-ÿ])", "g");
+function abbrify(root){
+  if (!root) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n =>
+    n.parentElement.closest("abbr,script,style,select,option,kbd") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT});
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(n => {
+    const s = n.nodeValue; GLOSS_RE.lastIndex = 0;
+    if (!GLOSS_RE.test(s)) return;
+    const frag = document.createDocumentFragment(); let last = 0; GLOSS_RE.lastIndex = 0; let m;
+    while ((m = GLOSS_RE.exec(s))){
+      frag.append(s.slice(last, m.index));
+      const a = document.createElement("abbr"); a.textContent = m[1]; a.dataset.tip = GLOSS[m[1]]; a.setAttribute("aria-label", GLOSS[m[1]]);
+      frag.append(a); last = m.index + m[1].length;
+    }
+    frag.append(s.slice(last)); n.replaceWith(frag);
+  });
+}
+/* dica posicionada acima da sigla, sem cobrir o texto nem ficar sob o cursor */
+(() => {
+  const tip = () => document.getElementById("tip");
+  function show(el){
+    const t = tip(); t.textContent = el.dataset.tip; t.classList.add("on");
+    const r = el.getBoundingClientRect(), w = t.offsetWidth, h = t.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 8) y = r.bottom + 8;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("mouseover", e => { const a = e.target.closest("abbr[data-tip]"); if (a) show(a); });
+  document.addEventListener("mouseout", e => { if (e.target.closest("abbr[data-tip]")) tip().classList.remove("on"); });
+  document.addEventListener("click", e => { const a = e.target.closest("abbr[data-tip]"); if (a){ show(a); setTimeout(() => tip().classList.remove("on"), 2500); } });
+  addEventListener("scroll", () => tip().classList.remove("on"), {passive: true});
+})();
+
+const KEY = "sefazdf_T10_contabilidade_aula00_revisao_v1";
+/* respostas já resolvidas, embutidas na publicação (usadas só se este navegador ainda não tiver dados) */
+const RESPOSTAS_INICIAIS = null;
+let S = JSON.parse(localStorage.getItem(KEY) || "null") || (RESPOSTAS_INICIAIS ? structuredClone(RESPOSTAS_INICIAIS) : null) || {answers:{}, cards:{}};
+S.answers ||= {}; S.cards ||= {}; S.draft ||= {};
+const save = () => { S._ts = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); syncAgendar(); };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* abas */
+function showTab(t){
+  document.querySelectorAll("section.tab").forEach(s => s.classList.toggle("on", s.id === t));
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  if (t === "rend") renderRend();
+  if (t === "flash") renderCard();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showTab(b.dataset.t));
+const active = () => document.querySelector("section.tab.on").id;
+
+/* questões */
+const TEMAS = [...new Set(QUESTOES.map(q => q.tema))];
+$("#fTema").innerHTML = '<option value="all">Todos os temas</option>' + TEMAS.map(t => `<option>${esc(t)}</option>`).join("");
+let cur = 0;
+
+function visible(){
+  const t = $("#fTema").value, st = $("#fStatus").value;
+  return QUESTOES.map((q, i) => i).filter(i => {
+    const q = QUESTOES[i], a = S.answers[q.n];
+    if (t !== "all" && q.tema !== t) return false;
+    if (st === "pend") return !a;
+    if (st === "bad") return a && !a.ok;
+    if (st === "ok") return a && a.ok;
+    return true;
+  });
+}
+function fmtCom(p){
+  return esc(p).replace(/^(Letra [A-E]|Item [IVX]+|Alternativa [A-E]|Assertiva [IVX]+)(:?)/, "<b>$1$2</b>");
+}
+function renderQ(){
+  const vis = visible();
+  const done = Object.keys(S.answers).length;
+  $("#qProg").style.width = (100 * done / QUESTOES.length) + "%";
+  $("#navQ").textContent = `${done}/${QUESTOES.length}`;
+  $("#qNav").innerHTML = vis.map(i => {
+    const a = S.answers[QUESTOES[i].n];
+    return `<button data-i="${i}" class="${a ? (a.ok ? "ok" : "bad") : ""} ${i === cur ? "cur" : ""}">${QUESTOES[i].nav || QUESTOES[i].n}</button>`;
+  }).join("");
+  $("#qNav").querySelectorAll("button").forEach(b => b.onclick = () => { cur = +b.dataset.i; renderQ(); });
+  if (!vis.length){ $("#qCard").innerHTML = '<p class="muted">Nenhuma questão neste filtro.</p>'; return; }
+  if (!vis.includes(cur)) cur = vis[0];
+  const q = QUESTOES[cur], a = S.answers[q.n];
+  const d = draft(q.n);
+  const st = v => a ? "" : (d.desc.includes(v) ? "desc" : d.sel === v ? "sel" : "");
+  let opts;
+  if (q.tipo === "ce"){
+    opts = '<div class="ce">' + [["C","Certo"],["E","Errado"]].map(([v, l]) => {
+      let cls = "";
+      if (a){ if (v === q.resp) cls = "right"; else if (v === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(v)}" data-v="${v}" ${a ? "disabled" : ""}>${l}</button>`;
+    }).join("") + "</div>";
+  } else {
+    opts = q.alts.map(([l, t]) => {
+      let cls = "";
+      if (a){ if (l === q.resp) cls = "right"; else if (l === a.sel) cls = "wrong"; }
+      return `<button class="opt ${cls} ${st(l)}" data-v="${l}" ${a ? "disabled" : ""}><span class="l">${l})</span><span>${esc(t)}</span></button>`;
+    }).join("");
+  }
+  const pos = vis.indexOf(cur) + 1;
+  let com = "";
+  if (a){
+    const gab = q.tipo === "ce" ? (q.resp === "C" ? "Certo" : "Errado") : "Letra " + q.resp.toUpperCase();
+    com = `<div class="coment" data-hl="q${q.n}c"><div class="verdict ${a.ok ? "ok" : "bad"}">${a.ok ? "✔ Você acertou" : "✘ Você errou"} · Gabarito: ${gab}</div>
+      ${q.com.map(p => `<p>${fmtCom(p)}</p>`).join("")}</div>`;
+  }
+  $("#qCard").innerHTML = `<div class="qhead"><span><b>${esc(q.rot || "Questão " + q.n)}</b> · ${esc(q.fonte)}</span><span><span class="pill">${esc(q.tema)}</span> ${pos}/${vis.length}</span></div>
+    ${q.texto ? `<div class="trecho" data-hl="q${q.n}t"><span class="lbl">Trecho do texto</span>${esc(q.texto)}</div>` : ""}
+    <div class="enun" data-hl="q${q.n}">${esc(q.enun)}</div>
+    ${a ? "" : '<div class="qhint">Clique para escolher · clique duas vezes para descartar (riscar) ou recuperar uma opção</div>'}
+    ${opts}
+    ${a ? "" : `<div class="qact"><button class="btn pri" id="qSubmit">Responder</button><div class="qmsg" id="qMsg" role="alert"></div></div>`}
+    ${com}`;
+  abbrify($("#qCard"));
+  $("#qCard").querySelectorAll("[data-hl]").forEach(hlAplicar);
+  let clickTimer = null;
+  $("#qCard").querySelectorAll(".opt:not(:disabled)").forEach(b => {
+    b.onclick = () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => escolher(b.dataset.v), 230); };
+    b.ondblclick = e => { e.preventDefault(); clearTimeout(clickTimer); descartar(b.dataset.v); };
+  });
+  if ($("#qSubmit")) $("#qSubmit").onclick = submeter;
+  $("#qPrev").disabled = pos <= 1;
+  $("#qNext").textContent = pos >= vis.length ? "Ver rendimento →" : "Próxima →";
+}
+function draft(n){
+  S.draft ||= {};
+  return S.draft[n] ||= {sel: null, desc: []};
+}
+function opcoes(q){ return q.tipo === "ce" ? ["C", "E"] : q.alts.map(x => x[0]); }
+function escolher(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)){ msg("warn", "Essa opção está descartada. Clique duas vezes nela para recuperá-la antes de escolher."); return; }
+  d.sel = d.sel === v ? null : v; save(); renderQ();
+}
+function descartar(v){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  if (d.desc.includes(v)) d.desc = d.desc.filter(x => x !== v);
+  else { d.desc.push(v); if (d.sel === v) d.sel = null; }
+  save(); renderQ();
+  if (d.desc.length === opcoes(q).length) msg("warn", "Você descartou todas as opções. Clique duas vezes em uma delas para recuperá-la e poder responder.");
+}
+function msg(tipo, texto){
+  const m = $("#qMsg"); if (!m) return;
+  m.className = "qmsg on " + tipo; m.textContent = texto;
+}
+function submeter(){
+  const q = QUESTOES[cur]; if (S.answers[q.n]) return;
+  const d = draft(q.n), todas = opcoes(q);
+  if (d.desc.length === todas.length) return msg("bad", "Você marcou todas as opções como descartadas. Recupere uma (clique duas vezes) e selecione-a antes de responder.");
+  if (!d.sel) return msg("bad", "Você não selecionou nenhuma resposta. Clique em uma opção e depois em Responder.");
+  answer(d.sel);
+}
+function answer(v){
+  const q = QUESTOES[cur];
+  if (S.answers[q.n]) return;
+  const d = draft(q.n);
+  S.answers[q.n] = {sel: v, ok: v === q.resp, desc: d.desc.slice(), ts: Date.now()};
+  delete S.draft[q.n];
+  save(); renderQ();
+  $("#qCard .coment")?.scrollIntoView({behavior: "smooth", block: "nearest"});
+  if (Object.keys(S.answers).length === QUESTOES.length){
+    setTimeout(() => { if (confirmFinish()) showTab("rend"); }, 50);
+  }
+}
+let finishedShown = false;
+function confirmFinish(){ if (finishedShown) return false; finishedShown = true; return true; }
+function step(d){
+  const vis = visible(), p = vis.indexOf(cur);
+  if (d > 0 && p >= vis.length - 1){ showTab("rend"); return; }
+  const np = Math.min(Math.max(p + d, 0), vis.length - 1);
+  cur = vis[np]; renderQ(); $("#qCard").scrollIntoView({block: "nearest"});
+}
+$("#qPrev").onclick = () => step(-1);
+$("#qNext").onclick = () => step(1);
+$("#fTema").onchange = $("#fStatus").onchange = () => { cur = -1; renderQ(); };
+
+/* flashcards */
+let deck = [], fcI = 0;
+FLASH.forEach((c, i) => c.id = "f" + i);
+function buildDeck(shuffle){
+  const d = $("#fcDeck").value;
+  deck = FLASH.filter(c => d === "all" || c[0] === d);
+  const box = c => (S.cards[c.id] || {box: 1}).box;
+  deck = deck.map(c => [c, Math.random()]).sort((x, y) => shuffle ? x[1] - y[1] : (box(x[0]) - box(y[0])) || (x[1] - y[1])).map(x => x[0]);
+  fcI = 0; renderCard();
+}
+function renderCard(){
+  if (!deck.length) buildDeck();
+  const c = deck[fcI];
+  $("#fc").classList.remove("flip");
+  $("#fcQ").innerHTML = c[1];
+  $("#fcA").innerHTML = c[2];
+  const b = (S.cards[c.id] || {box: 1}).box;
+  $("#fcPos").textContent = `Cartão ${fcI + 1} de ${deck.length}`;
+  $("#fcBox").textContent = `Caixa ${b}`;
+  const cnt = [0, 0, 0, 0, 0];
+  deck.forEach(x => cnt[((S.cards[x.id] || {box: 1}).box) - 1]++);
+  abbrify($("#fcQ")); abbrify($("#fcA"));
+  $("#fcBoxes").innerHTML = cnt.map((n, i) => `<span>Caixa ${i + 1}: ${n}</span>`).join("");
+}
+function grade(g){
+  const c = deck[fcI], st = S.cards[c.id] || {box: 1};
+  st.box = g === 0 ? 1 : g === 1 ? Math.max(1, st.box) : Math.min(5, st.box + 1);
+  st.seen = (st.seen || 0) + 1; S.cards[c.id] = st; save();
+  fcI = (fcI + 1) % deck.length; renderCard();
+}
+$("#fc").onclick = () => $("#fc").classList.toggle("flip");
+$("#fcBad").onclick = () => grade(0);
+$("#fcMid").onclick = () => grade(1);
+$("#fcOk").onclick = () => grade(2);
+$("#fcDeck").onchange = () => buildDeck();
+$("#fcShuffle").onclick = () => buildDeck(true);
+$("#fcReset").onclick = () => { if (confirm("Zerar as caixas de todos os flashcards?")){ S.cards = {}; save(); buildDeck(); } };
+
+/* rendimento */
+function renderRend(){
+  const ans = S.answers, n = QUESTOES.length, done = QUESTOES.filter(q => ans[q.n]);
+  const ok = done.filter(q => ans[q.n].ok).length;
+  if (!done.length){ $("#rendBody").innerHTML = '<div class="card"><p class="muted">Você ainda não respondeu nenhuma questão. Vá para a aba <b>Questões</b>.</p></div>'; return; }
+  const pct = Math.round(100 * ok / done.length);
+  const ce = done.filter(q => q.tipo === "ce"), ceOk = ce.filter(q => ans[q.n].ok).length, ceBad = ce.length - ceOk;
+  const mc = done.filter(q => q.tipo === "mc"), mcOk = mc.filter(q => ans[q.n].ok).length;
+  const complete = done.length === n;
+  const msg = pct >= 85 ? ["ok", "Excelente! Acima da meta de 80% do seu plano."] : pct >= 70 ? ["warn", "Bom, mas abaixo da meta de 80%. Revise os temas em amarelo e vermelho."] : ["bad", "Abaixo de 70%. Releia o Resumo dos temas fracos antes de refazer as erradas."];
+  const byT = TEMAS.map(t => {
+    const qs = done.filter(q => q.tema === t), o = qs.filter(q => ans[q.n].ok).length;
+    return {t, tot: QUESTOES.filter(q => q.tema === t).length, d: qs.length, o, p: qs.length ? Math.round(100 * o / qs.length) : null};
+  }).sort((a, b) => (a.p ?? 101) - (b.p ?? 101));
+  const wrong = done.filter(q => !ans[q.n].ok);
+  $("#rendBody").innerHTML = `
+    ${complete ? "" : `<div class="call warn"><b>Resultado parcial</b>Você respondeu ${done.length} de ${n}. O rendimento final aparece quando terminar todas.</div>`}
+    <div class="grid3">
+      <div class="card"><div class="muted">Aproveitamento</div><div class="big" style="color:var(--${pct >= 80 ? "ok" : pct >= 70 ? "warn" : "bad"})">${pct}%</div><div class="muted">${ok} certas de ${done.length}</div></div>
+      <div class="card"><div class="muted">Certo/Errado (nota CEBRASPE)</div><div class="big">${ceOk - ceBad}</div><div class="muted">${ceOk} certas − ${ceBad} erradas, em ${ce.length} itens</div></div>
+      <div class="card"><div class="muted">Múltipla escolha</div><div class="big">${mc.length ? Math.round(100 * mcOk / mc.length) : 0}%</div><div class="muted">${mcOk} de ${mc.length}</div></div>
+    </div>
+    <div class="call ${msg[0]}"><b>Diagnóstico</b>${msg[1]}</div>
+    <h3>Desempenho por tema (do mais fraco ao mais forte)</h3>
+    <div class="card">${byT.map(r => `<div class="bar"><span>${esc(r.t)}</span><div class="t"><div class="${r.p === null ? "" : r.p < 70 ? "low" : r.p < 85 ? "mid" : ""}" style="width:${r.p ?? 0}%"></div></div><span>${r.p === null ? "—" : r.p + "%"} <small class="muted">${r.o}/${r.d}</small></span></div>`).join("")}</div>
+    <h3>Questões erradas (${wrong.length})</h3>
+    <div class="card">${wrong.length ? wrong.map(q => `<div style="margin:6px 0"><a href="#" data-n="${q.n}">Q${q.n}</a> · <span class="pill">${esc(q.tema)}</span> <span class="muted">${esc(q.enun.slice(-120).replace(/^\S*\s/, "…"))}</span></div>`).join("") : '<p class="muted">Nenhuma! 🎯</p>'}</div>`;
+  abbrify($("#rendBody"));
+  $("#rendBody").querySelectorAll("a[data-n]").forEach(a => a.onclick = e => {
+    e.preventDefault(); $("#fTema").value = "all"; $("#fStatus").value = "all";
+    cur = QUESTOES.findIndex(q => q.n === +a.dataset.n); showTab("questoes"); renderQ();
+  });
+}
+$("#expBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type: "application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `${KEY}_${new Date().toISOString().slice(0, 10)}.json`; a.click();
+};
+$("#impFile").onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  f.text().then(t => { S = JSON.parse(t); S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {}; save(); renderQ(); renderRend(); hlTudo(); });
+};
+$("#redoBad").onclick = () => {
+  const bad = Object.keys(S.answers).filter(k => !S.answers[k].ok);
+  if (!bad.length) return;
+  bad.forEach(k => delete S.answers[k]); save(); finishedShown = false;
+  $("#fStatus").value = "pend"; cur = -1; showTab("questoes"); renderQ();
+};
+$("#resetAll").onclick = () => { if (confirm("Apagar TODAS as respostas das questões?")){ S.answers = {}; save(); finishedShown = false; renderQ(); renderRend(); } };
+
+/* ---------- marca-texto: selecione um trecho e escolha amarelo, rosa ou verde (salvo em S.marks) ---------- */
+S.marks ||= {};
+const hlBar = $("#hlBar");
+let hlAlvo = null;  /* {root, id} quando o clique foi numa marcação já existente */
+const hlId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const hlRaiz = n => (n.nodeType === 1 ? n : n.parentElement)?.closest("[data-hl]");
+function hlTextos(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), r = [];
+  while (w.nextNode()) r.push(w.currentNode);
+  return r;
+}
+function hlOff(root, node, off){ const r = document.createRange(); r.setStart(root, 0); r.setEnd(node, off); return r.toString().length; }
+/* posições contadas no texto puro do bloco; se o texto mudar, procura o trecho guardado */
+function hlAplicar(root){
+  if (!root) return;
+  root.querySelectorAll("mark.hl").forEach(m => m.replaceWith(...m.childNodes));
+  root.normalize();
+  const full = root.textContent;
+  (S.marks[root.dataset.hl] || []).forEach(m => {
+    if (full.slice(m.s, m.e) !== m.t){ const i = full.indexOf(m.t); if (i < 0) return; m.s = i; m.e = i + m.t.length; }
+    let pos = 0;
+    hlTextos(root).forEach(t => {
+      const a = pos, b = pos + t.length; pos = b;
+      if (b <= m.s || a >= m.e) return;
+      if (!t.nodeValue.trim() && /^(TABLE|TBODY|THEAD|TR|UL|OL|SECTION|DIV|DETAILS)$/.test(t.parentNode.nodeName)) return;
+      let n = t;
+      if (m.e - a < t.length) n.splitText(m.e - a);
+      if (m.s > a) n = n.splitText(m.s - a);
+      const mk = document.createElement("mark");
+      mk.className = "hl hl-" + m.c; mk.dataset.id = m.id;
+      n.replaceWith(mk); mk.append(n);
+    });
+  });
+}
+function hlTudo(){ document.querySelectorAll("[data-hl]").forEach(hlAplicar); }
+function hlSelecao(){
+  const sel = getSelection();
+  if (!sel.rangeCount || sel.isCollapsed) return null;
+  const r = sel.getRangeAt(0), root = hlRaiz(r.startContainer);
+  if (!root || root !== hlRaiz(r.endContainer)) return null;
+  const s = hlOff(root, r.startContainer, r.startOffset), e = hlOff(root, r.endContainer, r.endOffset);
+  return e > s ? {root, s, e, rect: r.getBoundingClientRect()} : null;
+}
+/* tira o trecho [s, e) das marcações existentes (nova cor por cima ou apagar) */
+function hlCortar(lista, s, e, full){
+  const out = [];
+  lista.forEach(m => {
+    if (m.e <= s || m.s >= e) return out.push(m);
+    if (m.s < s) out.push({...m, id: hlId(), e: s, t: full.slice(m.s, s)});
+    if (m.e > e) out.push({...m, id: hlId(), s: e, t: full.slice(e, m.e)});
+  });
+  return out;
+}
+function hlSalvar(root, lista){
+  const k = root.dataset.hl;
+  if (lista.length) S.marks[k] = lista.sort((a, b) => a.s - b.s); else delete S.marks[k];
+  save(); hlAplicar(root);
+}
+const hlToque = matchMedia("(pointer:coarse)").matches;
+let hlUltima = null;  /* última seleção válida: no celular, o toque no botão pode desfazer a seleção antes do clique */
+function hlMostrar(rect){
+  hlBar.classList.add("on");
+  const w = hlBar.offsetWidth, h = hlBar.offsetHeight;
+  /* no celular a barra vai abaixo do trecho, para não ficar sob o menu nativo de copiar */
+  let y = hlToque ? rect.bottom + 14 : rect.top - h - 8;
+  if (hlToque ? y > innerHeight - h - 8 : y < 8) y = hlToque ? rect.top - h - 14 : rect.bottom + 8;
+  y = Math.min(Math.max(8, y), innerHeight - h - 8);
+  hlBar.style.left = Math.min(Math.max(8, rect.left + rect.width / 2 - w / 2), innerWidth - w - 8) + "px";
+  hlBar.style.top = y + "px";
+}
+function hlEsconder(){ hlBar.classList.remove("on"); hlAlvo = null; hlUltima = null; }
+hlBar.addEventListener("mousedown", e => e.preventDefault());
+hlBar.querySelectorAll("button").forEach(b => b.onclick = () => {
+  const c = b.dataset.c;
+  if (hlAlvo){
+    const {root, id} = hlAlvo, lista = S.marks[root.dataset.hl] || [];
+    hlSalvar(root, c ? lista.map(m => m.id === id ? {...m, c} : m) : lista.filter(m => m.id !== id));
+  } else {
+    const x = hlSelecao() || hlUltima; if (!x) return hlEsconder();
+    const full = x.root.textContent, lista = hlCortar(S.marks[x.root.dataset.hl] || [], x.s, x.e, full);
+    if (c) lista.push({id: hlId(), s: x.s, e: x.e, c, t: full.slice(x.s, x.e)});
+    getSelection().removeAllRanges();
+    hlSalvar(x.root, lista);
+  }
+  hlEsconder();
+});
+function hlChecar(e){
+  if (hlBar.contains(e.target)) return;
+  setTimeout(() => {
+    const x = hlSelecao();
+    if (x){ hlAlvo = null; hlUltima = x; return hlMostrar(x.rect); }
+    const mk = e.target.closest?.("mark.hl");
+    if (mk && getSelection().isCollapsed){ hlMostrar(mk.getBoundingClientRect()); hlAlvo = {root: hlRaiz(mk), id: mk.dataset.id}; return; }
+    hlEsconder();
+  }, 10);
+}
+document.addEventListener("mouseup", hlChecar);
+document.addEventListener("touchend", hlChecar);
+document.addEventListener("keyup", e => { if (e.shiftKey) hlChecar(e); });
+/* celular: a seleção por toque longo (e o ajuste das alças) não gera mouseup confiável; acompanha selectionchange */
+let hlTimer = 0;
+const hlRever = () => { const x = hlSelecao(); if (x){ hlAlvo = null; hlUltima = x; hlMostrar(x.rect); } };
+document.addEventListener("selectionchange", () => {
+  if (!hlToque) return;
+  clearTimeout(hlTimer); hlTimer = setTimeout(hlRever, 350);
+});
+addEventListener("scroll", () => {
+  if (!hlBar.classList.contains("on")) return;
+  hlBar.classList.remove("on");
+  clearTimeout(hlTimer); hlTimer = setTimeout(hlRever, 250);
+}, {passive: true});
+$("#hlReset").onclick = () => { if (confirm("Apagar todas as marcações de texto desta página?")){ S.marks = {}; save(); hlTudo(); } };
+document.querySelectorAll("section.tab").forEach(s => { if (!["mapa", "questoes", "flash", "rend"].includes(s.id)) s.dataset.hl = s.id; });
+hlTudo();
+
+/* teclado */
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase(), tab = active();
+  if (tab === "questoes"){
+    const q = QUESTOES[cur];
+    if (k === "arrowright") step(1);
+    else if (k === "arrowleft") step(-1);
+    else if (q && !S.answers[q.n]){
+      const v = q.tipo === "ce" ? k.toUpperCase() : k;
+      if (k === "enter"){ e.preventDefault(); submeter(); }
+      else if (opcoes(q).includes(v)){ e.shiftKey ? descartar(v) : escolher(v); }
+    }
+  } else if (tab === "flash"){
+    if (k === " "){ e.preventDefault(); $("#fc").classList.toggle("flip"); }
+    else if (k === "1") grade(0); else if (k === "2") grade(1); else if (k === "3") grade(2);
+  }
+});
+
+renderMapa();
+["#inicio", "#resumo", "#mapa", "#esquemas", "#reforma"].forEach(s => abbrify($(s)));
+cur = 0; renderQ(); buildDeck();
+
+/* ---------- tamanho da fonte (70% a 200%, passo de 10%; salvo para todas as páginas) ---------- */
+function fonte(v){
+  v = Math.min(2, Math.max(0.7, Math.round(v * 10) / 10));
+  document.documentElement.style.setProperty("--fz", v);
+  localStorage.setItem("sefazdf_fonte", v);
+  $("#fzVal").textContent = Math.round(v * 100) + "%";
+  $("#fzMenos").disabled = v <= 0.7; $("#fzMais").disabled = v >= 2;
+}
+const fzAtual = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--fz")) || 1;
+$("#fzMenos").onclick = () => fonte(fzAtual() - 0.1);
+$("#fzMais").onclick = () => fonte(fzAtual() + 0.1);
+$("#fzVal").onclick = () => fonte(1);
+fonte(fzAtual());
+
+/* ---------- tela cheia: o mesmo botão entra e sai (Esc também sai) ---------- */
+$("#telaCheia").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {});
+document.addEventListener("fullscreenchange", () => {
+  const on = !!document.fullscreenElement, b = $("#telaCheia");
+  b.textContent = on ? "✕ Sair da tela cheia" : "⛶ Tela cheia";
+  b.title = b.ariaLabel = on ? "Sair da tela cheia" : "Tela cheia";
+});
+
+/* ---------- menu retrátil no celular: mostra a aba atual e fecha ao escolher outra ---------- */
+function menuRotulo(){
+  const b = $("#nav button.on");
+  $("#menuBtn").textContent = matchMedia("(min-width:701px)").matches ? "☰ Opções" : "☰ " + (b ? b.firstChild.textContent.trim() : "Menu");
+}
+$("#menuBtn").onclick = () => {
+  const on = $("header").classList.toggle("menu-on");
+  $("#menuBtn").setAttribute("aria-expanded", on);
+};
+$("#nav").addEventListener("click", e => {
+  if (!e.target.closest("button")) return;
+  $("header").classList.remove("menu-on"); $("#menuBtn").setAttribute("aria-expanded", false); menuRotulo();
+});
+document.addEventListener("click", e => { if (!e.target.closest("header")) menuRotulo(); });
+menuRotulo();
+addEventListener("resize", menuRotulo); /* CAB-JS */
+document.addEventListener("click", e => { if (matchMedia("(min-width:701px)").matches && !e.target.closest("header")){ $("header").classList.remove("menu-on"); $("#menuBtn").setAttribute("aria-expanded", false); } }); /* CAB-JS fecha */
+/* RET-JS */
+/* ---------- menu retrátil: recolhe o cabeçalho inteiro; vale para todas as páginas do plano ---------- */
+function cabOculto(on){
+  document.documentElement.classList.toggle("cab-oculto", on);
+  localStorage.setItem("sefazdf_cab_oculto", on ? "1" : "0");
+  $("header").classList.remove("menu-on"); $("#menuBtn").setAttribute("aria-expanded", false);
+}
+$("#recolher").onclick = () => cabOculto(true);
+$("#mostrarCab").onclick = () => cabOculto(false);
+/* /RET-JS */
+
+/* ---------- tema de cores (5 opções; salvo para todas as páginas do plano) ---------- */
+$("#tema").value = localStorage.getItem("sefazdf_tema") || (matchMedia("(prefers-color-scheme:dark)").matches ? "escuro" : "claro");
+$("#tema").onchange = e => { document.documentElement.dataset.theme = e.target.value; localStorage.setItem("sefazdf_tema", e.target.value); };
+/* SYNC-JS */
+/* ---------- sincronização entre aparelhos: o S de cada página vai para um Gist secreto do GitHub ---------- */
+const SYNC_TOK = "sefazdf_sync_token", SYNC_GIST = "sefazdf_sync_gist", SYNC_DESC = "sefazdf-sync (progresso do plano SEFAZ-DF)";
+const SYNC_ARQ = KEY + ".json";
+let syncTimer = null, syncOcupado = false;
+{ /* link de configuração vindo de outro aparelho: ...#sync=<token> */
+  const m = location.hash.match(/sync=([\w-]+)/);
+  if (m){ localStorage.setItem(SYNC_TOK, m[1]); localStorage.removeItem(SYNC_GIST); history.replaceState(null, "", location.pathname + location.search); }
+}
+const syncTok = () => localStorage.getItem(SYNC_TOK);
+async function gh(caminho, op = {}){
+  const r = await fetch("https://api.github.com" + caminho, {cache: "no-store", ...op, headers: {
+    Authorization: "Bearer " + syncTok(), Accept: "application/vnd.github+json", ...(op.body ? {"Content-Type": "application/json"} : {})}});
+  if (!r.ok) throw new Error(r.status === 401 ? "token inválido ou expirado" : r.status === 404 ? "Gist não encontrado" : "GitHub respondeu " + r.status);
+  return r.json();
+}
+/* acha o Gist do plano (pela descrição) ou cria um secreto */
+async function syncGist(){
+  let id = localStorage.getItem(SYNC_GIST);
+  if (id) return id;
+  for (let p = 1; p <= 10 && !id; p++){
+    const lista = await gh(`/gists?per_page=100&page=${p}`);
+    id = lista.find(g => g.description === SYNC_DESC)?.id;
+    if (lista.length < 100) break;
+  }
+  if (!id) id = (await gh("/gists", {method: "POST", body: JSON.stringify({description: SYNC_DESC, public: false,
+    files: {"LEIA-ME.md": {content: "Progresso das páginas do plano SEFAZ-DF (um arquivo por página). Gerado automaticamente."}}})})).id;
+  localStorage.setItem(SYNC_GIST, id);
+  return id;
+}
+function syncStatus(txt, tipo){
+  const b = $("#syncBtn"); if (!b) return;
+  b.textContent = txt; b.className = tipo || "";
+}
+/* último _ts que este aparelho sabe estar igual no Gist */
+const syncBase = () => +(localStorage.getItem(KEY + "_sinc") || 0);
+const syncMarcar = ts => localStorage.setItem(KEY + "_sinc", ts || 0);
+/* junta duas versões: fica a mais recente; respostas dadas na outra depois do último sincronismo entram também */
+function syncJuntar(loc, rem){
+  const novo = (rem._ts || 0) > (loc._ts || 0) ? rem : loc, velho = novo === loc ? rem : loc;
+  const r = structuredClone(novo), base = syncBase();
+  r.answers ||= {};
+  for (const [n, a] of Object.entries(velho.answers || {}))
+    if (!r.answers[n] && (a.ts || 0) > base) r.answers[n] = a;
+  return r;
+}
+function syncAplicar(novo){
+  S = novo; S.answers ||= {}; S.cards ||= {}; S.draft ||= {}; S.marks ||= {};
+  localStorage.setItem(KEY, JSON.stringify(S));
+  renderQ(); hlTudo();
+  if (active() === "rend") renderRend();
+  if (active() === "flash") renderCard(); else buildDeck();
+}
+async function syncPuxar(){
+  if (!syncTok() || syncOcupado) return;
+  syncOcupado = true; syncStatus("☁ …");
+  try {
+    const g = await gh("/gists/" + await syncGist());
+    const f = g.files[SYNC_ARQ];
+    let rem = null;
+    if (f) rem = JSON.parse(f.truncated ? await (await fetch(f.raw_url, {cache: "no-store"})).text() : f.content);
+    const loc = JSON.parse(localStorage.getItem(KEY) || "null");
+    const rts = rem?._ts || 0, lts = loc?._ts || 0, base = syncBase();
+    if (rem && (!lts || (rts > lts && lts <= base))){ syncAplicar(rem); syncMarcar(rts); }  /* só o outro aparelho mudou */
+    else if (lts && (!rem || (lts > rts && rts <= base))) await syncEnviar(true);         /* só este aparelho mudou */
+    else if (rem && rts !== lts){ syncAplicar(syncJuntar(loc, rem)); S._ts = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); await syncEnviar(true); }
+    else syncMarcar(lts);
+    syncStatus("☁ Sincronizado", "on");
+  } catch (e){
+    syncStatus("☁ Erro", "err"); console.warn("sincronização:", e);
+    if (/Gist não encontrado/.test(e.message)) localStorage.removeItem(SYNC_GIST);
+  } finally { syncOcupado = false; }
+}
+async function syncEnviar(direto){
+  if (!syncTok()) return;
+  if (!direto) syncStatus("☁ …");
+  try {
+    const body = JSON.stringify({files: {[SYNC_ARQ]: {content: JSON.stringify(S)}}}), ts = S._ts;
+    await gh("/gists/" + await syncGist(), {method: "PATCH", keepalive: body.length < 60000, body});
+    syncMarcar(ts);
+    if (!direto) syncStatus("☁ Sincronizado", "on");
+  } catch (e){ syncStatus("☁ Erro", "err"); console.warn("sincronização:", e); if (direto) throw e; }
+}
+function syncAgendar(){
+  if (!syncTok()) return;
+  clearTimeout(syncTimer); syncStatus("☁ …");
+  syncTimer = setTimeout(() => { syncTimer = null; syncEnviar(); }, 1500);
+}
+/* ao sair ou esconder a página, envia o que estiver pendente; ao voltar, busca o que veio do outro aparelho */
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden"){ if (syncTimer){ clearTimeout(syncTimer); syncTimer = null; syncEnviar(); } }
+  else if (!syncTimer) syncPuxar();
+});
+
+/* janela de configuração */
+function syncJanela(){
+  let box = $("#syncBox");
+  if (!box){
+    box = document.createElement("div"); box.id = "syncBox";
+    box.addEventListener("click", e => { if (e.target === box) box.classList.remove("on"); });
+    document.body.append(box);
+  }
+  const tok = syncTok();
+  box.innerHTML = `<div class="in" role="dialog" aria-label="Sincronizar entre aparelhos">
+    <h3>☁ Sincronizar entre aparelhos</h3>
+    ${tok ? `<p>Este aparelho está <b>conectado</b>. Respostas, flashcards e marcações desta página são salvos no seu GitHub (num Gist secreto) e aparecem nos outros aparelhos conectados.</p>
+      <p><b>Para conectar o celular</b>, abra nele o link abaixo (por exemplo, mande para você mesmo por e-mail ou WhatsApp). Ele configura o aparelho de uma vez, para todas as páginas.</p>
+      <input id="syncLink" readonly value="${esc(location.origin + location.pathname + "#sync=" + tok)}">
+      <div class="acoes"><button class="pri" id="syncCopiar">Copiar link</button><button id="syncAgora">Sincronizar agora</button><button id="syncSair">Desconectar este aparelho</button><button id="syncFechar">Fechar</button></div>`
+    : `<p>Conecte este aparelho para que as questões resolvidas no notebook apareçam no celular (e vice-versa). É feito uma vez por aparelho e vale para todas as páginas.</p>
+      <ol><li>No GitHub, crie um token com a permissão <b>gist</b> (só ela): <a href="https://github.com/settings/tokens/new?scopes=gist&description=sefazdf-sync" target="_blank" rel="noopener">criar token</a>. Em "Expiration", escolha uma data depois da prova.</li>
+      <li>Copie o token gerado (começa com <code>ghp_</code>) e cole aqui:</li></ol>
+      <input id="syncTokIn" placeholder="ghp_…" autocomplete="off" spellcheck="false">
+      <p class="muted" style="font-size:13px">No outro aparelho, use o link que aparece aqui depois de conectar. O token fica só no navegador de cada aparelho.</p>
+      <div class="acoes"><button class="pri" id="syncConectar">Conectar</button><button id="syncFechar">Fechar</button></div>`}
+    <div id="syncMsg"></div></div>`;
+  box.classList.add("on");
+  const msgS = (t, cor) => { const m = $("#syncMsg"); m.textContent = t; m.style.color = `var(--${cor || "muted"})`; };
+  $("#syncFechar").onclick = () => box.classList.remove("on");
+  if (tok){
+    $("#syncCopiar").onclick = () => { const i = $("#syncLink"); i.select(); navigator.clipboard?.writeText(i.value).then(() => msgS("Link copiado.", "ok"), () => msgS("Selecione e copie o link.")); };
+    $("#syncAgora").onclick = async () => { msgS("Sincronizando…"); await syncPuxar(); msgS($("#syncBtn").className === "on" ? "Pronto: esta página está sincronizada." : "Não deu certo. Confira a internet e o token.", $("#syncBtn").className === "on" ? "ok" : "bad"); };
+    $("#syncSair").onclick = () => { localStorage.removeItem(SYNC_TOK); localStorage.removeItem(SYNC_GIST); syncStatus("☁ Sincronizar"); syncJanela(); msgS("Aparelho desconectado. O progresso continua salvo neste navegador."); };
+  } else {
+    $("#syncConectar").onclick = async () => {
+      const v = $("#syncTokIn").value.trim();
+      if (!/^[\w-]{20,}$/.test(v)) return msgS("Cole o token completo (começa com ghp_).", "bad");
+      localStorage.setItem(SYNC_TOK, v); localStorage.removeItem(SYNC_GIST); msgS("Conectando…");
+      await syncPuxar();
+      if ($("#syncBtn").className === "on") syncJanela();
+      else { localStorage.removeItem(SYNC_TOK); syncStatus("☁ Sincronizar"); msgS("Não foi possível conectar. Confira se o token tem a permissão gist.", "bad"); }
+    };
+  }
+}
+$("#syncBtn").onclick = syncJanela;
+if (syncTok()) syncPuxar();
+/* /SYNC-JS */
+</script>
+</body>
+</html>

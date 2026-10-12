@@ -15,5 +15,8 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T5 | Direito Constitucional · Aula 00: aplicabilidade das normas, hierarquia e poder constituinte | [`direito constitucional/T5_trilha00_direito_constitucional_aula00.html`](direito%20constitucional/T5_trilha00_direito_constitucional_aula00.html) |
 | T6 | Direito Administrativo · Aula 00: regime jurídico administrativo e princípios | [`direito administrativo/T6_trilha00_direito_administrativo_aula00.html`](direito%20administrativo/T6_trilha00_direito_administrativo_aula00.html) |
 | T7 | Auditoria Fiscal · Aula 00: classificação da auditoria e NBC TA 200 (objetivos gerais do auditor) | [`auditoria/T7_trilha00_auditoria_aula00.html`](auditoria/T7_trilha00_auditoria_aula00.html) |
+| T8 | Tecnologia da Informação · Aula 15: banco de dados, conceitos básicos, transações (ACID) e papéis (DBA e AD) | [`banco de dados/T8_trilha00_banco_de_dados_aula15.html`](banco%20de%20dados/T8_trilha00_banco_de_dados_aula15.html) |
+| T9 | AFO / Direito Financeiro · Aula 00: planejamento e orçamento na Constituição (PPA, LDO e LOA) | [`afo/T9_trilha00_afo_aula00.html`](afo/T9_trilha00_afo_aula00.html) |
+| T10 | Contabilidade Geral · Aula 00 (revisão): Questões Comentadas 11 a 40 | [`contabilidade geral/T10_trilha00_contabilidade_geral_aula00.html`](contabilidade%20geral/T10_trilha00_contabilidade_geral_aula00.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
