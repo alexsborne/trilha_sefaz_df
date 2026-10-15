@@ -18,5 +18,15 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T8 | Tecnologia da Informação · Aula 15: banco de dados, conceitos básicos, transações (ACID) e papéis (DBA e AD) | [`banco de dados/T8_trilha00_banco_de_dados_aula15.html`](banco%20de%20dados/T8_trilha00_banco_de_dados_aula15.html) |
 | T9 | AFO / Direito Financeiro · Aula 00: planejamento e orçamento na Constituição (PPA, LDO e LOA) | [`afo/T9_trilha00_afo_aula00.html`](afo/T9_trilha00_afo_aula00.html) |
 | T10 | Contabilidade Geral · Aula 00 (revisão): Questões Comentadas 11 a 40 | [`contabilidade geral/T10_trilha00_contabilidade_geral_aula00.html`](contabilidade%20geral/T10_trilha00_contabilidade_geral_aula00.html) |
+| T11 | Português · Aula 00 (revisão): Questões Comentadas da CEBRASPE | [`português/T11_trilha01_portugues_aula00.html`](portugu%C3%AAs/T11_trilha01_portugues_aula00.html) |
+| T12 | Direito Tributário · Aula 00: espécies tributárias e lei seca (CTN e Constituição) | [`direito tributário/T12_trilha01_direito_tributario_aula00.html`](direito%20tribut%C3%A1rio/T12_trilha01_direito_tributario_aula00.html) |
+| T13 | Contabilidade Geral · Aula 00 (revisão): Questões Comentadas 1 a 10, 41 e 42 | [`contabilidade geral/T13_trilha01_contabilidade_geral_aula00.html`](contabilidade%20geral/T13_trilha01_contabilidade_geral_aula00.html) |
+| T14 | Raciocínio Lógico · Aula 00: proposições compostas e conectivos | [`raciocínio lógico/T14_trilha01_raciocinio_logico_aula00.html`](racioc%C3%ADnio%20l%C3%B3gico/T14_trilha01_raciocinio_logico_aula00.html) |
+| T15 | Direito Constitucional · Aula 00: Princípios Fundamentais (artigos 1º a 4º) | [`direito constitucional/T15_trilha01_direito_constitucional_aula00.html`](direito%20constitucional/T15_trilha01_direito_constitucional_aula00.html) |
+| T16 | Direito Administrativo · Aula 00 (treino): Questões Comentadas 21 a 70 | [`direito administrativo/T16_trilha01_direito_administrativo_aula00.html`](direito%20administrativo/T16_trilha01_direito_administrativo_aula00.html) |
+| T17 | Auditoria Fiscal · Aula 00 (revisão): Questões Comentadas 1 a 25 | [`auditoria/T17_trilha01_auditoria_aula00.html`](auditoria/T17_trilha01_auditoria_aula00.html) |
+| T18 | Tecnologia da Informação · Aula 15: arquitetura ANSI/SPARC, independência de dados e projeto | [`banco de dados/T18_trilha01_banco_de_dados_aula15.html`](banco%20de%20dados/T18_trilha01_banco_de_dados_aula15.html) |
+| T19 | AFO / Direito Financeiro · Aula 00 (revisão): Questões Comentadas 1 a 40 | [`afo/T19_trilha01_afo_aula00.html`](afo/T19_trilha01_afo_aula00.html) |
+| T20 | Direito Administrativo · Aula 00 (revisão): lei seca e Questões Comentadas 71 a 91 | [`direito administrativo/T20_trilha01_direito_administrativo_aula00_revisao.html`](direito%20administrativo/T20_trilha01_direito_administrativo_aula00_revisao.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
