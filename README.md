@@ -28,5 +28,15 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T18 | Tecnologia da Informação · Aula 15: arquitetura ANSI/SPARC, independência de dados e projeto | [`banco de dados/T18_trilha01_banco_de_dados_aula15.html`](banco%20de%20dados/T18_trilha01_banco_de_dados_aula15.html) |
 | T19 | AFO / Direito Financeiro · Aula 00 (revisão): Questões Comentadas 1 a 40 | [`afo/T19_trilha01_afo_aula00.html`](afo/T19_trilha01_afo_aula00.html) |
 | T20 | Direito Administrativo · Aula 00 (revisão): lei seca e Questões Comentadas 71 a 91 | [`direito administrativo/T20_trilha01_direito_administrativo_aula00_revisao.html`](direito%20administrativo/T20_trilha01_direito_administrativo_aula00_revisao.html) |
+| T21 | Português · Aula 00 (segunda revisão): Questões Comentadas CEBRASPE e caderno do Sistema de Questões | [`português/T21_trilha02_portugues_aula00_revisao.html`](portugu%C3%AAs/T21_trilha02_portugues_aula00_revisao.html) |
+| T22 | Direito Tributário · Aula 00 (revisão): Questões Comentadas 1, 4, 7… 52 | [`direito tributário/T22_trilha02_direito_tributario_aula00_revisao.html`](direito%20tribut%C3%A1rio/T22_trilha02_direito_tributario_aula00_revisao.html) |
+| T23 | Contabilidade Geral · Aula 01: patrimônio (teoria e Questões Comentadas 1 a 10) | [`contabilidade geral/T23_trilha02_contabilidade_geral_aula01.html`](contabilidade%20geral/T23_trilha02_contabilidade_geral_aula01.html) |
+| T24 | Raciocínio Lógico · Aula 00: conversão de linguagem, tabela-verdade e tautologia | [`raciocínio lógico/T24_trilha02_raciocinio_logico_aula00.html`](racioc%C3%ADnio%20l%C3%B3gico/T24_trilha02_raciocinio_logico_aula00.html) |
+| T25 | Direito Constitucional · Aula 00: questões de aplicabilidade, hierarquia e poder constituinte | [`direito constitucional/T25_trilha02_direito_constitucional_aula00_questoes.html`](direito%20constitucional/T25_trilha02_direito_constitucional_aula00_questoes.html) |
+| T26 | Direito Administrativo · Aula 01: conceito, objeto, fontes; Estado, Governo e Administração | [`direito administrativo/T26_trilha02_direito_administrativo_aula01.html`](direito%20administrativo/T26_trilha02_direito_administrativo_aula01.html) |
+| T27 | Auditoria Fiscal · Aula 00: Questões Comentadas 26 a 50 | [`auditoria/T27_trilha02_auditoria_aula00.html`](auditoria/T27_trilha02_auditoria_aula00.html) |
+| T28 | Tecnologia da Informação · Aula 16: modelagem lógica e modelo relacional | [`banco de dados/T28_trilha02_banco_de_dados_aula16.html`](banco%20de%20dados/T28_trilha02_banco_de_dados_aula16.html) |
+| T29 | AFO / Direito Financeiro · Aula 00: Questões Comentadas 1 a 20 e 41 a 50 | [`afo/T29_trilha02_afo_aula00.html`](afo/T29_trilha02_afo_aula00.html) |
+| T30 | Contabilidade Geral · Aula 01 (revisão): Questões Comentadas 11 a 40 | [`contabilidade geral/T30_trilha02_contabilidade_geral_aula01_revisao.html`](contabilidade%20geral/T30_trilha02_contabilidade_geral_aula01_revisao.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
