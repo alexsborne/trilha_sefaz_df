@@ -42,7 +42,10 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T34 | Contabilidade Geral · Aula 01 (segunda revisão): exercícios da teoria e Questões Comentadas 1 a 40 | [`contabilidade geral/T34_trilha03_contabilidade_geral_aula01_revisao.html`](contabilidade%20geral/T34_trilha03_contabilidade_geral_aula01_revisao.html) |
 | T35 | Raciocínio Lógico · Aula 00 (revisão da teoria): estruturas lógicas, questões da T14 e da T24 | [`raciocínio lógico/T35_trilha03_raciocinio_logico_aula00_revisao.html`](racioc%C3%ADnio%20l%C3%B3gico/T35_trilha03_raciocinio_logico_aula00_revisao.html) |
 | T36 | Direito Constitucional · Aula 00 (revisão): aplicabilidade das normas e princípios fundamentais | [`direito constitucional/T36_trilha03_direito_constitucional_aula00_revisao.html`](direito%20constitucional/T36_trilha03_direito_constitucional_aula00_revisao.html) |
+| T37 | Direito Administrativo · Aula 02: organização administrativa, órgãos, autarquias e agências (Questões 1 a 25) | [`direito administrativo/T37_trilha03_direito_administrativo_aula02.html`](direito%20administrativo/T37_trilha03_direito_administrativo_aula02.html) |
+| T38 | Auditoria Fiscal · Aula 01: auditoria interna (NBC TI 01 e NBC PI 01), teoria | [`auditoria/T38_trilha03_auditoria_aula01.html`](auditoria/T38_trilha03_auditoria_aula01.html) |
 | T39 | Tecnologia da Informação · Aula 16 (revisão): Questões Comentadas 16 a 45 | [`banco de dados/T39_trilha03_banco_de_dados_aula16_revisao.html`](banco%20de%20dados/T39_trilha03_banco_de_dados_aula16_revisao.html) |
 | T40 | AFO / Direito Financeiro · Aula 01: princípios orçamentários | [`afo/T40_trilha03_afo_aula01.html`](afo/T40_trilha03_afo_aula01.html) |
+| T41 | Direito Administrativo · Aula 02 (treino): Questões para Fixação 26 a 75 | [`direito administrativo/T41_trilha03_direito_administrativo_aula02_treino.html`](direito%20administrativo/T41_trilha03_direito_administrativo_aula02_treino.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
