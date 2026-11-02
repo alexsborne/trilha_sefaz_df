@@ -38,5 +38,9 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T28 | Tecnologia da Informação · Aula 16: modelagem lógica e modelo relacional | [`banco de dados/T28_trilha02_banco_de_dados_aula16.html`](banco%20de%20dados/T28_trilha02_banco_de_dados_aula16.html) |
 | T29 | AFO / Direito Financeiro · Aula 00: Questões Comentadas 1 a 20 e 41 a 50 | [`afo/T29_trilha02_afo_aula00.html`](afo/T29_trilha02_afo_aula00.html) |
 | T30 | Contabilidade Geral · Aula 01 (revisão): Questões Comentadas 11 a 40 | [`contabilidade geral/T30_trilha02_contabilidade_geral_aula01_revisao.html`](contabilidade%20geral/T30_trilha02_contabilidade_geral_aula01_revisao.html) |
+| T34 | Contabilidade Geral · Aula 01 (segunda revisão): exercícios da teoria e Questões Comentadas 1 a 40 | [`contabilidade geral/T34_trilha03_contabilidade_geral_aula01_revisao.html`](contabilidade%20geral/T34_trilha03_contabilidade_geral_aula01_revisao.html) |
+| T35 | Raciocínio Lógico · Aula 00 (revisão da teoria): estruturas lógicas, questões da T14 e da T24 | [`raciocínio lógico/T35_trilha03_raciocinio_logico_aula00_revisao.html`](racioc%C3%ADnio%20l%C3%B3gico/T35_trilha03_raciocinio_logico_aula00_revisao.html) |
+| T36 | Direito Constitucional · Aula 00 (revisão): aplicabilidade das normas e princípios fundamentais | [`direito constitucional/T36_trilha03_direito_constitucional_aula00_revisao.html`](direito%20constitucional/T36_trilha03_direito_constitucional_aula00_revisao.html) |
+| T39 | Tecnologia da Informação · Aula 16 (revisão): Questões Comentadas 16 a 45 | [`banco de dados/T39_trilha03_banco_de_dados_aula16_revisao.html`](banco%20de%20dados/T39_trilha03_banco_de_dados_aula16_revisao.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
