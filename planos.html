@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Todos os planos de estudo</title>
+<!-- SEFAZDF-PROTEGIDA -->
+<!-- SEFAZDF-META {"sub": "", "nq": 0, "nf": 0} -->
+<style>
+html{color-scheme:light dark}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#f4f5f7;color:#1d2330}
+html.esc body{background:#14171d;color:#e6e8ec}
+#caixa{background:#fff;border:1px solid #d6d9df;border-radius:14px;padding:22px 22px 18px;width:min(340px,88vw);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+html.esc #caixa{background:#1d2129;border-color:#323844}
+h1{font-size:19px;margin:0 0 4px} p{margin:0 0 12px;font-size:14px;opacity:.8}
+input{width:100%;box-sizing:border-box;font:inherit;padding:10px;border-radius:9px;border:1px solid #b9bec8;background:transparent;color:inherit;margin-bottom:10px}
+button{width:100%;font:inherit;font-weight:600;padding:10px;border:0;border-radius:9px;background:#2f6fde;color:#fff;cursor:pointer}
+#msg{min-height:20px;margin:10px 0 0;color:#d33;opacity:1}
+#espera{opacity:.6}
+#escolha{width:min(420px,90vw)} #escolha h1{font-size:19px;margin:0 0 4px}
+.op{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #d6d9df;border-radius:14px;padding:16px 18px;margin-top:12px;cursor:pointer;text-align:left;width:100%;box-sizing:border-box;font:inherit}
+html.esc .op{background:#1d2129;border-color:#323844}
+.op:hover,.op:focus-visible{border-color:#2f6fde;outline:none} .op b{display:block;font-size:17px} .op span{font-size:14px;opacity:.75}
+</style>
+<script>if (/escuro|azul/.test(localStorage.getItem("sefazdf_tema") || "")) document.documentElement.className = "esc";</script>
+</head><body>
+<div id="espera">Abrindo…</div>
+<form id="caixa" hidden>
+  <h1>Plano SEFAZ-DF</h1>
+  <p>Digite a senha para entrar.</p>
+  <input type="password" id="senha" autocomplete="current-password" aria-label="Senha">
+  <button>Entrar</button>
+  <p id="msg" role="alert"></p>
+</form>
+<div id="escolha" hidden>
+  <h1>O que você quer estudar?</h1>
+  <button type="button" class="op" id="op-sefaz"><b>Trilha SEFAZ-DF</b><span>Auditor Fiscal · índice das tarefas e páginas de estudo</span></button>
+  <a class="op" id="op-cgu" href="cgu_auditoria/"><b>CGU · Auditoria</b><span>Plano diário de questões do Tec Concursos · prova em 13/12/2026</span></a>
+  <a class="op" id="op-tce" href="tce_go/"><b>TCE-GO · Técnico Administrativo</b><span>Plano diário de questões do Tec Concursos · prova em 17/01/2027</span></a>
+  <a class="op" id="op-camara" href="camara_deputados/"><b>Câmara dos Deputados · Registro e Redação</b><span>Plano diário de questões do Tec Concursos · prova em 17/01/2027</span></a>
+</div>
+<script>
+const D = {"sal": "lb11RzJEit3TEAazNuOqiw==", "it": 250000, "iv": "aK0VTVJGyocaxAJJ", "dados": "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"};
+const CH = "sefazdf_chave";
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const em64 = a => btoa(String.fromCharCode(...a));
+async function decifrar(bruta){
+  const k = await crypto.subtle.importKey("raw", bruta, "AES-GCM", false, ["decrypt"]);
+  return new TextDecoder().decode(await crypto.subtle.decrypt({name: "AES-GCM", iv: b64(D.iv)}, k, b64(D.dados)));
+}
+async function derivar(senha){
+  const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(senha), "PBKDF2", false, ["deriveBits"]);
+  return new Uint8Array(await crypto.subtle.deriveBits({name: "PBKDF2", hash: "SHA-256", salt: b64(D.sal), iterations: D.it}, base, 256));
+}
+/* só troca depois de terminar de ler esta tela; antes disso o document.write mistura as duas páginas */
+const pronto = new Promise(r => document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", r) : r());
+async function escrever(html){ await pronto; document.open(); document.write(html); document.close(); }
+/* página inicial: depois da senha, escolhe entre SEFAZ e CGU (uma vez por aba; ?escolher mostra de novo) */
+const ESCOLHA = false, EK = "sefazdf_escolheu";
+const marcou = () => { try { sessionStorage.setItem(EK, "1"); } catch (e){} };
+async function abrir(html){
+  let ja = false; try { ja = !!sessionStorage.getItem(EK); } catch (e){}
+  if (!ESCOLHA || (ja && !/[?&]escolher(=|&|$)/.test(location.search))) return escrever(html);
+  await pronto;
+  document.getElementById("espera").hidden = true;
+  document.getElementById("caixa").hidden = true;
+  document.getElementById("escolha").hidden = false;
+  document.getElementById("op-sefaz").onclick = () => {
+    marcou();
+    if (location.search) history.replaceState(null, "", location.pathname + location.hash);
+    escrever(html);
+  };
+  document.getElementById("op-cgu").onclick = marcou;
+  document.getElementById("op-tce").onclick = marcou;
+  document.getElementById("op-camara").onclick = marcou;
+  document.getElementById("op-sefaz").focus();
+}
+(async () => {
+  const [sal, chave] = (localStorage.getItem(CH) || "").split(":");
+  if (sal === D.sal && chave){
+    try { await abrir(await decifrar(b64(chave))); return; } catch (e){ localStorage.removeItem(CH); }
+  }
+  document.getElementById("espera").hidden = true;
+  document.getElementById("caixa").hidden = false;
+  document.getElementById("senha").focus();
+})();
+document.getElementById("caixa").onsubmit = async ev => {
+  ev.preventDefault();
+  const msg = document.getElementById("msg"), senha = document.getElementById("senha").value;
+  if (!senha){ msg.textContent = "Digite a senha."; return; }
+  msg.style.color = "inherit"; msg.textContent = "Conferindo…";
+  try {
+    const bruta = await derivar(senha), html = await decifrar(bruta);
+    localStorage.setItem(CH, D.sal + ":" + em64(bruta));
+    await abrir(html);
+  } catch (e){
+    msg.style.color = ""; msg.textContent = "Senha incorreta.";
+  }
+};
+</script>
+</body></html>

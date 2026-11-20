@@ -7,6 +7,8 @@ Cada página corresponde a uma tarefa da trilha e traz resumo, mapa mental clic�
 
 Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, com link para as que já têm página.
 
+**Todos os planos de estudo:** [`planos.html`](planos.html) — links para SEFAZ-DF, Câmara, TCE-GO, CGU, Trilha de IA e Alfred.
+
 | Tarefa | Disciplina | Página |
 |---|---|---|
 | T1 | Português · Aula 00: ortografia, acentuação, hífen e expressões problemáticas | [`português/T1_trilha00_portugues_aula00.html`](portugu%C3%AAs/T1_trilha00_portugues_aula00.html) |
