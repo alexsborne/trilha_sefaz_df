@@ -49,5 +49,17 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T39 | Tecnologia da Informação · Aula 16 (revisão): Questões Comentadas 16 a 45 | [`banco de dados/T39_trilha03_banco_de_dados_aula16_revisao.html`](banco%20de%20dados/T39_trilha03_banco_de_dados_aula16_revisao.html) |
 | T40 | AFO / Direito Financeiro · Aula 01: princípios orçamentários | [`afo/T40_trilha03_afo_aula01.html`](afo/T40_trilha03_afo_aula01.html) |
 | T41 | Direito Administrativo · Aula 02 (treino): Questões para Fixação 26 a 75 | [`direito administrativo/T41_trilha03_direito_administrativo_aula02_treino.html`](direito%20administrativo/T41_trilha03_direito_administrativo_aula02_treino.html) |
+| T42 | Português · Aula 01 (revisão): 32 Questões Comentadas (substantivo a pronomes) | [`português/T42_trilha04_portugues_aula01_revisao.html`](portugu%C3%AAs/T42_trilha04_portugues_aula01_revisao.html) |
+| T43 | Direito Tributário · Aula 01 (revisão): Questões Comentadas 1 a 30 | [`direito tributário/T43_trilha04_direito_tributario_aula01_revisao.html`](direito%20tribut%C3%A1rio/T43_trilha04_direito_tributario_aula01_revisao.html) |
+| T44 | Contabilidade Geral · Aula 02 (contas): teoria e Questões Comentadas 1 a 10 | [`contabilidade geral/T44_trilha04_contabilidade_geral_aula02.html`](contabilidade%20geral/T44_trilha04_contabilidade_geral_aula02.html) |
+| T45 | Raciocínio Lógico · Aula 00 (revisão): 22 questões das listas Multibancas | [`raciocínio lógico/T45_trilha04_raciocinio_logico_aula00_revisao.html`](racioc%C3%ADnio%20l%C3%B3gico/T45_trilha04_raciocinio_logico_aula00_revisao.html) |
+| T46 | Direito Constitucional · Aula 01: artigo 5º, caput ao inciso X | [`direito constitucional/T46_trilha04_direito_constitucional_aula01.html`](direito%20constitucional/T46_trilha04_direito_constitucional_aula01.html) |
+| T47 | Direito Administrativo · Aula 03 (estatais e fundações): teoria e Questões 1 a 10 | [`direito administrativo/T47_trilha04_direito_administrativo_aula03.html`](direito%20administrativo/T47_trilha04_direito_administrativo_aula03.html) |
+| T48 | Auditoria Fiscal · Aula 01 (revisão): Questões Comentadas 1 a 25 | [`auditoria/T48_trilha04_auditoria_aula01_revisao.html`](auditoria/T48_trilha04_auditoria_aula01_revisao.html) |
+| T49 | Tecnologia da Informação · Aula 17 (normalização): teoria e Questões 1 a 15 | [`banco de dados/T49_trilha04_banco_de_dados_aula17.html`](banco%20de%20dados/T49_trilha04_banco_de_dados_aula17.html) |
+| T50 | AFO · Aula 01 (revisão): Questões Comentadas 1 a 50 | [`afo/T50_trilha04_afo_aula01_revisao.html`](afo/T50_trilha04_afo_aula01_revisao.html) |
+| T51 | Direito Tributário · Aula 01 (treino): Questões Comentadas 31 a 43 | [`direito tributário/T51_trilha04_direito_tributario_aula01_treino.html`](direito%20tribut%C3%A1rio/T51_trilha04_direito_tributario_aula01_treino.html) |
+| T52 | Contabilidade Geral · Aula 02 (revisão): Questões Comentadas 11 a 29 | [`contabilidade geral/T52_trilha04_contabilidade_geral_aula02_revisao.html`](contabilidade%20geral/T52_trilha04_contabilidade_geral_aula02_revisao.html) |
+| T53 | Direito Administrativo · Aula 03 (treino): Questões Comentadas 11 a 41 | [`direito administrativo/T53_trilha04_direito_administrativo_aula03_treino.html`](direito%20administrativo/T53_trilha04_direito_administrativo_aula03_treino.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
