@@ -61,5 +61,7 @@ Comece pelo [`index.html`](index.html): ele lista todas as tarefas da trilha, co
 | T51 | Direito Tributário · Aula 01 (treino): Questões Comentadas 31 a 43 | [`direito tributário/T51_trilha04_direito_tributario_aula01_treino.html`](direito%20tribut%C3%A1rio/T51_trilha04_direito_tributario_aula01_treino.html) |
 | T52 | Contabilidade Geral · Aula 02 (revisão): Questões Comentadas 11 a 43 (PDF com Marcação dos Aprovados) | [`contabilidade geral/T52_trilha04_contabilidade_geral_aula02_revisao.html`](contabilidade%20geral/T52_trilha04_contabilidade_geral_aula02_revisao.html) |
 | T53 | Direito Administrativo · Aula 03 (treino): Questões Comentadas 11 a 50 (PDF completo) | [`direito administrativo/T53_trilha04_direito_administrativo_aula03_treino.html`](direito%20administrativo/T53_trilha04_direito_administrativo_aula03_treino.html) |
+| T54 | Português · Aula 01 (revisão): Pronomes 16 a 37 e Colocação Pronominal 1 a 25, com link para o caderno do Sistema de Questões | [`português/T54_trilha05_portugues_aula01_revisao.html`](portugu%C3%AAs/T54_trilha05_portugues_aula01_revisao.html) |
+| T55 | Direito Tributário · Aula 02 (imunidades): teoria e Questões Comentadas 1 a 38 | [`direito tributário/T55_trilha05_direito_tributario_aula02.html`](direito%20tribut%C3%A1rio/T55_trilha05_direito_tributario_aula02.html) |
 
 Para usar, baixe o arquivo `.html` e abra no navegador. As respostas e as marcações de texto (marca-texto amarelo, rosa ou verde) ficam salvas no próprio navegador.
